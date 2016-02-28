@@ -13,8 +13,8 @@ public class DefaultValidatorFactory implements ValidatorFactory {
 	private static Map<String, Validator> validator = new HashMap<String, Validator>();
 
 	static {
-		validator.put("com.company.project.module.validation.rule.StringRule", new StringValidator());
-		validator.put("com.company.project.module.validation.rule.DateRule", new DateValidator());
+		validator.put("com.company.common.validation.rule.StringRule", new StringValidator());
+		validator.put("com.company.common.validation.rule.DateRule", new DateValidator());
 	}
 
 	@Override

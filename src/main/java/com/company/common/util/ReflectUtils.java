@@ -4,9 +4,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 /**
- * 反射Util
+ * 反射Utils
  * 
  * @author wangzhj
  */
@@ -131,5 +132,50 @@ public final class ReflectUtils {
 			e.printStackTrace();
 		}
 		return value;
+	}
+	
+	/**
+	 * 是否是数组
+	 * 
+	 * @param clazz
+	 * @return boolean
+	 */
+	public static boolean isArray(Class<?> clazz) {
+		return clazz.isArray();
+	}
+	
+	/**
+	 * 是否是规则注解
+	 * 
+	 * @param clazz
+	 * @return boolean
+	 */
+	public static boolean isCollection(Class<?> clazz){
+		return clazz.isAssignableFrom(List.class) || clazz.isAssignableFrom(List.class);
+	}
+	
+	/**
+	 * 是否是规则注解
+	 * 
+	 * @param clazz
+	 * @return boolean
+	 */
+	public static boolean isMap(Class<?> clazz){
+		return clazz.isAssignableFrom(Map.class);
+	}
+	
+	/**
+	 * 是否是规则注解
+	 * 
+	 * @param clazz
+	 * @return boolean
+	 */
+	public static boolean isBean(Class<?> clazz){
+		return clazz.isAssignableFrom(Map.class);
+	}
+	
+	public static boolean isAutomicField(Field field){
+		
+		return true;
 	}
 }

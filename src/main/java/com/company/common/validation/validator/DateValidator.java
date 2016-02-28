@@ -2,8 +2,8 @@ package com.company.common.validation.validator;
 
 import java.lang.annotation.Annotation;
 
-import com.company.common.exception.param.ForamtErrorException;
-import com.company.common.exception.param.ValueIllegalException;
+import com.company.common.exception.param.FormatErrorException;
+import com.company.common.exception.param.IllegalValueException;
 import com.company.common.validation.rule.DateRule;
 
 /**
@@ -33,17 +33,17 @@ public class DateValidator implements Validator {
 			//格式验证
 			DateRule.DTFormat df = dateRule.format();
 			if(true){
-				throw new ForamtErrorException(paramName);
+				throw new FormatErrorException(paramName);
 			}
 			//最小时间
 			String minDateTime = dateRule.minDateTime();
 			if(true){
-				throw new ValueIllegalException(paramName);
+				throw new IllegalValueException(paramName);
 			}
 			//最大时间
 			String maxDateTime = dateRule.maxDateTime();
 			if(true){
-				throw new ValueIllegalException(paramName);
+				throw new IllegalValueException(paramName);
 			}
 		}
 	}

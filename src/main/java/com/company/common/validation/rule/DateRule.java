@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 日期类型注解
+ * 日期规则
  * 
  * @author wangzhj
  */

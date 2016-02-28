@@ -7,9 +7,9 @@ import com.company.common.exception.ParamException;
  * 
  * @author wangzhj
  */
-public class EmptyException extends ParamException {
+public class EmptyValueException extends ParamException {
 
-	public EmptyException(String paramName) {
+	public EmptyValueException(String paramName) {
 		super(paramName, "1001", "参数值为空");
 	}	
 }

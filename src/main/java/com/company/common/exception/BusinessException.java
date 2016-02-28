@@ -7,4 +7,7 @@ package com.company.common.exception;
  */
 public class BusinessException extends BaseException {
 
+	public BusinessException() {
+		
+	}
 }

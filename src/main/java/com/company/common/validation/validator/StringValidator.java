@@ -2,7 +2,7 @@ package com.company.common.validation.validator;
 
 import java.lang.annotation.Annotation;
 
-import com.company.common.exception.param.ForamtErrorException;
+import com.company.common.exception.param.FormatErrorException;
 import com.company.common.validation.rule.StringRule;
 
 /**
@@ -32,12 +32,12 @@ public class StringValidator implements Validator {
 			//最小长度
 			int minLength = stringRule.minLength();
 			if (length < minLength) {
-				throw new ForamtErrorException(paramName);
+				throw new FormatErrorException(paramName);
 			}
 			//最大长度
 			int maxLength = stringRule.maxLength();
 			if (length > maxLength) {
-				throw new ForamtErrorException(paramName);
+				throw new FormatErrorException(paramName);
 			}
 		}
 

@@ -7,9 +7,9 @@ import com.company.common.exception.ParamException;
  * 
  * @author wangzhj
  */
-public class ForamtErrorException extends ParamException {
+public class FormatErrorException extends ParamException {
 
-	public ForamtErrorException(String paramName) {
+	public FormatErrorException(String paramName) {
 		super(paramName, "1002", "参数格式错误");
 	}
 }

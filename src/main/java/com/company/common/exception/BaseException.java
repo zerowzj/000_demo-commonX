@@ -44,11 +44,11 @@ public abstract class BaseException extends RuntimeException {
 		return errorCode;
 	}
 
-	public LogInfo getSubInfo() {
-		return subInfo;
-	}
-
 	public String getErrorDesc() {
 		return errorDesc;
+	}
+
+	public LogInfo getSubInfo() {
+		return subInfo;
 	}
 }

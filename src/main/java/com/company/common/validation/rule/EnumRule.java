@@ -6,17 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 字符串规则
+ * 枚举规则
  * 
  * @author wangzhj
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface StringRule {
+public @interface EnumRule {
 
-	/** 最小长度 */
-	public int minLength() default 0;
-
-	/** 最大长度 */
-	public int maxLength() default 0;
+	/** 枚举值 */
+	public String[] values();
 }

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.company.common.util.ReflectUtils;
 import com.company.common.validation.factory.DefaultValidatorFactory;
 import com.company.common.validation.rule.NotEmpty;
+import com.company.common.validation.util.RuleUtils;
 import com.company.common.validation.validator.Validator;
 
 /**
@@ -19,113 +20,96 @@ import com.company.common.validation.validator.Validator;
  * 
  * @author wangzhj
  */
-public class ValidatorUtils {
+public abstract class ValidatorUtils {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ValidatorUtils.class);
 	
-	/** 验证规则注解包结尾（判断注解是否是验证规则注解的依据） */
-	private static final String RULE_PACKAGE_END =  ".validation.rule";
-
 	/**
 	 * 验证
 	 * 
 	 * @param bean
 	 */
-	public static void validate(final Object bean) {
-		
-		logger.info("验证类型{}的对象属性", bean.getClass().getName());
+	public static void validate(Object bean){
 		//
+		if(bean == null){
+			logger.warn("bean is null");
+			return;
+		}
+		
+		//遍历属性
 		Class<?> cls = bean.getClass();
 		for (; cls != Object.class; cls = cls.getSuperclass()) {
-			//遍历属性
 			Field[] fieldArr = cls.getDeclaredFields();
 			for (Field field : fieldArr) {
-				//无注解
-				Annotation[] annotArr = field.getAnnotations();
-				if(annotArr == null){
-					
+				//是否有验证规则
+				if(!RuleUtils.haveRuleAnnotation(field)){
 					continue;
 				}
 				
 				//获取属性值
 				Object value = ReflectUtils.getFieldValue(bean, field);
 				
-				//
-				if(field.isAnnotationPresent(NotEmpty.class)){
-					
-				}
-				//
-				for(Annotation annot : annotArr) {
-					if(isRuleAnnotation(annot)){
-						Validator validator = new DefaultValidatorFactory().getValidator(annot);
-						if(validator.suppport(field.getType())){
-							validator.validate(field.getName(), value, annot);
-						} else {
-							
-						}
-					}
-				}
-				
-				//处理嵌套属性
-				Class<?> ftype = field.getType();
-				if (isCollection(ftype)) { //Collection
-					Collection<?> list = (Collection<?>) value;
-					if(list != null) {
-						for(Object nestObj : list){
-							validate(nestObj);
-						}
-					}
-				} else if(isMap(ftype)){ //Map
-					Map<?, ?> map = (Map<?, ?>) value;
-						for(Object nestObj : map.values()){
-							validate(nestObj);
-						}
-				} else if(isArray(ftype)){ //Array
-					Object[] array = (Object[])value;
-					for(Object nestObj : array){
-						validate(nestObj);
-					}
+				//执行验证
+				if(ReflectUtils.isAutomicField(field)){
+					validateInternal(field, value);
+				} else {
+					validateNestInternal(field, value);
 				}
 			}
 		}
 	}
 	
 	/**
-	 * 是否是规则注解
+	 * 验证
 	 * 
-	 * @param annot
-	 * @return boolean
+	 * @param field
+	 * @param value
 	 */
-	private static boolean isRuleAnnotation(Annotation annot){
-		Package pk =  annot.annotationType().getPackage();
-		return pk.getName().endsWith(RULE_PACKAGE_END);
+	private static void validateInternal(final Field field, final Object value) {
+		//
+		if(field.isAnnotationPresent(NotEmpty.class)){
+			
+		}
+		//
+		List<Annotation> annotArr = RuleUtils.getRuleAnnotations(field);
+		for(Annotation annot : annotArr) {
+			DefaultValidatorFactory validatorFactory=  new DefaultValidatorFactory();
+			Validator validator = validatorFactory.getValidator(annot);
+			if(validator.suppport(field.getType())){
+				validator.validate(field.getName(), value, annot);
+			} else {
+				logger.error("规则注解{}不支持类型{}的参数", annot.annotationType().getName(), field.getType().getName());
+			}
+		}
 	}
 	
 	/**
-	 * 是否是数组类型
+	 * 验证嵌套属性
 	 * 
-	 * @param clazz
-	 * @return boolean
+	 * @param field
+	 * @param value
 	 */
-	private static boolean isArray(Class<?> clazz){
-		return clazz.isArray();
-	}
-	/**
-	 * 是否是规则注解
-	 * 
-	 * @param clazz
-	 * @return boolean
-	 */
-	private static boolean isCollection(Class<?> clazz){
-		return clazz.isAssignableFrom(List.class) || clazz.isAssignableFrom(List.class);
-	}
-	/**
-	 * 是否是规则注解
-	 * 
-	 * @param clazz
-	 * @return boolean
-	 */
-	private static boolean isMap(Class<?> clazz){
-		return clazz.isAssignableFrom(Map.class);
+	private static void validateNestInternal(final Field field, final Object value){
+		//
+		Class<?> clazz = field.getClass();
+		//处理嵌套属性
+		if (ReflectUtils.isCollection(clazz)) { //Collection
+			Collection<?> list = (Collection<?>) value;
+			if(list != null) {
+				for(Object nestObj : list){
+					validate(nestObj);
+				}
+			}
+		} else if(ReflectUtils.isMap(clazz)){ //Map
+			Map<?, ?> map = (Map<?, ?>) value;
+				for(Object nestObj : map.values()){
+					validate(nestObj);
+				}
+		} else if(ReflectUtils.isArray(clazz)){ //Array
+			Object[] array = (Object[]) value;
+			for(Object nestObj : array){
+				validate(nestObj);
+			}
+		}
 	}
 }
