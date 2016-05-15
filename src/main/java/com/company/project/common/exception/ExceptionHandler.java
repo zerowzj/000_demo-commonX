@@ -1,11 +1,11 @@
-package com.company.project.common.exception.util;
+package com.company.project.common.exception;
 
 import com.company.project.common.log.LogInfo;
 
 /**
- * Created by wangzhj on 2016/4/13.
+ * @author wangzhj
  */
-public abstract class ExceptionUtil {
+public class ExceptionHandler {
 
     /**
      * 获取参数异常信息
