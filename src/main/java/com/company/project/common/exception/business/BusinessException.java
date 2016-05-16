@@ -1,7 +1,7 @@
 package com.company.project.common.exception.business;
 
 import com.company.project.common.exception.BaseException;
-import com.company.project.common.exception.util.ExceptionUtil;
+import com.company.project.common.exception.ExceptionHandler;
 
 /**
  * 业务异常
@@ -18,7 +18,7 @@ public class BusinessException extends BaseException {
     }
 
     public BusinessException(String targetName, String errorCode, String errorDesc){
-        super(errorCode, errorDesc, ExceptionUtil.getMessageOfBusinessException(targetName, errorCode,errorDesc), null);
+        super(errorCode, errorDesc, ExceptionHandler.getMessageOfBusinessException(targetName, errorCode, errorDesc), null);
     }
 
     public String getTargetName() {

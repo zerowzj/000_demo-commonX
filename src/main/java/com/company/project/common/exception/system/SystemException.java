@@ -1,7 +1,7 @@
 package com.company.project.common.exception.system;
 
 import com.company.project.common.exception.BaseException;
-import com.company.project.common.exception.util.ExceptionUtil;
+import com.company.project.common.exception.ExceptionHandler;
 
 /**
  * 系统异常
@@ -15,6 +15,6 @@ public class SystemException extends BaseException {
     }
 
     public SystemException(String errorCode, String errorDesc, Throwable cause){
-        super(errorCode, errorDesc, ExceptionUtil.getMessageOfSystemException(errorDesc), cause);
+        super(errorCode, errorDesc, ExceptionHandler.getMessageOfSystemException(errorDesc), cause);
     }
 }
