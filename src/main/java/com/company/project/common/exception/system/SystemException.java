@@ -15,6 +15,6 @@ public class SystemException extends BaseException {
     }
 
     public SystemException(String errorCode, String errorDesc, Throwable cause){
-        super(errorCode, errorDesc, ExceptionHandler.getMessageOfSystemException(errorDesc), cause);
+        super(errorCode, errorDesc, ExceptionHandler.getMsgOfSystemException(errorDesc), cause);
     }
 }

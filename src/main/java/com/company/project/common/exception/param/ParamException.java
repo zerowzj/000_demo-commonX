@@ -18,7 +18,7 @@ public class ParamException extends BaseException {
     }
 
     public ParamException(String paramName, String errorCode, String errorDesc){
-        super(errorCode, errorDesc, ExceptionHandler.getMessageOfParamException(paramName, errorCode, errorDesc), null);
+        super(errorCode, errorDesc, ExceptionHandler.getMsgOfParamException(paramName, errorCode, errorDesc), null);
         this.paramName = paramName;
     }
 

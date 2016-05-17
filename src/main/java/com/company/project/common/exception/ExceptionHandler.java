@@ -15,7 +15,7 @@ public class ExceptionHandler {
      * @param errorDesc 错误描述
      * @return LogInfo
      */
-    public static LogInfo getMessageOfParamException(String paramName, String errorCode, String errorDesc) {
+    public static LogInfo getMsgOfParamException(String paramName, String errorCode, String errorDesc) {
         LogInfo subInfo = new LogInfo();
         subInfo.append(errorDesc);
         if(paramName != null){
@@ -35,7 +35,7 @@ public class ExceptionHandler {
      * @param errorDesc 错误描述
      * @return LogInfo
      */
-    public static LogInfo getMessageOfBusinessException(String targetName, String errorCode, String errorDesc){
+    public static LogInfo getMsgOfBusinessException(String targetName, String errorCode, String errorDesc){
         LogInfo subInfo = new LogInfo();
         if(targetName != null){
             subInfo.append("["+targetName+"]");
@@ -53,7 +53,7 @@ public class ExceptionHandler {
      * @param errorDesc 错误描述
      * @return LogInfo
      */
-    public static LogInfo getMessageOfSystemException(String errorDesc){
+    public static LogInfo getMsgOfSystemException(String errorDesc){
         LogInfo subInfo = new LogInfo();
         subInfo.append(errorDesc);
         return subInfo;

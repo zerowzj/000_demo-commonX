@@ -18,7 +18,7 @@ public class BusinessException extends BaseException {
     }
 
     public BusinessException(String targetName, String errorCode, String errorDesc){
-        super(errorCode, errorDesc, ExceptionHandler.getMessageOfBusinessException(targetName, errorCode, errorDesc), null);
+        super(errorCode, errorDesc, ExceptionHandler.getMsgOfBusinessException(targetName, errorCode, errorDesc), null);
     }
 
     public String getTargetName() {
