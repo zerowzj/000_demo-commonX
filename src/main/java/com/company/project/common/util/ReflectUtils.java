@@ -16,46 +16,46 @@ public final class ReflectUtils {
 	/**
 	 * 获取参数化类数组
 	 * 
-	 * @param cls
+	 * @param clazz
 	 * @return Class<?>[]
 	 */
-	public static Class<?>[] getParameterizedClass(Class<?> cls) {
-		Type type = cls.getGenericSuperclass();
+	public static Class<?>[] getParameterizedClass(Class<?> clazz) {
+		Type type = clazz.getGenericSuperclass();
 		if (type == null) {
 			return null;
 		}
-		Type[] atypeArr = null;
-		Class<?>[] atypeClsArr = null;
+		Type[] typeArr = null;
+		Class<?>[] typeClassArr = null;
 		if (type instanceof ParameterizedType) {
-			// 参数化类型
-			ParameterizedType ptype = (ParameterizedType) type;
-			// 实际类型
-			atypeArr = ptype.getActualTypeArguments();
-			// TODO 转型Class 请转型异常
-			atypeClsArr = new Class[atypeArr.length];
-			for (int i = 0; i < atypeArr.length; i++) {
-				atypeClsArr[i] = (Class<?>) atypeArr[i];
+			//参数化类型
+			ParameterizedType pType = (ParameterizedType) type;
+			//实际类型
+			typeArr = pType.getActualTypeArguments();
+			//转型Class
+			typeClassArr = new Class[typeArr.length];
+			for (int i = 0; i < typeArr.length; i++) {
+				typeClassArr[i] = (Class<?>) typeArr[i];
 			}
 		}
-		return atypeClsArr;
+		return typeClassArr;
 	}
 
 	/**
 	 * 获取指定参数化类
 	 * 
-	 * @param cls
+	 * @param clazz
 	 * @param index
 	 * @return Class<?>
 	 */
-	public static Class<?> getParameterizedClass(Class<?> cls, int index) {
+	public static Class<?> getParameterizedClass(Class<?> clazz, int index) {
 		if (index <= 0) {
 			return null;
 		}
-		Class<?>[] clazz = getParameterizedClass(cls);
-		if (clazz == null || clazz.length < index) {
+		Class<?>[] clazzArr = getParameterizedClass(clazz);
+		if (clazz == null || clazzArr.length < index) {
 			return null;
 		}
-		return clazz[index - 1];
+		return clazzArr[index - 1];
 	}
 
 	/**
