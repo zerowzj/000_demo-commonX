@@ -1,6 +1,6 @@
-package com.company.exception.param;
+package com.company.exception.my.param;
 
-import com.company.exception.BaseException;
+import com.company.exception.base.BaseException;
 
 /**
  * 参数异常

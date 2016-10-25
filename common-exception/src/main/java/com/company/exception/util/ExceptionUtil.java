@@ -1,9 +1,10 @@
-package com.company.exception;
+package com.company.exception.util;
 
-import com.company.project.exception.param.ParamEmptyValueException;
-import com.company.project.exception.param.ParamException;
-import com.company.project.exception.param.ParamFormatErrorException;
-import com.company.project.exception.param.ParamValueIllegalException;
+import com.company.exception.base.BaseException;
+import com.company.exception.my.param.ParamEmptyValueException;
+import com.company.exception.my.param.ParamException;
+import com.company.exception.my.param.ParamFormatErrorException;
+import com.company.exception.my.param.ParamValueIllegalException;
 
 import java.text.MessageFormat;
 

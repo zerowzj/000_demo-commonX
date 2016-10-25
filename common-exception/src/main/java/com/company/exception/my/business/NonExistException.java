@@ -1,4 +1,4 @@
-package com.company.exception.business;
+package com.company.exception.my.business;
 
 /**
  * 不存在异常

@@ -1,4 +1,4 @@
-package com.company.exception.param;
+package com.company.exception.my.param;
 
 /**
  * 参数格式错误异常
