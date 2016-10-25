@@ -8,4 +8,8 @@ import com.company.exception.base.AuthException;
  * @author wangzhj
  */
 public class UnauthorizedException extends AuthException {
+
+    public UnauthorizedException(){
+        super("", "未被授权");
+    }
 }

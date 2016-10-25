@@ -9,4 +9,9 @@ import com.company.exception.base.BaseException;
  */
 public class AuthException extends BaseException {
 
+
+
+    public AuthException(String errorCode, String errorDesc){
+        super(errorCode, errorDesc);
+    }
 }

@@ -8,4 +8,8 @@ import com.company.exception.base.AuthException;
  * @author wangzhj
  */
 public class NotLoginException extends AuthException {
+
+    public NotLoginException(){
+        super("", "请登录");
+    }
 }
