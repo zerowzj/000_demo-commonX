@@ -5,9 +5,9 @@ package com.company.exception.my.param;
  *
  * @author wangzhj
  */
-public class ParamEmptyValueException extends ParamException {
+public class EmptyValueException extends ParamException {
 
-    public ParamEmptyValueException(String paramName){
+    public EmptyValueException(String paramName){
         super("10001", "参数为空[{0}]", paramName);
     }
 }

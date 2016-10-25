@@ -1,10 +1,10 @@
 package com.company.exception.util;
 
 import com.company.exception.base.BaseException;
-import com.company.exception.my.param.ParamEmptyValueException;
+import com.company.exception.my.param.EmptyValueException;
 import com.company.exception.my.param.ParamException;
-import com.company.exception.my.param.ParamFormatErrorException;
-import com.company.exception.my.param.ParamValueIllegalException;
+import com.company.exception.my.param.FormatErrorException;
+import com.company.exception.my.param.ValueIllegalException;
 
 import java.text.MessageFormat;
 
@@ -21,12 +21,12 @@ public class ExceptionUtil {
         Object paramValue = paramEx.getParamValue();
 
         String value = null;
-        if (paramEx instanceof ParamEmptyValueException) {
+        if (paramEx instanceof EmptyValueException) {
             value = MessageFormat.format(errorDesc, paramName);
-        } else if (paramEx instanceof ParamFormatErrorException) {
+        } else if (paramEx instanceof FormatErrorException) {
 
 
-        } else if (paramEx instanceof ParamValueIllegalException) {
+        } else if (paramEx instanceof ValueIllegalException) {
 
 
         }
