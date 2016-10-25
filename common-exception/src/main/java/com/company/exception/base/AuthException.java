@@ -1,4 +1,4 @@
-package com.company.exception.my.auth;
+package com.company.exception.base;
 
 import com.company.exception.base.BaseException;
 

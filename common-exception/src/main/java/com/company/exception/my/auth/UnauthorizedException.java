@@ -1,5 +1,7 @@
 package com.company.exception.my.auth;
 
+import com.company.exception.base.AuthException;
+
 /**
  * 未授权异常
  *

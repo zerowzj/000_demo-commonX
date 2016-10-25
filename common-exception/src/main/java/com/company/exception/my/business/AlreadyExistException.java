@@ -1,5 +1,7 @@
 package com.company.exception.my.business;
 
+import com.company.exception.base.BusinessException;
+
 /**
  * 已存在异常
  *

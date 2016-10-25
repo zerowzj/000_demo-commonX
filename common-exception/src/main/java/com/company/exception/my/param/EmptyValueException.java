@@ -1,5 +1,7 @@
 package com.company.exception.my.param;
 
+import com.company.exception.base.ParamException;
+
 /**
  * 参数空值异常
  *
