@@ -13,7 +13,6 @@
     <!--          模块         -->
     <!-- ==================== -->
     <modules>
-        <module>common</module>
         <module>common-exception</module>
     </modules>
     <!-- ==================== -->
