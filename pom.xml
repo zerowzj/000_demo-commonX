@@ -12,6 +12,7 @@
 	<!-- ==================== -->
 	<modules>
 		<module>common</module>
+		<module>common-exception</module>
 	</modules>
 	<!-- ==================== -->
 	<!--          构建         -->
