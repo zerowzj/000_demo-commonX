@@ -7,9 +7,9 @@ import com.company.exception.base.AuthException;
  *
  * @author wangzhj
  */
-public class UnamePwdErrorException extends AuthException {
+public class UserNamePwdErrorException extends AuthException {
 
-    public UnamePwdErrorException() {
+    public UserNamePwdErrorException() {
         super("", "用户名或密码错误");
     }
 }
