@@ -9,7 +9,7 @@ import com.company.exception.base.BaseException;
  */
 public class ParamException extends BaseException {
 
-    /** 参数名称 */
+    /** 参数名 */
     private String paramName = null;
     /** 参数值 */
     private Object paramValue = null;

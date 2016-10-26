@@ -10,6 +10,6 @@ import com.company.exception.base.AuthException;
 public class NotLoginException extends AuthException {
 
     public NotLoginException(){
-        super("", "请登录");
+        super("", "未登录");
     }
 }
