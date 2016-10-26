@@ -1,4 +1,4 @@
-package com.company.project.common.validation.util;
+package com.company.validation.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
