@@ -1,4 +1,4 @@
-package com.company.project.common.util;
+package com.company.util;
 
 public class PathUtils {
 
