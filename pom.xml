@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <!-- ==================== -->
-    <!--          项目         -->
+    <!--          项目        -->
     <!-- ==================== -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.company.project</groupId>
@@ -10,7 +10,7 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <!-- ==================== -->
-    <!--          模块         -->
+    <!--          模块        -->
     <!-- ==================== -->
     <modules>
         <module>common-util</module>
@@ -18,7 +18,7 @@
         <module>common-validation</module>
     </modules>
     <!-- ==================== -->
-    <!--          构建         -->
+    <!--          构建        -->
     <!-- ==================== -->
     <build>
         <plugins>
