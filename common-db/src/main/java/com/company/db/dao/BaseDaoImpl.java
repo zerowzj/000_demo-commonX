@@ -14,10 +14,10 @@ import java.io.Serializable;
 public abstract class BaseDaoImpl<E extends BaseEO> extends SqlSessionDaoSupport implements BaseDao<E> {
 
     @Override
-    public final int insert(E entity) {
+    public final E insert(E entity) {
         String sqlId = getSqlId("insert");
         int count = getSqlSession().insert(sqlId, entity);
-        return count;
+        return entity;
     }
 
     @Override

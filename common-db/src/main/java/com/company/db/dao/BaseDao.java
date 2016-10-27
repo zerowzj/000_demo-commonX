@@ -15,7 +15,7 @@ public interface BaseDao<E extends BaseEO> {
      * @param entity 实体信息
      * @return int 新增数量
      */
-    public int insert(E entity);
+    public E insert(E entity);
 
     /**
      * 删除实体
