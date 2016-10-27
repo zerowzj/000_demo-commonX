@@ -9,6 +9,8 @@ import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
@@ -22,9 +24,11 @@ import java.util.Properties;
 })
 public class MyInterceptor implements Interceptor {
 
+    private static final Logger logger = LoggerFactory.getLogger(MyInterceptor.class);
+
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        System.out.println("执行拦截器....");
+        logger.info("执行拦截器....");
         return invocation.proceed();
     }
 
