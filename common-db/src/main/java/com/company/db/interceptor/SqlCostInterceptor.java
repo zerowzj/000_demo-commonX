@@ -47,7 +47,7 @@ public class SqlCostInterceptor extends InterceptorAdapter {
             Method method = invocation.getMethod();
             result = invocation.proceed();
             long end = System.currentTimeMillis();
-            logger.info("[TimerInterceptor] execute [" + method.getName() + "] cost [" + (end - start) + "] ms");
+            logger.info("[SqlCostInterceptor] execute [" + method.getName() + "] cost [" + (end - start) + "] ms");
         }
         return result;
     }
