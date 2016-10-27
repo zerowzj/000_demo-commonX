@@ -16,6 +16,7 @@
         <module>common-util</module>
         <module>common-exception</module>
         <module>common-validation</module>
+        <module>common-db</module>
     </modules>
     <!-- ==================== -->
     <!--          构建        -->
