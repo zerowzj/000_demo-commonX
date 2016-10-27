@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
  * @author wangzhj
  */
 @Intercepts({@Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
-        @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})
+             @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})
 })
 public class MyInterceptor extends InterceptorAdapter {
 
@@ -26,6 +26,11 @@ public class MyInterceptor extends InterceptorAdapter {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
+        //
+        Object[] args = invocation.getArgs();
+        //
+        MappedStatement mappedStatement = (MappedStatement) args[0];
+
         logger.info("执行拦截器....");
         Object target = invocation.getTarget();
         Object result = null;
