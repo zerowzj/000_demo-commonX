@@ -1,6 +1,4 @@
-package com.company.exception.base;
-
-import com.company.exception.base.BaseException;
+package com.company.exception;
 
 /**
  * 参数异常

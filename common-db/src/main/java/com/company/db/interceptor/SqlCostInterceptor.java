@@ -4,6 +4,7 @@ import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Signature;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 
 /**
- * 拦截器
+ * Sql耗时拦截器
  *
  * @author wangzhj
  */
@@ -23,9 +24,9 @@ import java.lang.reflect.Method;
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
         @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})
 })
-public class MyInterceptor extends InterceptorAdapter {
+public class SqlCostInterceptor extends InterceptorAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(MyInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(SqlCostInterceptor.class);
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -33,6 +34,10 @@ public class MyInterceptor extends InterceptorAdapter {
         Object[] args = invocation.getArgs();
         //
         MappedStatement mappedStatement = (MappedStatement) args[0];
+        String sqlId = mappedStatement.getId();
+        SqlCommandType sqlCommandType = mappedStatement.getSqlCommandType();
+        mappedStatement.getParameterMap();
+        mappedStatement.getResultMaps();
 
         logger.info("执行拦截器....");
         Object target = invocation.getTarget();
@@ -40,7 +45,6 @@ public class MyInterceptor extends InterceptorAdapter {
         if (target instanceof Executor) {
             long start = System.currentTimeMillis();
             Method method = invocation.getMethod();
-            /**执行方法*/
             result = invocation.proceed();
             long end = System.currentTimeMillis();
             logger.info("[TimerInterceptor] execute [" + method.getName() + "] cost [" + (end - start) + "] ms");

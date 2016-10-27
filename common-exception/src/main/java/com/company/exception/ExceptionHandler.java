@@ -1,9 +1,5 @@
 package com.company.exception;
 
-import com.company.exception.base.BaseException;
-import com.company.exception.base.BusinessException;
-import com.company.exception.base.ParamException;
-
 /**
  * Created by wangzhj on 2016/10/26.
  */

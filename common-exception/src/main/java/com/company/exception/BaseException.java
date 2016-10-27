@@ -1,4 +1,4 @@
-package com.company.exception.base;
+package com.company.exception;
 
 /**
  * 基本异常

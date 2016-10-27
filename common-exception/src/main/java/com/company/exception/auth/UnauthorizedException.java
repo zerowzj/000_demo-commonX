@@ -1,6 +1,6 @@
-package com.company.exception.my.auth;
+package com.company.exception.auth;
 
-import com.company.exception.base.AuthException;
+import com.company.exception.AuthException;
 
 /**
  * 未授权异常
