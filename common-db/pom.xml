@@ -42,9 +42,9 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-    <!-- ==================== -->
-    <!--          构建        -->
-    <!-- ==================== -->
+   <!-- &lt;!&ndash; ==================== &ndash;&gt;
+    &lt;!&ndash;          构建        &ndash;&gt;
+    &lt;!&ndash; ==================== &ndash;&gt;
     <build>
         <plugins>
             <plugin>
@@ -57,5 +57,5 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 </project>
