@@ -1,7 +1,7 @@
 package com.company.util;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * HttpRequest Util
@@ -59,5 +59,26 @@ public abstract class HttpRequestUtil {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 提取HttpServletRequest参数
+     *
+     * @param request
+     * @return Map<String, Object>
+     */
+    public static Map<String, Object> extractParam(HttpServletRequest request) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        Enumeration enums = request.getParameterNames();
+        while (enums.hasMoreElements()) {
+            String key = (String) enums.nextElement();
+            String[] value = request.getParameterValues(key);
+            if (value.length == 1) {
+                map.put(key, value[0]);
+            } else {
+                map.put(key, Arrays.asList(value));
+            }
+        }
+        return map;
     }
 }
