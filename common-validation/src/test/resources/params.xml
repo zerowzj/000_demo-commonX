@@ -4,5 +4,8 @@
         <param name="">
             <data format="yyyy-MM-DD" minData="2010-11-12-12" maxData=""/>
         </param>
+        <param name="">
+            <data format="yyyy-MM-DD" minData="2010-11-12-12" maxData=""/>
+        </param>
     </params>
 </parma-set>
