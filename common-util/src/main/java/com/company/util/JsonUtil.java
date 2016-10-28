@@ -1,11 +1,14 @@
 package com.company.util;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Json Util
  *
  * @author wangzhj
  */
-public class JsonUtil {
+public abstract class JsonUtil {
 
     /**
      * 对象转Json
@@ -14,27 +17,49 @@ public class JsonUtil {
      * @return String
      */
     public static String toJson(Object obj) {
-        return null;
+        ObjectMapper mapper = new ObjectMapper();
+        String str = null;
+        try {
+            str = mapper.writeValueAsString(obj);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return str;
     }
 
     /**
      * Json转对象
      *
-     * @param json
+     * @param str
      * @return T
      */
-    public static <T> T fromJson(String json) {
-        return null;
+    public static <T> T fromJson(String str) {
+        ObjectMapper mapper = new ObjectMapper();
+        T t = null;
+        try {
+            t = mapper.readValue(str, new TypeReference<T>() {
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return t;
     }
 
     /**
      * 是否是Json
      *
-     * @param json
+     * @param str
      * @return boolean
      */
-    public static boolean isJson(String json) {
-
-        return true;
+    public static boolean isJson(String str) {
+        boolean is = true;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.readValue(str, new TypeReference() {
+            });
+        } catch (Exception ex) {
+            is = false;
+        }
+        return is;
     }
 }
