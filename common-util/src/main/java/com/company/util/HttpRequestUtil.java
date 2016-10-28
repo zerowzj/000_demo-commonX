@@ -81,4 +81,8 @@ public abstract class HttpRequestUtil {
         }
         return map;
     }
+
+    public static String getBodyString(HttpServletRequest request){
+        return null;
+    }
 }
