@@ -1,4 +1,4 @@
-package com.company.exception;
+package com.company.exception.domain;
 
 /**
  * 认证/授权异常

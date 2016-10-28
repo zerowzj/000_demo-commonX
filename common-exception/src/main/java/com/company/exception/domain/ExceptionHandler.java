@@ -1,4 +1,4 @@
-package com.company.exception;
+package com.company.exception.domain;
 
 /**
  * Created by wangzhj on 2016/10/26.

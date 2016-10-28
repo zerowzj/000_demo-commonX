@@ -1,6 +1,6 @@
-package com.company.exception.auth;
+package com.company.exception.domain.auth;
 
-import com.company.exception.AuthException;
+import com.company.exception.domain.AuthException;
 
 /**
  * 未授权异常

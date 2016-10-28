@@ -1,4 +1,4 @@
-package com.company.exception;
+package com.company.exception.domain;
 
 /**
  * 参数异常

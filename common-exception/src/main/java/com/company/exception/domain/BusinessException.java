@@ -1,4 +1,4 @@
-package com.company.exception;
+package com.company.exception.domain;
 
 /**
  * 业务异常
