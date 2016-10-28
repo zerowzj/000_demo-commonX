@@ -82,6 +82,12 @@ public abstract class HttpRequestUtil {
         return map;
     }
 
+    /**
+     * 提取HttpServletRequest参数
+     *
+     * @param request
+     * @return Map<String, Object>
+     */
     public static String getBodyString(HttpServletRequest request){
         return null;
     }
