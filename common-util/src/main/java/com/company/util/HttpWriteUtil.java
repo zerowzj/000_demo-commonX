@@ -4,11 +4,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
 /**
- * OutWrite Util
+ * Write Util
  *
  * @author wangzhj
  */
-public class OutWriteUtil {
+public class HttpWriteUtil {
 
     private static final String CHARSET_UTF_8 = "UTF-8";
 
