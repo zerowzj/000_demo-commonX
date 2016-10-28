@@ -16,6 +16,7 @@ public class Parser {
 
     public static String getLogMsg() {
 
+        return null;
     }
 
     public String handle(BaseException ex) {
@@ -35,7 +36,7 @@ public class Parser {
             BusinessException bex = (BusinessException) ex;
         }
 
-
+        return null;
     }
 
     private String getFormat(int count) {
