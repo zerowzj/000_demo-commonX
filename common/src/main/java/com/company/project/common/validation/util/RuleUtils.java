@@ -13,7 +13,7 @@ public class RuleUtils {
 	public static String RULE_PACKAGE = StringUtils.substringLastBefore(RuleUtils.class.getPackage().getName(), ".");
 	
 	static {
-		RULE_PACKAGE = RULE_PACKAGE + ".constraint";
+		RULE_PACKAGE = RULE_PACKAGE + ".rule";
 	}
 
 	/**
