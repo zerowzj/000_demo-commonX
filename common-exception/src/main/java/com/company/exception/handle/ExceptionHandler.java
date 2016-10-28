@@ -1,4 +1,8 @@
-package com.company.exception.domain;
+package com.company.exception.handle;
+
+import com.company.exception.domain.BaseException;
+import com.company.exception.domain.BusinessException;
+import com.company.exception.domain.ParamException;
 
 /**
  * Created by wangzhj on 2016/10/26.
