@@ -41,7 +41,6 @@ public abstract class BaseDaoImpl<E extends BaseEO> extends SqlSessionDaoSupport
         return entity;
     }
 
-
     /**
      * 获取sqlId
      *
