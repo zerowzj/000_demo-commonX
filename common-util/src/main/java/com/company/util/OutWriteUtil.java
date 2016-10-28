@@ -12,8 +12,6 @@ public class OutWriteUtil {
 
     private static final String CHARSET_UTF_8 = "UTF-8";
 
-    private static final String AJAX_HEADER = "X-Requested-With";
-
     /**
      * 写到客户端
      *
