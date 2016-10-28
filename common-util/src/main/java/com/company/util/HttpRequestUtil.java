@@ -29,7 +29,6 @@ public abstract class HttpRequestUtil {
         }
         return false;
     }
-
     /**
      * 是否是同步请求
      *
@@ -43,7 +42,6 @@ public abstract class HttpRequestUtil {
         }
         return false;
     }
-
     /**
      * 是否是上传请求
      *
