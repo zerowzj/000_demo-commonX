@@ -5,4 +5,6 @@ package com.company.validation.xml.rule;
  */
 public abstract class BaseRule implements Rule {
 
+    private boolean isEmpty = true;
+
 }

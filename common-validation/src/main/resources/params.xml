@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<params-config xmlns="http://www.19pay.com/validation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.19pay.com/validator/params params.xsd">
+	<param-set key="" >
+<!--		<param name="sex">
+				</param>
+		<param name="" />
+		<param name="appreqdate">
+			<date format="yyyyMMddHHmmss" />
+		</param>
+		<param name="mxid" required="false">
+			<string maxlength="100" />
+		</param>-->
+		<param name="isbind" >
+			<enum values="0,1" />
+		</param>
+	</param-set>
+</params-config>

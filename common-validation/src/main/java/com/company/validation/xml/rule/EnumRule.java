@@ -7,4 +7,7 @@ import java.util.List;
  */
 public class EnumRule extends BaseRule{
 
+    /** 枚举值列表 */
+    private List<String> valueLt = null;
+
 }
