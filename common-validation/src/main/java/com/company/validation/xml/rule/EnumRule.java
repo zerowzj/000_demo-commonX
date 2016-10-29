@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * Created by wangzhj on 2016/10/28.
  */
-public class Enum {
+public class EnumRule extends BaseRule{
 
-    private List<String> enumLt;
 }
