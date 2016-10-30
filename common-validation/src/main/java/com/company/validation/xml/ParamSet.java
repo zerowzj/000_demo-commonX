@@ -22,4 +22,12 @@ public class ParamSet {
 	public void setParamLt(List<Param> paramLt) {
 		this.paramLt = paramLt;
 	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
 }

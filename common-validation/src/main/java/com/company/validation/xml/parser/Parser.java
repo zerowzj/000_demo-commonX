@@ -1,6 +1,7 @@
 package com.company.validation.xml.parser;
 
 import com.company.validation.xml.Param;
+import com.company.validation.xml.rule.Rule;
 import org.dom4j.Element;
 
 /**
@@ -11,10 +12,9 @@ import org.dom4j.Element;
 public interface Parser {
 
     /**
-     * 解析类型
+     * 解析
      *
      * @param ele
-     * @param param
      */
-    public void parse(final Element ele, final Param param);
+    public Rule parse(Element ele);
 }
