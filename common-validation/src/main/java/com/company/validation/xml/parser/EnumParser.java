@@ -6,17 +6,14 @@ import com.google.common.base.Splitter;
 import org.dom4j.Attribute;
 import org.dom4j.Element;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 枚举规则解析器
  * 
  * @author wangzhj
  */
-public class EnumParser implements Parser {
+public class EnumParser extends BaseParser {
 
 	@Override
 	public Rule parse(Element ele) {

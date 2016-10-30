@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://www.19pay.com/validation" xmlns:tns="http://www.19pay.com/validation"
+	targetNamespace="http://www.company.com/validation" xmlns:tns="http://www.company.com/validation"
 	elementFormDefault="qualified">
 	<xs:element name="params-config">
 		<xs:complexType>
@@ -19,17 +19,17 @@
 
 	<xs:complexType name="paramType">
 		<xs:sequence>
-			<xs:group ref="tns:validaterule"></xs:group>
+			<xs:group ref="tns:myrule"></xs:group>
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="version" type="xs:string" />
 	</xs:complexType>
 
-	<xs:group name="validaterule">
+	<xs:group name="myrule">
 		<xs:choice>
 			<xs:element name="enum" minOccurs="0" maxOccurs="1">
 				<xs:complexType>
-					<xs:attribute name="isEmpty" type="xs:boolean" />
+					<xs:attribute name="notEmpty" type="xs:boolean" />
 					<xs:attribute name="values" type="xs:string" />
 				</xs:complexType>
 			</xs:element>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<params-config xmlns="http://www.19pay.com/validation"
+<params-config xmlns="http://www.company.com/validation"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="http://www.19pay.com/validator/params params.xsd">
+               xsi:schemaLocation="http://www.company.com/validation params.xsd">
     <param-set key="/login">
         <param name="isbind">
             <enum values="0,1"/>

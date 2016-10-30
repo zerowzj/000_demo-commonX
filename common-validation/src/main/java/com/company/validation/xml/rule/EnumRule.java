@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class EnumRule extends BaseRule{
 
-    /** 枚举值列表 */
+    /** 值列表 */
     private List<String> valueLt = null;
 
     public List<String> getValueLt() {
