@@ -19,13 +19,13 @@
 
 	<xs:complexType name="paramType">
 		<xs:sequence>
-			<xs:group ref="tns:myrule"></xs:group>
+			<xs:group ref="tns:rule"></xs:group>
 		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="version" type="xs:string" />
 	</xs:complexType>
 
-	<xs:group name="myrule">
+	<xs:group name="rule">
 		<xs:choice>
 			<xs:element name="enum" minOccurs="0" maxOccurs="1">
 				<xs:complexType>

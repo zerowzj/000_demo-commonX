@@ -13,8 +13,8 @@ public class ValidatorFactory {
      * @param type
      * @return TypeParser
      */
-    public static Parser getValidator(final String type) {
-        Parser parser = null;
+    public static Validator getValidator(final String type) {
+        Validator validator = null;
         /*if ("string".equals(type)) {
             typeParser = new StringParser();
 		} else if ("date".equals(type)) {
@@ -26,6 +26,6 @@ public class ValidatorFactory {
 		} else {
 
 		}*/
-        return parser;
+        return validator;
     }
 }
