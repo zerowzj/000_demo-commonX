@@ -3,7 +3,9 @@ package com.company.validation.xml.rule;
 import java.util.List;
 
 /**
- * Created by wangzhj on 2016/10/28.
+ * 枚举规则
+ *
+ * @author wangzhj
  */
 public class EnumRule extends BaseRule{
 
