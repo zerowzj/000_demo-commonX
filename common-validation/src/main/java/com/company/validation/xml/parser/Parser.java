@@ -16,5 +16,5 @@ public interface Parser {
      *
      * @param ele
      */
-    public Rule doParse(Element ele);
+    public Rule parse(Element ele);
 }

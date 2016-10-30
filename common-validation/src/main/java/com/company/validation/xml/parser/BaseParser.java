@@ -11,9 +11,10 @@ import org.dom4j.Element;
 public abstract class BaseParser implements Parser {
 
     @Override
-    public Rule doParse(Element ele) {
-        Rule rule = parse(ele);
-
+    public Rule parse(Element ele) {
+        //
+        Rule rule = parseCustom(ele);
+        //
         BaseRule baseRule = (BaseRule) rule;
         //获取值
         Attribute notEmptyAttr = ele.attribute("notEmpty");
@@ -24,5 +25,11 @@ public abstract class BaseParser implements Parser {
         return baseRule;
     }
 
-    public abstract Rule parse(Element ele);
+    /**
+     * 解析规则
+     *
+     * @param ele
+     * @return Rule
+     */
+    public abstract Rule parseCustom(Element ele);
 }

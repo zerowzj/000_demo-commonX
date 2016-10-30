@@ -16,7 +16,7 @@ import java.util.List;
 public class EnumParser extends BaseParser {
 
 	@Override
-	public Rule parse(Element ele) {
+	public Rule parseCustom(Element ele) {
 		EnumRule rule = new EnumRule();
 		//获取值
 		Attribute valuesAttr = ele.attribute("values");
