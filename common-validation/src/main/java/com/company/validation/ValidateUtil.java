@@ -34,7 +34,7 @@ public abstract class ValidateUtil {
             for (Rule rule : param.getRuleLt()) {
                 Validator validator = ValidatorFactory.getValidator(null);
                 if (!validator.support(paramValue)) {
-                    throw new IllegalStateException("验证其不支持");
+                    throw new IllegalStateException("验证不支持的数据类型！");
                 }
                 validator.validate(param, paramValue);
             }
