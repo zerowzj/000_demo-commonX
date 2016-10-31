@@ -14,10 +14,12 @@ public class ParserFactory {
      * @return Parser
      */
     public static Parser getParser(final String type) {
-        Parser parser = new StringParser();
+        Parser parser = null;
         if ("enum".equals(type)) {
-			parser = new EnumParser();
-		}
+            parser = new EnumParser();
+        } else if ("string".equals(type)) {
+            parser = new StringParser();
+        }
         return parser;
     }
 }
