@@ -1,6 +1,11 @@
 package com.company.util;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -29,6 +34,7 @@ public abstract class HttpRequestUtil {
         }
         return false;
     }
+
     /**
      * 是否是同步请求
      *
@@ -42,6 +48,7 @@ public abstract class HttpRequestUtil {
         }
         return false;
     }
+
     /**
      * 是否是上传请求
      *
@@ -81,12 +88,40 @@ public abstract class HttpRequestUtil {
     }
 
     /**
-     * 提取HttpServletRequest参数
+     *
      *
      * @param request
-     * @return Map<String, Object>
+     * @return String
      */
-    public static String getBodyString(HttpServletRequest request){
-        return null;
+    public static String getBodyString(HttpServletRequest request) {
+        StringBuilder sb = new StringBuilder();
+        InputStream is = null;
+        BufferedReader reader = null;
+        try {
+            is = request.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return sb.toString();
     }
 }
