@@ -12,12 +12,12 @@ public class ParamException extends BaseException {
     /** 参数值 */
     private Object paramValue = null;
 
-    public ParamException(String errorCode, String errorDesc, String paramName){
-        this(errorCode, errorDesc, paramName, null);
+    public ParamException(String errorCode, String errorDesc, String fmtErrorDesc, String paramName){
+        this(errorCode, errorDesc, fmtErrorDesc, paramName, null);
     }
 
-    public ParamException(String errorCode, String errorDesc, String paramName, Object paramValue){
-        super(errorCode, errorDesc);
+    public ParamException(String errorCode, String errorDesc, String fmtErrorDesc,String paramName, Object paramValue){
+        super(errorCode, errorDesc, fmtErrorDesc);
         this.paramName = paramName;
         this.paramValue = paramValue;
     }
