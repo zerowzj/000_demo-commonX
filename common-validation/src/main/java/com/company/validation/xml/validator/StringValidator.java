@@ -13,7 +13,7 @@ public class StringValidator implements Validator {
 
     @Override
     public boolean support(Class<?> clazz) {
-        return clazz.isAssignableFrom(String.class);
+        return String.class.isAssignableFrom(clazz);
     }
 
     @Override
@@ -21,11 +21,12 @@ public class StringValidator implements Validator {
         String paramName = param.getParamName();
         int length = value.toString().length();
         StringRule rule = (StringRule) param.getRule();
+        //最小长度
         int minLength = rule.getMinLength();
         if (minLength > 0 && length < minLength) {
             throw new FormatErrorException(paramName, value);
         }
-
+        //最大长度
         int maxLength = rule.getMaxLength();
         if (maxLength > 0 && length > maxLength) {
             throw new FormatErrorException(paramName, value);

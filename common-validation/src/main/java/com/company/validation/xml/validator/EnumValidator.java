@@ -22,8 +22,9 @@ public class EnumValidator implements Validator {
     @Override
     public void validate(Param param, Object value) {
         String paramName = param.getParamName();
-
         EnumRule rule = (EnumRule) param.getRule();
+
+        //值列表
         List<String> valueLt = rule.getValueLt();
         if (!valueLt.contains(value.toString())) {
             throw new ValueIllegalException(paramName, value);
