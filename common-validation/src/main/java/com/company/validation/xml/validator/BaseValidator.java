@@ -2,7 +2,6 @@ package com.company.validation.xml.validator;
 
 import com.company.exception.domain.param.EmptyValueException;
 import com.company.validation.xml.Param;
-import com.company.validation.xml.rule.BaseRule;
 import com.company.validation.xml.rule.Rule;
 
 import java.util.List;
@@ -16,16 +15,17 @@ public abstract class BaseValidator implements Validator {
 
     @Override
     public final void validate(Param param, Object value) {
-        List<Rule> ruleLt = param.getRuleLt();
-        BaseRule baseRule = null;
-        if (baseRule.isNotEmpty() && value == null) {
+        //
+        Rule rule = param.getRule();
+        if (rule.isNotEmpty() && value == null) {
             throw new EmptyValueException(param.getParamName());
         }
+        //
         validateCustom(param, value);
     }
 
     /**
-     * 自定义验证
+     * 各自验证
      *
      * @param param
      * @param value

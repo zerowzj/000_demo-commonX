@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author wangzhj
  */
-public class EnumRule extends BaseRule{
+public class EnumRule extends Rule {
 
     /** 值列表 */
     private List<String> valueLt = null;

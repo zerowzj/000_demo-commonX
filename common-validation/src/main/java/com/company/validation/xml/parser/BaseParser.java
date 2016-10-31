@@ -1,6 +1,5 @@
 package com.company.validation.xml.parser;
 
-import com.company.validation.xml.rule.BaseRule;
 import com.company.validation.xml.rule.Rule;
 import org.dom4j.Attribute;
 import org.dom4j.Element;
@@ -14,15 +13,13 @@ public abstract class BaseParser implements Parser {
     public Rule parse(Element ele) {
         //
         Rule rule = parseCustom(ele);
-        //
-        BaseRule baseRule = (BaseRule) rule;
         //获取值
         Attribute notEmptyAttr = ele.attribute("notEmpty");
-        if(notEmptyAttr != null){
-            baseRule.setNotEmpty(true);
-        }
+//        if(notEmptyAttr != null){
+            rule.setNotEmpty(true);
+//        }
 
-        return baseRule;
+        return rule;
     }
 
     /**

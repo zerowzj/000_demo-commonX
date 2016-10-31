@@ -1,6 +1,7 @@
 package com.company.validation.xml.validator;
 
 import com.company.validation.xml.Param;
+import com.company.validation.xml.rule.Rule;
 
 /**
  * Created by wangzhj on 2016/10/30.
@@ -14,6 +15,8 @@ public class EnumValidator extends BaseValidator{
 
     @Override
     public void validateCustom(Param param, Object value) {
+        String paramName = param.getParamName();
+        Rule rule = param.getRule();
 
 
     }

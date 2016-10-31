@@ -14,8 +14,8 @@ public class Param {
     /** 参数名 */
     private String paramName = null;
 
-    /** 规则列表 */
-    private List<Rule> ruleLt = null;
+    /** 规则 */
+    private Rule rule = null;
 
     public String getParamName() {
         return paramName;
@@ -25,11 +25,11 @@ public class Param {
         this.paramName = paramName;
     }
 
-    public List<Rule> getRuleLt() {
-        return ruleLt;
+    public Rule getRule() {
+        return rule;
     }
 
-    public void setRuleLt(List<Rule> ruleLt) {
-        this.ruleLt = ruleLt;
+    public void setRule(Rule rule) {
+        this.rule = rule;
     }
 }

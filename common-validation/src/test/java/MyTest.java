@@ -18,7 +18,7 @@ public class MyTest {
         ParamSet paramSet = new ParamSetFactory().getParamSet("/login");
 
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("isbind", new ArrayList<>());
+        paramMap.put("isbind1", "1");
 
         ValidateUtil.validate(paramMap, paramSet);
     }

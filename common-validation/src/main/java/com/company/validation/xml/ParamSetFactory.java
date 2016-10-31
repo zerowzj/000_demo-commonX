@@ -91,7 +91,7 @@ public class ParamSetFactory {
 
                     ruleLt.add(rule);
                 }
-                param.setRuleLt(ruleLt);
+                param.setRule(ruleLt.get(0));
 
                 paramLt.add(param);
             }

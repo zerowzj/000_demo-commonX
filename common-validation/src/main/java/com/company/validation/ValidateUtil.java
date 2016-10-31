@@ -1,5 +1,6 @@
 package com.company.validation;
 
+import com.company.exception.domain.param.EmptyValueException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.ParamSet;
 import com.company.validation.xml.rule.Rule;
@@ -31,13 +32,15 @@ public abstract class ValidateUtil {
         for (Param param : paramLt) {
             String paramName = param.getParamName();
             Object paramValue = paramMap.get(paramName);
-            for (Rule rule : param.getRuleLt()) {
-                Validator validator = ValidatorFactory.getValidator(null);
-                if (!validator.support(paramValue)) {
-                    throw new IllegalStateException("验证不支持的数据类型！");
-                }
-                validator.validate(param, paramValue);
+            Rule rule = param.getRule();
+            if (rule.isNotEmpty() && paramValue == null) {
+                throw new EmptyValueException(paramName);
             }
+            Validator validator = ValidatorFactory.getValidator(null);
+            if (!validator.support(paramValue)) {
+                throw new IllegalStateException("验证不支持的数据类型！");
+            }
+            validator.validate(param, paramValue);
         }
     }
 
