@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 验证Utils
+ * 验证Util
  *
  * @author wangzhj
  */
