@@ -6,9 +6,7 @@ import com.company.validation.xml.rule.Rule;
 import com.company.validation.xml.validator.Validator;
 import com.company.validation.xml.validator.ValidatorFactory;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +33,7 @@ public abstract class ValidateUtils {
             Object paramValue = paramMap.get(paramName);
             for (Rule rule : param.getRuleLt()) {
                 Validator validator = ValidatorFactory.getValidator(null);
-                if(!validator.support(paramValue)){
+                if (!validator.support(paramValue)) {
                     throw new IllegalStateException("验证其不支持");
                 }
                 validator.validate(param, paramValue);
