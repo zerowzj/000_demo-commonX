@@ -1,7 +1,6 @@
-import com.company.validation.ValidateUtils;
+import com.company.validation.ValidateUtil;
 import com.company.validation.xml.ParamSet;
 import com.company.validation.xml.ParamSetFactory;
-import com.company.validation.xml.validator.Validator;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -21,6 +20,6 @@ public class MyTest {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("isbind", new ArrayList<>());
 
-        ValidateUtils.validate(paramMap, paramSet);
+        ValidateUtil.validate(paramMap, paramSet);
     }
 }

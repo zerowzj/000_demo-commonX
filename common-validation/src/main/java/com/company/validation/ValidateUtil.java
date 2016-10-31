@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public abstract class ValidateUtils {
+public abstract class ValidateUtil {
 
 //	private static final Logger logger = LoggerFactory.getLogger(ValidatorUtils.class);
 
