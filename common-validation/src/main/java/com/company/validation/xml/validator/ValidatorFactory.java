@@ -15,17 +15,9 @@ public class ValidatorFactory {
      */
     public static Validator getValidator(final String type) {
         Validator validator = null;
-        /*if ("string".equals(type)) {
-            typeParser = new StringParser();
-		} else if ("date".equals(type)) {
-			typeParser = new DateParser();
-		} else if ("enum".equals(type)) {
-			typeParser = new EnumParser();
-		} else if ("money".equals(type)) {
-			typeParser = new MoneyParser();
-		} else {
-
-		}*/
-        return validator;
+        if ("string".equals(type)) {
+			validator = new EnumValidator();
+		}
+        return new EnumValidator();
     }
 }

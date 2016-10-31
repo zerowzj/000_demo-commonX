@@ -3,6 +3,10 @@ package com.company.util;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Json Util
  *
@@ -61,5 +65,12 @@ public abstract class JsonUtil {
             is = false;
         }
         return is;
+    }
+
+    public static void main(String[] args) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("2", 1);
+        data.put("1", new Date());
+        System.out.println(JsonUtil.toJson(data));
     }
 }

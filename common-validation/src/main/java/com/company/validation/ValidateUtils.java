@@ -1,5 +1,11 @@
 package com.company.validation;
 
+import com.company.validation.xml.Param;
+import com.company.validation.xml.ParamSet;
+import com.company.validation.xml.rule.Rule;
+import com.company.validation.xml.validator.Validator;
+import com.company.validation.xml.validator.ValidatorFactory;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -11,9 +17,31 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public abstract class ValidatorUtils {
+public abstract class ValidateUtils {
 
 //	private static final Logger logger = LoggerFactory.getLogger(ValidatorUtils.class);
+
+    /**
+     * 验证
+     *
+     * @param paramMap
+     * @param paramSet
+     */
+    public static void validate(Map<String, Object> paramMap, ParamSet paramSet) {
+
+        List<Param> paramLt = paramSet.getParamLt();
+        for (Param param : paramLt) {
+            String paramName = param.getParamName();
+            Object paramValue = paramMap.get(paramName);
+            for (Rule rule : param.getRuleLt()) {
+                Validator validator = ValidatorFactory.getValidator(null);
+                if(!validator.support(paramValue)){
+                    throw new IllegalStateException("验证其不支持");
+                }
+                validator.validate(param, paramValue);
+            }
+        }
+    }
 
     /**
      * 验证
