@@ -13,7 +13,8 @@ public class Param {
 
     /** 参数名 */
     private String paramName = null;
-
+    /** 是否非空 */
+    private boolean notEmpty = false;
     /** 规则 */
     private Rule rule = null;
 

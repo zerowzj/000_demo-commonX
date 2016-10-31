@@ -1,57 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://www.company.com/validation" xmlns:tns="http://www.company.com/validation"
-	elementFormDefault="qualified">
-	<xs:element name="params-config">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="param-set" minOccurs="0" maxOccurs="1">
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="param" type="tns:paramType" maxOccurs="unbounded" />
-						</xs:sequence>
-						<xs:attribute name="key" type="xs:string" />
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+           targetNamespace="http://www.company.com/validation" xmlns:tns="http://www.company.com/validation"
+           elementFormDefault="qualified">
+    <xs:element name="params-config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="param-set" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="param" type="tns:paramType" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                        <xs:attribute name="key" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:complexType name="paramType">
-		<xs:sequence>
-			<xs:group ref="tns:rule"></xs:group>
-		</xs:sequence>
-		<xs:attribute name="name" type="xs:string" />
-		<xs:attribute name="version" type="xs:string" />
-	</xs:complexType>
 
-	<xs:group name="rule">
-		<xs:choice>
-			<xs:element name="enum" minOccurs="0" maxOccurs="1">
-				<xs:complexType>
-					<xs:attribute name="notEmpty" type="xs:boolean" />
-					<xs:attribute name="values" type="xs:string" />
-				</xs:complexType>
-			</xs:element>
-		<!--	<xs:element name="date" minOccurs="0" maxOccurs="1">
-				<xs:complexType>
-					<xs:attribute name="format" type="xs:string">
-						<xs:simpleType>
-							<xs:restriction base="xs:string" >
-								<xs:enumeration value="yyyyMMddHHmmss" />
-								<xs:enumeration value="yyyyMMdd" />
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="money" minOccurs="0" maxOccurs="1">
-				<xs:complexType>
-					<xs:attribute name="format" use="required">
-					</xs:attribute>
-				</xs:complexType>
-			</xs:element>-->
-		</xs:choice>
-	</xs:group>
-	
+    <xs:complexType name="paramType">
+        <xs:sequence>
+            <xs:group ref="tns:rule"></xs:group>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="version" type="xs:string"/>
+    </xs:complexType>
+
+
+    <xs:group name="rule">
+        <xs:choice>
+            <xs:element name="string" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="notEmpty" type="xs:boolean" default="false"/>
+                    <xs:attribute name="minLength" type="xs:int"/>
+                    <xs:attribute name="maxLength" type="xs:int"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="enum" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="notEmpty" type="xs:boolean"/>
+                    <xs:attribute name="values" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="number" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="notEmpty" type="xs:boolean"/>
+                    <xs:attribute name="precision" type="xs:string" default="0"/>
+                    <xs:attribute name="minValue" type="xs:string"/>
+                    <xs:attribute name="maxValue" type="xs:string"/>
+                </xs:complexType>
+            </xs:element>
+            <!--	<xs:element name="date" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:attribute name="format" type="xs:string">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string" >
+                                    <xs:enumeration value="yyyyMMddHHmmss" />
+                                    <xs:enumeration value="yyyyMMdd" />
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="money" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:attribute name="format" use="required">
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>-->
+        </xs:choice>
+    </xs:group>
+
 </xs:schema>

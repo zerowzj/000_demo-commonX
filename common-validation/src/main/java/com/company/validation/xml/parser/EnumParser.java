@@ -13,10 +13,10 @@ import java.util.List;
  * 
  * @author wangzhj
  */
-public class EnumParser extends BaseParser {
+public class EnumParser implements Parser {
 
 	@Override
-	public Rule parseCustom(Element ele) {
+	public Rule parse(Element ele) {
 		EnumRule rule = new EnumRule();
 		//获取值
 		Attribute valuesAttr = ele.attribute("values");

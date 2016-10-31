@@ -14,7 +14,7 @@ public class ParserFactory {
      * @return Parser
      */
     public static Parser getParser(final String type) {
-        Parser parser = null;
+        Parser parser = new StringParser();
         if ("enum".equals(type)) {
 			parser = new EnumParser();
 		}
