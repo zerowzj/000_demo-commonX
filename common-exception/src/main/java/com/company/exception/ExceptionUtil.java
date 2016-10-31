@@ -1,5 +1,7 @@
 package com.company.exception;
 
+import com.company.exception.param.EmptyValueException;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +32,12 @@ public abstract class ExceptionUtil {
         List argLt = new ArrayList<>();
         if (ex instanceof ParamException) {
             ParamException pex = (ParamException) ex;
+            //参数名
             argLt.add(pex.getParamName());
-
+            //参数值
+            if (!(pex instanceof EmptyValueException)) {
+                argLt.add(pex.getParamValue());
+            }
             pex.getParamValue();
         }
         String errorDetail = ex.getErrorDetail();
