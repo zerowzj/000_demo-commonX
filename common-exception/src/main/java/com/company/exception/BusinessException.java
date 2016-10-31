@@ -10,8 +10,8 @@ public class BusinessException extends BaseException {
     /** 对象名称 */
     private String objName = null;
 
-    public BusinessException(String errorCode, String errorDesc, String fmtErrorDesc,  String objName){
-        super(errorCode, errorDesc, fmtErrorDesc);
+    public BusinessException(String errorCode, String errorDesc, String errorDetail,  String objName){
+        super(errorCode, errorDesc, errorDetail);
         this.objName = objName;
     }
 

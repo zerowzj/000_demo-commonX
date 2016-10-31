@@ -1,35 +1,40 @@
 package com.company.exception;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wangzhj on 2016/10/31.
  */
 public abstract class ExceptionUtil {
 
+    /**
+     * 获取异常描述
+     *
+     * @param ex
+     * @return String
+     */
     public static String getErrorDesc(BaseException ex) {
         String errorDesc = ex.getErrorDesc();
-        String fmtErrorDesc = ex.getFmtErrorDesc();
-        if (ex instanceof ParamException) {
-            ParamException pex = (ParamException) ex;
-            pex.getParamName();
-            pex.getParamValue();
-
-        } else if(ex instanceof BusinessException){
-
-        }
-        return null;
+        return errorDesc;
     }
 
-    public static String getFmtErrorDesc(BaseException ex) {
-        String errorDesc = ex.getErrorDesc();
-        String fmtErrorDesc = ex.getFmtErrorDesc();
+    /**
+     * 获取异常详细
+     *
+     * @param ex
+     * @return String
+     */
+    public static String getErrorDetail(BaseException ex) {
+        List argLt = new ArrayList<>();
         if (ex instanceof ParamException) {
             ParamException pex = (ParamException) ex;
-            pex.getParamName();
+            argLt.add(pex.getParamName());
+
             pex.getParamValue();
-
-        } else if(ex instanceof BusinessException){
-
         }
-        return null;
+        String errorDetail = ex.getErrorDetail();
+        return MessageFormat.format(errorDetail, argLt.toArray(new String[]{}));
     }
 }

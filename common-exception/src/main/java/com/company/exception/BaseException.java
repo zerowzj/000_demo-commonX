@@ -11,21 +11,23 @@ public class BaseException extends RuntimeException {
     private String errorCode = null;
     /** 错误描述 */
     private String errorDesc = null;
-    /** 格式化错误描述 */
-    private String fmtErrorDesc = null;
+    /** 错误详情 */
+    private String errorDetail = null;
 
     public BaseException(){
         super();
     }
 
     public BaseException(String errorCode, String errorDesc){
+
         this(errorCode, errorDesc, null);
     }
 
-    public BaseException(String errorCode, String errorDesc, String fmtErrorDesc){
+    public BaseException(String errorCode, String errorDesc, String errorDetail){
+
         this.errorCode = errorCode;
         this.errorDesc = errorDesc;
-        this.fmtErrorDesc = fmtErrorDesc;
+        this.errorDetail = errorDetail;
     }
 
     public BaseException(String message){
@@ -48,11 +50,7 @@ public class BaseException extends RuntimeException {
         return errorCode;
     }
 
-    public String getFmtErrorDesc() {
-        return fmtErrorDesc;
-    }
-
-    public void setFmtErrorDesc(String fmtErrorDesc) {
-        this.fmtErrorDesc = fmtErrorDesc;
+    public String getErrorDetail() {
+        return errorDetail;
     }
 }
