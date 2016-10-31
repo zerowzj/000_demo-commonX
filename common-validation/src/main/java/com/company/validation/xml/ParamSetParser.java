@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wangzhj on 2016/10/31.
+ * 参数集合解析器
+ *
+ * @author wangzhj
  */
 public class ParamSetParser {
 
@@ -108,6 +110,11 @@ public class ParamSetParser {
         }
     }
 
+    /**
+     * 获取参数集映射
+     *
+     * @return Map<String, ParamSet>
+     */
     public static Map<String, ParamSet> getParamSetMap() {
         return PARAM_SET_MAP;
     }
