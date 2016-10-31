@@ -11,7 +11,6 @@ public class ParamSet {
 
 	/** 关键字 */
 	private String key = null;
-
 	/** 参数列表 */
 	private List<Param> paramLt = null;
 

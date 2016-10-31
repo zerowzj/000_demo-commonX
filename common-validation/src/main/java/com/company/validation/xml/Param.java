@@ -15,7 +15,7 @@ public class Param {
     private String paramName = null;
     /** 是否非空 */
     private boolean notEmpty = false;
-    /** 规则 */
+    /** 验证规则 */
     private Rule rule = null;
 
     public String getParamName() {

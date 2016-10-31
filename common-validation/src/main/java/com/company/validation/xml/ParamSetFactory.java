@@ -90,7 +90,6 @@ public class ParamSetFactory {
                 } else {
                     param.setNotEmpty(true);
                 }
-
                 //规则元素
                 List<Rule> ruleLt = new ArrayList<>();
                 List<Element> eleLt = paramEle.elements();
