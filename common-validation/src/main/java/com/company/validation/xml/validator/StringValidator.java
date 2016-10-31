@@ -5,7 +5,9 @@ import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.StringRule;
 
 /**
- * Created by wangzhj on 2016/10/30.
+ * 字符串规则验证器
+ *
+ * @author wangzhj
  */
 public class StringValidator implements Validator {
 

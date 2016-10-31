@@ -9,12 +9,6 @@ import java.util.Map;
  */
 public class ParamSetFactory {
 
-    private static final Map<String, ParamSet> PARAM_SET_MAP;
-
-    static {
-        PARAM_SET_MAP = ParamSetParser.getParamSetMap();
-    }
-
     /**
      * 获取参数集
      *
@@ -22,7 +16,7 @@ public class ParamSetFactory {
      * @return ParamSet
      */
     public static ParamSet getParamSet(final String key) {
-        ParamSet paramSet = PARAM_SET_MAP.get(key);
+        ParamSet paramSet = ParamSetParser.getParamSetMap().get(key);
         if (paramSet == null) {
 
         }

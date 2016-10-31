@@ -16,7 +16,6 @@ public class MyTest {
     public void test(){
 
         ParamSet paramSet = new ParamSetFactory().getParamSet("/login");
-
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userName", "11111111111111");
 

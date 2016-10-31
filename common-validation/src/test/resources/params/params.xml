@@ -4,7 +4,7 @@
                xsi:schemaLocation="http://www.company.com/validation http://www.company.com/validation/params.xsd">
     <param-set key="/login">
         <param name="userName" notEmpty="true">
-            <string minLength="1" maxLength="10"/>
+
         </param>
     </param-set>
 </params-config>
