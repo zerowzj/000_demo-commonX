@@ -10,8 +10,8 @@ import com.company.validation.xml.rule.StringRule;
 public class StringValidator implements Validator {
 
     @Override
-    public boolean support(Object obj) {
-        return obj instanceof String;
+    public boolean support(Class<?> clazz) {
+        return clazz.isAssignableFrom(String.class);
     }
 
     @Override

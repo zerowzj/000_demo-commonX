@@ -12,10 +12,10 @@ public interface Validator {
     /**
      * 支持
      *
-     * @param obj
+     * @param clazz
      * @return boolean
      */
-    public boolean support(Object obj);
+    public boolean support(Class<?> clazz);
 
     /**
      * 验证
