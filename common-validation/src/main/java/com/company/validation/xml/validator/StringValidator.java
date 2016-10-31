@@ -7,7 +7,7 @@ import com.company.validation.xml.rule.StringRule;
 /**
  * Created by wangzhj on 2016/10/30.
  */
-public class StringValidator extends BaseValidator {
+public class StringValidator implements Validator {
 
     @Override
     public boolean support(Object obj) {
@@ -15,7 +15,7 @@ public class StringValidator extends BaseValidator {
     }
 
     @Override
-    public void validateCustom(Param param, Object value) {
+    public void validate(Param param, Object value) {
         String paramName = param.getParamName();
         int length = value.toString().length();
         StringRule rule = (StringRule) param.getRule();

@@ -6,7 +6,7 @@ import com.company.validation.xml.rule.Rule;
 /**
  * Created by wangzhj on 2016/10/30.
  */
-public class EnumValidator extends BaseValidator{
+public class EnumValidator implements Validator{
 
     @Override
     public boolean support(Object obj) {
@@ -14,7 +14,7 @@ public class EnumValidator extends BaseValidator{
     }
 
     @Override
-    public void validateCustom(Param param, Object value) {
+    public void validate(Param param, Object value) {
         String paramName = param.getParamName();
         Rule rule = param.getRule();
 
