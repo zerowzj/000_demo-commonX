@@ -10,6 +10,6 @@ import com.company.exception.BusinessException;
 public class AlreadyExistException extends BusinessException {
 
     public AlreadyExistException(String objName){
-        super("2001", "[{0}]已存在", objName);
+        super("2001", "", "[{0}]已存在", objName);
     }
 }

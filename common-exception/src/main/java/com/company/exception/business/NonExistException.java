@@ -10,6 +10,6 @@ import com.company.exception.BusinessException;
 public class NonExistException extends BusinessException {
 
     public NonExistException(String objName){
-        super("2002", "[{0}]不存在", objName);
+        super("2002", "", "[{0}]不存在", objName);
     }
 }
