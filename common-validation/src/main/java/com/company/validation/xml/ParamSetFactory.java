@@ -64,23 +64,33 @@ public class ParamSetFactory {
     }
 
     private static void parse(final Element root) {
-        //
+        //param-set元素
         List<Element> paramSetEleLt = root.elements();
         ParamSet paramSet = null;
         for (Element paramSetEle : paramSetEleLt) {
             paramSet = new ParamSet();
             //key属性
-            Attribute keyAttr = paramSetEle.attribute("key");
-            String key = keyAttr.getValue();
+            Attribute keyAtt = paramSetEle.attribute("key");
+            String key = keyAtt.getValue();
+
             //param元素
             List<Element> paramEleLt = paramSetEle.elements();
-            Param param;
+            Param param = null;
             List<Param> paramLt = new ArrayList<>();
             for (Element paramEle : paramEleLt) {
                 param = new Param();
                 //name属性
                 Attribute nameAttr = paramEle.attribute("name");
                 param.setParamName(nameAttr.getValue());
+                //notEmpty属性
+                Attribute notEmptyAtt = paramEle.attribute("notEmpty");
+                String notEmpty = notEmptyAtt.getValue();
+                if (notEmpty == null) {
+                    param.setNotEmpty(false);
+                } else {
+                    param.setNotEmpty(true);
+                }
+
                 //规则元素
                 List<Rule> ruleLt = new ArrayList<>();
                 List<Element> eleLt = paramEle.elements();

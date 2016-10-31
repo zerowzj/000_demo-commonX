@@ -33,4 +33,12 @@ public class Param {
     public void setRule(Rule rule) {
         this.rule = rule;
     }
+
+    public boolean isNotEmpty() {
+        return notEmpty;
+    }
+
+    public void setNotEmpty(boolean notEmpty) {
+        this.notEmpty = notEmpty;
+    }
 }

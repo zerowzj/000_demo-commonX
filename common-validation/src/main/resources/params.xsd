@@ -23,7 +23,7 @@
             <xs:group ref="tns:rule"></xs:group>
         </xs:sequence>
         <xs:attribute name="name" type="xs:string"/>
-        <xs:attribute name="version" type="xs:string"/>
+        <xs:attribute name="notEmpty" type="xs:boolean"/>
     </xs:complexType>
 
 
@@ -31,20 +31,17 @@
         <xs:choice>
             <xs:element name="string" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
-                    <xs:attribute name="notEmpty" type="xs:boolean" default="false"/>
                     <xs:attribute name="minLength" type="xs:int"/>
                     <xs:attribute name="maxLength" type="xs:int"/>
                 </xs:complexType>
             </xs:element>
             <xs:element name="enum" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
-                    <xs:attribute name="notEmpty" type="xs:boolean"/>
                     <xs:attribute name="values" type="xs:string"/>
                 </xs:complexType>
             </xs:element>
             <xs:element name="number" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
-                    <xs:attribute name="notEmpty" type="xs:boolean"/>
                     <xs:attribute name="precision" type="xs:string" default="0"/>
                     <xs:attribute name="minValue" type="xs:string"/>
                     <xs:attribute name="maxValue" type="xs:string"/>

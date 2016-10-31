@@ -18,6 +18,6 @@ public class ValidatorFactory {
         if ("string".equals(type)) {
 			validator = new EnumValidator();
 		}
-        return new EnumValidator();
+        return new StringValidator();
     }
 }

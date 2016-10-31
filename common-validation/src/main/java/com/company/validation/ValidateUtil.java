@@ -32,10 +32,11 @@ public abstract class ValidateUtil {
         for (Param param : paramLt) {
             String paramName = param.getParamName();
             Object paramValue = paramMap.get(paramName);
-            Rule rule = param.getRule();
-            if (rule.isNotEmpty() && paramValue == null) {
+            if (param.isNotEmpty() && paramValue == null) {
                 throw new EmptyValueException(paramName);
             }
+
+            Rule rule = param.getRule();
             Validator validator = ValidatorFactory.getValidator(null);
             if (!validator.support(paramValue)) {
                 throw new IllegalStateException("验证不支持的数据类型！");
