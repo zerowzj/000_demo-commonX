@@ -1,9 +1,8 @@
 package com.company.validation.xml.validator;
 
-import com.company.exception.domain.param.ValueIllegalException;
+import com.company.exception.param.ValueIllegalException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.EnumRule;
-import com.company.validation.xml.rule.Rule;
 
 import java.util.List;
 

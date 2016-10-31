@@ -1,7 +1,7 @@
 package com.company.validation;
 
-import com.company.exception.domain.ParamException;
-import com.company.exception.domain.param.EmptyValueException;
+import com.company.exception.ParamException;
+import com.company.exception.param.EmptyValueException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.ParamSet;
 import com.company.validation.xml.rule.Rule;

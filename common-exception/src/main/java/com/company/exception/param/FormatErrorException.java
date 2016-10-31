@@ -1,6 +1,6 @@
-package com.company.exception.domain.param;
+package com.company.exception.param;
 
-import com.company.exception.domain.ParamException;
+import com.company.exception.ParamException;
 
 /**
  * 参数格式错误异常

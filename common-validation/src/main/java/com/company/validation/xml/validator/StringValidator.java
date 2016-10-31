@@ -1,6 +1,6 @@
 package com.company.validation.xml.validator;
 
-import com.company.exception.domain.param.FormatErrorException;
+import com.company.exception.param.FormatErrorException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.StringRule;
 

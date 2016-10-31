@@ -1,6 +1,6 @@
-package com.company.exception.domain.business;
+package com.company.exception.business;
 
-import com.company.exception.domain.BusinessException;
+import com.company.exception.BusinessException;
 
 /**
  * 不存在异常

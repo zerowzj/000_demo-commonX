@@ -1,6 +1,6 @@
-package com.company.exception.domain.auth;
+package com.company.exception.auth;
 
-import com.company.exception.domain.AuthException;
+import com.company.exception.AuthException;
 
 /**
  * 用户名或密码错误异常

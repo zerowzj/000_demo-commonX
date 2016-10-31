@@ -1,6 +1,6 @@
-package com.company.exception.domain.auth;
+package com.company.exception.auth;
 
-import com.company.exception.domain.AuthException;
+import com.company.exception.AuthException;
 
 /**
  * token错误或过期异常
