@@ -7,38 +7,44 @@ package com.company.exception;
  */
 public class BaseException extends RuntimeException {
 
-    /** 错误码 */
+    /**
+     * 错误码
+     */
     private String errorCode = null;
-    /** 错误描述 */
+    /**
+     * 错误描述
+     */
     private String errorDesc = null;
-    /** 错误详情 */
+    /**
+     * 错误详情
+     */
     private String errorDetail = null;
 
-    public BaseException(){
+    public BaseException() {
         super();
     }
 
-    public BaseException(String errorCode, String errorDesc){
+    public BaseException(String errorCode, String errorDesc) {
 
         this(errorCode, errorDesc, null);
     }
 
-    public BaseException(String errorCode, String errorDesc, String errorDetail){
-
+    public BaseException(String errorCode, String errorDesc, String errorDetail) {
+        super(errorDesc + "[" + errorCode + "]");
         this.errorCode = errorCode;
         this.errorDesc = errorDesc;
         this.errorDetail = errorDetail;
     }
 
-    public BaseException(String message){
+    public BaseException(String message) {
         super(message);
     }
 
-    public BaseException(Throwable cause){
+    public BaseException(Throwable cause) {
         super(cause);
     }
 
-    public BaseException(String message, Throwable cause){
+    public BaseException(String message, Throwable cause) {
         super(message, cause);
     }
 
