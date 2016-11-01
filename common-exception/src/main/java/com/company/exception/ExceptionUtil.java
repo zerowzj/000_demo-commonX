@@ -30,6 +30,7 @@ public abstract class ExceptionUtil {
      */
     public static String getErrorDetail(BaseException ex) {
         List argLt = new ArrayList<>();
+        String errorDetail = ex.getErrorDetail();
         if (ex instanceof ParamException) {
             ParamException pex = (ParamException) ex;
             //参数名
@@ -38,9 +39,11 @@ public abstract class ExceptionUtil {
             if (!(pex instanceof EmptyValueException)) {
                 argLt.add(pex.getParamValue());
             }
-            pex.getParamValue();
+            errorDetail = MessageFormat.format(errorDetail, argLt.toArray(new String[]{}));
+        } else if (ex instanceof BusinessException) {
+
         }
-        String errorDetail = ex.getErrorDetail();
-        return MessageFormat.format(errorDetail, argLt.toArray(new String[]{}));
+
+        return errorDetail;
     }
 }

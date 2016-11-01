@@ -1,3 +1,5 @@
+import com.company.exception.ExceptionUtil;
+import com.company.exception.ParamException;
 import com.company.validation.ValidateUtil;
 import com.company.validation.xml.ParamSet;
 import com.company.validation.xml.ParamSetFactory;
@@ -19,6 +21,12 @@ public class MyTest {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userName", "11111111111111");
 
-        ValidateUtil.validate(paramMap, paramSet);
+        try {
+            ValidateUtil.validate(paramMap, paramSet);
+        } catch (ParamException ex) {
+//            ex.printStackTrace();
+            System.out.println(ExceptionUtil.getErrorDetail(ex));
+        }
+
     }
 }
