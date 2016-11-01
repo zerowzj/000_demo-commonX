@@ -23,6 +23,8 @@ public class ValidatorFactory {
             validator = new EnumValidator();
         } else if ("NumberRule".equals(type)) {
             validator = new NumberValidator();
+        } else if ("DateRule".equals(type)) {
+            validator = new DateValidator();
         }
         return validator;
     }

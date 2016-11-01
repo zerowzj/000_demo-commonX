@@ -21,6 +21,8 @@ public class ParserFactory {
             parser = new EnumParser();
         } else if ("number".equals(type)) {
             parser = new NumberParser();
+        } else if ("date".equals(type)) {
+            parser = new DateParser();
         }
         return parser;
     }
