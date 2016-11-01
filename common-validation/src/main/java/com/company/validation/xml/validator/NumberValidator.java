@@ -4,6 +4,9 @@ import com.company.exception.param.ValueIllegalException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.NumberRule;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+
 /**
  * 数字规则验证器
  *
@@ -21,10 +24,22 @@ public class NumberValidator implements Validator {
         String paramName = param.getParamName();
         NumberRule rule = (NumberRule) param.getRule();
 
-        rule.getMinValue();
-        rule.getMinValue();
+        BigDecimal b = new BigDecimal(value.toString());
+
+        String minValue = rule.getMinValue();
+        String maxValue = rule.getMinValue();
+
 //        if(){
 //            throw new ValueIllegalException(paramName, value);
 //        }
+    }
+
+    public static void main(String[] args) {
+        Long l = 1L;
+        Float f = 1.000F;
+        Double d = 20.000D;
+        System.out.println(l.toString());
+        System.out.println(f);
+        System.out.println(d.toString());
     }
 }

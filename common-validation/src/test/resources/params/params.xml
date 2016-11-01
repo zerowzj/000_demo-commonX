@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <params-config xmlns="http://www.company.com/validation"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xsi:schemaLocation="http://www.company.com/validation http://www.company.com/validation/params.xsd">
+               xsi:schemaLocation="http://www.company.com/validation http://www.company.com/validation/params-config.xsd">
 
     <param-set key="/login" desc="登录接口">
         <param name="userName" notEmpty="true">
             <string maxLength="5"/>
         </param>
         <param name="password" notEmpty="true">
+        </param>
+        <param name="order" notEmpty="true">
+            <number precision="1" minValue="1" maxValue="100"/>
         </param>
     </param-set>
 
