@@ -13,7 +13,7 @@ public class ParserFactory {
      * @param type
      * @return Parser
      */
-    public static Parser getParser(final String type) {
+    public static Parser getParser(String type) {
         Parser parser = null;
         if ("string".equals(type)) {
             parser = new StringParser();

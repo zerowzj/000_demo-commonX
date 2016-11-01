@@ -15,7 +15,7 @@ public class ValidatorFactory {
      * @param type
      * @return TypeParser
      */
-    public static Validator getValidator(final String type) {
+    public static Validator getValidator(String type) {
         Validator validator = null;
         if ("StringRule".equals(type)) {
             validator = new StringValidator();
