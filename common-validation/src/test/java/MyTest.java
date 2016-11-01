@@ -25,6 +25,7 @@ public class MyTest {
             ValidateUtil.validate(paramMap, paramSet);
         } catch (ParamException ex) {
 //            ex.printStackTrace();
+            System.out.println(ExceptionUtil.getErrorDesc(ex));
             System.out.println(ExceptionUtil.getErrorDetail(ex));
         }
 

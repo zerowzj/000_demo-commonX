@@ -5,12 +5,13 @@
     <xs:element name="params-config">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="param-set" minOccurs="0" maxOccurs="1">
+                <xs:element name="param-set" minOccurs="0" maxOccurs="3">
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="param" type="tns:paramType" maxOccurs="unbounded"/>
                         </xs:sequence>
                         <xs:attribute name="key" type="xs:string"/>
+                        <xs:attribute name="desc" type="xs:string"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
