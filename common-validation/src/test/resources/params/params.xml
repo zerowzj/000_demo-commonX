@@ -2,6 +2,7 @@
 <params-config xmlns="http://www.company.com/validation"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://www.company.com/validation http://www.company.com/validation/params.xsd">
+
     <param-set key="/login" desc="登录接口">
         <param name="userName" notEmpty="true">
             <string maxLength="5"/>
@@ -9,6 +10,5 @@
         <param name="password" notEmpty="true">
         </param>
     </param-set>
-
 
 </params-config>
