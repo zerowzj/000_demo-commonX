@@ -15,10 +15,10 @@ public class ParserFactory {
      */
     public static Parser getParser(final String type) {
         Parser parser = null;
-        if ("enum".equals(type)) {
-            parser = new EnumParser();
-        } else if ("string".equals(type)) {
+        if ("string".equals(type)) {
             parser = new StringParser();
+        } else if ("enum".equals(type)) {
+            parser = new EnumParser();
         }
         return parser;
     }

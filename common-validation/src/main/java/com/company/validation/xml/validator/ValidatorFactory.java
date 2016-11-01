@@ -3,7 +3,9 @@ package com.company.validation.xml.validator;
 import com.company.validation.xml.parser.Parser;
 
 /**
- * Created by wangzhj on 2016/10/30.
+ * 验证器工厂
+ *
+ * @author wangzhj
  */
 public class ValidatorFactory {
 
@@ -16,8 +18,10 @@ public class ValidatorFactory {
     public static Validator getValidator(final String type) {
         Validator validator = null;
         if ("string".equals(type)) {
-			validator = new EnumValidator();
-		}
-        return new StringValidator();
+            validator = new StringValidator();
+        } else if ("enum".equals(type)) {
+            validator = new EnumValidator();
+        }
+        return validator;
     }
 }
