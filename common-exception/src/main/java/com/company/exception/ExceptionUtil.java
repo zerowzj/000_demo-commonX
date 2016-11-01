@@ -1,13 +1,17 @@
 package com.company.exception;
 
 import com.company.exception.param.EmptyValueException;
+import com.company.exception.param.FormatErrorException;
+import com.company.exception.param.ValueIllegalException;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wangzhj on 2016/10/31.
+ * Exception Util
+ *
+ * @author wangzhj
  */
 public abstract class ExceptionUtil {
 
@@ -29,19 +33,20 @@ public abstract class ExceptionUtil {
      * @return String
      */
     public static String getErrorDetail(BaseException ex) {
-        List argLt = new ArrayList<>();
         String errorDetail = ex.getErrorDetail();
+
+        List argLt = new ArrayList<>();
         if (ex instanceof ParamException) {
             ParamException pex = (ParamException) ex;
             //参数名
             argLt.add(pex.getParamName());
             //参数值
-            if (!(pex instanceof EmptyValueException)) {
+            if (pex instanceof FormatErrorException || pex instanceof ValueIllegalException) {
                 argLt.add(pex.getParamValue());
             }
             errorDetail = MessageFormat.format(errorDetail, argLt.toArray(new String[]{}));
         } else if (ex instanceof BusinessException) {
-
+            BusinessException bex = (BusinessException) ex;
         }
 
         return errorDetail;
