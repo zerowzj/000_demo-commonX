@@ -8,7 +8,15 @@
                 <xs:element name="param-set" minOccurs="0" maxOccurs="3">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="param" type="tns:paramType" maxOccurs="unbounded"/>
+                            <xs:element name="param" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:group ref="tns:rule"></xs:group>
+                                    </xs:sequence>
+                                    <xs:attribute name="name" type="xs:string"/>
+                                    <xs:attribute name="notEmpty" type="xs:boolean"/>
+                                </xs:complexType>
+                            </xs:element>
                         </xs:sequence>
                         <xs:attribute name="key" type="xs:string"/>
                         <xs:attribute name="desc" type="xs:string"/>
@@ -17,16 +25,6 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-
-    <xs:complexType name="paramType">
-        <xs:sequence>
-            <xs:group ref="tns:rule"></xs:group>
-        </xs:sequence>
-        <xs:attribute name="name" type="xs:string"/>
-        <xs:attribute name="notEmpty" type="xs:boolean"/>
-    </xs:complexType>
-
 
     <xs:group name="rule">
         <xs:choice>

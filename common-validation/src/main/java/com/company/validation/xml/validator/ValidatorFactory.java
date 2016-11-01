@@ -13,7 +13,7 @@ public class ValidatorFactory {
      * 获取类型解析器
      *
      * @param type
-     * @return TypeParser
+     * @return Validator
      */
     public static Validator getValidator(String type) {
         Validator validator = null;
