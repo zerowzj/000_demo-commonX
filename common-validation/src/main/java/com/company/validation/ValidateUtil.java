@@ -28,8 +28,7 @@ public abstract class ValidateUtil {
      * @param paramSet
      * @throws ParamException
      */
-    public static void validate(Map<String, Object> paramMap,
-                                ParamSet paramSet) throws ParamException {
+    public static void validate(Map<String, Object> paramMap, ParamSet paramSet) throws ParamException {
         List<Param> paramLt = paramSet.getParamLt();
         for (Param param : paramLt) {
             String paramName = param.getParamName();
