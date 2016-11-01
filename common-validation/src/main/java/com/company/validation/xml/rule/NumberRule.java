@@ -1,6 +1,5 @@
 package com.company.validation.xml.rule;
 
-
 /**
  * 数字规则
  *
