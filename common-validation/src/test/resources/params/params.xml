@@ -12,6 +12,9 @@
         <param name="order" notEmpty="true">
             <number precision="1" minValue="30" maxValue="100"/>
         </param>
+        <param name="beginTime" notEmpty="true">
+            <date format="yyyyMMddHHmmss" />
+        </param>
     </param-set>
 
 </params-config>

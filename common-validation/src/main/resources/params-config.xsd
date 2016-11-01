@@ -38,7 +38,7 @@
             </xs:element>
             <xs:element name="enum" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
-                    <xs:attribute name="values" type="xs:string"/>
+                    <xs:attribute name="values" type="xs:string" use="required"/>
                 </xs:complexType>
             </xs:element>
             <xs:element name="number" minOccurs="0" maxOccurs="1">
@@ -48,24 +48,20 @@
                     <xs:attribute name="maxValue" type="xs:double"/>
                 </xs:complexType>
             </xs:element>
-            <!--	<xs:element name="date" minOccurs="0" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:attribute name="format" type="xs:string">
-                            <xs:simpleType>
-                                <xs:restriction base="xs:string" >
-                                    <xs:enumeration value="yyyyMMddHHmmss" />
-                                    <xs:enumeration value="yyyyMMdd" />
-                                </xs:restriction>
-                            </xs:simpleType>
-                        </xs:attribute>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="money" minOccurs="0" maxOccurs="1">
-                    <xs:complexType>
-                        <xs:attribute name="format" use="required">
-                        </xs:attribute>
-                    </xs:complexType>
-                </xs:element>-->
+            <xs:element name="date" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                    <xs:attribute name="format" type="xs:string">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="yyyyMMddHHmmss"/>
+                                <xs:enumeration value="yyyyMMdd"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="minDate" type="xs:double"/>
+                    <xs:attribute name="maxDate" type="xs:double"/>
+                </xs:complexType>
+            </xs:element>
         </xs:choice>
     </xs:group>
 
