@@ -24,22 +24,15 @@ public class NumberValidator implements Validator {
         String paramName = param.getParamName();
         NumberRule rule = (NumberRule) param.getRule();
 
-        BigDecimal b = new BigDecimal(value.toString());
+        Double myValue = Double.parseDouble(value.toString());
 
-        String minValue = rule.getMinValue();
-        String maxValue = rule.getMinValue();
-
-//        if(){
-//            throw new ValueIllegalException(paramName, value);
-//        }
-    }
-
-    public static void main(String[] args) {
-        Long l = 1L;
-        Float f = 1.000F;
-        Double d = 20.000D;
-        System.out.println(l.toString());
-        System.out.println(f);
-        System.out.println(d.toString());
+        Double minValue = Double.parseDouble(rule.getMinValue());
+        if (myValue < minValue) {
+            throw new ValueIllegalException(paramName, value);
+        }
+        Double maxValue = Double.parseDouble(rule.getMaxValue());
+        if (myValue > maxValue) {
+            throw new ValueIllegalException(paramName, value);
+        }
     }
 }

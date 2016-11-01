@@ -17,10 +17,12 @@ public class ValidatorFactory {
      */
     public static Validator getValidator(final String type) {
         Validator validator = null;
-        if ("string".equals(type)) {
+        if ("StringRule".equals(type)) {
             validator = new StringValidator();
-        } else if ("enum".equals(type)) {
+        } else if ("EnumRule".equals(type)) {
             validator = new EnumValidator();
+        } else if ("NumberRule".equals(type)) {
+            validator = new NumberValidator();
         }
         return validator;
     }
