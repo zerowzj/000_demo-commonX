@@ -30,7 +30,6 @@ public abstract class ValidateUtil {
      */
     public static void validate(Map<String, Object> paramMap,
                                 ParamSet paramSet) throws ParamException {
-
         List<Param> paramLt = paramSet.getParamLt();
         for (Param param : paramLt) {
             String paramName = param.getParamName();
@@ -44,7 +43,8 @@ public abstract class ValidateUtil {
             if (rule == null) {
                 continue;
             }
-            Validator validator = ValidatorFactory.getValidator(rule.getClass().getSimpleName());
+            String type = rule.getClass().getSimpleName();
+            Validator validator = ValidatorFactory.getValidator(type);
             if (!validator.support(paramValue.getClass())) {
                 throw new IllegalStateException("验证器不支持的数据类型！");
             }
