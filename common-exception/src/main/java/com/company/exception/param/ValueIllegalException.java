@@ -9,7 +9,7 @@ import com.company.exception.ParamException;
  */
 public class ValueIllegalException extends ParamException {
 
-    public ValueIllegalException(String paramName, Object paramValue) {
-        super("1003", "参数值非法", "参数[{0}]值[{1}]非法", paramName, paramValue);
+    public ValueIllegalException(String paramName, Object paramValue, String errorDetail) {
+        super("1003", "参数值非法", paramName, paramValue, errorDetail);
     }
 }

@@ -7,33 +7,23 @@ package com.company.exception;
  */
 public class BaseException extends RuntimeException {
 
-    /**
-     * 错误码
-     */
+    /** 错误码 */
     private String errorCode = null;
-    /**
-     * 错误描述
-     */
+    /** 错误描述 */
     private String errorDesc = null;
-    /**
-     * 错误详情
-     */
-    private String errorDetail = null;
 
     public BaseException() {
         super();
     }
 
     public BaseException(String errorCode, String errorDesc) {
-
         this(errorCode, errorDesc, null);
     }
 
     public BaseException(String errorCode, String errorDesc, String errorDetail) {
-        super(errorDesc + "[" + errorCode + "]");
+        super(errorDetail);
         this.errorCode = errorCode;
         this.errorDesc = errorDesc;
-        this.errorDetail = errorDetail;
     }
 
     public BaseException(String message) {
@@ -54,9 +44,5 @@ public class BaseException extends RuntimeException {
 
     public String getErrorCode() {
         return errorCode;
-    }
-
-    public String getErrorDetail() {
-        return errorDetail;
     }
 }

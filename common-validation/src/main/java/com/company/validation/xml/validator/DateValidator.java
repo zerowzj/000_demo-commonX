@@ -1,9 +1,13 @@
 package com.company.validation.xml.validator;
 
+import com.company.exception.param.FormatErrorException;
 import com.company.exception.param.ValueIllegalException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.DateRule;
-import com.company.validation.xml.rule.NumberRule;
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Date;
 
@@ -13,6 +17,8 @@ import java.util.Date;
  * @author wangzhj
  */
 public class DateValidator implements Validator {
+
+    private static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     @Override
     public boolean support(Class<?> clazz) {
@@ -24,8 +30,28 @@ public class DateValidator implements Validator {
         String paramName = param.getParamName();
         DateRule rule = (DateRule) param.getRule();
 
-        rule.getFormat();
-        rule.getMinDate();
-        rule.getMaxDate();
+        StringBuffer sb = new StringBuffer("[" + paramName + "]");
+
+        //
+        String format = rule.getFormat();
+        if (format == null) {
+            format = DEFAULT_FORMAT;
+        }
+        DateTimeFormatter dtFormat = DateTimeFormat.forPattern(format);
+     /*   if(dtFormat){
+            throw new FormatErrorException(paramName, value);
+        }*/
+        //
+        DateTime date = new DateTime(value);
+        String minDate = rule.getMinDate();
+        if (minDate != null && date.isBefore(new DateTime(minDate))) {
+            sb.append("");
+            throw new ValueIllegalException(paramName, value, sb.toString());
+        }
+        String maxDate = rule.getMaxDate();
+        if (maxDate != null && date.isAfter(new DateTime(minDate))) {
+            sb.append("");
+            throw new ValueIllegalException(paramName, value, sb.toString());
+        }
     }
 }

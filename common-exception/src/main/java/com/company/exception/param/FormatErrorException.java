@@ -9,7 +9,7 @@ import com.company.exception.ParamException;
  */
 public class FormatErrorException extends ParamException {
 
-    public FormatErrorException(String paramName, Object paramValue) {
-        super("1002", "参数值格式错误","参数[{0}]值[{1}]格式错误", paramName, paramValue);
+    public FormatErrorException(String paramName, Object paramValue, String errorDetail) {
+        super("1002", "参数值格式错误", paramName, paramValue, errorDetail);
     }
 }
