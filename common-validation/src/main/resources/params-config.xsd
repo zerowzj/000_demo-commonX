@@ -51,7 +51,9 @@
                     <xs:attribute name="format" type="xs:string">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
+                                <xs:enumeration value="yyyy-MM-dd HH:mm:ss"/>
                                 <xs:enumeration value="yyyyMMddHHmmss"/>
+                                <xs:enumeration value="yyyy-MM-dd"/>
                                 <xs:enumeration value="yyyyMMdd"/>
                             </xs:restriction>
                         </xs:simpleType>
