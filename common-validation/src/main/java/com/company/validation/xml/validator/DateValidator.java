@@ -61,6 +61,7 @@ public class DateValidator implements Validator {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         boolean f = true;
         try {
+            sdf.setLenient(false);
             sdf.parse(dateStr);
         } catch (Exception ex) {
             f = false;
