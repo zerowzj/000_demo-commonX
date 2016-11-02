@@ -33,10 +33,9 @@ public abstract class ValidateUtil {
         for (Param param : paramLt) {
             String paramName = param.getParamName();
             //非空验证
-
             Object paramValue = paramMap.get(paramName);
             if (param.isNotEmpty() && paramValue == null) {
-                StringBuffer detail = new StringBuffer("["+paramName+"]不存在或者为空");
+                StringBuffer detail = new StringBuffer("[" + paramName + "]不存在或者值为空");
                 throw new EmptyValueException(detail.toString(), paramName);
             }
             //规则验证
@@ -44,12 +43,14 @@ public abstract class ValidateUtil {
             if (rule == null) {
                 continue;
             }
-            String type = rule.getClass().getSimpleName();
-            Validator validator = ValidatorFactory.getValidator(type);
-            if (!validator.support(paramValue.getClass())) {
-                throw new IllegalStateException("验证器不支持的数据类型！");
+            if (paramValue != null) {
+                String type = rule.getClass().getSimpleName();
+                Validator validator = ValidatorFactory.getValidator(type);
+                if (!validator.support(paramValue.getClass())) {
+                    throw new IllegalStateException("验证器不支持的数据类型！");
+                }
+                validator.validate(param, paramValue);
             }
-            validator.validate(param, paramValue);
         }
     }
 
