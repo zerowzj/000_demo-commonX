@@ -13,12 +13,12 @@
                                     <xs:sequence>
                                         <xs:group ref="tns:rule"></xs:group>
                                     </xs:sequence>
-                                    <xs:attribute name="name" type="xs:string"/>
+                                    <xs:attribute name="name" type="xs:string" use="required"/>
                                     <xs:attribute name="notEmpty" type="xs:boolean"/>
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>
-                        <xs:attribute name="key" type="xs:string"/>
+                        <xs:attribute name="key" type="xs:string" use="required"/>
                         <xs:attribute name="desc" type="xs:string"/>
                     </xs:complexType>
                 </xs:element>
@@ -42,7 +42,7 @@
             <xs:element name="number" minOccurs="0" maxOccurs="1">
                 <xs:complexType>
                     <xs:attribute name="precision" type="xs:int" default="0"/>
-                    <xs:attribute name="minValue" type="xs:double"/>
+                    <xs:attribute name="minValue" type="xs:decimal"/>
                     <xs:attribute name="maxValue" type="xs:double"/>
                 </xs:complexType>
             </xs:element>
@@ -58,8 +58,8 @@
                             </xs:restriction>
                         </xs:simpleType>
                     </xs:attribute>
-                    <xs:attribute name="minDate" type="xs:double"/>
-                    <xs:attribute name="maxDate" type="xs:double"/>
+                    <xs:attribute name="minDate" type="xs:dateTime"/>
+                    <xs:attribute name="maxDate" type="xs:dateTime"/>
                 </xs:complexType>
             </xs:element>
         </xs:choice>
