@@ -30,7 +30,7 @@ public class DateValidator implements Validator {
         String paramName = param.getParamName();
         DateRule rule = (DateRule) param.getRule();
 
-        StringBuffer sb = new StringBuffer("[" + paramName + "]");
+        StringBuffer detail = new StringBuffer("[" + paramName + "]");
 
         //
         String format = rule.getFormat();
@@ -45,13 +45,13 @@ public class DateValidator implements Validator {
         DateTime date = new DateTime(value);
         String minDate = rule.getMinDate();
         if (minDate != null && date.isBefore(new DateTime(minDate))) {
-            sb.append("");
-            throw new ValueIllegalException(paramName, value, sb.toString());
+            detail.append("");
+            throw new ValueIllegalException(detail.toString(), paramName, value);
         }
         String maxDate = rule.getMaxDate();
         if (maxDate != null && date.isAfter(new DateTime(minDate))) {
-            sb.append("");
-            throw new ValueIllegalException(paramName, value, sb.toString());
+            detail.append("");
+            throw new ValueIllegalException(detail.toString(), paramName, value);
         }
     }
 }

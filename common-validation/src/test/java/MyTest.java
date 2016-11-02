@@ -21,7 +21,7 @@ public class MyTest {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userName", "111");
         paramMap.put("password", "111");
-        paramMap.put("order", "1000");
+//        paramMap.put("order", "1000");
 
         try {
             ValidateUtil.validate(paramMap, paramSet);

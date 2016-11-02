@@ -22,18 +22,18 @@ public class NumberValidator implements Validator {
         NumberRule rule = (NumberRule) param.getRule();
 
         Double myValue = Double.parseDouble(value.toString());
-        StringBuffer sb = new StringBuffer("[" + paramName + "]");
+        StringBuffer detail = new StringBuffer("[" + paramName + "]");
         //最小值
         String minValue = rule.getMinValue();
         if (minValue != null && myValue < Double.parseDouble(minValue)) {
-            sb.append("值小于").append("["+minValue+"]");
-            throw new ValueIllegalException(paramName, value, sb.toString());
+            detail.append("值小于").append("["+minValue+"]");
+            throw new ValueIllegalException(detail.toString(), paramName, value);
         }
         //最大值
         String maxValue = rule.getMaxValue();
         if (maxValue != null && myValue > Double.parseDouble(maxValue)) {
-            sb.append("值大于").append("["+minValue+"]");
-            throw new ValueIllegalException(paramName, value, sb.toString());
+            detail.append("值大于").append("["+minValue+"]");
+            throw new ValueIllegalException(detail.toString(), paramName, value);
         }
     }
 }

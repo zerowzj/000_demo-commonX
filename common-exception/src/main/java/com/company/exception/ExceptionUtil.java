@@ -33,18 +33,10 @@ public abstract class ExceptionUtil {
      * @return String
      */
     public static String getErrorDetail(BaseException ex) {
-        String errorDetail = ex.getErrorDetail();
+        String errorDetail = null;
 
-        List argLt = new ArrayList<>();
         if (ex instanceof ParamException) {
-            ParamException pex = (ParamException) ex;
-            //参数名
-            argLt.add(pex.getParamName());
-            //参数值
-            if (pex instanceof FormatErrorException || pex instanceof ValueIllegalException) {
-                argLt.add(pex.getParamValue());
-            }
-            errorDetail = MessageFormat.format(errorDetail, argLt.toArray(new String[]{}));
+            errorDetail = ex.getMessage();
         } else if (ex instanceof BusinessException) {
             BusinessException bex = (BusinessException) ex;
         }

@@ -33,9 +33,11 @@ public abstract class ValidateUtil {
         for (Param param : paramLt) {
             String paramName = param.getParamName();
             //非空验证
+
             Object paramValue = paramMap.get(paramName);
             if (param.isNotEmpty() && paramValue == null) {
-                throw new EmptyValueException(paramName);
+                StringBuffer detail = new StringBuffer("["+paramName+"]不存在或者为空");
+                throw new EmptyValueException(detail.toString(), paramName);
             }
             //规则验证
             Rule rule = param.getRule();

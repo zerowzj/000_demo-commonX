@@ -23,13 +23,13 @@ public class EnumValidator implements Validator {
         String paramName = param.getParamName();
         EnumRule rule = (EnumRule) param.getRule();
 
-        StringBuffer sb = new StringBuffer("[" + paramName + "]");
+        StringBuffer detail = new StringBuffer("[" + paramName + "]");
 
         //值列表
         List<String> valueLt = rule.getValueLt();
         if (!valueLt.contains(value.toString())) {
-            sb.append("值非枚举").append("[" + valueLt + "]");
-            throw new ValueIllegalException(paramName, value, sb.toString());
+            detail.append("值非枚举").append("[" + valueLt + "]");
+            throw new ValueIllegalException(detail.toString(), paramName, value);
         }
     }
 }
