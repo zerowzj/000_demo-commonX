@@ -21,13 +21,13 @@ public abstract class DateUtil {
             return false;
         }
         SimpleDateFormat sdf = new SimpleDateFormat(format);
-        boolean be = true;
+        boolean is = true;
         try {
             sdf.setLenient(false);
             sdf.parse(dateStr);
         } catch (Exception ex) {
-            be = false;
+            is = false;
         }
-        return be;
+        return is;
     }
 }

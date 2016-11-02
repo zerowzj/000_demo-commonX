@@ -56,6 +56,9 @@ public abstract class JsonUtil {
      * @return boolean
      */
     public static boolean isJson(String str) {
+        if (str == null) {
+            return false;
+        }
         boolean is = true;
         try {
             ObjectMapper mapper = new ObjectMapper();
