@@ -25,7 +25,7 @@ public class BaseException extends RuntimeException {
     }
 
     public BaseException(String errorCode, String errorDesc, String message) {
-        super(message);
+        super(ExceptionUtil.buildMessage(errorCode, errorDesc, message));
         this.errorCode = errorCode;
         this.errorDesc = errorDesc;
     }
