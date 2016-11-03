@@ -3,17 +3,12 @@
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://www.company.com/validation http://www.company.com/validation/params-config.xsd">
 
-    <param-set key="/login" desc="登录接口">
+    <param-set key="/login">
         <param name="userName" notEmpty="true">
-            <string maxLength="5"/>
+            <string minLength="2" maxLength="5"/>
         </param>
-        <param name="password" notEmpty="true">
-        </param>
-        <param name="order" notEmpty="true">
-            <number precision="1" minValue="01" maxValue="100"/>
-        </param>
-        <param name="beginTime" notEmpty="true">
-            <date format="yyyyMMddHHmmss" />
+        <param name="type" notEmpty="true">
+            <enum values="1,2"/>
         </param>
     </param-set>
 

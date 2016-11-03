@@ -1,35 +1,30 @@
-import com.company.exception.ExceptionUtil;
-import com.company.exception.ParamException;
+package com.company.exception;
+
 import com.company.validation.ValidateUtil;
 import com.company.validation.xml.ParamSet;
 import com.company.validation.xml.ParamSetFactory;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by wangzhj on 2016/10/30.
+ * Created by wangzhj on 2016/11/1.
  */
-public class MyTest {
+public class RuleTest {
 
     @Test
-    public void test(){
+    public void test() {
 
         ParamSet paramSet = new ParamSetFactory().getParamSet("/login");
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("userName", "111");
-        paramMap.put("password", "111");
-//        paramMap.put("order", "1000");
-
+        paramMap.put("userName", "11");
+        paramMap.put("type", 100);
         try {
             ValidateUtil.validate(paramMap, paramSet);
         } catch (ParamException ex) {
-//            ex.printStackTrace();
             System.out.println(ExceptionUtil.getErrorDesc(ex));
             System.out.println(ExceptionUtil.getErrorDetail(ex));
         }
-
     }
 }

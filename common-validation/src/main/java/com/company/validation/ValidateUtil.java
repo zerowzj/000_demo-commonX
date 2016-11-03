@@ -47,7 +47,7 @@ public abstract class ValidateUtil {
                 String type = rule.getClass().getSimpleName();
                 Validator validator = ValidatorFactory.getValidator(type);
                 if (!validator.support(paramValue.getClass())) {
-                    throw new IllegalStateException("验证器不支持的数据类型！");
+                    throw new IllegalStateException("验证器不支持的数据类型["+paramValue.getClass().getSimpleName()+"]！");
                 }
                 validator.validate(param, paramValue);
             }
