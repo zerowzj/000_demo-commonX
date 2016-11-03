@@ -10,10 +10,10 @@ import com.company.exception.ParamException;
 public class ValueIllegalException extends ParamException {
 
     public ValueIllegalException(String paramName, Object paramValue) {
-        this(null, paramName, paramValue);
+        this(paramName, paramValue, null);
     }
 
-    public ValueIllegalException(String errorDetail, String paramName, Object paramValue) {
-        super("1003", "参数值非法", errorDetail, paramName, paramValue);
+    public ValueIllegalException(String paramName, Object paramValue, String message) {
+        super("1003", "参数值非法", paramName, paramValue, message);
     }
 }

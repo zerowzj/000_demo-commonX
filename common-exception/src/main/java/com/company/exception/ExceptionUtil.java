@@ -1,13 +1,5 @@
 package com.company.exception;
 
-import com.company.exception.param.EmptyValueException;
-import com.company.exception.param.FormatErrorException;
-import com.company.exception.param.ValueIllegalException;
-
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Exception Util
  *
@@ -49,12 +41,27 @@ public abstract class ExceptionUtil {
      *
      * @param errorCode
      * @param errorDesc
-     * @param errorDetail
+     * @param message
      * @return String
      */
-    public static String buildMessage(String errorCode, String errorDesc, String errorDetail) {
-        String message = errorDetail;
-        if (errorDetail == null) {
+    public static String buildMessage(String errorCode, String errorDesc, String message) {
+        if (message == null) {
+            message = errorDesc + "[" + errorCode + "]";
+        }
+        return message;
+    }
+
+    /**
+     * 获取异常详细
+     *
+     * @param errorCode
+     * @param errorDesc
+     * @param paramName
+     * @param message
+     * @return String
+     */
+    public static String buildMessage(String errorCode, String errorDesc, String paramName, String message) {
+        if (message == null) {
             message = errorDesc + "[" + errorCode + "]";
         }
         return message;

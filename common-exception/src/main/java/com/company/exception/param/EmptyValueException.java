@@ -13,7 +13,7 @@ public class EmptyValueException extends ParamException {
         this(null, paramName);
     }
 
-    public EmptyValueException(String errorDetail, String paramName) {
-        super("1001", "参数值为空", errorDetail, paramName);
+    public EmptyValueException(String paramName, String message) {
+        super("1001", "参数不存在或值为空", paramName, message);
     }
 }

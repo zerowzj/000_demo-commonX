@@ -31,7 +31,7 @@ public class DateValidator implements Validator {
         String paramName = param.getParamName();
         DateRule rule = (DateRule) param.getRule();
 
-        StringBuffer detail = new StringBuffer("[" + paramName + "]");
+        StringBuffer message = new StringBuffer("[" + paramName + "]");
 
         //
         String format = rule.getFormat();
@@ -46,14 +46,14 @@ public class DateValidator implements Validator {
         DateTime date = new DateTime(value);
         String minDate = rule.getMinDate();
         if (minDate != null && date.isBefore(new DateTime(minDate))) {
-            detail.append("");
-            throw new ValueIllegalException(detail.toString(), paramName, value);
+            message.append("");
+            throw new ValueIllegalException(paramName, value, message.toString());
         }
         //最大日期
         String maxDate = rule.getMaxDate();
         if (maxDate != null && date.isAfter(new DateTime(minDate))) {
-            detail.append("");
-            throw new ValueIllegalException(detail.toString(), paramName, value);
+            message.append("");
+            throw new ValueIllegalException(paramName, value, message.toString());
         }
     }
 

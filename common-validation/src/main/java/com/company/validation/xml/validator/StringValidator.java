@@ -22,19 +22,19 @@ public class StringValidator implements Validator {
         int length = value.toString().length();
         StringRule rule = (StringRule) param.getRule();
 
-        StringBuffer detail = new StringBuffer("[" + paramName + "]");
+        StringBuffer message = new StringBuffer("[" + paramName + "]");
 
         //最小长度
         int minLength = rule.getMinLength();
         if (minLength > 0 && length < minLength) {
-            detail.append("长度小于").append("[" + minLength + "]");
-            throw new FormatErrorException(detail.toString(), paramName, value);
+            message.append("长度小于").append("[" + minLength + "]");
+            throw new FormatErrorException(paramName, value, message.toString());
         }
         //最大长度
         int maxLength = rule.getMaxLength();
         if (maxLength > 0 && length > maxLength) {
-            detail.append("长度大于").append("[" + maxLength + "]");
-            throw new FormatErrorException(detail.toString(), paramName, value);
+            message.append("长度大于").append("[" + maxLength + "]");
+            throw new FormatErrorException(paramName, value, message.toString());
         }
     }
 }
