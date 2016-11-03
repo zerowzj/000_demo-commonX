@@ -63,7 +63,7 @@ public abstract class ExceptionUtil {
      */
     public static String buildMessage(String errorCode, String errorDesc, String paramName, Object paramValue, String message) {
         if (message == null) {
-            message = errorDesc + "[" + errorCode + "]";
+            message = errorDesc + "[" + errorCode + "][" + paramName + "]";
         }
         return message;
     }

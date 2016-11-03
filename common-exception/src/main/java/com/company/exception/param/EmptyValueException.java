@@ -10,7 +10,7 @@ import com.company.exception.ParamException;
 public class EmptyValueException extends ParamException {
 
     public EmptyValueException(String paramName) {
-        this(null, paramName);
+        this(paramName, null);
     }
 
     public EmptyValueException(String paramName, String message) {
