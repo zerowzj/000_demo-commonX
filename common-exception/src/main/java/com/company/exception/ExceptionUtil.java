@@ -37,7 +37,7 @@ public abstract class ExceptionUtil {
     }
 
     /**
-     * 获取异常详细
+     * Build BaseException Message
      *
      * @param errorCode
      * @param errorDesc
@@ -52,15 +52,16 @@ public abstract class ExceptionUtil {
     }
 
     /**
-     * 获取异常详细
+     * Build ParamException Message
      *
      * @param errorCode
      * @param errorDesc
      * @param paramName
+     * @param paramValue
      * @param message
      * @return String
      */
-    public static String buildMessage(String errorCode, String errorDesc, String paramName, String message) {
+    public static String buildMessage(String errorCode, String errorDesc, String paramName, Object paramValue, String message) {
         if (message == null) {
             message = errorDesc + "[" + errorCode + "]";
         }
