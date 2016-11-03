@@ -13,10 +13,11 @@
     <!--          模块        -->
     <!-- ==================== -->
     <modules>
+        <module>common-db</module>
         <module>common-util</module>
         <module>common-exception</module>
         <module>common-validation</module>
-        <module>common-db</module>
+        <module>common-monitor</module>
     </modules>
     <!-- ==================== -->
     <!--          依赖        -->
