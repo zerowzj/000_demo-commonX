@@ -4,6 +4,8 @@ import com.company.exception.param.ValueIllegalException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.NumberRule;
 
+import java.text.MessageFormat;
+
 /**
  * 数字规则验证器
  *
@@ -22,18 +24,17 @@ public class NumberValidator implements Validator {
         NumberRule rule = (NumberRule) param.getRule();
 
         Double myValue = Double.parseDouble(value.toString());
-        StringBuffer message = new StringBuffer("[" + paramName + "]");
         //最小值
         String minValue = rule.getMinValue();
         if (minValue != null && myValue < Double.parseDouble(minValue)) {
-            message.append("值小于").append("["+minValue+"]");
-            throw new ValueIllegalException(paramName, value, message.toString());
+            String pattern = "参数[{0}]值小于[{1}]";
+            throw new ValueIllegalException(paramName, value, MessageFormat.format(pattern, paramName, minValue));
         }
         //最大值
         String maxValue = rule.getMaxValue();
         if (maxValue != null && myValue > Double.parseDouble(maxValue)) {
-            message.append("值大于").append("["+minValue+"]");
-            throw new ValueIllegalException(paramName, value, message.toString());
+            String pattern = "参数[{0}]值大于[{1}]";
+            throw new ValueIllegalException(paramName, value, MessageFormat.format(pattern, paramName, maxValue));
         }
     }
 }
