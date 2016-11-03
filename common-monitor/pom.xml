@@ -13,6 +13,17 @@
     <artifactId>common-monitor</artifactId>
     <packaging>jar</packaging>
     <!-- ==================== -->
+    <!--          依赖        -->
+    <!-- ==================== -->
+    <dependencies>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.2.4</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+    <!-- ==================== -->
     <!--          构建        -->
     <!-- ==================== -->
     <build>
