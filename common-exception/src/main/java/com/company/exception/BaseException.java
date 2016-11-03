@@ -7,9 +7,13 @@ package com.company.exception;
  */
 public class BaseException extends RuntimeException {
 
-    /** 错误码 */
+    /**
+     * 错误码
+     */
     private String errorCode = null;
-    /** 错误描述 */
+    /**
+     * 错误描述
+     */
     private String errorDesc = null;
 
     public BaseException() {
@@ -21,7 +25,7 @@ public class BaseException extends RuntimeException {
     }
 
     public BaseException(String errorCode, String errorDesc, String errorDetail) {
-        super(errorDetail);
+        super(ExceptionUtil.buildMessage(errorCode, errorDesc, errorDetail));
         this.errorCode = errorCode;
         this.errorDesc = errorDesc;
     }

@@ -43,4 +43,20 @@ public abstract class ExceptionUtil {
 
         return errorDetail;
     }
+
+    /**
+     * 获取异常详细
+     *
+     * @param errorCode
+     * @param errorDesc
+     * @param errorDetail
+     * @return String
+     */
+    public static String buildMessage(String errorCode, String errorDesc, String errorDetail) {
+        String message = errorDetail;
+        if (errorDetail == null) {
+            message = errorDesc + "[" + errorCode + "]";
+        }
+        return message;
+    }
 }
