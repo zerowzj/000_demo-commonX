@@ -4,11 +4,17 @@
                xsi:schemaLocation="http://www.company.com/validation http://www.company.com/validation/params-config.xsd">
 
     <param-set key="/login">
-        <param name="userName" notEmpty="true">
+        <param name="name" notEmpty="true">
             <string minLength="2" maxLength="5"/>
         </param>
         <param name="type" notEmpty="true">
             <enum values="1,2"/>
+        </param>
+        <param name="money" notEmpty="true">
+            <number minValue="100" maxValue="900"/>
+        </param>
+        <param name="beginTime" notEmpty="true">
+            <date />
         </param>
     </param-set>
 

@@ -18,8 +18,9 @@ public class RuleTest {
 
         ParamSet paramSet = new ParamSetFactory().getParamSet("/login");
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("userName", "11");
-        paramMap.put("type", 100);
+        paramMap.put("name", "11");
+        paramMap.put("type", "1");
+        paramMap.put("money", new HashMap<>());
         try {
             ValidateUtil.validate(paramMap, paramSet);
         } catch (ParamException ex) {
