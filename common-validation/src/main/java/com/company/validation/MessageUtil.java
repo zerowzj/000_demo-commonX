@@ -2,6 +2,7 @@ package com.company.validation;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.MessageFormat;
 import java.util.Properties;
 
 /**
@@ -26,12 +27,12 @@ public abstract class MessageUtil {
         }
     }
 
-    public static String getMinLength() {
-        return prop.get("param.error.min_length").toString();
+    public static String format(String key, Object... args) {
+        String pattern = prop.getProperty(key);
+        return MessageFormat.format(pattern, args);
     }
 
     public static void main(String[] args) {
-
-        System.out.println(MessageUtil.getMinLength());
+        System.out.println(MessageUtil.format("param.error", "key"));
     }
 }

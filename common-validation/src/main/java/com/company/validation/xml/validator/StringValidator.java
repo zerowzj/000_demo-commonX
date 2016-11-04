@@ -1,6 +1,7 @@
 package com.company.validation.xml.validator;
 
 import com.company.exception.param.FormatErrorException;
+import com.company.validation.MessageUtil;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.StringRule;
 
@@ -27,14 +28,14 @@ public class StringValidator implements Validator {
         //最小长度
         int minLength = rule.getMinLength();
         if (minLength > 0 && length < minLength) {
-            String pattern = "参数[{0}]长度小于[{1}]";
-            throw new FormatErrorException(paramName, value, MessageFormat.format(pattern, paramName, minLength));
+            String key = "";
+            throw new FormatErrorException(paramName, value, MessageUtil.format(key, paramName, minLength));
         }
         //最大长度
         int maxLength = rule.getMaxLength();
         if (maxLength > 0 && length > maxLength) {
-            String pattern = "参数[{0}]长度大于[{1}]";
-            throw new FormatErrorException(paramName, value, MessageFormat.format(pattern, paramName, maxLength));
+            String key = "";
+            throw new FormatErrorException(paramName, value, MessageUtil.format(key, paramName, maxLength));
         }
     }
 }
