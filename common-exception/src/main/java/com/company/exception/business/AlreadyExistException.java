@@ -6,9 +6,11 @@ import com.company.exception.ExceptionUtil;
 import java.text.MessageFormat;
 
 /**
- * 已存在异常
+ * <p>Title: AlreadyExistException<／p>
+ * <p>Description: 已存在异常<／p>
  *
  * @author wangzhj
+ * @time 2016-11-04 11:55
  */
 public class AlreadyExistException extends BusinessException {
 

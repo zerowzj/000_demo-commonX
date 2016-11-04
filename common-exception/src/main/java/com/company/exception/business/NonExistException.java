@@ -6,9 +6,11 @@ import com.company.exception.ExceptionUtil;
 import java.text.MessageFormat;
 
 /**
- * 不存在异常
+ * <p>Title: NonExistException<／p>
+ * <p>Description: 不存在异常<／p>
  *
  * @author wangzhj
+ * @time 2016-11-04 11:55
  */
 public class NonExistException extends BusinessException {
 

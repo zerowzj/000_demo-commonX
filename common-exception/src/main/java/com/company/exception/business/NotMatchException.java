@@ -6,9 +6,11 @@ import com.company.exception.ExceptionUtil;
 import java.text.MessageFormat;
 
 /**
- * 不匹配异常
+ * <p>Title: NotMatchException<／p>
+ * <p>Description: 不匹配异常<／p>
  *
  * @author wangzhj
+ * @time 2016-11-04 11:55
  */
 public class NotMatchException extends BusinessException {
 
