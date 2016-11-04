@@ -17,5 +17,4 @@ public class NonExistException extends BusinessException {
     public NonExistException(String obj) {
         super("2002", ExceptionUtil.formatErrorDesc("[{0}]不存在", obj));
     }
-
 }

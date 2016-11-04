@@ -10,6 +10,6 @@ import com.company.exception.AuthException;
 public class TokenErrorException extends AuthException {
 
     public TokenErrorException() {
-        super("", "token错误或过期");
+        super("8002", "token错误或过期");
     }
 }

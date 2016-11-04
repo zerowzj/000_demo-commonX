@@ -10,6 +10,6 @@ import com.company.exception.AuthException;
 public class UsernamePwdErrorException extends AuthException {
 
     public UsernamePwdErrorException() {
-        super("", "用户名或密码错误");
+        super("8001", "用户名或密码错误");
     }
 }

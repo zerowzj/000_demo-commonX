@@ -4,7 +4,7 @@ import com.company.exception.ParamException;
 
 /**
  * <p>Title: EmptyValueException<／p>
- * <p>Description: 参数不存或空值异常<／p>
+ * <p>Description: 参数不存在或空值异常<／p>
  *
  * @author wangzhj
  * @time 2016-11-04 11:55

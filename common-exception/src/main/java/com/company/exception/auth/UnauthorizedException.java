@@ -10,6 +10,6 @@ import com.company.exception.AuthException;
 public class UnauthorizedException extends AuthException {
 
     public UnauthorizedException(){
-        super("", "未被授权");
+        super("8004", "未被授权");
     }
 }
