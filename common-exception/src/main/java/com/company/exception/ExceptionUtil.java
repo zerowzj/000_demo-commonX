@@ -41,6 +41,18 @@ public abstract class ExceptionUtil {
      *
      * @param errorCode
      * @param errorDesc
+     * @return String
+     */
+    public static String buildMessage(String errorCode, String errorDesc) {
+        String message = errorDesc + "[" + errorCode + "]";
+        return message;
+    }
+
+    /**
+     * Build BaseException Message
+     *
+     * @param errorCode
+     * @param errorDesc
      * @param message
      * @return String
      */

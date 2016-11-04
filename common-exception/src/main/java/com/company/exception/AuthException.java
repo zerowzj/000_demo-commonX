@@ -8,6 +8,6 @@ package com.company.exception;
 public class AuthException extends BaseException {
 
     public AuthException(String errorCode, String errorDesc){
-        super(errorCode, errorDesc);
+        super(errorCode, errorDesc, ExceptionUtil.buildMessage(errorCode, errorDesc));
     }
 }
