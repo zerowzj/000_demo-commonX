@@ -35,8 +35,7 @@ public abstract class ValidateUtil {
             //非空验证
             Object paramValue = paramMap.get(paramName);
             if (param.isNotEmpty() && paramValue == null) {
-                String key = "param.error.noEmpty";
-                throw new EmptyValueException(paramName, MessageUtil.format(key, paramName));
+                throw new EmptyValueException(paramName);
             }
             //规则验证
             Rule rule = param.getRule();

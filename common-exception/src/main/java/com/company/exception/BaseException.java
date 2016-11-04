@@ -7,7 +7,7 @@ package com.company.exception;
  * @author wangzhj
  * @time 2016-11-04 11:55
  */
-public class BaseException extends RuntimeException {
+public abstract class BaseException extends RuntimeException {
 
     /** 错误码 */
     private String errorCode = null;

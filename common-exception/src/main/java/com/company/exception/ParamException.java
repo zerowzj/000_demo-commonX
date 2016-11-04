@@ -7,7 +7,7 @@ package com.company.exception;
  * @author wangzhj
  * @time 2016-11-04 11:55
  */
-public class ParamException extends BaseException {
+public abstract class ParamException extends BaseException {
 
     /** 参数名 */
     private String paramName = null;
@@ -19,7 +19,7 @@ public class ParamException extends BaseException {
     }
 
     public ParamException(String errorCode, String errorDesc, String paramName, Object paramValue, String message) {
-        super(errorCode, errorDesc, ExceptionUtil.buildMessage(errorDesc, paramName, paramValue, message));
+        super(errorCode, errorDesc, message);
         this.paramName = paramName;
         this.paramValue = paramValue;
     }

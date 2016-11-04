@@ -1,4 +1,4 @@
-package com.company.validation;
+package com.company.exception;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +14,7 @@ import java.util.Properties;
  */
 public abstract class MessageUtil {
 
-    private static final String MESSAGE_FILE = "message_validation.properties";
+    private static final String MESSAGE_FILE = "message_exception.properties";
 
     private static final Properties prop = new Properties();
 
@@ -35,6 +35,6 @@ public abstract class MessageUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(MessageUtil.format("param.error.minLength", "userName", 100));
+        System.out.println(MessageUtil.format("param.error.noEmpty", "userName"));
     }
 }

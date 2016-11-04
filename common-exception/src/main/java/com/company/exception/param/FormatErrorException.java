@@ -1,5 +1,6 @@
 package com.company.exception.param;
 
+import com.company.exception.ExceptionUtil;
 import com.company.exception.ParamException;
 
 /**
@@ -16,6 +17,6 @@ public class FormatErrorException extends ParamException {
     }
 
     public FormatErrorException(String paramName, Object paramValue, String message) {
-        super("1002", "参数值格式错误", paramName, paramValue, message);
+        super("1002", "参数值格式错误", paramName, paramValue, ExceptionUtil.buildParamExceptionMessage("param.error.formatError", paramName, paramValue, message));
     }
 }

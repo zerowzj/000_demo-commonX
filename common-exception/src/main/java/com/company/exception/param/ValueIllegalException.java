@@ -1,5 +1,6 @@
 package com.company.exception.param;
 
+import com.company.exception.ExceptionUtil;
 import com.company.exception.ParamException;
 
 /**
@@ -16,6 +17,6 @@ public class ValueIllegalException extends ParamException {
     }
 
     public ValueIllegalException(String paramName, Object paramValue, String message) {
-        super("1003", "参数值非法", paramName, paramValue, message);
+        super("1003", "参数值非法", paramName, paramValue, ExceptionUtil.buildParamExceptionMessage("param.error.valueIllegal", paramName, paramValue, message));
     }
 }
