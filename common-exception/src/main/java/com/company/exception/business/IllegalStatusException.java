@@ -5,8 +5,8 @@ import com.company.exception.BusinessException;
 import com.company.exception.ExceptionUtil;
 
 /**
- * <p>Title: StatusIllException<／p>
- * <p>Description: 状态非法异常<／p>
+ * <p>Title: IllegalStatusException<／p>
+ * <p>Description: 非法状态异常<／p>
  *
  * @author wangzhj
  * @time 2016-11-04 11:55
