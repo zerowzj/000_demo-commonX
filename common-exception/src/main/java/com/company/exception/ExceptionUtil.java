@@ -12,16 +12,12 @@ public abstract class ExceptionUtil {
     /**
      * 构造ParamException Message
      *
-     * @param errorCode
-     * @param errorDesc
-     * @param paramName
-     * @param paramValue
-     * @param message
      * @return String
      */
     public static String buildMessage(String errorCode, String errorDesc, String paramName, Object paramValue, String message) {
         if (message == null) {
-            message = errorDesc + "[" + paramName + "]";
+            String pattern = errorDesc + "[{0}]";
+            message = MessageFormat.format(pattern, paramName);
         }
         return message;
     }
@@ -29,8 +25,6 @@ public abstract class ExceptionUtil {
     /**
      * 格式化错误描述
      *
-     * @param pattern
-     * @param args
      * @return String
      */
     public static String formatErrorDesc(String pattern, String... args) {

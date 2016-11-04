@@ -5,6 +5,13 @@ package com.company.exception;
  *
  * @author wangzhj
  */
+/**
+ * <p>Title: ParamException<／p>
+ * <p>Description: 参数异常<／p>
+ *
+ * @author wangzhj
+ * @time 2016-11-04 11:55
+ */
 public class ParamException extends BaseException {
 
     /** 参数名 */
