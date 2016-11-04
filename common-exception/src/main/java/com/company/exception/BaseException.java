@@ -16,10 +16,6 @@ public class BaseException extends RuntimeException {
         super();
     }
 
-/*    public BaseException(String errorCode, String errorDesc) {
-        this(errorCode, errorDesc, null);
-    }*/
-
     public BaseException(String errorCode, String errorDesc, String message) {
         super(message);
         this.errorCode = errorCode;
