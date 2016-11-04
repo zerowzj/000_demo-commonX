@@ -27,12 +27,14 @@ public abstract class MessageUtil {
         }
     }
 
+    /**
+     **/
     public static String format(String key, Object... args) {
         String pattern = prop.getProperty(key);
         return MessageFormat.format(pattern, args);
     }
 
     public static void main(String[] args) {
-        System.out.println(MessageUtil.format("param.error", "key"));
+        System.out.println(MessageUtil.format("param.error.minLength", "userName", 100));
     }
 }

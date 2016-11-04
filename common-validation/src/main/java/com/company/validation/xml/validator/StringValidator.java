@@ -28,13 +28,13 @@ public class StringValidator implements Validator {
         //最小长度
         int minLength = rule.getMinLength();
         if (minLength > 0 && length < minLength) {
-            String key = "";
+            String key = "param.error.minLength";
             throw new FormatErrorException(paramName, value, MessageUtil.format(key, paramName, minLength));
         }
         //最大长度
         int maxLength = rule.getMaxLength();
         if (maxLength > 0 && length > maxLength) {
-            String key = "";
+            String key = "param.error.maxLength";
             throw new FormatErrorException(paramName, value, MessageUtil.format(key, paramName, maxLength));
         }
     }

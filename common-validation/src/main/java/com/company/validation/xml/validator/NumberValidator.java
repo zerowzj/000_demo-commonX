@@ -1,6 +1,7 @@
 package com.company.validation.xml.validator;
 
 import com.company.exception.param.ValueIllegalException;
+import com.company.validation.MessageUtil;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.NumberRule;
 
@@ -27,14 +28,14 @@ public class NumberValidator implements Validator {
         //最小值
         String minValue = rule.getMinValue();
         if (minValue != null && myValue < Double.parseDouble(minValue)) {
-            String pattern = "参数[{0}]值小于[{1}]";
-            throw new ValueIllegalException(paramName, value, MessageFormat.format(pattern, paramName, minValue));
+            String key = "param.error.minValue";
+            throw new ValueIllegalException(paramName, value, MessageUtil.format(key, paramName, minValue));
         }
         //最大值
         String maxValue = rule.getMaxValue();
         if (maxValue != null && myValue > Double.parseDouble(maxValue)) {
-            String pattern = "参数[{0}]值大于[{1}]";
-            throw new ValueIllegalException(paramName, value, MessageFormat.format(pattern, paramName, maxValue));
+            String key = "param.error.maxValue";
+            throw new ValueIllegalException(paramName, value, MessageUtil.format(key, paramName, maxValue));
         }
     }
 }
