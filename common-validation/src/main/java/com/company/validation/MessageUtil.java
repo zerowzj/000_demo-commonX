@@ -14,12 +14,13 @@ import java.util.Properties;
  */
 public abstract class MessageUtil {
 
-    private static final String MESSAGE_FILE = "message_validation.properties";
+    private static final String MESSAGE_FILE = "com/company/validation/message.properties";
 
     private static final Properties prop = new Properties();
 
     static {
-        InputStream is = ClassLoader.getSystemResourceAsStream(MESSAGE_FILE);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classLoader.getResourceAsStream(MESSAGE_FILE);
         try {
             prop.load(new InputStreamReader(is, "UTF-8"));
         } catch (Exception ex) {

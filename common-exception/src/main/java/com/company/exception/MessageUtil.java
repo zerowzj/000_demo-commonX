@@ -6,7 +6,6 @@ import java.text.MessageFormat;
 import java.util.Properties;
 
 /**
- * <p>Title: MessageUtil<／p>
  * <p>Description: ${DESC}<／p>
  *
  * @author wangzhj
@@ -14,12 +13,14 @@ import java.util.Properties;
  */
 public abstract class MessageUtil {
 
-    private static final String MESSAGE_FILE = "message_exception.properties";
+    private static final String MESSAGE_FILE = "com/company/exception/message.properties";
 
     private static final Properties prop = new Properties();
 
     static {
-        InputStream is = ClassLoader.getSystemResourceAsStream(MESSAGE_FILE);
+//        InputStream is = ClassLoader.getSystemResourceAsStream(MESSAGE_FILE);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classLoader.getResourceAsStream(MESSAGE_FILE);
         try {
             prop.load(new InputStreamReader(is, "UTF-8"));
         } catch (Exception ex) {
