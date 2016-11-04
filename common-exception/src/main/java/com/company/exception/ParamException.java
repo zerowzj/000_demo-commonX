@@ -19,7 +19,7 @@ public class ParamException extends BaseException {
     }
 
     public ParamException(String errorCode, String errorDesc, String paramName, Object paramValue, String message) {
-        super(errorCode, errorDesc, ExceptionUtil.buildMessage(errorCode, errorDesc, paramName, paramValue, message));
+        super(errorCode, errorDesc, ExceptionUtil.buildMessage(errorDesc, paramName, paramValue, message));
         this.paramName = paramName;
         this.paramValue = paramValue;
     }

@@ -14,7 +14,7 @@ public abstract class ExceptionUtil {
      *
      * @return String
      */
-    public static String buildMessage(String errorCode, String errorDesc, String paramName, Object paramValue, String message) {
+    public static String buildMessage(String errorDesc, String paramName, Object paramValue, String message) {
         if (message == null) {
             String pattern = errorDesc + "[{0}]";
             message = MessageFormat.format(pattern, paramName);
