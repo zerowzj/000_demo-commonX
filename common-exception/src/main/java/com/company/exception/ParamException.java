@@ -1,11 +1,6 @@
 package com.company.exception;
 
 /**
- * 参数异常
- *
- * @author wangzhj
- */
-/**
  * <p>Title: ParamException<／p>
  * <p>Description: 参数异常<／p>
  *

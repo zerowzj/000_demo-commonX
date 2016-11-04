@@ -1,9 +1,11 @@
 package com.company.exception;
 
 /**
- * 认证/授权异常
+ * <p>Title: AuthException<／p>
+ * <p>Description: 认证/授权异常<／p>
  *
  * @author wangzhj
+ * @time 2016-11-04 11:55
  */
 public class AuthException extends BaseException {
 

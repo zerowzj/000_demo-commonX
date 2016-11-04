@@ -1,9 +1,11 @@
 package com.company.exception;
 
 /**
- * 基本异常
+ * <p>Title: BaseException<／p>
+ * <p>Description: 基本异常<／p>
  *
  * @author wangzhj
+ * @time 2016-11-04 11:55
  */
 public class BaseException extends RuntimeException {
 

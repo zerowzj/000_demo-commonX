@@ -1,9 +1,11 @@
 package com.company.exception;
 
 /**
- * 业务异常
+ * <p>Title: BusinessException<／p>
+ * <p>Description: 业务异常<／p>
  *
  * @author wangzhj
+ * @time 2016-11-04 11:55
  */
 public class BusinessException extends BaseException {
 
