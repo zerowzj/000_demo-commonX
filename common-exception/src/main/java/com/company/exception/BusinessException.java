@@ -7,7 +7,7 @@ package com.company.exception;
  */
 public class BusinessException extends BaseException {
 
-    public BusinessException(String errorCode, String errorDesc){
-
+    public BusinessException(String errorCode, String errorDesc) {
+        super(errorCode, errorDesc, errorDesc);
     }
 }

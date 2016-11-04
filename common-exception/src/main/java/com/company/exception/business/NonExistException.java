@@ -1,6 +1,9 @@
 package com.company.exception.business;
 
 import com.company.exception.BusinessException;
+import com.company.exception.ExceptionUtil;
+
+import java.text.MessageFormat;
 
 /**
  * 不存在异常
@@ -10,6 +13,7 @@ import com.company.exception.BusinessException;
 public class NonExistException extends BusinessException {
 
     public NonExistException(String objName){
-        super("2002", "", "[{0}]不存在", objName);
+        super("2002", ExceptionUtil.formatErrorDesc("[{0}]不存在", objName));
     }
+
 }

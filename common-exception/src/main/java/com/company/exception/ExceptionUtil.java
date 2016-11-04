@@ -1,5 +1,7 @@
 package com.company.exception;
 
+import java.text.MessageFormat;
+
 /**
  * Exception Util
  *
@@ -8,63 +10,7 @@ package com.company.exception;
 public abstract class ExceptionUtil {
 
     /**
-     * 获取异常描述
-     *
-     * @param ex
-     * @return String
-     */
-    public static String getErrorDesc(BaseException ex) {
-        String errorDesc = ex.getErrorDesc();
-        return errorDesc;
-    }
-
-    /**
-     * 获取异常详细
-     *
-     * @param ex
-     * @return String
-     */
-    public static String getErrorDetail(BaseException ex) {
-        String errorDetail = null;
-
-        if (ex instanceof ParamException) {
-            errorDetail = ex.getMessage();
-        } else if (ex instanceof BusinessException) {
-            BusinessException bex = (BusinessException) ex;
-        }
-
-        return errorDetail;
-    }
-
-    /**
-     * Build BaseException Message
-     *
-     * @param errorCode
-     * @param errorDesc
-     * @return String
-     */
-    public static String buildMessage(String errorCode, String errorDesc) {
-        String message = errorDesc + "[" + errorCode + "]";
-        return message;
-    }
-
-    /**
-     * Build BaseException Message
-     *
-     * @param errorCode
-     * @param errorDesc
-     * @param message
-     * @return String
-     */
-    public static String buildMessage(String errorCode, String errorDesc, String message) {
-        if (message == null) {
-            message = errorDesc + "[" + errorCode + "]";
-        }
-        return message;
-    }
-
-    /**
-     * Build ParamException Message
+     * 构造ParamException Message
      *
      * @param errorCode
      * @param errorDesc
@@ -75,8 +21,24 @@ public abstract class ExceptionUtil {
      */
     public static String buildMessage(String errorCode, String errorDesc, String paramName, Object paramValue, String message) {
         if (message == null) {
-            message = errorDesc + "[" + errorCode + "][" + paramName + "]";
+            message = errorDesc + "[" + paramName + "]";
         }
         return message;
+    }
+
+    /**
+     * 格式化错误描述
+     *
+     * @param pattern
+     * @param args
+     * @return String
+     */
+    public static String formatErrorDesc(String pattern, String... args) {
+        for (String arg : args) {
+            if (arg == null) {
+                throw new IllegalArgumentException();
+            }
+        }
+        return MessageFormat.format(pattern, args);
     }
 }
