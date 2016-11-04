@@ -14,7 +14,7 @@ import java.text.MessageFormat;
  */
 public class NotMatchException extends BusinessException {
 
-    public NotMatchException(String objName1, String objName2) {
-        super("2002", ExceptionUtil.formatErrorDesc("[{0}]和[{1}]不匹配", objName1, objName2));
+    public NotMatchException(String obj, String objName2) {
+        super("2002", ExceptionUtil.formatErrorDesc("[{0}]和[{1}]不匹配", obj, objName2));
     }
 }

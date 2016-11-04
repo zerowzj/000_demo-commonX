@@ -14,7 +14,7 @@ import java.text.MessageFormat;
  */
 public class AlreadyExistException extends BusinessException {
 
-    public AlreadyExistException(String objName) {
-        super("2001", ExceptionUtil.formatErrorDesc("[{0}]已存在", objName));
+    public AlreadyExistException(String obj) {
+        super("2001", ExceptionUtil.formatErrorDesc("[{0}]已存在", obj));
     }
 }

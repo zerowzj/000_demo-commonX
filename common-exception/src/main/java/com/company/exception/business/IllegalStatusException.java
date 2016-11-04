@@ -11,9 +11,9 @@ import com.company.exception.ExceptionUtil;
  * @author wangzhj
  * @time 2016-11-04 11:55
  */
-public class StatusIllegalException extends BusinessException {
+public class IllegalStatusException extends BusinessException {
 
-    public StatusIllegalException(String objName, String status) {
+    public IllegalStatusException(String objName, String status) {
         super("", ExceptionUtil.formatErrorDesc("[{0}]状态非法", objName, status));
     }
 }
