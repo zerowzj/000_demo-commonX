@@ -56,25 +56,4 @@ public class DateValidator implements Validator {
             throw new ValueIllegalException(paramName, value, message.toString());
         }
     }
-
-    private boolean isFormat(String format, String dateStr) {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
-        boolean f = true;
-        try {
-            sdf.setLenient(false);
-            sdf.parse(dateStr);
-        } catch (Exception ex) {
-            f = false;
-        }
-        return f;
-    }
-
-    public static void main(String[] args) {
-        String dateString = "2009-04-17";
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyy");
-        System.out.println(formatter.isParser());
-        System.out.println(formatter.isPrinter());
-
-
-    }
 }

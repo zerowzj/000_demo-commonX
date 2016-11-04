@@ -24,8 +24,7 @@ public class RuleTest {
         try {
             ValidateUtil.validate(paramMap, paramSet);
         } catch (ParamException ex) {
-            System.out.println(ExceptionUtil.getErrorDesc(ex));
-            System.out.println(ExceptionUtil.getErrorDetail(ex));
+
         }
     }
 }
