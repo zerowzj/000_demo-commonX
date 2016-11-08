@@ -33,4 +33,9 @@ public abstract class MessageUtil {
         String pattern = prop.getProperty(key);
         return MessageFormat.format(pattern, args);
     }
+
+    public static void main(String[] args) {
+        StringBuffer sb = new StringBuffer("abc;");
+        System.out.println(sb.substring(0, sb.length()));
+    }
 }
