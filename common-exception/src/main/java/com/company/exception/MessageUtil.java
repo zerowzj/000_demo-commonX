@@ -28,14 +28,14 @@ public abstract class MessageUtil {
     }
 
     /**
+     * 格式化信息
+     *
+     * @param key
+     * @param args
+     * @return String
      **/
     public static String format(String key, Object... args) {
         String pattern = prop.getProperty(key);
         return MessageFormat.format(pattern, args);
-    }
-
-    public static void main(String[] args) {
-        StringBuffer sb = new StringBuffer("abc;");
-        System.out.println(sb.substring(0, sb.length()));
     }
 }
