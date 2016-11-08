@@ -11,6 +11,6 @@ import com.company.exception.MessageUtil;
 public class TokenExpireOrErrorException extends AuthException {
 
     public TokenExpireOrErrorException() {
-        super("8002", MessageUtil.format("auth.error.tokenExpireOrError"));
+        super("8003", MessageUtil.format("auth.error.tokenExpireOrError"));
     }
 }

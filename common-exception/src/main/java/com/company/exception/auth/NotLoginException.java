@@ -11,6 +11,6 @@ import com.company.exception.MessageUtil;
 public class NotLoginException extends AuthException {
 
     public NotLoginException(){
-        super("8003", MessageUtil.format("auth.error.notLogin"));
+        super("8001", MessageUtil.format("auth.error.notLogin"));
     }
 }

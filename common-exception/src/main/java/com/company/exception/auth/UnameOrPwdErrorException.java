@@ -11,6 +11,6 @@ import com.company.exception.MessageUtil;
 public class UnameOrPwdErrorException extends AuthException {
 
     public UnameOrPwdErrorException() {
-        super("8001", MessageUtil.format("auth.error.unameOrPwdError"));
+        super("8002", MessageUtil.format("auth.error.unameOrPwdError"));
     }
 }
