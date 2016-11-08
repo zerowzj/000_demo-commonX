@@ -24,6 +24,12 @@ public abstract class BaseException extends RuntimeException {
         this.errorDesc = errorDesc;
     }
 
+    public BaseException(String errorCode, String errorDesc, Throwable cause) {
+        super(cause);
+        this.errorCode = errorCode;
+        this.errorDesc = errorDesc;
+    }
+
     public String getErrorDesc() {
         return errorDesc;
     }
