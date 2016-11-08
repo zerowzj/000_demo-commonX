@@ -18,7 +18,6 @@ public abstract class MessageUtil {
     private static final Properties prop = new Properties();
 
     static {
-//        InputStream is = ClassLoader.getSystemResourceAsStream(MESSAGE_FILE);
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream is = classLoader.getResourceAsStream(MESSAGE_FILE);
         try {
@@ -33,9 +32,5 @@ public abstract class MessageUtil {
     public static String format(String key, Object... args) {
         String pattern = prop.getProperty(key);
         return MessageFormat.format(pattern, args);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(MessageUtil.format("param.error.noEmpty", "userName"));
     }
 }
