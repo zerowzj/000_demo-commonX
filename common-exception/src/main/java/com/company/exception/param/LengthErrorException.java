@@ -12,6 +12,6 @@ import com.company.exception.ParamException;
 public class LengthErrorException extends ParamException {
 
     public LengthErrorException(String paramName){
-        super("", "", paramName, null);
+        super("", "参数值长度错误", paramName, null);
     }
 }

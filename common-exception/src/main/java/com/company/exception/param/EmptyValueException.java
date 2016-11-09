@@ -1,6 +1,7 @@
 package com.company.exception.param;
 
-import com.company.exception.MessageUtil;
+import static com.company.exception.MessageUtil.format;
+
 import com.company.exception.ParamException;
 
 /**
@@ -11,7 +12,9 @@ import com.company.exception.ParamException;
  */
 public class EmptyValueException extends ParamException {
 
+    private static final String key = "param.error.noEmpty";
+
     public EmptyValueException(String paramName) {
-        super("1001", "参数不存在或值为空", paramName, MessageUtil.format("param.error.noEmpty", paramName));
+        super("1001", "参数不存在或值为空", paramName, format(key, paramName));
     }
 }
