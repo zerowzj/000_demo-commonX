@@ -5,11 +5,9 @@ import com.company.exception.param.ValueIllegalException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.DateRule;
 import org.joda.time.DateTime;
-import org.joda.time.Interval;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**

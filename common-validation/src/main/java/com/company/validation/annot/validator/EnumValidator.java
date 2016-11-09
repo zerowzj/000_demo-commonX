@@ -4,7 +4,6 @@ import com.company.exception.param.ValueIllegalException;
 import com.company.validation.annot.constraint.EnumRule;
 
 import java.lang.annotation.Annotation;
-import java.security.MessageDigest;
 import java.text.MessageFormat;
 
 

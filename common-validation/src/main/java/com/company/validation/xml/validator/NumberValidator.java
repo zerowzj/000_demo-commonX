@@ -5,8 +5,6 @@ import com.company.validation.MessageUtil;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.NumberRule;
 
-import java.text.MessageFormat;
-
 /**
  * 数字规则验证器
  *
