@@ -10,6 +10,7 @@ import com.company.exception.ParamException;
  * @author wangzhj
  * @time 2016-11-04 11:55
  */
+@Deprecated
 public class FormatErrorException extends ParamException {
 
     public FormatErrorException(String paramName, Object paramValue) {

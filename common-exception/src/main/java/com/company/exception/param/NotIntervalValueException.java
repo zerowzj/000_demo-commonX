@@ -10,13 +10,14 @@ import com.company.exception.ParamException;
  * @author wangzhj
  * @time 2016-11-09 10:09
  */
-public class NotInIntervalException extends ParamException {
+public class NotIntervalValueException extends ParamException {
 
-    private String start = null;
-
+    /**  */
+    private String begin = null;
+    /**  */
     private String end = null;
 
-    public NotInIntervalException(String paramName) {
-        super("1001", "参数不存在或值为空", paramName, MessageUtil.format("param.error.noEmpty", paramName));
+    public NotIntervalValueException(String paramName) {
+        super("1001", "参数值不在区间", paramName, MessageUtil.format("param.error.noEmpty", paramName));
     }
 }

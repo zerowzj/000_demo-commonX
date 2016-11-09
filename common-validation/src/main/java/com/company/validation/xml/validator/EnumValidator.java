@@ -1,11 +1,9 @@
 package com.company.validation.xml.validator;
 
-import com.company.exception.param.ValueIllegalException;
-import com.company.validation.MessageUtil;
+import com.company.exception.param.NotEnumValueException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.EnumRule;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 /**
@@ -28,8 +26,7 @@ public class EnumValidator implements Validator {
         //值列表
         List<String> valueLt = rule.getValueLt();
         if (!valueLt.contains(value.toString())) {
-            String key = "param.error.notEnum";
-            throw new ValueIllegalException(paramName, value, MessageUtil.format(key, paramName, valueLt));
+            throw new NotEnumValueException(paramName);
         }
     }
 }

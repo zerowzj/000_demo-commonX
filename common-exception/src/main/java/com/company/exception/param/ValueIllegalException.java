@@ -10,6 +10,7 @@ import com.company.exception.ParamException;
  * @author wangzhj
  * @time 2016-11-04 11:55
  */
+@Deprecated
 public class ValueIllegalException extends ParamException {
 
     public ValueIllegalException(String paramName, Object paramValue) {
