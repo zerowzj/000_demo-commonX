@@ -1,7 +1,5 @@
 package com.company.validation.xml.validator;
 
-import com.company.exception.param.FormatErrorException;
-import com.company.exception.param.ValueIllegalException;
 import com.company.validation.xml.Param;
 import com.company.validation.xml.rule.DateRule;
 import org.joda.time.DateTime;
@@ -45,13 +43,11 @@ public class DateValidator implements Validator {
         String minDate = rule.getMinDate();
         if (minDate != null && date.isBefore(new DateTime(minDate))) {
             message.append("");
-            throw new ValueIllegalException(paramName, value, message.toString());
         }
         //最大日期
         String maxDate = rule.getMaxDate();
         if (maxDate != null && date.isAfter(new DateTime(minDate))) {
             message.append("");
-            throw new ValueIllegalException(paramName, value, message.toString());
         }
     }
 }

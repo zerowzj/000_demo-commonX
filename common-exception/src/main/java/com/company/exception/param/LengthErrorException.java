@@ -2,6 +2,8 @@ package com.company.exception.param;
 
 import com.company.exception.ParamException;
 
+import static com.company.exception.MessageUtil.format;
+
 /**
  * <p>Title: LengthErrorException<／p>
  * <p>Description: ${DESC}<／p>
@@ -11,7 +13,17 @@ import com.company.exception.ParamException;
  */
 public class LengthErrorException extends ParamException {
 
-    public LengthErrorException(String paramName){
-        super("", "参数值长度错误", paramName, null);
+    private static final String ERROR_CODE = "1002";
+
+    private static final String DESC_KEY = "param.error.desc.lengthError";
+
+    private static final String MSG_KEY = "param.error.msg.lengthError";
+
+    public LengthErrorException(String paramName) {
+        super(ERROR_CODE, format(DESC_KEY, paramName), format(DESC_KEY, paramName));
+    }
+
+    public LengthErrorException(String paramName, int minLength, int maxLength) {
+        super(ERROR_CODE, format(DESC_KEY, paramName), format(MSG_KEY, paramName, minLength, maxLength));
     }
 }

@@ -12,6 +12,6 @@ public class DateFormatErrorException extends ParamException {
 
 
     public DateFormatErrorException(){
-        super("", "参数值日期格式错误", "", null);
+        super("", "参数值日期格式错误",  null);
     }
 }

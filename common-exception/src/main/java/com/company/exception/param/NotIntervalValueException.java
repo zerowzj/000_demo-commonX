@@ -1,23 +1,28 @@
 package com.company.exception.param;
 
-import com.company.exception.MessageUtil;
 import com.company.exception.ParamException;
 
+import static com.company.exception.MessageUtil.format;
+
 /**
- * <p>Title: IntervalErrorException<／p>
- * <p>Description: ${DESC}<／p>
+ * <p>非法区间值异常<／p>
  *
  * @author wangzhj
  * @time 2016-11-09 10:09
  */
 public class NotIntervalValueException extends ParamException {
 
-    /**  */
-    private String begin = null;
-    /**  */
-    private String end = null;
+    private static final String ERROR_CODE = "1001";
+
+    private static final String DESC_KEY = "param.error.desc.notInterval";
+
+    private static final String MSG_KEY = "param.error.msg.notInterval";
 
     public NotIntervalValueException(String paramName) {
-        super("1001", "参数值不在区间", paramName, MessageUtil.format("param.error.noEmpty", paramName));
+        super(ERROR_CODE, format(DESC_KEY, paramName), format(DESC_KEY, paramName));
+    }
+
+    public NotIntervalValueException(String paramName, Object beginValue, Object endValue) {
+        super(ERROR_CODE, format(DESC_KEY, paramName), format(MSG_KEY, paramName));
     }
 }
