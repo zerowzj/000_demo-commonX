@@ -9,13 +9,13 @@ import static com.company.exception.MessageUtil.format;
  *
  * @author wangzhj
  */
-public class TokenExpireOrErrorException extends AuthException {
+public class TokenExpiredOrErrorException extends AuthException {
 
     private static final String ERROR_CODE = "1002";
 
     private static final String DESC_KEY = "auth.error.tokenExpireOrError";
 
-    public TokenExpireOrErrorException() {
+    public TokenExpiredOrErrorException() {
         super(ERROR_CODE, format(DESC_KEY));
     }
 }
