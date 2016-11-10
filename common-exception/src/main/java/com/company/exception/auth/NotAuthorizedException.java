@@ -5,7 +5,7 @@ import com.company.exception.AuthException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * 未授权异常
+ * <p>未授权异常</p>
  *
  * @author wangzhj
  */

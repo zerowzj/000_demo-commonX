@@ -5,17 +5,18 @@ import com.company.exception.AuthException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * <p>用户名或密码错误异常</p>
+ * <p>用户不存在异常<／p>
  *
  * @author wangzhj
+ * @time 2016-11-10 11:52
  */
-public class UnameOrPwdErrorException extends AuthException {
+public class NotUnameException extends AuthException{
 
     private static final String ERROR_CODE = "1002";
 
-    private static final String DESC_KEY = "auth.error.unameOrPwdError";
+    private static final String DESC_KEY = "auth.error.notUname";
 
-    public UnameOrPwdErrorException() {
+    public NotUnameException() {
         super(ERROR_CODE, format(DESC_KEY));
     }
 }

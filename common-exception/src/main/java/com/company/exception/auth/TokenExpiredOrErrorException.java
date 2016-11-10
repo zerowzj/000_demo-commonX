@@ -5,7 +5,7 @@ import com.company.exception.AuthException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * token过期或错误异常
+ * <p>token过期或错误异常</p>
  *
  * @author wangzhj
  */
