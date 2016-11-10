@@ -14,16 +14,48 @@ import java.util.Map;
 public class RuleTest {
 
     @Test
+    public void testEmptyValueException() {
+        ParamSet paramSet = new ParamSetFactory().getParamSet("/login");
+        Map<String, Object> paramMap = new HashMap<>();
+        try {
+            ValidateUtil.validate(paramMap, paramSet);
+        } catch (ParamException ex) {
+            System.out.println(ex.getErrorCode());
+            System.out.println(ex.getErrorDesc());
+            ex.printStackTrace();
+
+        }
+    }
+
+    @Test
+    public void testEnumRule() {
+        ParamSet paramSet = new ParamSetFactory().getParamSet("/login");
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("name", "wangzhj");
+        paramMap.put("type", "123");
+        try {
+            ValidateUtil.validate(paramMap, paramSet);
+        } catch (ParamException ex) {
+            System.out.println(ex.getErrorCode());
+            System.out.println(ex.getErrorDesc());
+            ex.printStackTrace();
+
+        }
+    }
+
+    @Test
     public void test() {
 
         ParamSet paramSet = new ParamSetFactory().getParamSet("/login");
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("name", "11");
-        paramMap.put("type", "1");
-        paramMap.put("money", new HashMap<>());
+        paramMap.put("name", "1");
+
         try {
             ValidateUtil.validate(paramMap, paramSet);
         } catch (ParamException ex) {
+            System.out.println(ex.getErrorCode());
+            System.out.println(ex.getErrorDesc());
+            ex.printStackTrace();
 
         }
     }

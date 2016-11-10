@@ -2,6 +2,8 @@ package com.company.exception.param;
 
 import com.company.exception.ParamException;
 
+import java.util.List;
+
 import static com.company.exception.MessageUtil.format;
 
 /**
@@ -22,7 +24,7 @@ public class NotEnumValueException extends ParamException {
         super(ERROR_CODE, format(DESC_KEY, paramName), format(DESC_KEY, paramName));
     }
 
-    public NotEnumValueException(String paramName, Object enumValue) {
-        super(ERROR_CODE, format(DESC_KEY, paramName), format(MSG_KEY, paramName, enumValue));
+    public NotEnumValueException(String paramName, List<?> valueLt) {
+        super(ERROR_CODE, format(DESC_KEY, paramName), format(MSG_KEY, paramName, valueLt));
     }
 }

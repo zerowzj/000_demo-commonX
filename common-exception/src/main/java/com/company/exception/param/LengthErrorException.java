@@ -23,7 +23,7 @@ public class LengthErrorException extends ParamException {
         super(ERROR_CODE, format(DESC_KEY, paramName), format(DESC_KEY, paramName));
     }
 
-    public LengthErrorException(String paramName, int minLength, int maxLength) {
+    public LengthErrorException(String paramName, Integer minLength, Integer maxLength) {
         super(ERROR_CODE, format(DESC_KEY, paramName), format(MSG_KEY, paramName, minLength, maxLength));
     }
 }

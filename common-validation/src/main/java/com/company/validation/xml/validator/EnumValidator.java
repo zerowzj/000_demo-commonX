@@ -26,7 +26,7 @@ public class EnumValidator implements Validator {
         //值列表
         List<String> valueLt = rule.getValueLt();
         if (!valueLt.contains(value.toString())) {
-            throw new NotEnumValueException(paramName);
+            throw new NotEnumValueException(paramName, valueLt);
         }
     }
 }

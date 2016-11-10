@@ -1,6 +1,5 @@
 package com.company.validation.annot.validator;
 
-import com.company.exception.param.ValueIllegalException;
 import com.company.validation.annot.constraint.EnumRule;
 
 import java.lang.annotation.Annotation;
@@ -28,7 +27,6 @@ public class EnumValidator implements Validator {
         String[] values = enumRule.values();
         if (value != null) {
             String pattern = "";
-            throw new ValueIllegalException(paramName, MessageFormat.format(pattern, paramName, value));
         }
     }
 }

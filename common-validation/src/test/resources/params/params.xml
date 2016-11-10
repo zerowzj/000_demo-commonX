@@ -5,16 +5,10 @@
 
     <param-set key="/login">
         <param name="name" notEmpty="true">
-            <string minLength="2" maxLength="5"/>
+            <string minLength="2" maxLength="10"/>
         </param>
         <param name="type" notEmpty="true">
             <enum values="1,2"/>
-        </param>
-        <param name="money" notEmpty="true">
-            <number minValue="100" maxValue="900"/>
-        </param>
-        <param name="beginTime" notEmpty="true">
-            <date />
         </param>
     </param-set>
 

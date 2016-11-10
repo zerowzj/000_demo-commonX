@@ -21,16 +21,11 @@ public class StringValidator implements Validator {
         String paramName = param.getParamName();
         int length = value.toString().length();
         StringRule rule = (StringRule) param.getRule();
-
-        //最小长度
+        //长度
         int minLength = rule.getMinLength();
-        if (minLength > 0 && length < minLength) {
-            throw new LengthErrorException(paramName);
-        }
-        //最大长度
         int maxLength = rule.getMaxLength();
-        if (maxLength > 0 && length > maxLength) {
-            throw new LengthErrorException(paramName);
+        if ((minLength > 0 && length < minLength) || (maxLength > 0 && length > maxLength)) {
+            throw new LengthErrorException(paramName, minLength, null);
         }
     }
 }
