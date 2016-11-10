@@ -19,7 +19,7 @@ public class NotIntervalValueException extends ParamException {
     private static final String MSG_KEY = "param.error.msg.notInterval";
 
     public NotIntervalValueException(String paramName) {
-        super(ERROR_CODE, format(DESC_KEY, paramName), format(DESC_KEY, paramName));
+        super(ERROR_CODE, format(DESC_KEY, paramName));
     }
 
     public NotIntervalValueException(String paramName, Object beginValue, Object endValue) {

@@ -21,7 +21,7 @@ public class NotEnumValueException extends ParamException {
     private static final String MSG_KEY = "param.error.msg.notEnum";
 
     public NotEnumValueException(String paramName) {
-        super(ERROR_CODE, format(DESC_KEY, paramName), format(DESC_KEY, paramName));
+        super(ERROR_CODE, format(DESC_KEY, paramName));
     }
 
     public NotEnumValueException(String paramName, List<?> valueLt) {

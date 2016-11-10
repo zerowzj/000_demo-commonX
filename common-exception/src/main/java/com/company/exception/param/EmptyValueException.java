@@ -17,6 +17,6 @@ public class EmptyValueException extends ParamException {
     private static final String DESC_KEY = "param.error.notEmpty";
 
     public EmptyValueException(String paramName) {
-        super(ERROR_CODE, format(DESC_KEY, paramName), format(DESC_KEY, paramName));
+        super(ERROR_CODE, format(DESC_KEY, paramName));
     }
 }

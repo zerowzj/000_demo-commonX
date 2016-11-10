@@ -8,6 +8,10 @@ package com.company.exception;
  */
 public abstract class ParamException extends BaseException {
 
+    public ParamException(String errorCode, String errorDesc) {
+        this(errorCode, errorDesc, errorDesc);
+    }
+
     public ParamException(String errorCode, String errorDesc, String message) {
         super(errorCode, errorDesc, message);
     }

@@ -19,7 +19,7 @@ public class LengthException extends ParamException {
     private static final String MSG_KEY = "param.error.msg.lengthError";
 
     public LengthException(String paramName) {
-        super(ERROR_CODE, format(DESC_KEY, paramName), format(DESC_KEY, paramName));
+        super(ERROR_CODE, format(DESC_KEY, paramName));
     }
 
     public LengthException(String paramName, Integer minLength, Integer maxLength) {

@@ -2,6 +2,8 @@ package com.company.exception.param;
 
 import com.company.exception.ParamException;
 
+import static com.company.exception.MessageUtil.format;
+
 /**
  * <p>日期格式错误<／p>
  *
@@ -10,8 +12,11 @@ import com.company.exception.ParamException;
  */
 public class DateFormatException extends ParamException {
 
+    private static final String ERROR_CODE = "1002";
 
-    public DateFormatException(){
-        super("", "参数值日期格式错误",  null);
+    private static final String DESC_KEY = "param.error.desc.lengthError";
+
+    public DateFormatException(String paramName) {
+        super(ERROR_CODE, format(DESC_KEY, paramName));
     }
 }

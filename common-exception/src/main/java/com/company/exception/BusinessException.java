@@ -11,4 +11,8 @@ public abstract class BusinessException extends BaseException {
     public BusinessException(String errorCode, String errorDesc) {
         super(errorCode, errorDesc, errorDesc);
     }
+
+    public BusinessException(String errorCode, String errorDesc, String message) {
+        super(errorCode, errorDesc, message);
+    }
 }
