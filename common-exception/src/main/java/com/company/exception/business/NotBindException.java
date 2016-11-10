@@ -5,7 +5,7 @@ import com.company.exception.BusinessException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * <p>未绑定异常<／p>
+ * <p>未绑定异常</p>
  *
  * @author wangzhj
  * @time 2016-11-10 11:40

@@ -5,7 +5,7 @@ import com.company.exception.AuthException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * <p>用户不存在异常<／p>
+ * <p>用户不存在异常</p>
  *
  * @author wangzhj
  * @time 2016-11-10 11:52

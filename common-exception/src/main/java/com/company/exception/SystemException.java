@@ -1,7 +1,7 @@
 package com.company.exception;
 
 /**
- * <p>系统异常<／p>
+ * <p>系统异常</p>
  *
  * @author wangzhj
  * @time 2016-11-04 11:55

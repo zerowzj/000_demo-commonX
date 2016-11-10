@@ -5,7 +5,7 @@ import com.company.exception.ParamException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * <p>日期格式错误<／p>
+ * <p>日期格式错误</p>
  *
  * @author wangzhj
  * @time 2016-11-09 10:52

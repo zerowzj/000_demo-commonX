@@ -5,7 +5,7 @@ import com.company.exception.BusinessException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * <p>已存在异常<／p>
+ * <p>已存在异常</p>
  *
  * @author wangzhj
  * @time 2016-11-04 11:55

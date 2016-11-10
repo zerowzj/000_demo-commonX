@@ -5,7 +5,7 @@ import com.company.exception.BusinessException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * <p>过期异常<／p>
+ * <p>过期异常</p>
  *
  * @author wangzhj
  * @time 2016-11-10 14:04

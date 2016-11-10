@@ -20,10 +20,21 @@ public class NotEnumValueException extends ParamException {
 
     private static final String MSG_KEY = "param.error.msg.notEnum";
 
+    /**
+     * 构造非法枚举值异常
+     *
+     * @param paramName 参数名称
+     */
     public NotEnumValueException(String paramName) {
         super(ERROR_CODE, format(DESC_KEY, paramName));
     }
 
+    /**
+     * 构造非法枚举值异常
+     *
+     * @param paramName 参数名称
+     * @param valueLt   枚举值列表
+     */
     public NotEnumValueException(String paramName, List<?> valueLt) {
         super(ERROR_CODE, format(DESC_KEY, paramName), format(MSG_KEY, paramName, valueLt));
     }
