@@ -14,7 +14,7 @@ public class NotBindException extends BusinessException {
 
     private static final String ERROR_CODE = "2002";
 
-    private static final String DESC_KEY = "business.error.msg.notBind";
+    private static final String DESC_KEY = "business.error.notBind";
 
     public NotBindException(String objName, String targetName) {
         super(ERROR_CODE, format(DESC_KEY, objName, targetName));
