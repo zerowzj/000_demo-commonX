@@ -8,10 +8,10 @@ import com.company.exception.ParamException;
  * @author wangzhj
  * @time 2016-11-09 10:52
  */
-public class DateFormatErrorException extends ParamException {
+public class DateFormatException extends ParamException {
 
 
-    public DateFormatErrorException(){
+    public DateFormatException(){
         super("", "参数值日期格式错误",  null);
     }
 }
