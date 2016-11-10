@@ -1,7 +1,8 @@
 package com.company.exception.auth;
 
 import com.company.exception.AuthException;
-import com.company.exception.MessageUtil;
+
+import static com.company.exception.MessageUtil.format;
 
 /**
  * 未登录异常
@@ -10,7 +11,11 @@ import com.company.exception.MessageUtil;
  */
 public class NotLoginException extends AuthException {
 
-    public NotLoginException(){
-        super("8001", MessageUtil.format("auth.error.notLogin"));
+    private static final String ERROR_CODE = "1002";
+
+    private static final String DESC_KEY = "auth.error.notLogin";
+
+    public NotLoginException() {
+        super(ERROR_CODE, format(DESC_KEY));
     }
 }

@@ -1,7 +1,8 @@
 package com.company.exception.business;
 
 import com.company.exception.BusinessException;
-import com.company.exception.MessageUtil;
+
+import static com.company.exception.MessageUtil.format;
 
 /**
  * <p>不存在异常<／p>
@@ -11,7 +12,11 @@ import com.company.exception.MessageUtil;
  */
 public class NotExistException extends BusinessException {
 
+    private static final String ERROR_CODE = "2002";
+
+    private static final String DESC_KEY = "business.error.notExist";
+
     public NotExistException(String objName, String objValue) {
-        super("2002", MessageUtil.format("business.error.notExist", objName, objValue));
+        super(ERROR_CODE, format(DESC_KEY, objName, objValue));
     }
 }

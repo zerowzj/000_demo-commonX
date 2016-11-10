@@ -1,7 +1,8 @@
 package com.company.exception.auth;
 
 import com.company.exception.AuthException;
-import com.company.exception.MessageUtil;
+
+import static com.company.exception.MessageUtil.format;
 
 /**
  * 用户名或密码错误异常
@@ -10,7 +11,11 @@ import com.company.exception.MessageUtil;
  */
 public class UnameOrPwdErrorException extends AuthException {
 
+    private static final String ERROR_CODE = "1002";
+
+    private static final String DESC_KEY = "auth.error.unameOrPwdError";
+
     public UnameOrPwdErrorException() {
-        super("8002", MessageUtil.format("auth.error.unameOrPwdError"));
+        super(ERROR_CODE, format(DESC_KEY));
     }
 }

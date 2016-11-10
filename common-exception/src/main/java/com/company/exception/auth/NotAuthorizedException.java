@@ -1,7 +1,8 @@
 package com.company.exception.auth;
 
 import com.company.exception.AuthException;
-import com.company.exception.MessageUtil;
+
+import static com.company.exception.MessageUtil.format;
 
 /**
  * 未授权异常
@@ -10,7 +11,11 @@ import com.company.exception.MessageUtil;
  */
 public class NotAuthorizedException extends AuthException {
 
-    public NotAuthorizedException(){
-        super("8004", MessageUtil.format("auth.error.notAuthorized"));
+    private static final String ERROR_CODE = "1002";
+
+    private static final String DESC_KEY = "auth.error.notAuthorized";
+
+    public NotAuthorizedException() {
+        super(ERROR_CODE, format(DESC_KEY));
     }
 }
