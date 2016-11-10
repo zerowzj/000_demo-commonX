@@ -10,13 +10,13 @@ import static com.company.exception.MessageUtil.format;
  * @author wangzhj
  * @time 2016-11-10 11:52
  */
-public class NotUnameException extends AuthException{
+public class NoUnameException extends AuthException{
 
     private static final String ERROR_CODE = "1002";
 
     private static final String DESC_KEY = "auth.error.notUname";
 
-    public NotUnameException() {
+    public NoUnameException() {
         super(ERROR_CODE, format(DESC_KEY));
     }
 }
