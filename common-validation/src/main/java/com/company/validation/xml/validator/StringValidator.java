@@ -25,7 +25,7 @@ public class StringValidator implements Validator {
         int minLength = rule.getMinLength();
         int maxLength = rule.getMaxLength();
         if ((minLength > 0 && length < minLength) || (maxLength > 0 && length > maxLength)) {
-            throw new LengthException(paramName, minLength, null);
+            throw new LengthException(paramName);
         }
     }
 }

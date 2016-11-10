@@ -5,8 +5,7 @@ import com.company.exception.ParamException;
 import static com.company.exception.MessageUtil.format;
 
 /**
- * <p>Title: LengthErrorException<／p>
- * <p>Description: ${DESC}<／p>
+ * <p>长度异常<／p>
  *
  * @author wangzhj
  * @time 2016-11-09 13:31

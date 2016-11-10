@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * <p>Description: ${DESC}<／p>
+ * <p>Message Util<／p>
  *
  * @author wangzhj
  * @time 2016-11-04 16:47
@@ -38,6 +38,7 @@ public abstract class MessageUtil {
      **/
     public static String format(String key, Object... args) {
         String pattern = prop.getProperty(key);
-        return MessageFormat.format(pattern, args);
+        MessageFormat msgFormat = new MessageFormat(pattern);
+        return msgFormat.format(args);
     }
 }
