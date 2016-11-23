@@ -24,12 +24,28 @@
     <!-- ==================== -->
     <!--          依赖        -->
     <!-- ==================== -->
+    <dependencyManagement>
     <dependencies>
         <!-- Junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Jsp -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp.version}</version>
+            <scope>provided</scope>
         </dependency>
         <!-- Spring Core -->
         <dependency>
@@ -59,6 +75,7 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+    </dependencyManagement>
     <!-- ==================== -->
     <!--          构建        -->
     <!-- ==================== -->
