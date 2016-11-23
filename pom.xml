@@ -18,7 +18,6 @@
         <module>common-util</module>
         <module>common-exception</module>
         <module>common-validation</module>
-        <module>common-monitor</module>
     </modules>
     <!-- ==================== -->
     <!--          依赖        -->
