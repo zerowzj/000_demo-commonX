@@ -13,6 +13,7 @@ public abstract class SystemException extends BaseException {
      *
      * @param errorCode 错误码
      * @param errorDesc 错误描述
+     * @param cause 原因
      */
     public SystemException(String errorCode, String errorDesc, Throwable cause) {
         super(errorCode, errorDesc, errorDesc);
