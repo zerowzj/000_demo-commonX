@@ -1,15 +1,7 @@
 package com.company.util;
 
-import sun.reflect.generics.reflectiveObjects.TypeVariableImpl;
-
-import java.lang.reflect.GenericDeclaration;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-
 /**
- * <p></p>
+ * <p>类型转换 Util</p>
  *
  * @author wangzhj
  * @time 2016-11-24 13:10
@@ -27,10 +19,5 @@ public abstract class TypeCastUtil {
             return null;
         }
         return (T) obj;
-    }
-
-    public static void main(String[] args) {
-        String str = "";
-        String aa = TypeCastUtil.cast(str);
     }
 }
