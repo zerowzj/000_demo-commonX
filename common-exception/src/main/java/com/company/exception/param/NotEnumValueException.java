@@ -4,7 +4,7 @@ import com.company.exception.ParamException;
 
 import java.util.List;
 
-import static com.company.exception.MessageUtil.format;
+import static com.company.exception.util.MessageUtil.format;
 
 /**
  * <p>非法枚举值异常</p>

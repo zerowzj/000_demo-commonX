@@ -2,7 +2,7 @@ package com.company.exception.param;
 
 import com.company.exception.ParamException;
 
-import static com.company.exception.MessageUtil.format;
+import static com.company.exception.util.MessageUtil.format;
 
 /**
  * <p>参数不存在或空值异常</p>

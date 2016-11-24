@@ -2,7 +2,7 @@ package com.company.exception.auth;
 
 import com.company.exception.AuthException;
 
-import static com.company.exception.MessageUtil.format;
+import static com.company.exception.util.MessageUtil.format;
 
 /**
  * <p>未登录异常</p>

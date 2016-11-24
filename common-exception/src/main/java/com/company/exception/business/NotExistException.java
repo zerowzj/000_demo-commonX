@@ -2,7 +2,7 @@ package com.company.exception.business;
 
 import com.company.exception.BusinessException;
 
-import static com.company.exception.MessageUtil.format;
+import static com.company.exception.util.MessageUtil.format;
 
 /**
  * <p>不存在异常</p>

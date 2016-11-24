@@ -2,7 +2,7 @@ package com.company.exception.param;
 
 import com.company.exception.ParamException;
 
-import static com.company.exception.MessageUtil.format;
+import static com.company.exception.util.MessageUtil.format;
 
 /**
  * <p>长度异常</p>

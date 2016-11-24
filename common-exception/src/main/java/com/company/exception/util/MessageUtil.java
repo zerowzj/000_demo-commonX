@@ -1,4 +1,4 @@
-package com.company.exception;
+package com.company.exception.util;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
