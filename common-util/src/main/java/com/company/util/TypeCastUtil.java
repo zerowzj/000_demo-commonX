@@ -14,17 +14,10 @@ public abstract class TypeCastUtil {
      * @param obj
      * @return T
      */
-    public static <T> T cast(Object obj, Class<T> clazz){
+    public static <T> T cast(Object obj){
         if(obj == null){
             return null;
         }
         return (T) obj;
-    }
-
-
-    public static void main(String[] args) {
-        String str = "1212";
-
-        Long aa = TypeCastUtil.cast(str, Long.class);
     }
 }
