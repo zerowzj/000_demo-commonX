@@ -4,14 +4,11 @@
     <!-- ==================== -->
     <!--          项目        -->
     <!-- ==================== -->
-    <parent>
-        <groupId>com.company</groupId>
-        <artifactId>common</artifactId>
-        <version>1.0</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
+    <groupId>com.company.common</groupId>
     <artifactId>common-util</artifactId>
     <packaging>jar</packaging>
+    <version>1.0</version>
     <!-- ==================== -->
     <!--          依赖        -->
     <!-- ==================== -->
