@@ -69,11 +69,4 @@ public abstract class JsonUtil {
         }
         return is;
     }
-
-    public static void main(String[] args) {
-        Map<String, Object> data = new HashMap<>();
-        data.put("2", 1);
-        data.put("1", new Date());
-        System.out.println(JsonUtil.toJson(data));
-    }
 }

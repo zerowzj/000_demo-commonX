@@ -18,7 +18,7 @@ public class HttpWriteUtil {
      * @param response
      * @param obj
      */
-    public static <T> void writeByJson(HttpServletResponse response, Object obj) {
+    public static void writeByJson(HttpServletResponse response, Object obj) {
         write(response, JsonUtil.toJson(obj));
     }
 
