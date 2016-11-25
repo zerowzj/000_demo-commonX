@@ -5,7 +5,7 @@
     <!--          项目        -->
     <!-- ==================== -->
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.company</groupId>
+    <groupId>com.company.common</groupId>
     <artifactId>common</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
