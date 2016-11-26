@@ -10,9 +10,14 @@ import java.io.Serializable;
  */
 public final class PageResp<T extends Serializable> extends BaseResp<T> {
 
+    /** 页码 */
     private Integer pageNo = null;
-
+    /** 页大小 */
     private Integer pageSize = null;
+    /** 总页数 */
+    private Integer totalPage = null;
+    /** 总条数 */
+    private Integer totalCount = null;
 
     public Integer getPageNo() {
         return pageNo;
@@ -28,5 +33,21 @@ public final class PageResp<T extends Serializable> extends BaseResp<T> {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public Integer getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(Integer totalPage) {
+        this.totalPage = totalPage;
+    }
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 }
