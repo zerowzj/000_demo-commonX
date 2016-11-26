@@ -8,4 +8,24 @@ package com.common.svr.param;
  */
 public class PageParam extends BaseParam {
 
+    /** 页码 */
+    private Integer pageNo = null;
+    /** 页大小 */
+    private Integer pageSize = null;
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 }
