@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author wangzhj
  * @time 2016-11-26 10:57
  */
-public class BaseResp<T extends Serializable> implements Serializable{
+public final class BaseResp<T extends Serializable> implements Serializable{
 
     /** 结果码 */
     private String code = null;
