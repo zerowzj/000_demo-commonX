@@ -255,6 +255,11 @@
                 <artifactId>common-db</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.company.common</groupId>
+                <artifactId>common-svr</artifactId>
+                <version>1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <!-- ==================== -->

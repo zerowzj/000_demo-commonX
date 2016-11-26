@@ -3,12 +3,12 @@ package com.common.svr.resp;
 import java.io.Serializable;
 
 /**
- * <p></p>
+ * <p>基本结果</p>
  *
  * @author wangzhj
  * @time 2016-11-26 10:57
  */
-public final class BaseResp<T extends Serializable> implements Serializable{
+public class BaseResp<T extends Serializable> implements Serializable{
 
     /** 结果码 */
     private String code = null;
