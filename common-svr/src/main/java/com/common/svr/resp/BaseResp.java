@@ -1,4 +1,4 @@
-package com.common.svr.output;
+package com.common.svr.resp;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author wangzhj
  * @time 2016-11-26 10:57
  */
-public class BaseOutput<T extends Serializable> implements Serializable{
+public class BaseResp<T extends Serializable> implements Serializable{
 
     /** 结果码 */
     private String code = null;
