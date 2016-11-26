@@ -142,7 +142,7 @@
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
-                <version>4.0.4.RELEASE</version>
+                <version>3.4.1</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -242,11 +242,18 @@
                 <artifactId>guava</artifactId>
                 <version>20.0</version>
             </dependency>
-            <!-- Commons -->
+            <!-- Apache Commons -->
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>1.10</version>
+            </dependency>
+
+            <!-- Project Commons -->
+            <dependency>
+                <groupId>com.company.common</groupId>
+                <artifactId>common-db</artifactId>
+                <version>1.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
