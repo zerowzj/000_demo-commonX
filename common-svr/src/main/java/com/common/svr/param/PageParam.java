@@ -13,6 +13,12 @@ public class PageParam extends BaseParam {
     /** 页大小 */
     private Integer pageSize = null;
 
+    public PageParam(Integer pageNo, Integer pageSize){
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+
+    }
+
     public Integer getPageNo() {
         return pageNo;
     }

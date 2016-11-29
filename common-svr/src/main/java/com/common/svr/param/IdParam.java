@@ -8,7 +8,7 @@ package com.common.svr.param;
  */
 public class IdParam extends BaseParam {
 
-    /*  **/
+    /**  */
     private Long id = null;
 
     public IdParam(Long id){
