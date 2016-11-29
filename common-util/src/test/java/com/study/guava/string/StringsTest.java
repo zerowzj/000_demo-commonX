@@ -13,8 +13,11 @@ public class StringsTest {
 
     @Test
     public void test(){
+        System.out.println(Strings.nullToEmpty(null));
+        System.out.println(Strings.nullToEmpty("123"));
+
         System.out.println(Strings.emptyToNull(null));
-        System.out.println(Strings.emptyToNull(" "));
+        System.out.println(Strings.emptyToNull(""));
 
         System.out.println(Strings.isNullOrEmpty(null));
         System.out.println(Strings.isNullOrEmpty("  "));
