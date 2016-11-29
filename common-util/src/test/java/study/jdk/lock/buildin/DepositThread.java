@@ -1,6 +1,6 @@
-package com.study.jdk.lock.buildin;
+package study.jdk.lock.buildin;
 
-import com.study.jdk.lock.Account;
+import study.jdk.lock.Account;
 
 /**
  * <p></p>
