@@ -28,6 +28,13 @@ public class SplitterTest {
         System.out.println(tt);
     }
 
+    @Test
+    public void test_limit(){
+        String str = "aaa,ffdsfds,sdfsdfsdfsd,aaaa";
+        List<String> tt = Splitter.on(",").limit(3).splitToList(str);
+        System.out.println(tt);
+    }
+
 
     @Test
     public void test_withKeyValueSeparator(){
