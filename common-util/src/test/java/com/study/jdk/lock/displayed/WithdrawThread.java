@@ -1,6 +1,6 @@
-package study.jdk.lock.displayed;
+package com.study.jdk.lock.displayed;
 
-import study.jdk.lock.Account;
+import com.study.jdk.lock.Account;
 
 /**
  * <p></p>

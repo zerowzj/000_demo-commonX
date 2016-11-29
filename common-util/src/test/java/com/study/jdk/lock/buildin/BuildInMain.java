@@ -1,7 +1,7 @@
-package study.jdk.lock.buildin;
+package com.study.jdk.lock.buildin;
 
 
-import study.jdk.lock.Account;
+import com.study.jdk.lock.Account;
 
 /**
  * <p></p>

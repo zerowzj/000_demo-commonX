@@ -1,4 +1,4 @@
-package study.jdk.lock;
+package com.study.jdk.lock;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
