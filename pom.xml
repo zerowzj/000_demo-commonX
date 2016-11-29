@@ -18,6 +18,6 @@
         <module>common-util</module>
         <module>common-exception</module>
         <module>common-validation</module>
-        <module>common-svr</module>
+        <module>common-base</module>
     </modules>
 </project>

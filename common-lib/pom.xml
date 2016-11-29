@@ -257,7 +257,17 @@
             </dependency>
             <dependency>
                 <groupId>com.company.common</groupId>
-                <artifactId>common-svr</artifactId>
+                <artifactId>common-exception</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.company.common</groupId>
+                <artifactId>common-util</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.company.common</groupId>
+                <artifactId>common-base</artifactId>
                 <version>1.0</version>
             </dependency>
         </dependencies>
