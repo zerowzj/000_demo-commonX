@@ -14,7 +14,7 @@ public class IdParam extends BaseParam {
     private Long id = null;
 
     public IdParam(Long id){
-        Preconditions.checkNotNull(id);
+        Preconditions.checkNotNull(id, "id不能为空");
         this.id = id;
     }
 

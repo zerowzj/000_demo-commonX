@@ -16,11 +16,10 @@ public class PageParam extends BaseParam {
     private Integer pageSize = null;
 
     public PageParam(Integer pageNo, Integer pageSize) {
-        Preconditions.checkArgument(pageNo >= 1);
-        Preconditions.checkNotNull(pageSize >= 1);
+        Preconditions.checkArgument(pageNo != null && pageNo >= 1, "页码[%s]必须大于0", pageNo);
+        Preconditions.checkArgument(pageSize != null && pageSize >= 1, "页大小[%s]必须大于0", pageSize);
         this.pageNo = pageNo;
         this.pageSize = pageSize;
-
     }
 
     public Integer getPageNo() {
@@ -29,11 +28,5 @@ public class PageParam extends BaseParam {
 
     public Integer getPageSize() {
         return pageSize;
-    }
-
-    public static void main(String[] args) {
-        Integer i = null;
-        Preconditions.checkNotNull(i, "水电费水电费");
-//        Preconditions.checkArgument(i != null && i > 0);
     }
 }
