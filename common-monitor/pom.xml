@@ -26,7 +26,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
         </dependency>
-
         <!-- Guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
