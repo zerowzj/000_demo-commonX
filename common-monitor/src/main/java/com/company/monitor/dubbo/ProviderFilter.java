@@ -25,6 +25,7 @@ public class ProviderFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        logger.info("ProviderFilter......开始");
         long start = System.currentTimeMillis();
         //接口全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
@@ -39,7 +40,7 @@ public class ProviderFilter implements Filter {
             ex.printStackTrace();
         } finally {
             long end = System.currentTimeMillis();
-            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, (end - start) / 1000.00D);
+            logger.info("ProviderFilter......结束");
         }
         return result;
     }

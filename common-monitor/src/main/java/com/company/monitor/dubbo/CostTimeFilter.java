@@ -26,6 +26,7 @@ public class CostTimeFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        logger.info("CostTimeFilter......");
         long start = System.currentTimeMillis();
         //接口全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
