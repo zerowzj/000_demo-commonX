@@ -15,8 +15,8 @@ import com.alibaba.dubbo.rpc.RpcException;
  * @author wangzhj
  * @time 2016-11-30 18:55
  */
-@Activate(group = {Constants.PROVIDER, Constants.CONSUMER})
-public class CostFilter implements Filter {
+@Activate(group = {Constants.CONSUMER})
+public class ConsumerFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
