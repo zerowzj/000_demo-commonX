@@ -8,6 +8,9 @@ import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
+import com.google.common.base.Joiner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p></p>
@@ -18,9 +21,22 @@ import com.alibaba.dubbo.rpc.RpcException;
 @Activate(group = {Constants.PROVIDER})
 public class ProviderFilter implements Filter {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProviderFilter.class);
+
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        logger.info("ProviderFilter......");
         RpcContext context = RpcContext.getContext();
-        return null;
+        String full = Joiner.on(".").join(invoker.getInterface().getCanonicalName(), invocation.getMethodName());
+
+
+        Result result = null;
+        try {
+            invoker.invoke(invocation);
+        } catch (Exception ex) {
+            logger.error("");
+        }
+
+        return result;
     }
 }

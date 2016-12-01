@@ -8,6 +8,7 @@ import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
+import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,9 +25,18 @@ public class ConsumerFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        logger.info("ConsumerFilter......");
         RpcContext context = RpcContext.getContext();
-        invocation.getMethodName();
-        invocation.getArguments();
-        return null;
+        String full = Joiner.on(".").join(invoker.getInterface().getCanonicalName(), invocation.getMethodName());
+
+
+        Result result = null;
+        try {
+            invoker.invoke(invocation);
+        } catch (Exception ex) {
+            logger.error("");
+        }
+
+        return result;
     }
 }
