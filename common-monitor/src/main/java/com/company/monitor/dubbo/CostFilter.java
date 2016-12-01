@@ -21,9 +21,6 @@ public class CostFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         RpcContext context = RpcContext.getContext();
-        if(context.isConsumerSide()){
-
-        }
         return null;
     }
 }
