@@ -29,12 +29,11 @@ public class ProviderFilter implements Filter {
         RpcContext context = RpcContext.getContext();
         String full = Joiner.on(".").join(invoker.getInterface().getCanonicalName(), invocation.getMethodName());
 
-
         Result result = null;
         try {
-            invoker.invoke(invocation);
+            result = invoker.invoke(invocation);
         } catch (Exception ex) {
-            logger.error("");
+            ex.printStackTrace();
         }
 
         return result;

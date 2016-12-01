@@ -25,18 +25,22 @@ public class ConsumerFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        logger.info("ConsumerFilter......");
+        long start = System.currentTimeMillis();
+        //接口全限定名
+        String canonicalName = invoker.getInterface().getCanonicalName();
+        String methodName = invocation.getMethodName();
+        String fqName = Joiner.on(".").join(canonicalName, methodName);
+        //
         RpcContext context = RpcContext.getContext();
-        String full = Joiner.on(".").join(invoker.getInterface().getCanonicalName(), invocation.getMethodName());
-
-
         Result result = null;
         try {
-            invoker.invoke(invocation);
+            result = invoker.invoke(invocation);
         } catch (Exception ex) {
-            logger.error("");
+            ex.printStackTrace();
+        } finally {
+            long end = System.currentTimeMillis();
+            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, (end - start) / 1000);
         }
-
         return result;
     }
 }
