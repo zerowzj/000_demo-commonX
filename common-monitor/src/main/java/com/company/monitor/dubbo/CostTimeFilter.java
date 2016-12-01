@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @author wangzhj
  * @time 2016-11-30 18:55
  */
-@Activate(group = {Constants.CONSUMER, Constants.PROVIDER})
+@Activate(group = {Constants.CONSUMER, Constants.PROVIDER}, order = -1110000)
 public class CostTimeFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(CostTimeFilter.class);

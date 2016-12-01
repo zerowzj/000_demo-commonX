@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @author wangzhj
  * @time 2016-11-30 18:55
  */
-@Activate(group = {Constants.CONSUMER})
+@Activate(group = {Constants.CONSUMER}, order = -11000)
 public class ConsumerFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(ConsumerFilter.class);
