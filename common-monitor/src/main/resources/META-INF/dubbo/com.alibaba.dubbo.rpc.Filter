@@ -1,0 +1,2 @@
+ConsumerFilter=com.company.monitor.dubbo.ConsumerFilter
+ProviderFilter=com.company.monitor.dubbo.ProviderFilter
