@@ -288,6 +288,11 @@
                 <artifactId>common-base</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.company.common</groupId>
+                <artifactId>common-monitor</artifactId>
+                <version>1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <!-- ==================== -->
