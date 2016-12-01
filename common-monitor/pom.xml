@@ -40,6 +40,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.company.common</groupId>
+            <artifactId>common-util</artifactId>
+        </dependency>
     </dependencies>
     <!-- ==================== -->
     <!--          构建        -->

@@ -25,17 +25,22 @@ public class ProviderFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        logger.info("ProviderFilter......");
+        long start = System.currentTimeMillis();
+        //接口全限定名
+        String canonicalName = invoker.getInterface().getCanonicalName();
+        String methodName = invocation.getMethodName();
+        String fqName = Joiner.on(".").join(canonicalName, methodName);
+        //
         RpcContext context = RpcContext.getContext();
-        String full = Joiner.on(".").join(invoker.getInterface().getCanonicalName(), invocation.getMethodName());
-
         Result result = null;
         try {
             result = invoker.invoke(invocation);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            long end = System.currentTimeMillis();
+            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, (end - start) / 1000.00D);
         }
-
         return result;
     }
 }

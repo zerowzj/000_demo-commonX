@@ -8,6 +8,7 @@ import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
+import com.company.util.JsonUtil;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,7 @@ public class ConsumerFilter implements Filter {
         String fqName = Joiner.on(".").join(canonicalName, methodName);
         //
         RpcContext context = RpcContext.getContext();
+        logger.info(JsonUtil.toJson(invocation.getArguments()));
         Result result = null;
         try {
             result = invoker.invoke(invocation);
@@ -39,7 +41,7 @@ public class ConsumerFilter implements Filter {
             ex.printStackTrace();
         } finally {
             long end = System.currentTimeMillis();
-            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, (end - start) / 1000);
+            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, (end - start) / 1000.00D);
         }
         return result;
     }
