@@ -2,14 +2,8 @@ package com.company.monitor.dubbo;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.rpc.Filter;
-import com.alibaba.dubbo.rpc.Invocation;
-import com.alibaba.dubbo.rpc.Invoker;
-import com.alibaba.dubbo.rpc.Result;
-import com.alibaba.dubbo.rpc.RpcContext;
-import com.alibaba.dubbo.rpc.RpcException;
+import com.alibaba.dubbo.rpc.*;
 import com.company.monitor.Constant;
-import com.company.monitor.TraceKeyHolder;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,17 +29,9 @@ public class CostTimeFilter implements Filter {
         String fqName = Joiner.on(".").join(canonicalName, methodName);
         //上下文
         RpcContext context = RpcContext.getContext();
-        logger.info("context.isConsumerSide():"+context.isConsumerSide());
-    /*    if(context.isConsumerSide()){
-            String traceKey = TraceKeyHolder.getTraceKey();
-            logger.info("traceKey"+traceKey);
-            context.setAttachment(Constant.CALL_TRACE_KEY, traceKey);
-        } else {
-            String callTrackId = context.getAttachment(Constant.CALL_TRACE_KEY);
-            logger.info("callTrackId="+callTrackId);
-        }*/
+        logger.info("context.isConsumerSide():" + context.isConsumerSide());
         String callTraceKey = context.getAttachment(Constant.CALL_TRACE_KEY);
-        logger.info("callTraceKey="+callTraceKey);
+        logger.info("callTraceKey=" + callTraceKey);
         //
         Result result = null;
         try {

@@ -3,6 +3,8 @@ package com.study.guava.string;
 import com.google.common.base.Strings;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 /**
  * <p></p>
  *
@@ -21,6 +23,11 @@ public class StringsTest {
 
         System.out.println(Strings.isNullOrEmpty(null));
         System.out.println(Strings.isNullOrEmpty("  "));
+
+        BigDecimal b1 = new BigDecimal("1");
+        BigDecimal b2 = new BigDecimal("3");
+
+        System.out.println(b1.divide(b2, 3, BigDecimal.ROUND_HALF_EVEN).movePointRight(2));
 
     }
 }
