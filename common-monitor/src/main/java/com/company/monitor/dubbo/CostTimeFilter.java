@@ -9,6 +9,7 @@ import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.company.monitor.Constant;
+import com.company.monitor.TraceKeyHolder;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +35,16 @@ public class CostTimeFilter implements Filter {
         String fqName = Joiner.on(".").join(canonicalName, methodName);
         //上下文
         RpcContext context = RpcContext.getContext();
-        String callTrackId = context.getAttachment(Constant.CALL_TRACK_KEY);
-        logger.info("callTrackId="+callTrackId);
+        logger.info("context.isConsumerSide():"+context.isConsumerSide());
+        if(context.isConsumerSide()){
+            String traceKey = TraceKeyHolder.getTraceKey();
+            logger.info("");
+            context.setAttachment(Constant.CALL_TRACE_KEY, traceKey);
+        } else {
+            String callTrackId = context.getAttachment(Constant.CALL_TRACE_KEY);
+            logger.info("callTrackId="+callTrackId);
+        }
+
         //
         Result result = null;
         try {
