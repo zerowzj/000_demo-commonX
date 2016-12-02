@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * @author wangzhj
  * @time 2016-11-30 18:55
  */
-@Activate(group = {Constants.PROVIDER})
+//@Activate(group = {Constants.PROVIDER})
 public class ProviderFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(ProviderFilter.class);

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  * @author wangzhj
  * @time 2016-11-30 18:55
  */
-@Activate(group = {Constants.CONSUMER, Constants.PROVIDER}, order = -1110000)
+@Activate(group = {Constants.CONSUMER, Constants.PROVIDER})
 public class CostTimeFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(CostTimeFilter.class);
@@ -36,15 +36,16 @@ public class CostTimeFilter implements Filter {
         //上下文
         RpcContext context = RpcContext.getContext();
         logger.info("context.isConsumerSide():"+context.isConsumerSide());
-        if(context.isConsumerSide()){
+    /*    if(context.isConsumerSide()){
             String traceKey = TraceKeyHolder.getTraceKey();
-            logger.info("");
+            logger.info("traceKey"+traceKey);
             context.setAttachment(Constant.CALL_TRACE_KEY, traceKey);
         } else {
             String callTrackId = context.getAttachment(Constant.CALL_TRACE_KEY);
             logger.info("callTrackId="+callTrackId);
-        }
-
+        }*/
+        String callTraceKey = context.getAttachment(Constant.CALL_TRACE_KEY);
+        logger.info("callTraceKey="+callTraceKey);
         //
         Result result = null;
         try {
