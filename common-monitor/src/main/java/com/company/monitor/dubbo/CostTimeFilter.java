@@ -8,7 +8,7 @@ import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
-import com.company.util.JsonUtil;
+import com.company.monitor.Constant;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +32,11 @@ public class CostTimeFilter implements Filter {
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
         String fqName = Joiner.on(".").join(canonicalName, methodName);
-        //
+        //上下文
         RpcContext context = RpcContext.getContext();
-        logger.info(JsonUtil.toJson(invocation.getArguments()));
+        String callTrackId = context.getAttachment(Constant.CALL_TRACK_KEY);
+        logger.info("callTrackId="+callTrackId);
+        //
         Result result = null;
         try {
             result = invoker.invoke(invocation);
