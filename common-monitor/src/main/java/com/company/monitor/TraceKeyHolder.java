@@ -1,5 +1,7 @@
 package com.company.monitor;
 
+import java.math.BigDecimal;
+
 /**
  * <p></p>
  *
@@ -30,5 +32,4 @@ public class TraceKeyHolder {
     public static void clear() {
         threadLocal.remove();
     }
-
 }
