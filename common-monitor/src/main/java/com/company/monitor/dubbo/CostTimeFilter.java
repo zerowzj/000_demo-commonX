@@ -27,7 +27,7 @@ public class CostTimeFilter implements Filter {
         //服务端
         boolean isProvider = context.isProviderSide();
         String callTraceKey = context.getAttachment(Constant.CALL_TRACE_KEY);
-        if(isProvider){
+        if (isProvider) {
             MDC.put("id", callTraceKey);
         }
         logger.info("CostTimeFilter......");
@@ -45,6 +45,10 @@ public class CostTimeFilter implements Filter {
         } finally {
             long end = System.currentTimeMillis();
             logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, (end - start) / 1000.00D);
+            //对于涉及到ThreadLocal相关使用的接口，
+            //都需要去考虑在使用完上下文对象时，
+            //清除掉对应的数据，以避免内存泄露问题
+            MDC.clear();
         }
         return result;
     }

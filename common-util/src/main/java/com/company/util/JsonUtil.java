@@ -3,10 +3,6 @@ package com.company.util;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Json Util
  *
@@ -62,9 +58,9 @@ public abstract class JsonUtil {
         boolean is = true;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            mapper.readValue(str, new TypeReference() {
-            });
+            mapper.readValue(str, Object.class);
         } catch (Exception ex) {
+            ex.printStackTrace();
             is = false;
         }
         return is;
