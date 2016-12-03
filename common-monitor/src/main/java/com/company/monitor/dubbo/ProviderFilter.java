@@ -5,6 +5,7 @@ import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
 import com.company.monitor.Constant;
 import com.company.monitor.CostTimer;
+import com.company.util.JsonUtil;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,19 +35,22 @@ public class ProviderFilter implements Filter {
         String methodName = invocation.getMethodName();
         String fqName = Joiner.on(".").join(canonicalName, methodName);
         //调用
+        logger.info("[REQUEST]===>{}", JsonUtil.toJson(invocation.getArguments()));
         Result result = null;
         try {
             result = invoker.invoke(invocation);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("Dubbo Interface[{}] [COST TIME] [{}] ms", fqName, CostTimer.getCost());
+            logger.info("[INTERFACE][{}] [COST TIME][{}] ms", fqName, CostTimer.getCost());
             //对于涉及到ThreadLocal相关使用的接口，
             //都需要去考虑在使用完上下文对象时，
             //清除掉对应的数据，以避免内存泄露问题
+            logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
             MDC.clear();
             CostTimer.clear();
         }
+
         return result;
     }
 }

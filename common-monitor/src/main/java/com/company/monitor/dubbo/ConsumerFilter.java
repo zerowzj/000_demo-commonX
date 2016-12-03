@@ -4,6 +4,7 @@ import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
 import com.company.monitor.CostTimer;
+import com.company.util.JsonUtil;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,14 +29,16 @@ public class ConsumerFilter implements Filter {
         String fqName = Joiner.on(".").join(canonicalName, methodName);
         //调用
         Result result = null;
+        logger.info("[REQUEST]===>{}", JsonUtil.toJson(invocation.getArguments()));
         try {
             result = invoker.invoke(invocation);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("Dubbo Interface[{}] [COST TIME] [{}] ms", fqName, CostTimer.getCost());
+            logger.info("[INTERFACE][{}] [COST TIME][{}] ms", fqName, CostTimer.getCost());
             CostTimer.clear();
         }
+        logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
         return result;
     }
 }
