@@ -33,7 +33,7 @@ public class ConsumerFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, CostTimer.getCost());
+            logger.info("Dubbo Interface[{}] [COST TIME] [{}] ms", fqName, CostTimer.getCost());
             CostTimer.clear();
         }
         return result;

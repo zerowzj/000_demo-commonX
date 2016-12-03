@@ -26,7 +26,7 @@ public class ProviderFilter implements Filter {
         CostTimer.start();
         //上下文
         RpcContext context = RpcContext.getContext();
-        //
+        //设置
         String callTraceKey = context.getAttachment(Constant.CALL_TRACE_KEY);
          MDC.put("id", callTraceKey);
         //接口全限定名
@@ -40,7 +40,7 @@ public class ProviderFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, CostTimer.getCost());
+            logger.info("Dubbo Interface[{}] [COST TIME] [{}] ms", fqName, CostTimer.getCost());
             //对于涉及到ThreadLocal相关使用的接口，
             //都需要去考虑在使用完上下文对象时，
             //清除掉对应的数据，以避免内存泄露问题
