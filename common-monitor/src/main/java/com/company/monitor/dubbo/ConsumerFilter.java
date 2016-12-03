@@ -22,8 +22,6 @@ public class ConsumerFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         CostTimer.start();
-        //上下文
-        RpcContext context = RpcContext.getContext();
         //接口全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
