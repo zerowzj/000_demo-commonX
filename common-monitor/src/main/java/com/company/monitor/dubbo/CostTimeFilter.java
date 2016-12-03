@@ -15,7 +15,7 @@ import org.slf4j.MDC;
  * @author wangzhj
  * @time 2016-11-30 18:55
  */
-@Activate(group = {Constants.CONSUMER, Constants.PROVIDER})
+//@Activate(group = {Constants.CONSUMER, Constants.PROVIDER})
 public class CostTimeFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(CostTimeFilter.class);
@@ -48,7 +48,9 @@ public class CostTimeFilter implements Filter {
             //对于涉及到ThreadLocal相关使用的接口，
             //都需要去考虑在使用完上下文对象时，
             //清除掉对应的数据，以避免内存泄露问题
-            MDC.clear();
+            if(isProvider){
+                MDC.clear();
+            }
         }
         return result;
     }

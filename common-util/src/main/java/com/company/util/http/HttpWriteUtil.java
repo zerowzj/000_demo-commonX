@@ -1,4 +1,6 @@
-package com.company.util;
+package com.company.util.http;
+
+import com.company.util.JsonUtil;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
