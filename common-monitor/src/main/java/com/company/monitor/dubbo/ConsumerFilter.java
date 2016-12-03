@@ -2,18 +2,11 @@ package com.company.monitor.dubbo;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.rpc.Filter;
-import com.alibaba.dubbo.rpc.Invocation;
-import com.alibaba.dubbo.rpc.Invoker;
-import com.alibaba.dubbo.rpc.Result;
-import com.alibaba.dubbo.rpc.RpcContext;
-import com.alibaba.dubbo.rpc.RpcException;
-import com.company.monitor.Constant;
-import com.company.util.JsonUtil;
+import com.alibaba.dubbo.rpc.*;
+import com.company.monitor.CostTimer;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 
 /**
  * <p></p>
@@ -28,9 +21,9 @@ public class ConsumerFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        CostTimer.start();
         //上下文
         RpcContext context = RpcContext.getContext();
-        long start = System.currentTimeMillis();
         //接口全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
@@ -42,8 +35,8 @@ public class ConsumerFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            long end = System.currentTimeMillis();
-            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, (end - start) / 1000.00D);
+            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, CostTimer.getCost());
+            CostTimer.clear();
         }
         return result;
     }

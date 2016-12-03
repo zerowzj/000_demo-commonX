@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  */
 public class TraceKeyHolder {
 
-    private  static ThreadLocal<String> threadLocal = new ThreadLocal<>();
+    private static ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
     /**
      * 获取TraceKey

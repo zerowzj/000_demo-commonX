@@ -4,6 +4,7 @@ import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
 import com.company.monitor.Constant;
+import com.company.monitor.CostTimer;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,12 +23,12 @@ public class ProviderFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        CostTimer.start();
         //上下文
         RpcContext context = RpcContext.getContext();
         //
         String callTraceKey = context.getAttachment(Constant.CALL_TRACE_KEY);
          MDC.put("id", callTraceKey);
-        long start = System.currentTimeMillis();
         //接口全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
@@ -39,12 +40,12 @@ public class ProviderFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            long end = System.currentTimeMillis();
-            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, (end - start) / 1000.00D);
+            logger.info("Dubbo Interface[{}] [COST TIME] [{}] s", fqName, CostTimer.getCost());
             //对于涉及到ThreadLocal相关使用的接口，
             //都需要去考虑在使用完上下文对象时，
             //清除掉对应的数据，以避免内存泄露问题
             MDC.clear();
+            CostTimer.clear();
         }
         return result;
     }
