@@ -7,13 +7,13 @@ package com.company.monitor;
  */
 public class CostTimer {
 
-    private static ThreadLocal<Long> start = new ThreadLocal<>();
+    private static ThreadLocal<Long> startThreadLocal = new ThreadLocal<>();
 
     /**
      * 开始计时
      */
     public static void start(){
-        start.set(System.currentTimeMillis());
+        startThreadLocal.set(System.currentTimeMillis());
     }
 
     /**
@@ -23,7 +23,7 @@ public class CostTimer {
      */
     public static long getCost(){
         long end = System.currentTimeMillis();
-        long time = end -start.get();
+        long time = end - startThreadLocal.get();
         return time;
     }
 
@@ -31,6 +31,6 @@ public class CostTimer {
      * 清除
      */
     public static void clear(){
-        start.remove();
+        startThreadLocal.remove();
     }
 }
