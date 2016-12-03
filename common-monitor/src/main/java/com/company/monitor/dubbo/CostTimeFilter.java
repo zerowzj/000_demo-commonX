@@ -7,6 +7,7 @@ import com.company.monitor.Constant;
 import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 /**
  * <p>耗时过滤器</p>
@@ -21,18 +22,21 @@ public class CostTimeFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
+        //上下文
+        RpcContext context = RpcContext.getContext();
+        //服务端
+        boolean isProvider = context.isProviderSide();
+        String callTraceKey = context.getAttachment(Constant.CALL_TRACE_KEY);
+        if(isProvider){
+            MDC.put("id", callTraceKey);
+        }
         logger.info("CostTimeFilter......");
         long start = System.currentTimeMillis();
         //接口全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
         String fqName = Joiner.on(".").join(canonicalName, methodName);
-        //上下文
-        RpcContext context = RpcContext.getContext();
-        logger.info("context.isConsumerSide():" + context.isConsumerSide());
-        String callTraceKey = context.getAttachment(Constant.CALL_TRACE_KEY);
-        logger.info("callTraceKey=" + callTraceKey);
-        //
+        //调用
         Result result = null;
         try {
             result = invoker.invoke(invocation);
