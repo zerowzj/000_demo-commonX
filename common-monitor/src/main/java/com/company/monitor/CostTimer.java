@@ -28,7 +28,7 @@ public class CostTimer {
     }
 
     /**
-     * 获取耗时
+     * 清除
      */
     public static void clear(){
         start.remove();
