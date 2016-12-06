@@ -3,6 +3,7 @@ package com.company.monitor.dubbo;
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
+import com.company.monitor.Constant;
 import com.company.monitor.CostTimer;
 import com.company.util.JsonUtil;
 import com.google.common.base.Joiner;
@@ -22,8 +23,8 @@ public class ConsumerFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        CostTimer.start();
-        //接口全限定名
+        CostTimer.start(Constant.CONSUMER_COST_TIMER);
+        //全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
         String fqName = Joiner.on(".").join(canonicalName, methodName);
@@ -35,9 +36,9 @@ public class ConsumerFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get());
+            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.CONSUMER_COST_TIMER));
             logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
-            CostTimer.clear();
+            CostTimer.clear(Constant.CONSUMER_COST_TIMER);
         }
         return result;
     }
