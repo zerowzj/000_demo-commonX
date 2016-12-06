@@ -24,12 +24,11 @@ public class ProviderFilter implements Filter {
 
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        CostTimer.start(Constant.PROVIDER_COST_TIMER);
-        //上下文
-        RpcContext context = RpcContext.getContext();
         //设置
-        String callTraceKey = context.getAttachment(Constant.CALL_TRACE_KEY);
-         MDC.put("id", callTraceKey);
+        String callTraceKey = RpcContext.getContext().getAttachment(Constant.CALL_TRACE_KEY);
+        MDC.put("id", callTraceKey);
+        //计时
+        CostTimer.start(Constant.PROVIDER_COST_TIMER);
         //全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
@@ -43,12 +42,10 @@ public class ProviderFilter implements Filter {
             ex.printStackTrace();
         } finally {
             logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.PROVIDER_COST_TIMER));
-            //对于涉及到ThreadLocal相关使用的接口，
-            //都需要去考虑在使用完上下文对象时，
-            //清除掉对应的数据，以避免内存泄露问题
             logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
-            MDC.clear();
+            //清理
             CostTimer.clear(Constant.PROVIDER_COST_TIMER);
+            MDC.clear();
         }
         return result;
     }
