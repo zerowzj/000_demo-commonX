@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <p></p>
+ * 消费者过滤器
  *
  * @author wangzhj
  * @time 2016-11-30 18:55

@@ -21,7 +21,7 @@ public class CostTimer {
         @Override
         protected Map<String, Long> initialValue() {
             logger.info("initialValue");
-            return new HashMap<>();
+            return Maps.newHashMap();
         }
     };
 

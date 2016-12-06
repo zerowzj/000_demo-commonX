@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
 /**
- * <p></p>
+ * 生产者过滤器
  *
  * @author wangzhj
  * @time 2016-11-30 18:55
