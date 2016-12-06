@@ -21,7 +21,7 @@ public class CostTimer {
      *
      * @return long
      */
-    public static long getCost(){
+    public static long get(){
         long end = System.currentTimeMillis();
         long time = end - startThreadLocal.get();
         return time;

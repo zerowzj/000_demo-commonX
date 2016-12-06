@@ -28,17 +28,17 @@ public class ConsumerFilter implements Filter {
         String methodName = invocation.getMethodName();
         String fqName = Joiner.on(".").join(canonicalName, methodName);
         //调用
-        Result result = null;
         logger.info("[REQUEST]===>{}", JsonUtil.toJson(invocation.getArguments()));
+        Result result = null;
         try {
             result = invoker.invoke(invocation);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("[INTERFACE][{}] [COST TIME][{}] ms", fqName, CostTimer.getCost());
+            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get());
+            logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
             CostTimer.clear();
         }
-        logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
         return result;
     }
 }

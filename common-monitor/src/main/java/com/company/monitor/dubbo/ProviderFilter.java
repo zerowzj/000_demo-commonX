@@ -42,7 +42,7 @@ public class ProviderFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("[INTERFACE][{}] [COST TIME][{}] ms", fqName, CostTimer.getCost());
+            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get());
             //对于涉及到ThreadLocal相关使用的接口，
             //都需要去考虑在使用完上下文对象时，
             //清除掉对应的数据，以避免内存泄露问题
@@ -50,7 +50,6 @@ public class ProviderFilter implements Filter {
             MDC.clear();
             CostTimer.clear();
         }
-
         return result;
     }
 }
