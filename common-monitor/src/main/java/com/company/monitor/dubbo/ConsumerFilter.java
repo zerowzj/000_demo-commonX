@@ -24,7 +24,7 @@ public class ConsumerFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         //计时
-        CostTimer.start(Constant.CONSUMER_COST_TIMER);
+        CostTimer.start(Constant.COST_TIMER_CONSUMER);
         //全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
@@ -37,10 +37,10 @@ public class ConsumerFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.CONSUMER_COST_TIMER));
+            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.COST_TIMER_CONSUMER));
             logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
             //清理
-            CostTimer.clear(Constant.CONSUMER_COST_TIMER);
+            CostTimer.clear(Constant.COST_TIMER_CONSUMER);
         }
         return result;
     }

@@ -57,6 +57,7 @@ public class CostTimer {
         logger.info("clear");
         startThreadLocal.get().remove(key);
         if(startThreadLocal.get().isEmpty()){
+            logger.info("remove");
             startThreadLocal.remove();
         }
     }

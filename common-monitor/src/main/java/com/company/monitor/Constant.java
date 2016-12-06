@@ -10,7 +10,7 @@ public interface Constant {
 
     public static final String CALL_TRACE_KEY = "CALL_TRACE_KEY";
 
-    public static final String CONSUMER_COST_TIMER = "CONSUMER_COST_TIMER";
+    public static final String COST_TIMER_CONSUMER = "COST_TIMER_CONSUMER";
 
-    public static final String PROVIDER_COST_TIMER = "PROVIDER_COST_TIMER";
+    public static final String COST_TIMER_PROVIDER = "COST_TIMER_PROVIDER";
 }

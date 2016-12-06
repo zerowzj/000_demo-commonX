@@ -28,7 +28,7 @@ public class ProviderFilter implements Filter {
         String callTraceKey = RpcContext.getContext().getAttachment(Constant.CALL_TRACE_KEY);
         MDC.put("id", callTraceKey);
         //计时
-        CostTimer.start(Constant.PROVIDER_COST_TIMER);
+        CostTimer.start(Constant.COST_TIMER_PROVIDER);
         //全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
@@ -41,10 +41,10 @@ public class ProviderFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.PROVIDER_COST_TIMER));
+            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.COST_TIMER_PROVIDER));
             logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
             //清理
-            CostTimer.clear(Constant.PROVIDER_COST_TIMER);
+            CostTimer.clear(Constant.COST_TIMER_PROVIDER);
             MDC.clear();
         }
         return result;
