@@ -1,4 +1,4 @@
-package com.common.svr.resp;
+package com.common.base.svr.resp;
 
 import java.io.Serializable;
 

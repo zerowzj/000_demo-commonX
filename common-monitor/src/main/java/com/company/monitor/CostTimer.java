@@ -20,7 +20,6 @@ public class CostTimer {
     private static ThreadLocal<Map<String, Long>> startThreadLocal = new ThreadLocal<Map<String, Long>>() {
         @Override
         protected Map<String, Long> initialValue() {
-            logger.info("initialValue");
             return Maps.newHashMap();
         }
     };
@@ -31,7 +30,6 @@ public class CostTimer {
      * @param key
      */
     public static void start(String key) {
-        logger.info("start");
         startThreadLocal.get().put(key, System.currentTimeMillis());
     }
 
@@ -42,7 +40,6 @@ public class CostTimer {
      * @return long
      */
     public static long get(String key) {
-        logger.info("get");
         long end = System.currentTimeMillis();
         long time = end - startThreadLocal.get().get(key);
         return time;
@@ -54,10 +51,8 @@ public class CostTimer {
      * @param key
      */
     public static void clear(String key) {
-        logger.info("clear");
         startThreadLocal.get().remove(key);
         if(startThreadLocal.get().isEmpty()){
-            logger.info("remove");
             startThreadLocal.remove();
         }
     }

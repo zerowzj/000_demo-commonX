@@ -1,4 +1,4 @@
-package com.common.svr.param;
+package com.common.base.svr.param;
 
 import java.io.Serializable;
 

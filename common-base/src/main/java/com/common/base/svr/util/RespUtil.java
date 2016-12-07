@@ -1,6 +1,6 @@
-package com.common.svr.util;
+package com.common.base.svr.util;
 
-import com.common.svr.resp.BaseResp;
+import com.common.base.svr.resp.BaseResp;
 
 import java.io.Serializable;
 

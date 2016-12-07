@@ -1,4 +1,4 @@
-package com.common.svr.param;
+package com.common.base.svr.param;
 
 import com.google.common.base.Preconditions;
 
