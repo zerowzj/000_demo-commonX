@@ -34,14 +34,14 @@ public class ProviderFilter implements Filter {
         String methodName = invocation.getMethodName();
         String fqName = Joiner.on(".").join(canonicalName, methodName);
         //调用
-        logger.info("[REQUEST]===>{}", JsonUtil.toJson(invocation.getArguments()));
+        logger.info(" [REQUEST]===>{}", JsonUtil.toJson(invocation.getArguments()));
         Result result = null;
         try {
             result = invoker.invoke(invocation);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("[DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.COST_TIMER_PROVIDER));
+            logger.info("   [DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.COST_TIMER_PROVIDER));
             logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
             //清理
             CostTimer.clear(Constant.COST_TIMER_PROVIDER);
