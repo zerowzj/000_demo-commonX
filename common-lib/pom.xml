@@ -219,7 +219,7 @@
                 <version>${httpcomponents.version}</version>
             </dependency>
 
-            <!-- Msgpack -->
+            <!-- MessagePack -->
             <dependency>
                 <groupId>org.msgpack</groupId>
                 <artifactId>msgpack</artifactId>
