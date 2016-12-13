@@ -7,10 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.Arrays;
 
 /**
  * Created by wangzhj on 2016/12/13.
