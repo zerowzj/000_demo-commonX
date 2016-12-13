@@ -1,4 +1,3 @@
-local key = KEYS[1]
-
-local is_exists = redis.call("EXISTS", key)
-print("exist===>", is_exists)
+for i = 0, 999, 1 do
+    redis.call("INCR", "counter1")
+end

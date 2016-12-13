@@ -35,7 +35,7 @@ public class JedisPipelineTest extends JedisBaseTest {
         Jedis jedis = jedisPool.getResource();
         try {
             for (int i = 0; i < count; i++) {
-                jedis.incr("");
+                jedis.incr("counter1");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -51,7 +51,7 @@ public class JedisPipelineTest extends JedisBaseTest {
         try {
             Pipeline pipeline = jedis.pipelined();
             for (int i = 0; i < count; i++) {
-                pipeline.incr("");
+                pipeline.incr("counter2");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
