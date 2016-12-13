@@ -1,5 +1,6 @@
 package com.study.jedis;
 
+import com.google.common.io.CharStreams;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 /**
  * Created by wangzhj on 2016/12/8.
