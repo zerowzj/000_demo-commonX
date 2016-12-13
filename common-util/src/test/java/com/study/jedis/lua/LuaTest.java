@@ -21,7 +21,7 @@ public class LuaTest extends JedisBaseTest {
     public void test_get() {
         try {
             File file = new File("D:\\project\\my\\common\\common-util\\src\\test\\java\\com\\study\\jedis\\lua\\get.lua");
-            BufferedReader reader = Files.newReader(file, Charset.forName("UTF-8"));
+            Reader reader = Files.newReader(file, Charset.forName("UTF-8"));
             String str = CharStreams.toString(reader);
             Object obj = jedis.eval(str);
             logger.info(obj.toString());
@@ -34,8 +34,8 @@ public class LuaTest extends JedisBaseTest {
     public void test() {
         long start = System.currentTimeMillis();
         try {
-            FileInputStream fi = new FileInputStream("D:\\project\\my\\common\\common-util\\src\\test\\java\\com\\study\\jedis\\lua\\incr.lua");
-            Reader reader = new InputStreamReader(fi);
+            File file = new File("D:\\project\\my\\common\\common-util\\src\\test\\java\\com\\study\\jedis\\lua\\incr.lua");
+            Reader reader = Files.newReader(file, Charset.forName("UTF-8"));
             String str = CharStreams.toString(reader);
             jedis.eval(str);
         } catch (Exception ex) {
