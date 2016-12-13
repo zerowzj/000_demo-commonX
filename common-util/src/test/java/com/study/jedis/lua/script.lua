@@ -1,5 +1,4 @@
-local key = "rate.limit:" .. KEYS[1]
-local limit = tonumber(ARGV[1])
+local key = KEYS[1]
 
-print("hello  luaj !!!", key)
-print("hello  luaj !!!", limit)
+local is_exists = redis.call("EXISTS", key)
+print("exist===>", is_exists)

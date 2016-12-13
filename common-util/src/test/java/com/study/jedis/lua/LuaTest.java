@@ -21,7 +21,7 @@ public class LuaTest extends JedisBaseTest {
             FileInputStream fi = new FileInputStream("D:\\project\\my\\common\\common-util\\src\\test\\java\\com\\study\\jedis\\lua\\script.lua");
             Reader reader = new InputStreamReader(fi);
             String str = CharStreams.toString(reader);
-            jedis.eval(str, Arrays.asList("key1","key2"), Arrays.asList("arg1","arg2"));
+            jedis.eval(str, Arrays.asList("counter","键2"), Arrays.asList("参数1","参数2"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
