@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 /**
  * Created by wangzhj on 2016/12/13.
@@ -16,6 +17,19 @@ import java.nio.charset.Charset;
 public class LuaTest extends JedisBaseTest {
 
     private static final Logger logger = LoggerFactory.getLogger(LuaTest.class);
+
+    @Test
+    public void test_user_login() {
+        try {
+            File file = new File("D:\\project\\my\\common\\common-util\\src\\test\\java\\com\\study\\jedis\\lua\\user_login.lua");
+            Reader reader = Files.newReader(file, Charset.forName("UTF-8"));
+            String str = CharStreams.toString(reader);
+            Object obj = jedis.eval(str, Arrays.asList("1111"), Arrays.asList(""));
+            logger.info(obj.toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     @Test
     public void test_get() {
