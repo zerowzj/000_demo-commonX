@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by wangzhj on 2016/12/8.
+ * 散列
  */
 public class JedisMapTest extends JedisBaseTest {
 
