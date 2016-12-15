@@ -26,19 +26,8 @@ public class JedisStringTest extends JedisBaseTest {
         jedis = jedisPool.getResource();
         String statusCode = jedis.set("set", "123123123");
         logger.info(statusCode);
-    }
 
-    @Test
-    public void test_mset() {
-        jedis = jedisPool.getResource();
-        String statusCode = jedis.mset("name", "liuling", "age", "23", "qq", "476777XXX");
-        logger.info(statusCode);
-    }
-
-    @Test
-    public void test_setObj() {
-        jedis = jedisPool.getResource();
-        MessagePack pack = new MessagePack();
+        /*MessagePack pack = new MessagePack();
         //序列化
         MyObj obj = new MyObj();
         obj.setName("111");
@@ -50,7 +39,35 @@ public class JedisStringTest extends JedisBaseTest {
             logger.info(statusCode);
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
+    }
+
+    @Test
+    public void test_setnx() {
+        jedis = jedisPool.getResource();
+        Long statusCode = jedis.setnx("setnx", "1");
+        logger.info(statusCode + "");
+    }
+
+    @Test
+    public void test_setex() {
+        jedis = jedisPool.getResource();
+        String statusCode = jedis.setex("setex", 60, "aaa");
+        logger.info(statusCode);
+    }
+
+    @Test
+    public void test_mset() {
+        jedis = jedisPool.getResource();
+        String statusCode = jedis.mset("name", "liuling", "age", "23", "qq", "476777XXX");
+        logger.info(statusCode);
+    }
+
+    @Test
+    public void test_msetnx() {
+        jedis = jedisPool.getResource();
+        Long statusCode = jedis.msetnx("name", "liuling", "age", "23", "qq", "476777XXX");
+        logger.info(statusCode + "");
     }
 
     /**
@@ -63,19 +80,8 @@ public class JedisStringTest extends JedisBaseTest {
         jedis = jedisPool.getResource();
         String str = jedis.get("set");
         logger.info(str);
-    }
 
-    @Test
-    public void test_mget() {
-        jedis = jedisPool.getResource();
-        List<String> valueLt = jedis.mget("name", "age", "qq");
-        logger.info(valueLt + "");
-    }
-
-    @Test
-    public void test_getObj() {
-        jedis = jedisPool.getResource();
-        MessagePack pack = new MessagePack();
+        /*MessagePack pack = new MessagePack();
         try {
             byte[] key = "setObj".getBytes();
             byte[] bytes = jedis.get(key);
@@ -83,7 +89,14 @@ public class JedisStringTest extends JedisBaseTest {
             logger.info(obj.toString());
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }*/
+    }
+
+    @Test
+    public void test_mget() {
+        jedis = jedisPool.getResource();
+        List<String> valueLt = jedis.mget("name", "age", "qq");
+        logger.info(valueLt + "");
     }
 
     /**
@@ -94,10 +107,30 @@ public class JedisStringTest extends JedisBaseTest {
     @Test
     public void test_incr() {
         jedis = jedisPool.getResource();
-        jedis.set("counter", "1.0");
+        jedis.set("counter", "1");
         for (int i = 0; i < 5; i++) {
-//            Long value = jedis.incr("counter");
-            Double value = jedis.incrByFloat("counter", 1d);
+            Long value = jedis.incr("counter");
+//            Double value = jedis.incrByFloat("counter", 1d);
+            logger.info(value + "");
+        }
+    }
+
+    @Test
+    public void test_incrBy() {
+        jedis = jedisPool.getResource();
+        jedis.set("counter", "1");
+        for (int i = 0; i < 5; i++) {
+            Long value = jedis.incrBy("counter", 100);
+            logger.info(value + "");
+        }
+    }
+
+    @Test
+    public void test_incrByFloat() {
+        jedis = jedisPool.getResource();
+        jedis.set("counter", "1");
+        for (int i = 0; i < 5; i++) {
+            Double value = jedis.incrByFloat("counter", 100);
             logger.info(value + "");
         }
     }
@@ -107,6 +140,15 @@ public class JedisStringTest extends JedisBaseTest {
         jedis = jedisPool.getResource();
         for (int i = 0; i < 5; i++) {
             Long value = jedis.decr("counter");
+            logger.info(value + "");
+        }
+    }
+
+    @Test
+    public void test_decrBy() {
+        jedis = jedisPool.getResource();
+        for (int i = 0; i < 5; i++) {
+            Long value = jedis.decrBy("counter", 100);
             logger.info(value + "");
         }
     }

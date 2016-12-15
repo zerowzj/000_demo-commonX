@@ -34,6 +34,5 @@ public class JedisSetTest extends JedisBaseTest {
     @Test
     public void test_lpop() {
         jedis = jedisPool.getResource();
-
     }
 }
