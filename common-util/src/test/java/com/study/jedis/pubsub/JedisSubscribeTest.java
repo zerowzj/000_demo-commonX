@@ -9,18 +9,19 @@ import redis.clients.jedis.JedisPubSub;
 /**
  * Created by wangzhj on 2016/12/13.
  */
-public class JedisSubcribe1Test extends JedisBaseTest {
+public class JedisSubscribeTest extends JedisBaseTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(JedisSubcribe1Test.class);
+    private static final Logger logger = LoggerFactory.getLogger(JedisSubscribeTest.class);
 
     @Test
-    public void test_subcribe() {
-        //监听管道
-        jedis.subscribe(new JedisPubSub() {
+    public void test_subscribe() {
+        JedisPubSub jedisPubSub = new JedisPubSub() {
             @Override
             public void onMessage(String channel, String message) {
                 logger.info("=====>{}", message);
             }
-        }, "channel");
+        };
+        //监听管道
+        jedis.subscribe(jedisPubSub, "channel");
     }
 }
