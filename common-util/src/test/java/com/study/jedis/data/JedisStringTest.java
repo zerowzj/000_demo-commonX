@@ -14,10 +14,14 @@ public class JedisStringTest extends JedisBaseTest {
 
     private static final Logger logger = LoggerFactory.getLogger(JedisStringTest.class);
 
+    //==============================
+    //             放值
+    //==============================
+
     /**
-     * ==============================
-     * 放值
-     * ==============================
+     *
+     *
+     *
      */
     @Test
     public void test_set() {
@@ -40,6 +44,11 @@ public class JedisStringTest extends JedisBaseTest {
         }*/
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_setnx() {
         jedis = jedisPool.getResource();
@@ -47,6 +56,11 @@ public class JedisStringTest extends JedisBaseTest {
         logger.info(statusCode + "");
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_setex() {
         jedis = jedisPool.getResource();
@@ -54,6 +68,11 @@ public class JedisStringTest extends JedisBaseTest {
         logger.info(statusCode);
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_mset() {
         jedis = jedisPool.getResource();
@@ -61,6 +80,11 @@ public class JedisStringTest extends JedisBaseTest {
         logger.info(statusCode);
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_msetnx() {
         jedis = jedisPool.getResource();
@@ -68,10 +92,14 @@ public class JedisStringTest extends JedisBaseTest {
         logger.info(statusCode + "");
     }
 
+    //==============================
+    //             取值
+    //==============================
+
     /**
-     * ==============================
-     * 取值
-     * ==============================
+     *
+     *
+     *
      */
     @Test
     public void test_get() {
@@ -90,6 +118,11 @@ public class JedisStringTest extends JedisBaseTest {
         }*/
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_mget() {
         jedis = jedisPool.getResource();
@@ -97,10 +130,14 @@ public class JedisStringTest extends JedisBaseTest {
         logger.info(valueLt + "");
     }
 
+    //==============================
+    //             计数
+    //==============================
+
     /**
-     * ==============================
-     * 计数
-     * ==============================
+     *
+     *
+     *
      */
     @Test
     public void test_incr() {
@@ -113,6 +150,11 @@ public class JedisStringTest extends JedisBaseTest {
         }
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_incrBy() {
         jedis = jedisPool.getResource();
@@ -123,6 +165,11 @@ public class JedisStringTest extends JedisBaseTest {
         }
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_incrByFloat() {
         jedis = jedisPool.getResource();
@@ -133,6 +180,11 @@ public class JedisStringTest extends JedisBaseTest {
         }
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_decr() {
         jedis = jedisPool.getResource();
@@ -142,6 +194,11 @@ public class JedisStringTest extends JedisBaseTest {
         }
     }
 
+    /**
+     *
+     *
+     *
+     */
     @Test
     public void test_decrBy() {
         jedis = jedisPool.getResource();
