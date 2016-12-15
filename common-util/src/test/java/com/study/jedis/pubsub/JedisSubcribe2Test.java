@@ -19,7 +19,7 @@ public class JedisSubcribe2Test extends JedisBaseTest {
         jedis.subscribe(new JedisPubSub() {
             @Override
             public void onMessage(String channel, String message) {
-                logger.info("#######>{}", message);
+                logger.info("######>{}", message);
             }
         }, "channel");
     }
