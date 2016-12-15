@@ -65,4 +65,9 @@ public abstract class JsonUtil {
         }
         return is;
     }
+
+    public static void main(String[] args) {
+        String str = "12345678";
+        System.out.println(String.format("%a 10s", str));
+    }
 }

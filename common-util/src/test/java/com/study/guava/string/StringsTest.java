@@ -15,19 +15,16 @@ public class StringsTest {
 
     @Test
     public void test(){
-        System.out.println(Strings.nullToEmpty(null));
+        /*System.out.println(Strings.nullToEmpty(null));
         System.out.println(Strings.nullToEmpty("123"));
 
         System.out.println(Strings.emptyToNull(null));
         System.out.println(Strings.emptyToNull(""));
 
-        System.out.println(Strings.isNullOrEmpty(null));
-        System.out.println(Strings.isNullOrEmpty("  "));
+        System.out.println(Strings.isNullOrEmpty(null));*/
+        System.out.println(Strings.isNullOrEmpty(Strings.emptyToNull(" ")));
 
-        BigDecimal b1 = new BigDecimal("1");
-        BigDecimal b2 = new BigDecimal("7");
-
-        System.out.println(b1.divide(b2, 1, BigDecimal.ROUND_HALF_EVEN));
-
+        /*String str = "12345678";
+        System.out.println(Strings.padEnd(str, 10, '0'));*/
     }
 }
