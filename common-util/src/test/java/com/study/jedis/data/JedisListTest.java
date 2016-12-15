@@ -9,7 +9,7 @@ import redis.clients.jedis.BinaryClient;
 import java.util.List;
 
 /**
- * Created by wangzhj on 2016/12/8.
+ * 双向列表
  */
 public class JedisListTest extends JedisBaseTest {
 
@@ -29,9 +29,23 @@ public class JedisListTest extends JedisBaseTest {
     }
 
     @Test
+    public void test_lpushx() {
+        jedis = jedisPool.getResource();
+        Long str = jedis.lpushx("", "");
+        logger.info(str + "");
+    }
+
+    @Test
     public void test_rpush() {
         jedis = jedisPool.getResource();
         Long number = jedis.rpush("rpush", "value3");
+        logger.info(number + "");
+    }
+
+    @Test
+    public void test_rpushx() {
+        jedis = jedisPool.getResource();
+        Long number = jedis.rpushx("rpush", "value3");
         logger.info(number + "");
     }
 

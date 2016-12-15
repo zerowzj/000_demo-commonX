@@ -1,16 +1,14 @@
 package com.study.jedis.data;
 
 import com.study.jedis.JedisBaseTest;
-import com.study.jedis.MyObj;
 import org.junit.Test;
-import org.msgpack.MessagePack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 /**
- * Created by wangzhj on 2016/12/8.
+ * 字符串
  */
 public class JedisStringTest extends JedisBaseTest {
 
