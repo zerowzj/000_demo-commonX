@@ -19,12 +19,13 @@ public class JedisPSubscribeTest extends JedisBaseTest {
      * news.* 匹配所有以 news. 开头的频道( news.it 、 news.global.today 等等)，诸如此类。
      */
     @Test
-    public void test_subcribe() {
+    public void test_psubscribe() {
         //监听
         JedisPubSub jedisPubSub = new JedisPubSub() {
+
             @Override
-            public void onMessage(String channel, String message) {
-                logger.info("=====>{}", message);
+            public void onPMessage(String pattern, String channel, String message) {
+                logger.info("[{}]******>{}", pattern, message);
             }
         };
         //订阅
