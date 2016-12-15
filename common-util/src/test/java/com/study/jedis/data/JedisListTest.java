@@ -20,21 +20,45 @@ public class JedisListTest extends JedisBaseTest {
      * 放值
      * ==============================
      */
+    /**
+     * 将一个或多个值value插入到列表key的表头。
+     * 如果有多个value值，那么各个value值按从左到右的顺序依次插入到表头：
+     * 比如对一个空列表(mylist)执行LPUSH mylist a b c，则结果列表为c b a，等同于执行执行命令LPUSH mylist a、LPUSH mylist b、LPUSH mylist c。
+     * 如果key不存在，一个空列表会被创建并执行LPUSH操作。
+     * 当key存在但不是列表类型时，返回一个错误。
+     * 执行LPUSH命令后，列表的长度。
+     */
     @Test
     public void test_lpush() {
         jedis = jedisPool.getResource();
-        jedis.lpush("lpush", "VALUE_1");
-        jedis.lpush("lpush", "VALUE_2");
-        jedis.lpush("lpush", "VALUE_3");
+        Long num1 = jedis.lpush("lpush", "VALUE_1");
+        logger.info(num1 + "");
+        Long num2 = jedis.lpush("lpush", "VALUE_2");
+        logger.info(num2 + "");
+        Long num3 = jedis.lpush("lpush", "VALUE_3");
+        logger.info(num3 + "");
     }
 
+    /**
+     * 将值value插入到列表key的表头，当且仅当key存在并且是一个列表。
+     * 和LPUSH命令相反，当key不存在时，LPUSHX命令什么也不做。
+     * LPUSHX命令执行之后，表的长度。
+     */
     @Test
     public void test_lpushx() {
         jedis = jedisPool.getResource();
-        Long str = jedis.lpushx("", "");
+        Long str = jedis.lpushx("lpush11", "VALUE_1");
         logger.info(str + "");
     }
 
+    /**
+     * 将一个或多个值value插入到列表key的表尾。
+     * 如果有多个value值，那么各个value值按从左到右的顺序依次插入到表尾：
+     * 比如对一个空列表(mylist)执行RPUSH mylist a b c，则结果列表为a b c，等同于执行命令RPUSH mylist a、RPUSH mylist b、RPUSH mylist c。
+     * 如果key不存在，一个空列表会被创建并执行RPUSH操作。
+     * 当key存在但不是列表类型时，返回一个错误。
+     * 执行RPUSH操作后，表的长度。
+     */
     @Test
     public void test_rpush() {
         jedis = jedisPool.getResource();
@@ -42,6 +66,11 @@ public class JedisListTest extends JedisBaseTest {
         logger.info(number + "");
     }
 
+    /**
+     * 将值value插入到列表key的表尾，当且仅当key存在并且是一个列表。
+     * 和RPUSH命令相反，当key不存在时，RPUSHX命令什么也不做。
+     * RPUSHX命令执行之后，表的长度。
+     */
     @Test
     public void test_rpushx() {
         jedis = jedisPool.getResource();
