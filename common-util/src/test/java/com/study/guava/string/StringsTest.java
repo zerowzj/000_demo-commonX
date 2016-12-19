@@ -2,6 +2,8 @@ package com.study.guava.string;
 
 import com.google.common.base.Strings;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 
@@ -12,6 +14,8 @@ import java.math.BigDecimal;
  * @time 2016-11-29 16:56
  */
 public class StringsTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(StringsTest.class);
 
     @Test
     public void test(){
@@ -24,7 +28,9 @@ public class StringsTest {
         System.out.println(Strings.isNullOrEmpty(null));*/
         System.out.println(Strings.isNullOrEmpty(Strings.emptyToNull(" ")));
 
-        /*String str = "12345678";
-        System.out.println(Strings.padEnd(str, 10, '0'));*/
+        String str = "12345678";
+        logger.info(Strings.padStart(str, 10, '0'));
+        logger.info(Strings.padEnd(str, 10, '0'));
+        logger.info(Strings.repeat(str, 10));
     }
 }
