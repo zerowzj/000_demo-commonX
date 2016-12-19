@@ -21,16 +21,13 @@ public class StringsTest {
     public void test(){
         /*System.out.println(Strings.nullToEmpty(null));
         System.out.println(Strings.nullToEmpty("123"));
-
         System.out.println(Strings.emptyToNull(null));
         System.out.println(Strings.emptyToNull(""));
-
         System.out.println(Strings.isNullOrEmpty(null));*/
-        System.out.println(Strings.isNullOrEmpty(Strings.emptyToNull(" ")));
 
         String str = "12345678";
         logger.info(Strings.padStart(str, 10, '0'));
         logger.info(Strings.padEnd(str, 10, '0'));
-        logger.info(Strings.repeat(str, 10));
+        logger.info(Strings.repeat(str, 2));
     }
 }
