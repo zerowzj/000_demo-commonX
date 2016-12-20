@@ -19,11 +19,11 @@ public class StringsTest {
 
     @Test
     public void test(){
-        /*System.out.println(Strings.nullToEmpty(null));
-        System.out.println(Strings.nullToEmpty("123"));
-        System.out.println(Strings.emptyToNull(null));
-        System.out.println(Strings.emptyToNull(""));
-        System.out.println(Strings.isNullOrEmpty(null));*/
+        logger.info(Strings.nullToEmpty(null));
+        logger.info(Strings.nullToEmpty("123"));
+        logger.info(Strings.emptyToNull(null));
+        logger.info(Strings.emptyToNull(""));
+        logger.info(Strings.isNullOrEmpty(null)+"");
 
         String str = "12345678";
         logger.info(Strings.padStart(str, 10, '0'));

@@ -2,6 +2,8 @@ package com.study.guava.string;
 
 import com.google.common.base.Joiner;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,16 +16,18 @@ import java.util.Map;
  */
 public class JoinerTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(JoinerTest.class);
+
     @Test
     public void test_skipNulls(){
         String str = Joiner.on(",").skipNulls().join("123", "abc", null, null);
-        System.out.println(str);
+        logger.info(str);
     }
 
     @Test
     public void test_userForNull(){
         String str = Joiner.on(",").useForNull("空格").join("123", "abc", null, null);
-        System.out.println(str);
+        logger.info(str);
     }
 
     @Test
@@ -32,6 +36,6 @@ public class JoinerTest {
         map.put("key1", "value1");
         map.put("key2", "value2");
         String str = Joiner.on("&").withKeyValueSeparator("=").join(map);
-        System.out.println(str);
+        logger.info(str);
     }
 }
