@@ -1,13 +1,10 @@
 package com.study.guava.string;
 
 import com.google.common.base.CharMatcher;
-import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Multimap;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
 
 /**
  * <p></p>
@@ -17,5 +14,14 @@ import java.util.Collection;
  */
 public class CharMatcherTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(CharMatcherTest.class);
 
+    @Test
+    public void test() {
+
+        String digit = "abc123";
+        logger.info(CharMatcher.digit().matchesAllOf(digit)+"");
+        logger.info(CharMatcher.digit().matchesAnyOf(digit)+"");
+
+    }
 }
