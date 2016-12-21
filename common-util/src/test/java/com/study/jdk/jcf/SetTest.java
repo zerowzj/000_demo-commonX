@@ -17,4 +17,9 @@ public class SetTest {
     public void test_HashSet() {
 
     }
+
+    @Test
+    public void test_TreeSet() {
+
+    }
 }
