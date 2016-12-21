@@ -38,7 +38,7 @@ public class MapTest {
         map.put("Fruits", "Pear");
         map.put("Fruits", "Pear");
 
-        Collection<Object> fruits = map.get("Fruits");
+        Collection<Long> fruits = map.get("Fruits");
         logger.info(fruits.toString());
     }
 }
