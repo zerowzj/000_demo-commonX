@@ -1,5 +1,6 @@
 package com.study.commons.codec;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -14,7 +15,15 @@ public class Base64Test {
 
     @Test
     public void test_md5(){
-        String str = "123456";
+        String str = "你好1a";
 
+        logger.info(Base64.encodeBase64String(str.getBytes()));
+
+    }
+
+    @Test
+    public void test_isBase64(){
+        String str = "la";
+        logger.info(Base64.isBase64(str)+"");
     }
 }
