@@ -15,5 +15,6 @@ public class Base64Test {
     @Test
     public void test_md5(){
         String str = "123456";
+
     }
 }
