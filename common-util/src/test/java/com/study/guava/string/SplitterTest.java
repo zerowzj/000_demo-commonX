@@ -20,25 +20,24 @@ public class SplitterTest {
 
     @Test
     public void test_omitEmptyStrings() {
-        String str = "aaa,ffdsfds,,,sdfsdf  ,,,sdfsd";
+        String str = "aaa,bbb,,,ddd";
         List<String> tt = Splitter.on(",").omitEmptyStrings().splitToList(str);
         logger.info(tt.toString());
     }
 
     @Test
     public void test_trimResults() {
-        String str = "aaa,ffdsfds,,,sdfsdf  ,,,sdfsd";
+        String str = "aaa, bbb,ccc ,ddd";
         List<String> tt = Splitter.on(",").trimResults().splitToList(str);
         logger.info(tt.toString());
     }
 
     @Test
     public void test_limit() {
-        String str = "aaa,ffdsfds,sdfsdfsdfsd,aaaa";
+        String str = "aaa,bbb,ccc,ddd";
         List<String> tt = Splitter.on(",").limit(3).splitToList(str);
         logger.info(tt.toString());
     }
-
 
     @Test
     public void test_withKeyValueSeparator() {
