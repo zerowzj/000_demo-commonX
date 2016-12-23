@@ -1,4 +1,4 @@
-package com.company.util.http;
+package com.company.util.servlet;
 
 import com.company.util.JsonUtil;
 
@@ -10,7 +10,7 @@ import java.io.PrintWriter;
  *
  * @author wangzhj
  */
-public class HttpWriteUtil {
+public class WriteUtil {
 
     private static final String CHARSET_UTF_8 = "UTF-8";
 

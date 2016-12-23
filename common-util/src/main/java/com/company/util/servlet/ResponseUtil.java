@@ -1,4 +1,4 @@
-package com.company.util.http;
+package com.company.util.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +9,7 @@ import java.util.Locale;
  *
  * @author wangzhj
  */
-public abstract class HttpResponseUtil {
+public abstract class ResponseUtil {
 
     /**
      * 发送错误码

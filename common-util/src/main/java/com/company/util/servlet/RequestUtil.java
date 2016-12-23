@@ -1,4 +1,4 @@
-package com.company.util.http;
+package com.company.util.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public abstract class HttpRequestUtil {
+public abstract class RequestUtil {
 
     private static final String AJAX_HEADER = "X-Requested-With";
 
