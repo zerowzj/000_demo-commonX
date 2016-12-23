@@ -1,5 +1,6 @@
 package com.company.util.http;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -27,5 +28,11 @@ abstract class Entitys {
             ex.printStackTrace();
         }
         return formEntity;
+    }
+    public static HttpEntity createJsonEntity(Map<String, String> params) {
+        StringEntity stringEntity = new StringEntity(null,Charsets.UTF_8.toString());
+        stringEntity.setContentEncoding(Charsets.UTF_8.toString());
+        stringEntity.setContentType("application/json");
+        return stringEntity;
     }
 }

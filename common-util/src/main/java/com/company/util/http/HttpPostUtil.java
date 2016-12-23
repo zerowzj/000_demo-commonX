@@ -22,10 +22,12 @@ public class HttpPostUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPostUtil.class);
 
+    public void postJson(String url, Map<String, String> params) {
+        post(url, Entitys.createJsonEntity(params), "");
+    }
+
     public void postForm(String url, Map<String, String> params) {
-
         post(url, Entitys.createUrlEncodedFormEntity(params), "");
-
     }
 
     private static byte[] post(String url, HttpEntity entity, String charset) {
