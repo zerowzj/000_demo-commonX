@@ -15,25 +15,6 @@ import java.util.Map;
  */
 public class HttpPostUtil {
 
-    private void get(String url, Map<String, Object> params) {
-        // 创建默认的httpClient实例.
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
-        String queryStr = Joiner.on("&").withKeyValueSeparator("=").join(params);
-        HttpGet httpGet = new HttpGet(url + "?" + queryStr);
-
-        CloseableHttpResponse response = null;
-        try {
-            response = httpclient.execute(httpGet);
-            response.getStatusLine();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            closeQuietly(response);
-            closeQuietly(httpclient);
-        }
-    }
-
     private void post(String url) {
         // 创建默认的httpClient实例.
         CloseableHttpClient httpclient = HttpClients.createDefault();

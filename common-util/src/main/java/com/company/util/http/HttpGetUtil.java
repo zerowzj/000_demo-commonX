@@ -34,12 +34,6 @@ public class HttpGetUtil {
         }
     }
 
-    private void post(String url) {
-        // 创建默认的httpClient实例.
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-    }
-
-
     private static void closeQuietly(Closeable closeable) {
         if (closeable != null) {
             try {
