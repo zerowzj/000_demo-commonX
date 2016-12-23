@@ -14,23 +14,60 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
  * Created by wangzhj on 2016/12/23.
  */
-public abstract class HttpGetUtil {
+public class HttpGets {
 
-    private static final Logger logger = LoggerFactory.getLogger(HttpGetUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
 
-    public static String getString(String url, Map<String, String> params, Charset charset) {
-        byte[] result = get(url, params);
+    /** URL */
+    private String url = null;
+    /** 参数 */
+    private Map<String, String> params = null;
 
-        return null;
+    /** 连接超时时间 */
+    private long connectTimeout = 0;
+    /** 读取超时时间 */
+    private long readTimeout = 0;
+
+    private HttpGets(String url, Map<String, String> params) {
+        this.url = url;
+        this.params = params;
     }
 
-    public static byte[] get(String url, Map<String, String> params) {
+    public static HttpGets build(String url, Map<String, String> params) {
+        return new HttpGets(url, params);
+    }
+
+    public HttpGets connectTimeout(long connectTimeout) {
+        this.connectTimeout = connectTimeout;
+        return this;
+    }
+
+    public HttpGets readTimeout(long readTimeout) {
+        this.readTimeout = readTimeout;
+        return this;
+    }
+
+    /**
+     * 获取
+     *
+     * @return String
+     */
+    public String getString() {
+        byte[] data = get();
+        return new String(data);
+    }
+
+    /**
+     * 获取
+     *
+     * @return byte[]
+     */
+    public byte[] get() {
         String query = Joiner.on("&").withKeyValueSeparator("=").join(params);
         logger.info("url===> {}", url);
         logger.info("query===> {}", query);
@@ -39,7 +76,7 @@ public abstract class HttpGetUtil {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         InputStream is = null;
-        byte[] result = null;
+        byte[] data = null;
         try {
             response = httpClient.execute(httpGet);
 
@@ -48,7 +85,7 @@ public abstract class HttpGetUtil {
             logger.info("status code===> {}", statusCode);
             if (statusCode == HttpStatus.SC_OK) {
                 is = response.getEntity().getContent();
-                result = ByteStreams.toByteArray(is);
+                data = ByteStreams.toByteArray(is);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -57,20 +94,20 @@ public abstract class HttpGetUtil {
             CloseUtil.closeQuietly(response);
             CloseUtil.closeQuietly(httpClient);
         }
-        return result;
+        return data;
     }
 
     public static void main(String[] args) {
         Map params = Maps.newTreeMap();
-        params.put("key1", "valu1");
-        params.put("key2", "asdf");
-        params.put("key3", "asdf");
-        params.put("key4", "asdf");
-        params.put("key5", "asdf");
-        params.put("key6", "asdf");
-        params.put("key7", "asdf");
-        params.put("key8", "asdf");
-        params.put("key9", "asdf");
-        get("http://www.sohu.com", params);
+        params.put("key1", "value1");
+        params.put("key2", "value1");
+        params.put("key3", "value1");
+        params.put("key4", "value1");
+        params.put("key5", "value1");
+        params.put("key6", "value1");
+        params.put("key7", "value1");
+        params.put("key8", "value1");
+        params.put("key9", "value1");
+        HttpGets.build("http://www.sohu.com", params).getString();
     }
 }

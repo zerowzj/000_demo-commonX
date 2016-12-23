@@ -1,5 +1,6 @@
 package com.company.util.http;
 
+import com.company.util.JsonUtil;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import org.apache.http.HttpEntity;
@@ -21,6 +22,7 @@ abstract class Entitys {
         for (Map.Entry<String, String> entry : params.entrySet()) {
             pairLt.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
         }
+
         UrlEncodedFormEntity formEntity = null;
         try {
             formEntity = new UrlEncodedFormEntity(pairLt);
@@ -29,10 +31,14 @@ abstract class Entitys {
         }
         return formEntity;
     }
+
     public static HttpEntity createJsonEntity(Map<String, String> params) {
-        StringEntity stringEntity = new StringEntity(null,Charsets.UTF_8.toString());
+        String json = JsonUtil.toJson(params);
+
+        StringEntity stringEntity = new StringEntity(json, Charsets.UTF_8.toString());
         stringEntity.setContentEncoding(Charsets.UTF_8.toString());
         stringEntity.setContentType("application/json");
+
         return stringEntity;
     }
 }
