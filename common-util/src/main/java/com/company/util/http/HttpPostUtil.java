@@ -1,14 +1,22 @@
 package com.company.util.http;
 
-import com.google.common.base.Joiner;
+import com.company.util.Closeables;
+import com.google.common.collect.Lists;
+import com.google.common.io.ByteStreams;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.Closeable;
-import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,33 +24,53 @@ import java.util.Map;
  */
 public class HttpPostUtil {
 
-    public void postJson(String url){
+    private static final Logger logger = LoggerFactory.getLogger(HttpPostUtil.class);
+
+    public void postJson(String url) {
 
     }
 
-    public void postForm(String url){
+    public void postForm(String url) {
 
     }
-    private void post(String url, Map<String, String> params, String charset) {
-        // 创建默认的httpClient实例.
+
+    public static byte[] post(String url, Map<String, String> params, String charset) {
+
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(url);
+
+        UrlEncodedFormEntity formEntity = null;
+        CloseableHttpResponse response = null;
+        InputStream is = null;
+        byte[] result = null;
         try {
+            List<NameValuePair> pairLt = transform(params);
+            formEntity = new UrlEncodedFormEntity(pairLt);
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setEntity(formEntity);
 
-        } catch (Exception ex){
+            response = httpClient.execute(httpPost);
 
+            StatusLine statusLine = response.getStatusLine();
+            int statusCode = statusLine.getStatusCode();
+            logger.info("status code===> {}", statusCode);
+            if (statusCode == HttpStatus.SC_OK) {
+                is = response.getEntity().getContent();
+                result = ByteStreams.toByteArray(is);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         } finally {
-
+            Closeables.closeQuietly(response);
+            Closeables.closeQuietly(httpClient);
         }
+        return result;
     }
 
-    private static void closeQuietly(Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+    private static List<NameValuePair> transform(Map<String, String> params) {
+        List<NameValuePair> pairLt = Lists.newArrayList();
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            pairLt.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
         }
+        return pairLt;
     }
 }

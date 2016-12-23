@@ -1,5 +1,6 @@
 package com.company.util.http;
 
+import com.company.util.Closeables;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
@@ -12,8 +13,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.Closeable;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -25,50 +24,40 @@ public abstract class HttpGetUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpGetUtil.class);
 
-    public static String getStr(String url, Map<String, String> params, Charset charset){
+    public static String getString(String url, Map<String, String> params, Charset charset) {
         byte[] result = get(url, params);
 
         return null;
     }
 
     public static byte[] get(String url, Map<String, String> params) {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-
-        String queryStr = Joiner.on("&").withKeyValueSeparator("=").join(params);
-        HttpGet httpGet = new HttpGet(url + "?" + queryStr);
+        String query = Joiner.on("&").withKeyValueSeparator("=").join(params);
         logger.info("url===> {}", url);
-        logger.info("query string===> {}", queryStr);
+        logger.info("query===> {}", query);
+        HttpGet httpGet = new HttpGet(url + "?" + query);
 
+        CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         InputStream is = null;
-        byte[] bytes = null;
+        byte[] result = null;
         try {
             response = httpClient.execute(httpGet);
+
             StatusLine statusLine = response.getStatusLine();
             int statusCode = statusLine.getStatusCode();
-            logger.warn("status code===> {}", statusCode);
+            logger.info("status code===> {}", statusCode);
             if (statusCode == HttpStatus.SC_OK) {
                 is = response.getEntity().getContent();
-                bytes = ByteStreams.toByteArray(is);
+                result = ByteStreams.toByteArray(is);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            closeQuietly(is);
-            closeQuietly(response);
-            closeQuietly(httpClient);
+            Closeables.closeQuietly(is);
+            Closeables.closeQuietly(response);
+            Closeables.closeQuietly(httpClient);
         }
-        return bytes;
-    }
-
-    private static void closeQuietly(Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
+        return result;
     }
 
     public static void main(String[] args) {
