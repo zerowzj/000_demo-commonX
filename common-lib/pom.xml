@@ -385,8 +385,15 @@
             <dependency>
                 <groupId>org.elasticsearch</groupId>
                 <artifactId>elasticsearch</artifactId>
-                <version>5.1.1</version>
+                <version>2.4.3</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.elasticsearch.client/transport -->
+        <!--    <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>5.1.1</version>
+            </dependency>-->
 
 
             <!-- Project Commons -->
