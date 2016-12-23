@@ -1,6 +1,6 @@
 package com.company.util.http;
 
-import com.company.util.Closeables;
+import com.company.util.CloseUtil;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
@@ -53,9 +53,9 @@ public abstract class HttpGetUtil {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            Closeables.closeQuietly(is);
-            Closeables.closeQuietly(response);
-            Closeables.closeQuietly(httpClient);
+            CloseUtil.closeQuietly(is);
+            CloseUtil.closeQuietly(response);
+            CloseUtil.closeQuietly(httpClient);
         }
         return result;
     }

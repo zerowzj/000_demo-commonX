@@ -11,7 +11,7 @@ import java.util.Map;
  * 
  * @author wangzhj
  */
-public final class ReflectUtils {
+public final class ReflectUtil {
 
 	/**
 	 * 获取参数化类数组

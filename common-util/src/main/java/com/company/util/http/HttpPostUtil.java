@@ -1,6 +1,6 @@
 package com.company.util.http;
 
-import com.company.util.Closeables;
+import com.company.util.CloseUtil;
 import com.google.common.collect.Lists;
 import com.google.common.io.ByteStreams;
 import org.apache.http.HttpStatus;
@@ -60,8 +60,8 @@ public class HttpPostUtil {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            Closeables.closeQuietly(response);
-            Closeables.closeQuietly(httpClient);
+            CloseUtil.closeQuietly(response);
+            CloseUtil.closeQuietly(httpClient);
         }
         return result;
     }

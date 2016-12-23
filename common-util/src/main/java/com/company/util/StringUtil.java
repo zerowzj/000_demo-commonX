@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
  * 
  * @author wangzhj
  */
-public class StringUtils {
+public class StringUtil {
 	
 	/** 正则需要转义字符 */
 	private static final String[] escape = new String[]{"*", "+", ".","?", "\\", "^", "|", "(", ")", "[", "]", "{", "}"};
