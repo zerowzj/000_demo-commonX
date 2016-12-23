@@ -1,6 +1,8 @@
 package com.company.util.http;
 
 import com.google.common.base.Joiner;
+import com.google.common.io.ByteStreams;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -8,6 +10,8 @@ import org.apache.http.impl.client.HttpClients;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -15,7 +19,7 @@ import java.util.Map;
  */
 public class HttpGetUtil {
 
-    private void get(String url, Map<String, Object> params) {
+    public static byte[] get(String url, Map<String, Object> params, Charset charset) {
         // 创建默认的httpClient实例.
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
@@ -23,15 +27,24 @@ public class HttpGetUtil {
         HttpGet httpGet = new HttpGet(url + "?" + queryStr);
 
         CloseableHttpResponse response = null;
+        InputStream is = null;
+        byte[] bytes = null;
         try {
             response = httpclient.execute(httpGet);
-            response.getStatusLine();
+            StatusLine statusLine = response.getStatusLine();
+            int statusCode = statusLine.getStatusCode();
+            if(statusCode == 200){
+                is = response.getEntity().getContent();
+                bytes = ByteStreams.toByteArray(is);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
+            closeQuietly(is);
             closeQuietly(response);
             closeQuietly(httpclient);
         }
+        return bytes;
     }
 
     private static void closeQuietly(Closeable closeable) {
