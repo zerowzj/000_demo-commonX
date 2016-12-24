@@ -2,10 +2,13 @@ package com.company.util.http;
 
 import com.company.util.CloseUtil;
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -25,15 +28,16 @@ public class HttpGets {
 
     /** URL */
     private String url = null;
-    /** 参数 */
+    /**  参数 */
     private Map<String, String> params = null;
 
     /** 连接超时时间 */
-    private long connectTimeout = 0;
+    private int connectTimeout = 0;
     /** 读取超时时间 */
-    private long readTimeout = 0;
+    private int readTimeout = 0;
 
     private HttpGets(String url, Map<String, String> params) {
+        Preconditions.checkNotNull(Strings.emptyToNull(url), "url is not null");
         this.url = url;
         this.params = params;
     }
@@ -42,12 +46,12 @@ public class HttpGets {
         return new HttpGets(url, params);
     }
 
-    public HttpGets connectTimeout(long connectTimeout) {
+    public HttpGets connectTimeout(int connectTimeout) {
         this.connectTimeout = connectTimeout;
         return this;
     }
 
-    public HttpGets readTimeout(long readTimeout) {
+    public HttpGets readTimeout(int readTimeout) {
         this.readTimeout = readTimeout;
         return this;
     }
@@ -74,6 +78,11 @@ public class HttpGets {
         HttpGet httpGet = new HttpGet(url + "?" + query);
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(connectTimeout)
+                .setSocketTimeout(readTimeout)
+                .build();
+        httpGet.setConfig(requestConfig);
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] data = null;
@@ -108,6 +117,6 @@ public class HttpGets {
         params.put("key7", "value1");
         params.put("key8", "value1");
         params.put("key9", "value1");
-        HttpGets.build("http://www.sohu.com", params).getString();
+        HttpGets.build("2121", params).getString();
     }
 }
