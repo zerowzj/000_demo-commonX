@@ -11,12 +11,14 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
+import java.net.URI;
 import java.util.Map;
 
 /**
@@ -26,14 +28,22 @@ public class HttpGets {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
 
-    /** URL */
+    /**
+     * URL
+     */
     private String url = null;
-    /**  参数 */
+    /**
+     * 参数
+     */
     private Map<String, String> params = null;
 
-    /** 连接超时时间 */
+    /**
+     * 连接超时时间
+     */
     private int connectTimeout = 0;
-    /** 读取超时时间 */
+    /**
+     * 读取超时时间
+     */
     private int readTimeout = 0;
 
     private HttpGets(String url, Map<String, String> params) {
@@ -62,21 +72,23 @@ public class HttpGets {
      * @return byte[]
      */
     public byte[] get() {
-        String query = Joiner.on("&").withKeyValueSeparator("=").join(params);
-        logger.info("url===> {}", url);
-        logger.info("query===> {}", query);
-        HttpGet httpGet = new HttpGet(url + "?" + query);
-
         CloseableHttpClient httpClient = HttpClients.createDefault();
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectTimeout(connectTimeout)
-                .setSocketTimeout(readTimeout)
-                .build();
-        httpGet.setConfig(requestConfig);
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] data = null;
         try {
+            URI uri = new URIBuilder(url)
+                    .setParameters(NameValuePairs.pairs(params))
+                    .build();
+            HttpGet httpGet = new HttpGet(uri);
+            logger.info("url===> {}", httpGet.getURI().toString());
+
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setConnectTimeout(connectTimeout)
+                    .setSocketTimeout(readTimeout)
+                    .build();
+            httpGet.setConfig(requestConfig);
+
             response = httpClient.execute(httpGet);
 
             StatusLine statusLine = response.getStatusLine();
@@ -107,6 +119,6 @@ public class HttpGets {
         params.put("key7", "value1");
         params.put("key8", "value1");
         params.put("key9", "value1");
-        HttpGets.build("2121", params).get();
+        HttpGets.build("http://www.sohu.com/adb", params).get();
     }
 }

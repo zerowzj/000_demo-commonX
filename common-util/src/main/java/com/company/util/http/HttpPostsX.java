@@ -66,7 +66,7 @@ public class HttpPostsX {
      *
      */
     public byte[] postJson() {
-        byte[] data = post(Entitys.createJsonEntity(params));
+        byte[] data = post(Entitys.createJsonEntity(params, charset));
         return data;
     }
 
@@ -74,7 +74,7 @@ public class HttpPostsX {
      *
      */
     public byte[] postForm() {
-        byte[] data = post(Entitys.createUrlEncodedFormEntity(params));
+        byte[] data = post(Entitys.createUrlEncodedFormEntity(params, charset));
         return data;
     }
 
