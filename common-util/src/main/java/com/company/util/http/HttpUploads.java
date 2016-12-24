@@ -4,16 +4,23 @@ import com.company.util.CloseUtil;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.FormBodyPart;
+import org.apache.http.entity.mime.FormBodyPartBuilder;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -33,6 +40,11 @@ public class HttpUploads {
      * 参数
      */
     private Map<String, String> params = null;
+    /**
+     * 参数
+     */
+    private Map<String, File> files = null;
+
 
     /**
      * 连接超时时间
@@ -45,13 +57,20 @@ public class HttpUploads {
 
     private Charset charset = Charsets.UTF_8;
 
-    private HttpUploads(String url, Map<String, String> params) {
+    private HttpUploads(String url) {
         this.url = url;
-        this.params = params;
     }
 
-    public static HttpUploads build(String url, Map<String, String> params) {
-        return new HttpUploads(url, params);
+    public static HttpUploads build(String url) {
+        return new HttpUploads(url);
+    }
+
+    public HttpUploads addFiles(Map<String, File> files) {
+        return this;
+    }
+
+    public HttpUploads addTexts(Map<String, String> texts) {
+        return this;
     }
 
     public HttpUploads connectTimeout(long connectTimeout) {
@@ -80,10 +99,15 @@ public class HttpUploads {
         InputStream is = null;
         byte[] result = null;
         try {
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+            builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+            FormBodyPart fileBody = FormBodyPartBuilder.create().setField("", "").build();
+            builder.addPart(fileBody);
+            HttpEntity httpEntity = builder.build();
+
             HttpPost httpPost = new HttpPost(url);
-//            httpPost.setEntity(httpEntity);
+            httpPost.setEntity(httpEntity);
             logger.info("url===> {}", httpPost.getURI().toString());
-            logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
 
             response = httpClient.execute(httpPost);
 

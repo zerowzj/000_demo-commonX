@@ -6,6 +6,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 
 import java.nio.charset.Charset;
@@ -33,7 +34,16 @@ abstract class Entitys {
         String json = JsonUtil.toJson(params);
         StringEntity stringEntity = new StringEntity(json, charset.toString());
         stringEntity.setContentEncoding(charset.toString());
-        stringEntity.setContentType("application/json");
+        stringEntity.setContentType(ContentType.APPLICATION_JSON.getMimeType());
+
         return stringEntity;
+    }
+
+    public static HttpEntity createMultipartEntity(Map<String, String> params, Charset charset) {
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        HttpEntity entity = builder.build();
+
+        return entity;
     }
 }
