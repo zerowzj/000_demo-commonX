@@ -4,6 +4,7 @@ import com.company.util.CloseUtil;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.Files;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -73,7 +74,6 @@ public class HttpUploads {
     }
 
     /**
-     *
      * @return
      */
     public byte[] upload() {
@@ -85,12 +85,12 @@ public class HttpUploads {
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
             //
-            for(Map.Entry<String, byte[]> entry : files.entrySet()){
+            for (Map.Entry<String, byte[]> entry : files.entrySet()) {
                 builder.addBinaryBody(entry.getKey(), entry.getValue(), ContentType.DEFAULT_BINARY, entry.getKey());
             }
             //
-            if(params != null){
-                for(Map.Entry<String, String> entry : params.entrySet()){
+            if (params != null) {
+                for (Map.Entry<String, String> entry : params.entrySet()) {
                     builder.addTextBody(entry.getKey(), entry.getValue());
                 }
             }
@@ -119,14 +119,14 @@ public class HttpUploads {
         return result;
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
 
         Map<String, byte[]> files = Maps.newHashMap();
-        files.put("file", ByteStreams.toByteArray(new FileInputStream("d:\\win7.jpg")));
-        byte[] data  = HttpUploads.build("http://localhost:8080/demo/upload", files).params(params).upload();
+        files.put("file", Files.toByteArray(new File("d:\\win7.jpg")));
+        byte[] data = HttpUploads.build("http://localhost:8080/demo/upload", files).params(params).upload();
         logger.info(new String(data));
     }
 }
