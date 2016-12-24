@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -32,44 +33,26 @@ public class HttpUploads {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpUploads.class);
 
-    /**
-     * URL
-     */
     private String url = null;
-    /**
-     * 参数
-     */
     private Map<String, String> params = null;
-    /**
-     * 参数
-     */
-    private Map<String, File> files = null;
+    private Map<String, byte[]> files = null;
 
-
-    /**
-     * 连接超时时间
-     */
     private long connectTimeout = 30 * 1000;
-    /**
-     * 读取超时时间
-     */
     private long readTimeout = 60 * 1000;
 
     private Charset charset = Charsets.UTF_8;
 
-    private HttpUploads(String url) {
+    private HttpUploads(String url, Map<String, byte[]> files) {
         this.url = url;
+        this.files = files;
     }
 
-    public static HttpUploads build(String url) {
-        return new HttpUploads(url);
+    public static HttpUploads build(String url, Map<String, byte[]> files) {
+        return new HttpUploads(url, files);
     }
 
-    public HttpUploads addFiles(Map<String, File> files) {
-        return this;
-    }
-
-    public HttpUploads addTexts(Map<String, String> texts) {
+    public HttpUploads params(Map<String, String> params) {
+        this.params = params;
         return this;
     }
 
@@ -90,7 +73,6 @@ public class HttpUploads {
 
     /**
      *
-     *
      * @return
      */
     public byte[] upload() {
@@ -101,8 +83,16 @@ public class HttpUploads {
         try {
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-            FormBodyPart fileBody = FormBodyPartBuilder.create().setField("", "").build();
-            builder.addPart(fileBody);
+            //
+            for(Map.Entry<String, byte[]> entry : files.entrySet()){
+                builder.addBinaryBody(entry.getKey(), entry.getValue());
+            }
+            //
+            if(params != null){
+                for(Map.Entry<String, String> entry : params.entrySet()){
+                    builder.addTextBody(entry.getKey(), entry.getValue());
+                }
+            }
             HttpEntity httpEntity = builder.build();
 
             HttpPost httpPost = new HttpPost(url);
@@ -128,10 +118,14 @@ public class HttpUploads {
         return result;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
 
+        Map<String, byte[]> files = Maps.newHashMap();
+        files.put("file", ByteStreams.toByteArray(new FileInputStream("d:\\win7.jpg")));
+        byte[] data  = HttpUploads.build("http://localhost:8080/demo/upload", files).params(params).upload();
+        logger.info(new String(data));
     }
 }
