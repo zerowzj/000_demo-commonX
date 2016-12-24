@@ -39,11 +39,11 @@ public class HttpGets {
     /**
      * 连接超时时间
      */
-    private int connectTimeout = 0;
+    private int connectTimeout = 30*1000;
     /**
      * 读取超时时间
      */
-    private int readTimeout = 0;
+    private int readTimeout = 60*1000;
 
     private HttpGets(String url, Map<String, String> params) {
         Preconditions.checkNotNull(Strings.emptyToNull(url), "url is not null");
@@ -111,7 +111,8 @@ public class HttpGets {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
-        byte[] data = HttpGets.build("http://localhost:8080/demo/list", params).get();
+        byte[] data = HttpGets.build("http://localhost:8080/demo/list", params)
+                .connectTimeout(1).get();
         logger.info(new String(data));
     }
 }
