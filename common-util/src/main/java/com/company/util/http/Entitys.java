@@ -40,8 +40,7 @@ abstract class Entitys {
     }
 
     public static HttpEntity createMultipartEntity(Map<String, String> params, Charset charset) {
-        MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        MultipartEntityBuilder builder = MultipartEntityBuilder.create().setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         HttpEntity entity = builder.build();
 
         return entity;

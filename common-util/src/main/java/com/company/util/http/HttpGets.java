@@ -57,7 +57,7 @@ public class HttpGets {
     }
 
     /**
-     * 获取
+     * 提交
      *
      * @return byte[]
      */

@@ -71,6 +71,11 @@ public class HttpPosts {
         return this;
     }
 
+    /**
+     * 提交
+     *
+     * @return byte[]
+     */
     public byte[] post() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
