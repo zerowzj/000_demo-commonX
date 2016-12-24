@@ -102,8 +102,8 @@ public class HttpGets {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
-        byte[] data = HttpGets.build("http://localhost:808/demo/list", params)
-                .connectTimeout(10000).get();
+        byte[] data = HttpGets.build("http://localhost:8080/demo/list", params)
+                .connectTimeout(1).get();
         logger.info(new String(data));
     }
 }
