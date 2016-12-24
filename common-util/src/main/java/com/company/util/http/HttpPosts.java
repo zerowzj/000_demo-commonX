@@ -2,6 +2,7 @@ package com.company.util.http;
 
 import com.company.util.CloseUtil;
 import com.google.common.base.Charsets;
+import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,52 +20,60 @@ import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
- *
- *
  * @author wangzhj
  */
 public class HttpPosts {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
-    /** URL */
+    /**
+     * URL
+     */
     private String url = null;
-    /** 参数 */
+    /**
+     * 参数
+     */
     private Map<String, String> params = null;
 
-    /** 连接超时时间 */
+    /**
+     * 连接超时时间
+     */
     private long connectTimeout = 30 * 1000;
-    /** 读取超时时间 */
+    /**
+     * 读取超时时间
+     */
     private long readTimeout = 60 * 1000;
 
     private Charset charset = Charsets.UTF_8;
 
-    private HttpPosts(String url, Map<String, String> params){
+    private HttpPosts(String url, Map<String, String> params) {
         this.url = url;
         this.params = params;
     }
 
-    public static HttpPosts build(String url, Map<String, String> params){
+    public static HttpPosts build(String url, Map<String, String> params) {
         return new HttpPosts(url, params);
     }
 
-    public HttpPosts connectTimeout(long connectTimeout){
+    public HttpPosts connectTimeout(long connectTimeout) {
         this.connectTimeout = connectTimeout;
         return this;
     }
 
-    public HttpPosts readTimeout(long readTimeout){
+    public HttpPosts readTimeout(long readTimeout) {
         this.readTimeout = readTimeout;
         return this;
     }
 
-    public HttpPosts charset(Charset charset){
+    public HttpPosts charset(Charset charset) {
         this.charset = charset;
         return this;
     }
 
     /**
+     * Json提交
      *
+     * @return
      */
     public byte[] postJson() {
         byte[] data = post(Entitys.createJsonEntity(params, charset));
@@ -71,7 +81,9 @@ public class HttpPosts {
     }
 
     /**
+     * 表单提交
      *
+     * @return
      */
     public byte[] postForm() {
         byte[] data = post(Entitys.createUrlEncodedFormEntity(params, charset));
@@ -80,13 +92,14 @@ public class HttpPosts {
 
     private byte[] post(HttpEntity httpEntity) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
-
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] result = null;
         try {
             HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
+            logger.info("url===> {}", httpPost.getURI().toString());
+            logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
 
             response = httpClient.execute(httpPost);
 
@@ -100,9 +113,24 @@ public class HttpPosts {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
+            CloseUtil.closeQuietly(is);
             CloseUtil.closeQuietly(response);
             CloseUtil.closeQuietly(httpClient);
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        Map params = Maps.newTreeMap();
+        params.put("key1", "value1");
+        params.put("key2", "value1");
+        params.put("key3", "value1");
+        params.put("key4", "value1");
+        params.put("key5", "value1");
+        params.put("key6", "value1");
+        params.put("key7", "value1");
+        params.put("key8", "value1");
+        params.put("key9", "value1");
+        HttpPosts.build("http://www.sohu.com/adb", params).postJson();
     }
 }
