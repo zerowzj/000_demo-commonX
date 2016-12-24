@@ -122,15 +122,9 @@ public class HttpPosts {
 
     public static void main(String[] args) {
         Map params = Maps.newTreeMap();
-        params.put("key1", "value1");
-        params.put("key2", "value1");
-        params.put("key3", "value1");
-        params.put("key4", "value1");
-        params.put("key5", "value1");
-        params.put("key6", "value1");
-        params.put("key7", "value1");
-        params.put("key8", "value1");
-        params.put("key9", "value1");
-        HttpPosts.build("http://www.sohu.com/adb", params).postJson();
+        params.put("userName", "admin");
+        params.put("token", "123");
+        byte[] data = HttpPosts.build("http://localhost:8080/demo/list", params).postJson();
+        logger.info(new String(data));
     }
 }
