@@ -9,6 +9,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.FormBodyPart;
 import org.apache.http.entity.mime.FormBodyPartBuilder;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -85,7 +86,7 @@ public class HttpUploads {
             builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
             //
             for(Map.Entry<String, byte[]> entry : files.entrySet()){
-                builder.addBinaryBody(entry.getKey(), entry.getValue());
+                builder.addBinaryBody(entry.getKey(), entry.getValue(), ContentType.DEFAULT_BINARY, entry.getKey());
             }
             //
             if(params != null){
