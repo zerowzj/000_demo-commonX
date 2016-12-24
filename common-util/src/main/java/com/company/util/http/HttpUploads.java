@@ -1,31 +1,29 @@
 package com.company.util.http;
 
 import com.company.util.CloseUtil;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
+import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
-import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
- * Created by wangzhj on 2016/12/23.
+ * @author wangzhj
  */
-public class HttpGets {
+public class HttpUploads {
 
-    private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpUploads.class);
 
     /**
      * URL
@@ -39,63 +37,62 @@ public class HttpGets {
     /**
      * 连接超时时间
      */
-    private int connectTimeout = 0;
+    private long connectTimeout = 30 * 1000;
     /**
      * 读取超时时间
      */
-    private int readTimeout = 0;
+    private long readTimeout = 60 * 1000;
 
-    private HttpGets(String url, Map<String, String> params) {
-        Preconditions.checkNotNull(Strings.emptyToNull(url), "url is not null");
+    private Charset charset = Charsets.UTF_8;
+
+    private HttpUploads(String url, Map<String, String> params) {
         this.url = url;
         this.params = params;
     }
 
-    public static HttpGets build(String url, Map<String, String> params) {
-        return new HttpGets(url, params);
+    public static HttpUploads build(String url, Map<String, String> params) {
+        return new HttpUploads(url, params);
     }
 
-    public HttpGets connectTimeout(int connectTimeout) {
+    public HttpUploads connectTimeout(long connectTimeout) {
         this.connectTimeout = connectTimeout;
         return this;
     }
 
-    public HttpGets readTimeout(int readTimeout) {
+    public HttpUploads readTimeout(long readTimeout) {
         this.readTimeout = readTimeout;
         return this;
     }
 
+    public HttpUploads charset(Charset charset) {
+        this.charset = charset;
+        return this;
+    }
+
     /**
-     * 获取
      *
-     * @return byte[]
+     *
+     * @return
      */
-    public byte[] get() {
+    public byte[] upload() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         InputStream is = null;
-        byte[] data = null;
+        byte[] result = null;
         try {
-            URI uri = new URIBuilder(url)
-                    .setParameters(NVPairs.pairs(params))
-                    .build();
-            HttpGet httpGet = new HttpGet(uri);
-            logger.info("url===> {}", httpGet.getURI().toString());
+            HttpPost httpPost = new HttpPost(url);
+//            httpPost.setEntity(httpEntity);
+            logger.info("url===> {}", httpPost.getURI().toString());
+            logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
 
-            RequestConfig requestConfig = RequestConfig.custom()
-                    .setConnectTimeout(connectTimeout)
-                    .setSocketTimeout(readTimeout)
-                    .build();
-            httpGet.setConfig(requestConfig);
-
-            response = httpClient.execute(httpGet);
+            response = httpClient.execute(httpPost);
 
             StatusLine statusLine = response.getStatusLine();
             int statusCode = statusLine.getStatusCode();
             logger.info("status code===> {}", statusCode);
             if (statusCode == HttpStatus.SC_OK) {
                 is = response.getEntity().getContent();
-                data = ByteStreams.toByteArray(is);
+                result = ByteStreams.toByteArray(is);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -104,14 +101,13 @@ public class HttpGets {
             CloseUtil.closeQuietly(response);
             CloseUtil.closeQuietly(httpClient);
         }
-        return data;
+        return result;
     }
 
     public static void main(String[] args) {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
-        byte[] data = HttpGets.build("http://localhost:8080/demo/list", params).get();
-        logger.info(new String(data));
+
     }
 }
