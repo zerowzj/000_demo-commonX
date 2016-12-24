@@ -2,6 +2,8 @@ package com.company.util.http;
 
 import com.company.util.CloseUtil;
 import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import org.apache.http.HttpEntity;
@@ -26,25 +28,18 @@ public class HttpPosts {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
-    /**
-     * URL
-     */
     private String url = null;
-    /**
-     * 参数
-     */
+
     private Map<String, String> params = null;
 
-    /**
-     * 连接超时时间
-     */
-    private long connectTimeout = 30 * 1000;
-    /**
-     * 读取超时时间
-     */
-    private long readTimeout = 60 * 1000;
+    private BodyFormat bodyFormat = BodyFormat.FORM;
 
     private Charset charset = Charsets.UTF_8;
+
+
+    private long connectTimeout = 30 * 1000;
+
+    private long readTimeout = 60 * 1000;
 
     private HttpPosts(String url, Map<String, String> params) {
         this.url = url;
@@ -52,7 +47,18 @@ public class HttpPosts {
     }
 
     public static HttpPosts build(String url, Map<String, String> params) {
+        Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
         return new HttpPosts(url, params);
+    }
+
+    public HttpPosts charset(Charset charset) {
+        this.charset = charset;
+        return this;
+    }
+
+    public HttpPosts bodyFormat(BodyFormat format) {
+        this.bodyFormat = format;
+        return this;
     }
 
     public HttpPosts connectTimeout(long connectTimeout) {
@@ -65,38 +71,19 @@ public class HttpPosts {
         return this;
     }
 
-    public HttpPosts charset(Charset charset) {
-        this.charset = charset;
-        return this;
-    }
-
-    /**
-     * Json提交
-     *
-     * @return
-     */
-    public byte[] postJson() {
-        byte[] data = post(Entitys.createJsonEntity(params, charset));
-        return data;
-    }
-
-    /**
-     * 表单提交
-     *
-     * @return
-     */
-    public byte[] postForm() {
-        byte[] data = post(Entitys.createUrlEncodedFormEntity(params, charset));
-        return data;
-    }
-
-    private byte[] post(HttpEntity httpEntity) {
+    public byte[] post() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] result = null;
         try {
             HttpPost httpPost = new HttpPost(url);
+            HttpEntity httpEntity = null;
+            if(bodyFormat == BodyFormat.FORM){
+                httpEntity = Entitys.createUrlEncodedFormEntity(params, charset);
+            } else if(bodyFormat == BodyFormat.JSON) {
+                httpEntity = Entitys.createJsonEntity(params, charset);
+            }
             httpPost.setEntity(httpEntity);
             logger.info("url===> {}", httpPost.getURI().toString());
             logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
@@ -120,11 +107,15 @@ public class HttpPosts {
         return result;
     }
 
+    public enum BodyFormat {
+        FORM, JSON
+    }
+
     public static void main(String[] args) {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
-        byte[] data = HttpPosts.build("http://localhost:8080/demo/list", params).postJson();
+        byte[] data = HttpPosts.build("http://localhost:8080/demo/list", params).bodyFormat(BodyFormat.JSON).post();
         logger.info(new String(data));
     }
 }
