@@ -27,22 +27,13 @@ public class HttpGets {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
 
-    /**
-     * URL
-     */
     private String url = null;
-    /**
-     * 参数
-     */
+
     private Map<String, String> params = null;
 
-    /**
-     * 连接超时时间
-     */
+
     private int connectTimeout = 30*1000;
-    /**
-     * 读取超时时间
-     */
+
     private int readTimeout = 60*1000;
 
     private HttpGets(String url, Map<String, String> params) {
