@@ -59,16 +59,6 @@ public class HttpGets {
     /**
      * 获取
      *
-     * @return String
-     */
-    public String getString() {
-        byte[] data = get();
-        return new String(data);
-    }
-
-    /**
-     * 获取
-     *
      * @return byte[]
      */
     public byte[] get() {
@@ -117,6 +107,6 @@ public class HttpGets {
         params.put("key7", "value1");
         params.put("key8", "value1");
         params.put("key9", "value1");
-        HttpGets.build("2121", params).getString();
+        HttpGets.build("2121", params).get();
     }
 }
