@@ -4,7 +4,9 @@ import com.company.util.JsonUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -29,11 +31,9 @@ abstract class Entitys {
 
     public static HttpEntity createJsonEntity(Map<String, String> params, Charset charset) {
         String json = JsonUtil.toJson(params);
-
         StringEntity stringEntity = new StringEntity(json, charset.toString());
         stringEntity.setContentEncoding(charset.toString());
         stringEntity.setContentType("application/json");
-
         return stringEntity;
     }
 }
