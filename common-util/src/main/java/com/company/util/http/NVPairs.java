@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by wangzhj on 2016/12/24.
  */
-public class NameValuePairs {
+abstract class NVPairs {
 
     public static List<NameValuePair> pairs(Map<String, String> params) {
         List<NameValuePair> pairLt = Lists.newArrayList();

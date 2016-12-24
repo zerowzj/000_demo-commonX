@@ -16,7 +16,7 @@ import java.util.Map;
 abstract class Entitys {
 
     public static HttpEntity createUrlEncodedFormEntity(Map<String, String> params, Charset charset) {
-        List<NameValuePair> pairLt = NameValuePairs.pairs(params);
+        List<NameValuePair> pairLt = NVPairs.pairs(params);
         UrlEncodedFormEntity formEntity = null;
         try {
             formEntity = new UrlEncodedFormEntity(pairLt, charset);

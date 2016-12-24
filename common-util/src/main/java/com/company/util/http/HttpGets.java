@@ -1,7 +1,6 @@
 package com.company.util.http;
 
 import com.company.util.CloseUtil;
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
@@ -78,7 +77,7 @@ public class HttpGets {
         byte[] data = null;
         try {
             URI uri = new URIBuilder(url)
-                    .setParameters(NameValuePairs.pairs(params))
+                    .setParameters(NVPairs.pairs(params))
                     .build();
             HttpGet httpGet = new HttpGet(uri);
             logger.info("url===> {}", httpGet.getURI().toString());
