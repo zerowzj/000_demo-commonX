@@ -128,6 +128,8 @@ public class HttpUploads {
 
         Map<String, byte[]> files = Maps.newHashMap();
         files.put("file", Files.toByteArray(new File("d://win7.jpg")));
+
+        Files.write(Files.toByteArray(new File("d://win7.jpg")), new File("d:\123.jpg"));
         byte[] data = HttpUploads.build("http://localhost:8080/demo/upload", files)
                 .params(params)
                 .upload();

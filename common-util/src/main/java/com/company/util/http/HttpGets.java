@@ -79,6 +79,7 @@ public class HttpGets {
                     .build();
             httpGet.setConfig(requestConfig);
 
+
             response = httpClient.execute(httpGet);
 
             StatusLine statusLine = response.getStatusLine();
@@ -103,7 +104,7 @@ public class HttpGets {
         params.put("userName", "admin");
         params.put("token", "123");
         byte[] data = HttpGets.build("http://localhost:8080/demo/list", params)
-                .connectTimeout(1).get();
+                .connectTimeout(1000).get();
         logger.info(new String(data));
     }
 }
