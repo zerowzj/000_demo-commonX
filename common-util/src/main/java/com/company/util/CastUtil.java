@@ -6,7 +6,7 @@ package com.company.util;
  * @author wangzhj
  * @time 2016-11-24 13:10
  */
-public abstract class TypeCastUtil {
+public abstract class CastUtil {
 
     /**
      * 转型
