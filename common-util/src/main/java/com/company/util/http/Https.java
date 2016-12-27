@@ -13,18 +13,18 @@ import java.util.Map;
  */
 abstract class Https {
 
-    /**  */
+    /** URL */
     protected String url = null;
-    /**  */
+    /** 请求参数 */
     protected Map<String, String> params = null;
-    /**  */
+    /** 上传文件 */
     protected Map<String, byte[]> files = null;
-    /**  */
+    /** 编码 */
     protected Charset charset = Charsets.UTF_8;
 
-    /**  */
+    /** 连接超时时间 */
     protected int connectTimeout = 2 * 1000;
-    /**  */
+    /** 读取超时时间 */
     protected int readTimeout = 2 * 1000;
 
     protected Https(String url, Map<String, String> params) {
