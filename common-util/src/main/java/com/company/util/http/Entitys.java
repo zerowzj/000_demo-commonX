@@ -18,6 +18,13 @@ import java.util.Map;
  */
 abstract class Entitys {
 
+    /**
+     * 生成表单实体
+     *
+     * @param params
+     * @param charset
+     * @return HttpEntity
+     */
     public static HttpEntity createUrlEncodedFormEntity(Map<String, String> params, Charset charset) {
         List<NameValuePair> pairLt = NVPairs.pairs(params);
         UrlEncodedFormEntity formEntity = null;
@@ -30,6 +37,14 @@ abstract class Entitys {
         return formEntity;
     }
 
+
+    /**
+     * 生成Json实体
+     *
+     * @param params
+     * @param charset
+     * @return HttpEntity
+     */
     public static HttpEntity createJsonEntity(Map<String, String> params, Charset charset) {
         String json = JsonUtil.toJson(params);
         StringEntity stringEntity = new StringEntity(json, charset.toString());
@@ -39,6 +54,13 @@ abstract class Entitys {
         return stringEntity;
     }
 
+    /**
+     * 生成Multipart实体
+     *
+     * @param params
+     * @param charset
+     * @return HttpEntity
+     */
     public static HttpEntity createMultipartEntity(Map<String, String> params, Charset charset) {
         MultipartEntityBuilder builder = MultipartEntityBuilder.create().setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         HttpEntity entity = builder.build();
