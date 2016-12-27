@@ -3,7 +3,6 @@ package com.company.util.http;
 import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -61,7 +60,6 @@ public class HttpGets extends Https {
                     .build();
             httpGet.setConfig(requestConfig);
 
-
             response = httpClient.execute(httpGet);
 
             StatusLine statusLine = response.getStatusLine();
@@ -79,14 +77,5 @@ public class HttpGets extends Https {
             CloseUtil.closeQuietly(httpClient);
         }
         return data;
-    }
-
-    public static void main(String[] args) {
-        Map params = Maps.newTreeMap();
-        params.put("userName", "admin");
-        params.put("password", "123");
-        byte[] data = HttpGets.create("http://localhost:8080/demo/list", params)
-                .connectTimeout(1000).submit();
-        logger.info(new String(data));
     }
 }

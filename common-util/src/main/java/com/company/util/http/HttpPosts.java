@@ -3,9 +3,7 @@ package com.company.util.http;
 import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
-import com.google.common.io.Files;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -17,7 +15,6 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -93,27 +90,5 @@ public class HttpPosts extends Https {
 
     public enum BodyFormat {
         FORM, JSON, MULTIPART
-    }
-
-    public static void main1(String[] args) {
-        Map params = Maps.newTreeMap();
-        params.put("userName", "admin");
-        params.put("token", "123");
-        byte[] data = HttpPosts.create("http://localhost:8080/demo/list", params)
-                .bodyFormat(BodyFormat.JSON).submit();
-        logger.info(new String(data));
-    }
-
-    public static void main(String[] args) throws Exception {
-        Map params = Maps.newTreeMap();
-        params.put("userName", "admin");
-        params.put("token", "123");
-
-        Map<String, byte[]> files = Maps.newHashMap();
-        files.put("file", Files.toByteArray(new File("d:/win7.jpg")));
-        byte[] data = HttpPosts.create("http://localhost:8080/demo/upload", null)
-                .bodyFormat(BodyFormat.MULTIPART)
-                .submit();
-        logger.info(new String(data));
     }
 }
