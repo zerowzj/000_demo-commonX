@@ -12,6 +12,9 @@ import java.util.Map;
  */
 abstract class NVPairs {
 
+    /**
+     *
+     */
     public static List<NameValuePair> pairs(Map<String, String> params) {
         List<NameValuePair> pairLt = Lists.newArrayList();
         for (Map.Entry<String, String> entry : params.entrySet()) {
