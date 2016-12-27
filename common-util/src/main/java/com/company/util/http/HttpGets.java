@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -99,12 +100,23 @@ public class HttpGets {
         return data;
     }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
         byte[] data = HttpGets.build("http://localhost:8080/demo/list", params)
                 .connectTimeout(1000).get();
         logger.info(new String(data));
+    }
+
+    public static void main(String[] args) {
+        Map params = Maps.newTreeMap();
+        params.put("idCard", "admin");
+        params.put("captcha", "123");
+        byte[] data = HttpGets.build("http://study.dongao.com/study/login/loginByShanXi", params)
+                .connectTimeout(1000).get();
+        logger.info(new String(data));
+
+        logger.info(new Date().getTime()+"");
     }
 }
