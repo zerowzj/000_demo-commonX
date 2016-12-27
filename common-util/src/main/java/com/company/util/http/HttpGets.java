@@ -110,12 +110,10 @@ public class HttpGets {
 
     public static void main(String[] args) {
         Map params = Maps.newTreeMap();
-        params.put("idCard", "admin");
-        params.put("captcha", "123");
-        byte[] data = HttpGets.build("http://study.dongao.com/study/login/loginByShanXi", params)
+        params.put("userName", "admin");
+        params.put("password", "123");
+        byte[] data = HttpGets.build("http://localhost:8080/demo/list", params)
                 .connectTimeout(1000).get();
         logger.info(new String(data));
-
-        logger.info(new Date().getTime() + "");
     }
 }
