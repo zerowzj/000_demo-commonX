@@ -22,6 +22,8 @@ import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
+ * Http Post请求
+ *
  * @author wangzhj
  */
 public class HttpPosts {
@@ -29,16 +31,11 @@ public class HttpPosts {
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
     private String url = null;
-
     private Map<String, String> params = null;
-
     private BodyFormat bodyFormat = BodyFormat.FORM;
-
     private Charset charset = Charsets.UTF_8;
 
-
     private long connectTimeout = 30 * 1000;
-
     private long readTimeout = 60 * 1000;
 
     private HttpPosts(String url, Map<String, String> params) {

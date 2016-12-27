@@ -22,20 +22,19 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * Created by wangzhj on 2016/12/23.
+ * Http Get请求
+ *
+ * @author wangzhj
  */
 public class HttpGets {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
 
     private String url = null;
-
     private Map<String, String> params = null;
 
-
-    private int connectTimeout = 30*1000;
-
-    private int readTimeout = 60*1000;
+    private int connectTimeout = 30 * 1000;
+    private int readTimeout = 60 * 1000;
 
     private HttpGets(String url, Map<String, String> params) {
         this.url = url;
@@ -117,6 +116,6 @@ public class HttpGets {
                 .connectTimeout(1000).get();
         logger.info(new String(data));
 
-        logger.info(new Date().getTime()+"");
+        logger.info(new Date().getTime() + "");
     }
 }

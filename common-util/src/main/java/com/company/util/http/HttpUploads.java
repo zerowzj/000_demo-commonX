@@ -76,7 +76,7 @@ public class HttpUploads {
     /**
      * 上传
      *
-     * @return
+     * @return byte[]
      */
     public byte[] upload() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
