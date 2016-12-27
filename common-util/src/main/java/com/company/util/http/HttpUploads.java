@@ -127,7 +127,7 @@ public class HttpUploads {
         params.put("token", "123");
 
         Map<String, byte[]> files = Maps.newHashMap();
-        files.put("file", Files.toByteArray(new File("d://win7.jpg")));
+        files.put("file", Files.toByteArray(new File("d:/win7.jpg")));
         byte[] data = HttpUploads.build("http://localhost:8080/demo/upload", files)
                 .params(params)
                 .upload();

@@ -99,15 +99,6 @@ public class HttpGets {
         return data;
     }
 
-    public static void main1(String[] args) {
-        Map params = Maps.newTreeMap();
-        params.put("userName", "admin");
-        params.put("token", "123");
-        byte[] data = HttpGets.build("http://localhost:8080/demo/list", params)
-                .connectTimeout(1000).get();
-        logger.info(new String(data));
-    }
-
     public static void main(String[] args) {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
