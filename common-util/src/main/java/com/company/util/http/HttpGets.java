@@ -43,7 +43,9 @@ public class HttpGets extends Https {
 
     @Override
     public byte[] submit() {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setConnectionManager(poolingConnManager)
+                .build();
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] data = null;

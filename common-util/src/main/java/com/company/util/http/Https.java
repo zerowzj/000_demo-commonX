@@ -1,9 +1,7 @@
 package com.company.util.http;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import org.apache.http.HttpEntity;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -28,6 +26,13 @@ abstract class Https {
     protected int connectTimeout = 2 * 1000;
     /** 读取超时时间 */
     protected int readTimeout = 2 * 1000;
+
+    protected static PoolingHttpClientConnectionManager poolingConnManager = new PoolingHttpClientConnectionManager();
+
+    static {
+        //连接池最大生成连接数200
+        poolingConnManager.setMaxTotal(200);
+    }
 
     protected Https(String url, Map<String, String> params) {
         this.url = url;
