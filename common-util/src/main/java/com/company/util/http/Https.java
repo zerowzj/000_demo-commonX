@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by wangzhj on 2016/12/27.
  */
-public abstract class Https {
+abstract class Https {
 
     protected String url = null;
 
