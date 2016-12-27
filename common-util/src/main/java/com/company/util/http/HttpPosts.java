@@ -37,12 +37,12 @@ public class HttpPosts extends Https {
     }
 
     public static HttpPosts create(String url, Map<String, byte[]> files) {
-        Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
-        return new HttpPosts(url, null, files);
+        return create(url, null, files);
     }
 
     public static HttpPosts create(String url, Map<String, String> params, Map<String, byte[]> files) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
+        Preconditions.checkArgument(!(files == null || files.isEmpty()), "files is not null or empty");
         return new HttpPosts(url, params, files);
     }
 
@@ -51,11 +51,7 @@ public class HttpPosts extends Https {
         return this;
     }
 
-    /**
-     * 提交
-     *
-     * @return byte[]
-     */
+    @Override
     public byte[] submit() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
@@ -99,7 +95,7 @@ public class HttpPosts extends Https {
         FORM, JSON, MULTIPART
     }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
@@ -108,14 +104,14 @@ public class HttpPosts extends Https {
         logger.info(new String(data));
     }
 
-    public static void main2(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
 
         Map<String, byte[]> files = Maps.newHashMap();
         files.put("file", Files.toByteArray(new File("d:/win7.jpg")));
-        byte[] data = HttpPosts.create("http://localhost:8080/demo/upload", files)
+        byte[] data = HttpPosts.create("http://localhost:8080/demo/upload", null)
                 .bodyFormat(BodyFormat.MULTIPART)
                 .submit();
         logger.info(new String(data));

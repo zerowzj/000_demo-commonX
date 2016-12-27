@@ -13,16 +13,18 @@ import java.util.Map;
  */
 abstract class Https {
 
+    /**  */
     protected String url = null;
-
+    /**  */
     protected Map<String, String> params = null;
-
+    /**  */
     protected Map<String, byte[]> files = null;
-
+    /**  */
     protected Charset charset = Charsets.UTF_8;
 
+    /**  */
     protected int connectTimeout = 2 * 1000;
-
+    /**  */
     protected int readTimeout = 2 * 1000;
 
     protected Https(String url, Map<String, String> params) {
@@ -51,5 +53,10 @@ abstract class Https {
         return this;
     }
 
+    /**
+     * 提交
+     *
+     * @return byte[]
+     */
     public abstract byte[] submit();
 }
