@@ -17,6 +17,9 @@ abstract class NVPairs {
      */
     public static List<NameValuePair> pairs(Map<String, String> params) {
         List<NameValuePair> pairLt = Lists.newArrayList();
+        if (params == null) {
+            return pairLt;
+        }
         for (Map.Entry<String, String> entry : params.entrySet()) {
             pairLt.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
         }

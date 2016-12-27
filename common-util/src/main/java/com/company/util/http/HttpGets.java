@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.net.URI;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -26,42 +25,25 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public class HttpGets {
+public class HttpGets extends Https {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
 
-    private String url = null;
-    private Map<String, String> params = null;
-
-    private int connectTimeout = 30 * 1000;
-    private int readTimeout = 60 * 1000;
-
     private HttpGets(String url, Map<String, String> params) {
-        this.url = url;
-        this.params = params;
+        super(url, params);
     }
 
-    public static HttpGets build(String url, Map<String, String> params) {
+    public static HttpGets create(String url) {
+        return create(url, null);
+    }
+
+    public static HttpGets create(String url, Map<String, String> params) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
         return new HttpGets(url, params);
     }
 
-    public HttpGets connectTimeout(int connectTimeout) {
-        this.connectTimeout = connectTimeout;
-        return this;
-    }
-
-    public HttpGets readTimeout(int readTimeout) {
-        this.readTimeout = readTimeout;
-        return this;
-    }
-
-    /**
-     * 提交
-     *
-     * @return byte[]
-     */
-    public byte[] get() {
+    @Override
+    public byte[] submit() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         InputStream is = null;
@@ -103,8 +85,8 @@ public class HttpGets {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("password", "123");
-        byte[] data = HttpGets.build("http://localhost:8080/demo/list", params)
-                .connectTimeout(1000).get();
+        byte[] data = HttpGets.create("http://localhost:8080/demo/list", params)
+                .connectTimeout(1000).submit();
         logger.info(new String(data));
     }
 }

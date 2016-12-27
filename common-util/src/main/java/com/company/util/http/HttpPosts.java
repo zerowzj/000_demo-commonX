@@ -1,11 +1,11 @@
 package com.company.util.http;
 
 import com.company.util.CloseUtil;
-import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.Files;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -17,8 +17,8 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -26,45 +26,28 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public class HttpPosts {
+public class HttpPosts extends Https {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
-    private String url = null;
-    private Map<String, String> params = null;
     private BodyFormat bodyFormat = BodyFormat.FORM;
-    private Charset charset = Charsets.UTF_8;
 
-    private long connectTimeout = 30 * 1000;
-    private long readTimeout = 60 * 1000;
-
-    private HttpPosts(String url, Map<String, String> params) {
-        this.url = url;
-        this.params = params;
+    private HttpPosts(String url, Map<String, String> params, Map<String, byte[]> files) {
+        super(url, params, files);
     }
 
-    public static HttpPosts build(String url, Map<String, String> params) {
+    public static HttpPosts create(String url, Map<String, byte[]> files) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
-        return new HttpPosts(url, params);
+        return new HttpPosts(url, null, files);
     }
 
-    public HttpPosts charset(Charset charset) {
-        this.charset = charset;
-        return this;
+    public static HttpPosts create(String url, Map<String, String> params, Map<String, byte[]> files) {
+        Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
+        return new HttpPosts(url, params, files);
     }
 
     public HttpPosts bodyFormat(BodyFormat format) {
         this.bodyFormat = format;
-        return this;
-    }
-
-    public HttpPosts connectTimeout(long connectTimeout) {
-        this.connectTimeout = connectTimeout;
-        return this;
-    }
-
-    public HttpPosts readTimeout(long readTimeout) {
-        this.readTimeout = readTimeout;
         return this;
     }
 
@@ -73,19 +56,22 @@ public class HttpPosts {
      *
      * @return byte[]
      */
-    public byte[] post() {
+    public byte[] submit() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] result = null;
         try {
-            HttpPost httpPost = new HttpPost(url);
+            //生成实体
             HttpEntity httpEntity = null;
-            if(bodyFormat == BodyFormat.FORM){
+            if (bodyFormat == BodyFormat.FORM) {
                 httpEntity = Entitys.createUrlEncodedFormEntity(params, charset);
-            } else if(bodyFormat == BodyFormat.JSON) {
+            } else if (bodyFormat == BodyFormat.JSON) {
                 httpEntity = Entitys.createJsonEntity(params, charset);
+            } else if (bodyFormat == BodyFormat.MULTIPART) {
+                httpEntity = Entitys.createMultipartEntity(params, files);
             }
+            HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
             logger.info("url===> {}", httpPost.getURI().toString());
             logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
@@ -110,14 +96,28 @@ public class HttpPosts {
     }
 
     public enum BodyFormat {
-        FORM, JSON
+        FORM, JSON, MULTIPART
     }
 
     public static void main(String[] args) {
         Map params = Maps.newTreeMap();
         params.put("userName", "admin");
         params.put("token", "123");
-        byte[] data = HttpPosts.build("http://localhost:8080/demo/list", params).bodyFormat(BodyFormat.JSON).post();
+        byte[] data = HttpPosts.create("http://localhost:8080/demo/list", params)
+                .bodyFormat(BodyFormat.JSON).submit();
+        logger.info(new String(data));
+    }
+
+    public static void main2(String[] args) throws Exception {
+        Map params = Maps.newTreeMap();
+        params.put("userName", "admin");
+        params.put("token", "123");
+
+        Map<String, byte[]> files = Maps.newHashMap();
+        files.put("file", Files.toByteArray(new File("d:/win7.jpg")));
+        byte[] data = HttpPosts.create("http://localhost:8080/demo/upload", files)
+                .bodyFormat(BodyFormat.MULTIPART)
+                .submit();
         logger.info(new String(data));
     }
 }
