@@ -9,7 +9,9 @@ import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
- * Created by wangzhj on 2016/12/27.
+ * Http请求
+ *
+ * @author wangzhj
  */
 abstract class Https {
 
