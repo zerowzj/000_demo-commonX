@@ -19,11 +19,11 @@ import java.util.Map;
  */
 public abstract class RequestUtil {
 
-    private static final String AJAX_HEADER = "X-Requested-With";
+    public static final String AJAX_HEADER = "X-Requested-With";
 
-    private static final String AJAX_VALUE = "XMLHttpRequest";
+    public static final String AJAX_VALUE = "XMLHttpRequest";
 
-    private static final String MULTIPART = "multipart/";
+    public static final String MULTIPART = "multipart/";
 
     /**
      * 是否是Ajax请求
