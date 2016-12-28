@@ -64,11 +64,13 @@ abstract class Entitys {
     public static HttpEntity createMultipartEntity(Map<String, String> params, Map<String, byte[]> files) {
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-        //
-        for (Map.Entry<String, byte[]> entry : files.entrySet()) {
-            builder.addBinaryBody(entry.getKey(), entry.getValue(), ContentType.DEFAULT_BINARY, entry.getKey());
+        //文件
+        if(files != null){
+            for (Map.Entry<String, byte[]> entry : files.entrySet()) {
+                builder.addBinaryBody(entry.getKey(), entry.getValue(), ContentType.DEFAULT_BINARY, entry.getKey());
+            }
         }
-        //
+        //参数
         if (params != null) {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 builder.addTextBody(entry.getKey(), entry.getValue());

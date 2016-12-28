@@ -31,7 +31,7 @@ abstract class Https {
 
     static {
         //连接池最大生成连接数200
-        poolingConnManager.setMaxTotal(200);
+        poolingConnManager.setMaxTotal(100);
     }
 
     protected Https(String url, Map<String, String> params) {
