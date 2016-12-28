@@ -1,6 +1,7 @@
 package com.company.util.http;
 
 import com.google.common.base.Charsets;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 
 import java.nio.charset.Charset;
@@ -13,18 +14,30 @@ import java.util.Map;
  */
 abstract class Https {
 
-    /** URL */
+    /**
+     * URL
+     */
     protected String url = null;
-    /** 请求参数 */
+    /**
+     * 请求参数
+     */
     protected Map<String, String> params = null;
-    /** 上传文件 */
+    /**
+     * 上传文件
+     */
     protected Map<String, byte[]> files = null;
-    /** 编码 */
+    /**
+     * 编码
+     */
     protected Charset charset = Charsets.UTF_8;
 
-    /** 连接超时时间 */
+    /**
+     * 连接超时时间
+     */
     protected int connectTimeout = 2 * 1000;
-    /** 读取超时时间 */
+    /**
+     * 读取超时时间
+     */
     protected int readTimeout = 2 * 1000;
 
     protected static PoolingHttpClientConnectionManager poolingConnManager = new PoolingHttpClientConnectionManager();
@@ -58,6 +71,17 @@ abstract class Https {
     public Https charset(Charset charset) {
         this.charset = charset;
         return this;
+    }
+
+    /**
+     * 释放连接
+     *
+     * @param httpRequest
+     */
+    public final void releaseConnection(HttpRequestBase httpRequest) {
+        if (httpRequest != null) {
+            httpRequest.releaseConnection();
+        }
     }
 
     /**

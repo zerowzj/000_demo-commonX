@@ -53,6 +53,7 @@ public class HttpPosts extends Https {
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setConnectionManager(poolingConnManager)
                 .build();
+        HttpPost httpPost = null;
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] result = null;
@@ -66,7 +67,7 @@ public class HttpPosts extends Https {
             } else if (bodyFormat == BodyFormat.MULTIPART) {
                 httpEntity = Entitys.createMultipartEntity(params, files);
             }
-            HttpPost httpPost = new HttpPost(url);
+            httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
             logger.info("url===> {}", httpPost.getURI().toString());
             logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
@@ -85,6 +86,7 @@ public class HttpPosts extends Https {
         } finally {
             CloseUtil.closeQuietly(is);
             CloseUtil.closeQuietly(response);
+            releaseConnection(httpPost);
             CloseUtil.closeQuietly(httpClient);
         }
         return result;

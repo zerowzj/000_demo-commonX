@@ -46,6 +46,7 @@ public class HttpGets extends Https {
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setConnectionManager(poolingConnManager)
                 .build();
+        HttpGet httpGet = null;
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] data = null;
@@ -53,7 +54,7 @@ public class HttpGets extends Https {
             URI uri = new URIBuilder(url)
                     .setParameters(NVPairs.pairs(params))
                     .build();
-            HttpGet httpGet = new HttpGet(uri);
+            httpGet = new HttpGet(uri);
             logger.info("url===> {}", httpGet.getURI().toString());
 
             RequestConfig requestConfig = RequestConfig.custom()
@@ -61,6 +62,7 @@ public class HttpGets extends Https {
                     .setSocketTimeout(readTimeout)
                     .build();
             httpGet.setConfig(requestConfig);
+            httpGet.releaseConnection();
 
             response = httpClient.execute(httpGet);
 
@@ -76,6 +78,7 @@ public class HttpGets extends Https {
         } finally {
             CloseUtil.closeQuietly(is);
             CloseUtil.closeQuietly(response);
+            releaseConnection(httpGet);
             CloseUtil.closeQuietly(httpClient);
         }
         return data;
