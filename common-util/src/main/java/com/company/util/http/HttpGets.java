@@ -3,6 +3,8 @@ package com.company.util.http;
 import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.net.URI;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -79,25 +82,44 @@ public class HttpGets extends Https {
             ex.printStackTrace();
         } finally {
             CloseUtil.closeQuietly(is);
-//            CloseUtil.closeQuietly(response);
-//            releaseConnection(httpGet);
+            CloseUtil.closeQuietly(response);
+            releaseConnection(httpGet);
 //            CloseUtil.closeQuietly(httpClient);
         }
         return data;
     }
 
     public static void main(String[] args) {
-       /* for(int i = 0; i < 5; i++){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    HttpGets.create("http://www.baidu.com").submit();
-                }
-            }).start();
-        }*/
+        long start = System.currentTimeMillis();
+        int count = 500;
+        Map<String, String> params = Maps.newHashMap();
+        params.put("userName", "admin");
+        params.put("token", "123");
+//        List<Thread> tLt = Lists.newArrayList();
+//        for(int i = 0; i < count; i++){
+//            Thread t = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    HttpGets.create("http://localhost:8080/demo/list").submit();
+//                }
+//            });
+//            t.start();
+//
+//            tLt.add(t);
+//        }
+//        for(Thread t : tLt){
+//            try {
+//                t.join();
+//            } catch (Exception ex) {
+//
+//            }
+//        }
+//        System.out.println(System.currentTimeMillis() - start);
 
-        for(int i = 0; i < 50; i++){
-            HttpGets.create("http://www.baidu.com").submit();
+        for(int i = 0; i < count; i++){
+            HttpGets.create("http://localhost:8080/demo/list").submit();
         }
+
+        System.out.println(System.currentTimeMillis() - start);
     }
 }

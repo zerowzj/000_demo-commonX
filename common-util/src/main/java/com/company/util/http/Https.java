@@ -38,11 +38,11 @@ abstract class Https {
     /**
      * 连接超时时间
      */
-    protected int connectTimeout = 2 * 1000;
+    protected int connectTimeout = 20 * 1000;
     /**
      * 读取超时时间
      */
-    protected int readTimeout = 2 * 1000;
+    protected int readTimeout = 20 * 1000;
 
     protected Https(String url, Map<String, String> params) {
         this.url = url;
@@ -93,6 +93,6 @@ abstract class Https {
     static {
         //连接池最大生成连接数200
         connManager.setMaxTotal(100);
-
+//        connManager.setDefaultMaxPerRoute(20);
     }
 }
