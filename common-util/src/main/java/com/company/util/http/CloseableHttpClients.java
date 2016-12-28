@@ -13,7 +13,7 @@ import java.util.concurrent.ScheduledExecutorService;
 /**
  * Created by wangzhj on 2016/12/28.
  */
-public class CloseableHttpClients {
+class CloseableHttpClients {
 
     private static final Logger logger = LoggerFactory.getLogger(CloseableHttpClients.class);
 
@@ -21,7 +21,8 @@ public class CloseableHttpClients {
 
     static {
         //连接池最大生成连接数200
-        connManager.setMaxTotal(100);
+        connManager.setMaxTotal(500);
+        logger.info("sssssssssssssssssssssssss");
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 //        scheduler.scheduleAtFixedRate(new IdleConnectionMonitor(connManager), initialDelay, heartbeatPeriod, unit);
     }
@@ -51,6 +52,9 @@ public class CloseableHttpClients {
     }
 
     public static CloseableHttpClient getHttpClient(){
-        return HttpClients.custom().setConnectionManager(connManager).build();
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setConnectionManager(connManager)
+                .build();
+        return httpClient;
     }
 }

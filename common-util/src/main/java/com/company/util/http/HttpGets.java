@@ -47,7 +47,7 @@ public class HttpGets extends Https {
 
     @Override
     public byte[] submit() {
-        CloseableHttpClient httpClient = CloseableHttpClients.createHttpClient();
+        CloseableHttpClient httpClient = CloseableHttpClients.getHttpClient();
         HttpGet httpGet = null;
         CloseableHttpResponse response = null;
         InputStream is = null;
@@ -94,26 +94,6 @@ public class HttpGets extends Https {
         Map<String, String> params = Maps.newHashMap();
         params.put("userName", "admin");
         params.put("token", "123");
-//        List<Thread> tLt = Lists.newArrayList();
-//        for(int i = 0; i < count; i++){
-//            Thread t = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    HttpGets.create("http://localhost:8080/demo/list").submit();
-//                }
-//            });
-//            t.start();
-//
-//            tLt.add(t);
-//        }
-//        for(Thread t : tLt){
-//            try {
-//                t.join();
-//            } catch (Exception ex) {
-//
-//            }
-//        }
-//        System.out.println(System.currentTimeMillis() - start);
         for(int i = 0; i < count; i++){
             HttpGets.create("http://localhost:8080/demo/list").submit();
         }
