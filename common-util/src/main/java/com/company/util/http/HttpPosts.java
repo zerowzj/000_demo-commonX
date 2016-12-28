@@ -33,7 +33,11 @@ public class HttpPosts extends Https {
         super(url, params, files);
     }
 
-    public static HttpPosts create(String url, Map<String, byte[]> files) {
+    public static HttpPosts create(String url, Map<String, String> params) {
+        return create(url, params, null);
+    }
+
+    public static HttpPosts create(Map<String, byte[]> files, String url) {
         return create(url, null, files);
     }
 
@@ -51,7 +55,7 @@ public class HttpPosts extends Https {
     @Override
     public byte[] submit() {
         CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(poolingConnManager)
+                .setConnectionManager(connManager)
                 .build();
         HttpPost httpPost = null;
         CloseableHttpResponse response = null;
@@ -65,6 +69,7 @@ public class HttpPosts extends Https {
             } else if (bodyFormat == BodyFormat.JSON) {
                 httpEntity = Entitys.createJsonEntity(params, charset);
             } else if (bodyFormat == BodyFormat.MULTIPART) {
+                Preconditions.checkArgument(!(files == null || files.isEmpty()), "upload file is not null or empty");
                 httpEntity = Entitys.createMultipartEntity(params, files);
             }
             httpPost = new HttpPost(url);

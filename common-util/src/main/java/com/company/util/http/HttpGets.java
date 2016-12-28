@@ -44,16 +44,18 @@ public class HttpGets extends Https {
     @Override
     public byte[] submit() {
         CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(poolingConnManager)
+                .setConnectionManager(connManager)
                 .build();
         HttpGet httpGet = null;
         CloseableHttpResponse response = null;
         InputStream is = null;
         byte[] data = null;
         try {
-            URI uri = new URIBuilder(url)
-                    .setParameters(NVPairs.pairs(params))
-                    .build();
+            URIBuilder builder = new URIBuilder(url);
+            if(params != null && !params.isEmpty()){
+                builder.setParameters(NVPairs.pairs(params));
+            }
+            URI uri = builder.build();
             httpGet = new HttpGet(uri);
             logger.info("url===> {}", httpGet.getURI().toString());
 
@@ -77,10 +79,25 @@ public class HttpGets extends Https {
             ex.printStackTrace();
         } finally {
             CloseUtil.closeQuietly(is);
-            CloseUtil.closeQuietly(response);
-            releaseConnection(httpGet);
-            CloseUtil.closeQuietly(httpClient);
+//            CloseUtil.closeQuietly(response);
+//            releaseConnection(httpGet);
+//            CloseUtil.closeQuietly(httpClient);
         }
         return data;
+    }
+
+    public static void main(String[] args) {
+       /* for(int i = 0; i < 5; i++){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    HttpGets.create("http://www.baidu.com").submit();
+                }
+            }).start();
+        }*/
+
+        for(int i = 0; i < 50; i++){
+            HttpGets.create("http://www.baidu.com").submit();
+        }
     }
 }

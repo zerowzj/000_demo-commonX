@@ -2,10 +2,14 @@ package com.company.util.http;
 
 import com.google.common.base.Charsets;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 
 import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Http请求
@@ -39,13 +43,6 @@ abstract class Https {
      * 读取超时时间
      */
     protected int readTimeout = 2 * 1000;
-
-    protected static PoolingHttpClientConnectionManager poolingConnManager = new PoolingHttpClientConnectionManager();
-
-    static {
-        //连接池最大生成连接数200
-        poolingConnManager.setMaxTotal(100);
-    }
 
     protected Https(String url, Map<String, String> params) {
         this.url = url;
@@ -90,4 +87,12 @@ abstract class Https {
      * @return byte[]
      */
     public abstract byte[] submit();
+
+    protected static PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
+
+    static {
+        //连接池最大生成连接数200
+        connManager.setMaxTotal(100);
+
+    }
 }

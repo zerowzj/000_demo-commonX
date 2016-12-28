@@ -23,6 +23,6 @@ abstract class NVPairs {
         for (Map.Entry<String, String> entry : params.entrySet()) {
             pairLt.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
         }
-        return pairLt;
+        return null;
     }
 }
