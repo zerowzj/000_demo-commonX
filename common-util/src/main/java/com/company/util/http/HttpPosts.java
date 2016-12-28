@@ -3,6 +3,8 @@ package com.company.util.http;
 import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.http.HttpEntity;
@@ -16,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -101,37 +104,32 @@ public class HttpPosts extends Https {
     }
 
     public static void main(String[] args) {
-//        long start = System.currentTimeMillis();
-//        int count = 500;
-//        final Map<String, String> params = Maps.newHashMap();
-//        params.put("userName", "admin");
-//        params.put("token", "123");
-//        List<Thread> tLt = Lists.newArrayList();
-//        for(int i = 0; i < count; i++){
-//            Thread t = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    HttpPosts.create("http://localhost:8080/demo/list", params)
-//                            .bodyFormat(BodyFormat.JSON)
-//                            .submit();
-//                }
-//            });
-//            t.start();
-//
-//            tLt.add(t);
-//        }
-//        for(Thread t : tLt){
-//            try {
-//                t.join();
-//            } catch (Exception ex) {
-//
-//            }
-//        }
-//        System.out.println(System.currentTimeMillis() - start);
+        long start = System.currentTimeMillis();
+        int count = 5000;
+        final Map<String, String> params = Maps.newHashMap();
+        params.put("userName", "admin");
+        params.put("token", "123");
+        List<Thread> tLt = Lists.newArrayList();
+        for(int i = 0; i < count; i++){
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    HttpPosts.create("http://localhost:8080/demo/list", params)
+                            .bodyFormat(BodyFormat.JSON)
+                            .submit();
+                }
+            });
+            t.start();
 
-        for(int i = 0; i < 100; i++){
-            System.out.println(RandomUtils.nextInt(0, 3));
+            tLt.add(t);
         }
+        for(Thread t : tLt){
+            try {
+                t.join();
+            } catch (Exception ex) {
 
+            }
+        }
+        System.out.println(System.currentTimeMillis() - start);
     }
 }

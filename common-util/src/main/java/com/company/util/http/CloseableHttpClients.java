@@ -1,6 +1,5 @@
 package com.company.util.http;
 
-import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -9,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wangzhj on 2016/12/28.
@@ -24,28 +24,24 @@ class CloseableHttpClients {
         connManager.setMaxTotal(500);
         logger.info("sssssssssssssssssssssssss");
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-//        scheduler.scheduleAtFixedRate(new IdleConnectionMonitor(connManager), initialDelay, heartbeatPeriod, unit);
+        scheduler.scheduleAtFixedRate(new IdleMonitor(), 1000, 5000, TimeUnit.MILLISECONDS);
     }
 
-    //    private static class IdleConnectionMonitor implements Runnable {
-//        PoolingHttpClientConnectionManager connManager;
-//
-//        public IdleConnectionMonitor(PoolingHttpClientConnectionManager connectionManager) {
-//            this.connManager = connectionManager;
-//        }
-//
-//        @Override
-//        public void run() {
-//
-//            // Close expired connections
+    private static class IdleMonitor implements Runnable {
+
+        @Override
+        public void run() {
+            logger.info("监控");
+
+            // Close expired connections
 //            connManager.closeExpiredConnections();
-//            // Optionally, close connections
-//            // that have been idle longer than readTimeout*2 MILLISECONDS
+            // Optionally, close connections
+            // that have been idle longer than readTimeout*2 MILLISECONDS
 //            connManager.closeIdleConnections(readTimeout * 2, TimeUnit.MILLISECONDS);
 //            logger.info("release end connect count:=" + connManager.getTotalStats().getAvailable());
-//
-//        }
-//    }
+
+        }
+    }
 
     /**
      * 创建HttpClient
