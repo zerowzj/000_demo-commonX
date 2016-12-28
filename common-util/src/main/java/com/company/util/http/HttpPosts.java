@@ -55,7 +55,7 @@ public class HttpPosts extends Https {
     @Override
     public byte[] submit() {
         CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(connManager)
+                .setConnectionManager(null)
                 .build();
         HttpPost httpPost = null;
         CloseableHttpResponse response = null;

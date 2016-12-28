@@ -87,12 +87,4 @@ abstract class Https {
      * @return byte[]
      */
     public abstract byte[] submit();
-
-    protected static PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
-
-    static {
-        //连接池最大生成连接数200
-        connManager.setMaxTotal(100);
-//        connManager.setDefaultMaxPerRoute(20);
-    }
 }

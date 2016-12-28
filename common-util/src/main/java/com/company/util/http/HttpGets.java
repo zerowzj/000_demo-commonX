@@ -12,6 +12,7 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
@@ -46,9 +47,7 @@ public class HttpGets extends Https {
 
     @Override
     public byte[] submit() {
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(connManager)
-                .build();
+        CloseableHttpClient httpClient = CloseableHttpClients.createHttpClient();
         HttpGet httpGet = null;
         CloseableHttpResponse response = null;
         InputStream is = null;
@@ -115,7 +114,6 @@ public class HttpGets extends Https {
 //            }
 //        }
 //        System.out.println(System.currentTimeMillis() - start);
-
         for(int i = 0; i < count; i++){
             HttpGets.create("http://localhost:8080/demo/list").submit();
         }
