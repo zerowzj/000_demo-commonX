@@ -4,13 +4,13 @@ import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.io.ByteStreams;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +27,7 @@ public class HttpPosts extends Https {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
+    /** 请求实体格式 */
     private BodyFormat bodyFormat = BodyFormat.FORM;
 
     private HttpPosts(String url, Map<String, String> params, Map<String, byte[]> files) {
@@ -38,12 +39,12 @@ public class HttpPosts extends Https {
     }
 
     public static HttpPosts create(Map<String, byte[]> files, String url) {
+        Preconditions.checkArgument(!(files == null || files.isEmpty()), "files is not null or empty");
         return create(url, null, files);
     }
 
     public static HttpPosts create(String url, Map<String, String> params, Map<String, byte[]> files) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
-        Preconditions.checkArgument(!(files == null || files.isEmpty()), "files is not null or empty");
         return new HttpPosts(url, params, files);
     }
 
@@ -54,9 +55,7 @@ public class HttpPosts extends Https {
 
     @Override
     public byte[] submit() {
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(null)
-                .build();
+        CloseableHttpClient httpClient = CloseableHttpClients.getHttpClient();
         HttpPost httpPost = null;
         CloseableHttpResponse response = null;
         InputStream is = null;
@@ -92,12 +91,47 @@ public class HttpPosts extends Https {
             CloseUtil.closeQuietly(is);
             CloseUtil.closeQuietly(response);
             releaseConnection(httpPost);
-            CloseUtil.closeQuietly(httpClient);
+//            CloseUtil.closeQuietly(httpClient);
         }
         return result;
     }
 
     public enum BodyFormat {
         FORM, JSON, MULTIPART
+    }
+
+    public static void main(String[] args) {
+//        long start = System.currentTimeMillis();
+//        int count = 500;
+//        final Map<String, String> params = Maps.newHashMap();
+//        params.put("userName", "admin");
+//        params.put("token", "123");
+//        List<Thread> tLt = Lists.newArrayList();
+//        for(int i = 0; i < count; i++){
+//            Thread t = new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    HttpPosts.create("http://localhost:8080/demo/list", params)
+//                            .bodyFormat(BodyFormat.JSON)
+//                            .submit();
+//                }
+//            });
+//            t.start();
+//
+//            tLt.add(t);
+//        }
+//        for(Thread t : tLt){
+//            try {
+//                t.join();
+//            } catch (Exception ex) {
+//
+//            }
+//        }
+//        System.out.println(System.currentTimeMillis() - start);
+
+        for(int i = 0; i < 100; i++){
+            System.out.println(RandomUtils.nextInt(0, 3));
+        }
+
     }
 }

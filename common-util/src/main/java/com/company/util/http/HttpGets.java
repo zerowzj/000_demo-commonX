@@ -3,8 +3,6 @@ package com.company.util.http;
 import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -12,15 +10,12 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.net.URI;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,7 +42,7 @@ public class HttpGets extends Https {
 
     @Override
     public byte[] submit() {
-        CloseableHttpClient httpClient = CloseableHttpClients.getHttpClient();
+        CloseableHttpClient httpClient = CloseableHttpClients.createHttpClient();
         HttpGet httpGet = null;
         CloseableHttpResponse response = null;
         InputStream is = null;
@@ -83,21 +78,8 @@ public class HttpGets extends Https {
             CloseUtil.closeQuietly(is);
             CloseUtil.closeQuietly(response);
             releaseConnection(httpGet);
-//            CloseUtil.closeQuietly(httpClient);
+            CloseUtil.closeQuietly(httpClient);
         }
         return data;
-    }
-
-    public static void main(String[] args) {
-        long start = System.currentTimeMillis();
-        int count = 500;
-        Map<String, String> params = Maps.newHashMap();
-        params.put("userName", "admin");
-        params.put("token", "123");
-        for(int i = 0; i < count; i++){
-            HttpGets.create("http://localhost:8080/demo/list").submit();
-        }
-
-        System.out.println(System.currentTimeMillis() - start);
     }
 }

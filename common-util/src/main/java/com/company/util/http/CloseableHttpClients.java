@@ -47,11 +47,21 @@ class CloseableHttpClients {
 //        }
 //    }
 
-    public static CloseableHttpClient createHttpClient(){
+    /**
+     * 创建HttpClient
+     *
+     * @return CloseableHttpClient
+     */
+    public static CloseableHttpClient createHttpClient() {
         return HttpClients.createDefault();
     }
 
-    public static CloseableHttpClient getHttpClient(){
+    /**
+     * 获取HttpClient
+     *
+     * @return CloseableHttpClient
+     */
+    public static CloseableHttpClient getHttpClient() {
         CloseableHttpClient httpClient = HttpClients.custom()
                 .setConnectionManager(connManager)
                 .build();
