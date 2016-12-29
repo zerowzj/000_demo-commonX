@@ -1,6 +1,7 @@
 package com.company.util.http;
 
 import com.company.util.JsonUtil;
+import com.google.common.collect.Lists;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -8,6 +9,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -26,7 +28,7 @@ abstract class Entitys {
      * @return HttpEntity
      */
     public static HttpEntity createUrlEncodedFormEntity(Map<String, String> params, Charset charset) {
-        List<NameValuePair> pairLt = NVPairs.pairs(params);
+        List<NameValuePair> pairLt = pairs(params);
         UrlEncodedFormEntity formEntity = null;
         try {
             formEntity = new UrlEncodedFormEntity(pairLt, charset);
@@ -78,5 +80,16 @@ abstract class Entitys {
         }
         HttpEntity httpEntity = builder.build();
         return httpEntity;
+    }
+
+    public static List<NameValuePair> pairs(Map<String, String> params) {
+        List<NameValuePair> pairLt = Lists.newArrayList();
+        if (params == null) {
+            return pairLt;
+        }
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            pairLt.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+        }
+        return pairLt;
     }
 }

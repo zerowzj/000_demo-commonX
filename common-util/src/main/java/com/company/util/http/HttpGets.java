@@ -63,7 +63,7 @@ public class HttpGets extends Https {
             //===>Url
             URIBuilder builder = new URIBuilder(url);
             if (paramMap != null && !paramMap.isEmpty()) {
-                builder.setParameters(NVPairs.pairs(paramMap));
+                builder.setParameters(Entitys.pairs(paramMap));
             }
             URI uri = builder.build();
             //===>Get
