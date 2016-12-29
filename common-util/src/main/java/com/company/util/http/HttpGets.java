@@ -118,17 +118,19 @@ public class HttpGets extends Https {
 
     @Override
     public void asyncSubmit() {
-        CloseableHttpAsyncClient httpClient = CloseableHttpClients.createHttpAsyncClient();
-        httpClient.start();
+        CloseableHttpAsyncClient httpAsyncClient = CloseableHttpClients.createHttpAsyncClient();
+        httpAsyncClient.start();
 
+        HttpGet httpGet = null;
         HttpResponse response = null;
         InputStream is = null;
         byte[] data = null;
         try {
-            HttpGet httpGet = createHttpGet();
-            logger.info("url===> {}", httpGet.getURI().toString());
             //===>请求
-            Future<HttpResponse> future = httpClient.execute(httpGet, null);
+            httpGet = createHttpGet();
+            logger.info("url===> {}", httpGet.getURI().toString());
+            //===>
+            Future<HttpResponse> future = httpAsyncClient.execute(httpGet, null);
             response = future.get();// 获取结果
             //===>响应
             StatusLine statusLine = response.getStatusLine();
@@ -142,7 +144,8 @@ public class HttpGets extends Https {
             ex.printStackTrace();
         } finally {
             CloseUtil.closeQuietly(is);
-            CloseUtil.closeQuietly(httpClient);
+            HttpClientUtils.closeQuietly(response);
+            releaseConnection(httpGet);
         }
     }
 }
