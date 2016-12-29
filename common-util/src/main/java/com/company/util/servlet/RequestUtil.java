@@ -1,5 +1,7 @@
 package com.company.util.servlet;
 
+import com.company.util.CloseUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -111,20 +113,8 @@ public abstract class RequestUtil {
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            CloseUtil.closeQuietly(is);
+            CloseUtil.closeQuietly(reader);
         }
         return sb.toString();
     }

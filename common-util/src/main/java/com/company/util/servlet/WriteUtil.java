@@ -1,5 +1,6 @@
 package com.company.util.servlet;
 
+import com.company.util.CloseUtil;
 import com.company.util.JsonUtil;
 
 import javax.servlet.http.HttpServletResponse;
@@ -50,9 +51,7 @@ public class WriteUtil {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            if (out != null) {
-                out.close();
-            }
+            CloseUtil.closeQuietly(out);
         }
     }
 }
