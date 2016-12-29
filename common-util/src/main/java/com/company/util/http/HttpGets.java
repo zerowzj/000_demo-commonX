@@ -48,12 +48,13 @@ public class HttpGets extends Https {
         InputStream is = null;
         byte[] data = null;
         try {
-            //URL
+            //Url
             URIBuilder builder = new URIBuilder(url);
             if(paramMap != null && !paramMap.isEmpty()){
                 builder.setParameters(NVPairs.pairs(paramMap));
             }
             URI uri = builder.build();
+            //Get
             httpGet = new HttpGet(uri);
             RequestConfig requestConfig = RequestConfig.custom()
                     .setConnectTimeout(connectTimeout)
@@ -62,10 +63,9 @@ public class HttpGets extends Https {
             httpGet.setConfig(requestConfig);
             //头部
             if(headerMap != null && !headerMap.isEmpty()){
-//                httpGet.setHeaders();
+                httpGet.setHeaders(Headers.create(headerMap));
             }
             logger.info("url===> {}", httpGet.getURI().toString());
-
             //请求
             response = httpClient.execute(httpGet);
             //响应

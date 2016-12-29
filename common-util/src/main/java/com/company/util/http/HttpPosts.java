@@ -64,7 +64,7 @@ public class HttpPosts extends Https {
         InputStream is = null;
         byte[] result = null;
         try {
-            //生成实体
+            //Entity
             HttpEntity httpEntity = null;
             if (bodyFormat == BodyFormat.FORM) {
                 httpEntity = Entitys.createUrlEncodedFormEntity(paramMap, charset);
@@ -74,13 +74,18 @@ public class HttpPosts extends Https {
                 Preconditions.checkArgument(!(fileMap == null || fileMap.isEmpty()), "upload file is not null or empty");
                 httpEntity = Entitys.createMultipartEntity(paramMap, fileMap);
             }
+            //Post
             httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
             logger.info("url===> {}", httpPost.getURI().toString());
             logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
-
+            //头部
+            if(headerMap != null && !headerMap.isEmpty()){
+                httpPost.setHeaders(Headers.create(headerMap));
+            }
+            //请求
             response = httpClient.execute(httpPost);
-
+            //响应
             StatusLine statusLine = response.getStatusLine();
             int statusCode = statusLine.getStatusCode();
             logger.info("status code===> {}", statusCode);
