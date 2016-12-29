@@ -110,7 +110,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient-cache</artifactId>
+            <artifactId>httpasyncclient</artifactId>
         </dependency>
     </dependencies>
     <!-- ==================== -->
