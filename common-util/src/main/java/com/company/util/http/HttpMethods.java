@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-abstract class Https {
+abstract class HttpMethods {
 
     /** URL */
     protected String url = null;
@@ -31,33 +31,33 @@ abstract class Https {
     /** 读取超时时间 */
     protected int readTimeout = 20 * 1000;
 
-    protected Https(String url, Map<String, String> paramMap) {
+    protected HttpMethods(String url, Map<String, String> paramMap) {
         this.url = url;
         this.paramMap = paramMap;
     }
 
-    protected Https(String url, Map<String, String> paramMap, Map<String, byte[]> fileMap) {
+    protected HttpMethods(String url, Map<String, String> paramMap, Map<String, byte[]> fileMap) {
         this.url = url;
         this.paramMap = paramMap;
         this.fileMap = fileMap;
     }
 
-    public final Https connectTimeout(int connectTimeout) {
+    public final HttpMethods connectTimeout(int connectTimeout) {
         this.connectTimeout = connectTimeout;
         return this;
     }
 
-    public final Https readTimeout(int readTimeout) {
+    public final HttpMethods readTimeout(int readTimeout) {
         this.readTimeout = readTimeout;
         return this;
     }
 
-    public final Https charset(Charset charset) {
+    public final HttpMethods charset(Charset charset) {
         this.charset = charset;
         return this;
     }
 
-    public final Https headers(Map<String, String> headerMap) {
+    public final HttpMethods headers(Map<String, String> headerMap) {
         this.headerMap = headerMap;
         return this;
     }

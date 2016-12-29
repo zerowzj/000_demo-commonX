@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public class HttpPosts extends Https {
+public class HttpPosts extends HttpMethods {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 

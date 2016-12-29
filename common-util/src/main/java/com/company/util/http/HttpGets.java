@@ -27,7 +27,7 @@ import java.util.concurrent.Future;
  *
  * @author wangzhj
  */
-public class HttpGets extends Https {
+public class HttpGets extends HttpMethods {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
 
