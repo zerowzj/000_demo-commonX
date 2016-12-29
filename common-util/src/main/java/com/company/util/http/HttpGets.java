@@ -86,16 +86,4 @@ public class HttpGets extends Https {
         }
         return data;
     }
-
-    public static void main(String[] args) {
-        for(int i = 0; i < 100; i++){
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    HttpGets.create("http://www.baidu.com").submit();
-                }
-            });
-            t.start();
-        }
-    }
 }

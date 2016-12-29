@@ -107,34 +107,4 @@ public class HttpPosts extends Https {
     public enum BodyFormat {
         FORM, JSON, MULTIPART
     }
-
-    public static void main(String[] args) {
-        long start = System.currentTimeMillis();
-        int count = 5000;
-        final Map<String, String> params = Maps.newHashMap();
-        params.put("userName", "admin");
-        params.put("token", "123");
-        List<Thread> tLt = Lists.newArrayList();
-        for(int i = 0; i < count; i++){
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    HttpPosts.create("http://localhost:8080/demo/list", params)
-                            .bodyFormat(BodyFormat.JSON)
-                            .submit();
-                }
-            });
-            t.start();
-
-            tLt.add(t);
-        }
-        for(Thread t : tLt){
-            try {
-                t.join();
-            } catch (Exception ex) {
-
-            }
-        }
-        System.out.println(System.currentTimeMillis() - start);
-    }
 }
