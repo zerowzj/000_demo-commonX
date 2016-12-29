@@ -61,7 +61,7 @@ public class HttpGets extends Https {
                     .setSocketTimeout(readTimeout)
                     .build();
             httpGet.setConfig(requestConfig);
-            httpGet.releaseConnection();
+//            httpGet.releaseConnection();
 
             response = httpClient.execute(httpGet);
 
@@ -81,5 +81,17 @@ public class HttpGets extends Https {
             CloseUtil.closeQuietly(httpClient);
         }
         return data;
+    }
+
+    public static void main(String[] args) {
+        for(int i = 0; i < 100; i++){
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    HttpGets.create("http://www.sohu.com").submit();
+                }
+            });
+            t.start();
+        }
     }
 }
