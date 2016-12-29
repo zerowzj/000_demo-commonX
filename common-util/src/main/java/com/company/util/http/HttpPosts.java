@@ -67,12 +67,12 @@ public class HttpPosts extends Https {
             //生成实体
             HttpEntity httpEntity = null;
             if (bodyFormat == BodyFormat.FORM) {
-                httpEntity = Entitys.createUrlEncodedFormEntity(params, charset);
+                httpEntity = Entitys.createUrlEncodedFormEntity(paramMap, charset);
             } else if (bodyFormat == BodyFormat.JSON) {
-                httpEntity = Entitys.createJsonEntity(params, charset);
+                httpEntity = Entitys.createJsonEntity(paramMap, charset);
             } else if (bodyFormat == BodyFormat.MULTIPART) {
-                Preconditions.checkArgument(!(files == null || files.isEmpty()), "upload file is not null or empty");
-                httpEntity = Entitys.createMultipartEntity(params, files);
+                Preconditions.checkArgument(!(fileMap == null || fileMap.isEmpty()), "upload file is not null or empty");
+                httpEntity = Entitys.createMultipartEntity(paramMap, fileMap);
             }
             httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);

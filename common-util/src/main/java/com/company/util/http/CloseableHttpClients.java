@@ -21,7 +21,7 @@ class CloseableHttpClients {
 
     static {
         //连接池最大生成连接数200
-        connManager.setMaxTotal(500);
+        connManager.setMaxTotal(10);
         logger.info("sssssssssssssssssssssssss");
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new IdleMonitor(), 1000, 5000, TimeUnit.MILLISECONDS);

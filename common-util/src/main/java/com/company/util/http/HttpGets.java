@@ -48,23 +48,27 @@ public class HttpGets extends Https {
         InputStream is = null;
         byte[] data = null;
         try {
+            //URL
             URIBuilder builder = new URIBuilder(url);
-            if(params != null && !params.isEmpty()){
-                builder.setParameters(NVPairs.pairs(params));
+            if(paramMap != null && !paramMap.isEmpty()){
+                builder.setParameters(NVPairs.pairs(paramMap));
             }
             URI uri = builder.build();
             httpGet = new HttpGet(uri);
-            logger.info("url===> {}", httpGet.getURI().toString());
-
             RequestConfig requestConfig = RequestConfig.custom()
                     .setConnectTimeout(connectTimeout)
                     .setSocketTimeout(readTimeout)
                     .build();
             httpGet.setConfig(requestConfig);
-//            httpGet.releaseConnection();
+            //头部
+            if(headerMap != null && !headerMap.isEmpty()){
+//                httpGet.setHeaders();
+            }
+            logger.info("url===> {}", httpGet.getURI().toString());
 
+            //请求
             response = httpClient.execute(httpGet);
-
+            //响应
             StatusLine statusLine = response.getStatusLine();
             int statusCode = statusLine.getStatusCode();
             logger.info("status code===> {}", statusCode);
@@ -88,7 +92,7 @@ public class HttpGets extends Https {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    HttpGets.create("http://www.sohu.com").submit();
+                    HttpGets.create("http://www.baidu.com").submit();
                 }
             });
             t.start();
