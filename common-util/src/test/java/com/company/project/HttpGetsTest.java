@@ -9,15 +9,16 @@ import org.junit.Test;
 public class HttpGetsTest {
 
     @Test
-    public void test() {
-        for(int i = 0; i < 100; i++){
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    HttpGets.create("http://www.baidu.com").submit();
-                }
-            });
-            t.start();
+    public void test_submit() {
+        for (int i = 0; i < 100; i++) {
+            HttpGets.create("http://www.baidu.com").submit();
+        }
+    }
+
+    @Test
+    public void test_asyncSubmit() {
+        for (int i = 0; i < 100; i++) {
+            HttpGets.create("http://www.baidu.com").asyncSubmit();
         }
     }
 }

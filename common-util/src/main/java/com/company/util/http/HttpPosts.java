@@ -26,7 +26,9 @@ public class HttpPosts extends Https {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
-    /** 请求实体格式 */
+    /**
+     * 请求实体格式
+     */
     private BodyFormat bodyFormat = BodyFormat.FORM;
 
     private HttpPosts(String url, Map<String, String> params, Map<String, byte[]> files) {
@@ -69,7 +71,7 @@ public class HttpPosts extends Https {
             httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
             //===>头部
-            if(headerMap != null && !headerMap.isEmpty()){
+            if (headerMap != null && !headerMap.isEmpty()) {
                 httpPost.setHeaders(Headers.create(headerMap));
             }
         } catch (Exception ex) {
@@ -80,7 +82,7 @@ public class HttpPosts extends Https {
 
     @Override
     public byte[] submit() {
-        CloseableHttpClient httpClient = CloseableHttpClients.getHttpClient();
+        CloseableHttpClient httpClient = SyncClients.getHttpClient();
 
         HttpPost httpPost = null;
         CloseableHttpResponse response = null;

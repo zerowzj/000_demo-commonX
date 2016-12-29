@@ -85,7 +85,7 @@ public class HttpGets extends Https {
 
     @Override
     public byte[] submit() {
-        CloseableHttpClient httpClient = CloseableHttpClients.createHttpClient();
+        CloseableHttpClient httpClient = SyncClients.createHttpClient();
 
         HttpGet httpGet = null;
         CloseableHttpResponse response = null;
@@ -118,7 +118,7 @@ public class HttpGets extends Https {
 
     @Override
     public void asyncSubmit() {
-        CloseableHttpAsyncClient httpAsyncClient = CloseableHttpClients.createHttpAsyncClient();
+        CloseableHttpAsyncClient httpAsyncClient = AsyncClients.createHttpClient();
         httpAsyncClient.start();
 
         HttpGet httpGet = null;
