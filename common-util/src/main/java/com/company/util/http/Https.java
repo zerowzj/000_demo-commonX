@@ -74,9 +74,16 @@ abstract class Https {
     }
 
     /**
-     * 提交
+     * 同步提交
      *
      * @return byte[]
      */
     public abstract byte[] submit();
+
+    /**
+     * 异步提交
+     *
+     * @return byte[]
+     */
+    public abstract void asyncSubmit();
 }

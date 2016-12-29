@@ -3,10 +3,7 @@ package com.company.util.http;
 import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
-import org.apache.commons.lang3.RandomUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -18,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,15 +52,10 @@ public class HttpPosts extends Https {
         return this;
     }
 
-    @Override
-    public byte[] submit() {
-        CloseableHttpClient httpClient = CloseableHttpClients.getHttpClient();
+    private HttpPost createHttpPost() {
         HttpPost httpPost = null;
-        CloseableHttpResponse response = null;
-        InputStream is = null;
-        byte[] result = null;
         try {
-            //Entity
+            //===>Entity
             HttpEntity httpEntity = null;
             if (bodyFormat == BodyFormat.FORM) {
                 httpEntity = Entitys.createUrlEncodedFormEntity(paramMap, charset);
@@ -74,16 +65,33 @@ public class HttpPosts extends Https {
                 Preconditions.checkArgument(!(fileMap == null || fileMap.isEmpty()), "upload file is not null or empty");
                 httpEntity = Entitys.createMultipartEntity(paramMap, fileMap);
             }
-            //Post
+            //===>Post
             httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
-            logger.info("url===> {}", httpPost.getURI().toString());
-            logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
-            //头部
+            //===>头部
             if(headerMap != null && !headerMap.isEmpty()){
                 httpPost.setHeaders(Headers.create(headerMap));
             }
-            //请求
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return httpPost;
+    }
+
+    @Override
+    public byte[] submit() {
+        CloseableHttpClient httpClient = CloseableHttpClients.getHttpClient();
+
+        HttpPost httpPost = null;
+        CloseableHttpResponse response = null;
+        InputStream is = null;
+        byte[] data = null;
+        try {
+            //===>请求
+            httpPost = createHttpPost();
+            logger.info("url===> {}", httpPost.getURI().toString());
+            logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
+            //===>
             response = httpClient.execute(httpPost);
             //响应
             StatusLine statusLine = response.getStatusLine();
@@ -91,17 +99,22 @@ public class HttpPosts extends Https {
             logger.info("status code===> {}", statusCode);
             if (statusCode == HttpStatus.SC_OK) {
                 is = response.getEntity().getContent();
-                result = ByteStreams.toByteArray(is);
+                data = ByteStreams.toByteArray(is);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             CloseUtil.closeQuietly(is);
             CloseUtil.closeQuietly(response);
+            CloseUtil.closeQuietly(httpClient);
             releaseConnection(httpPost);
-//            CloseUtil.closeQuietly(httpClient);
         }
-        return result;
+        return data;
+    }
+
+    @Override
+    public void asyncSubmit() {
+
     }
 
     public enum BodyFormat {
