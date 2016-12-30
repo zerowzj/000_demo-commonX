@@ -1,7 +1,9 @@
 package com.study.guava.cache;
 
+import com.google.common.base.Ticker;
 import com.google.common.cache.*;
 import com.google.common.util.concurrent.ListenableFuture;
+import org.apache.commons.lang3.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,29 +17,25 @@ public class CacheLoaderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(CacheLoaderTest.class);
 
-    private static CacheLoader<String, String> cacheLoader = new CacheLoader<String, String>() {
-        @Override
-        public String load(String key) throws Exception {
-            logger.info("加载[{}]的值", key);
-            String value = "hello " + key + "!";
-            return value;
-        }
-
-        @Override
-        public ListenableFuture<String> reload(String key, String oldValue) throws Exception {
-            return super.reload(key, oldValue);
-        }
-
-        @Override
-        public Map<String, String> loadAll(Iterable<? extends String> keys) throws Exception {
-            return super.loadAll(keys);
-        }
-    };
-
     private static LoadingCache<String, String> cache = CacheBuilder.newBuilder()
 //            .refreshAfterWrite(10, TimeUnit.SECONDS)
 //            .expireAfterWrite(10, TimeUnit.SECONDS)
-            .build(cacheLoader);
+            .expireAfterAccess(10, TimeUnit.SECONDS)
+            .ticker(Ticker.systemTicker())
+            .removalListener(new RemovalListener<Object, Object>() {
+                @Override
+                public void onRemoval(RemovalNotification<Object, Object> notification) {
+
+                }
+            })
+            .build(new CacheLoader<String, String>() {
+                @Override
+                public String load(String key) throws Exception {
+                    logger.info("加载[{}]的值", key);
+                    String value = "hello " + key + "!";
+                    return String.valueOf(RandomUtils.nextInt(0, 10));
+                }
+            });
 
     public static void main(String[] args) throws Exception {
         while (true) {
