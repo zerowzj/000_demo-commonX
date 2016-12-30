@@ -1,8 +1,17 @@
 package com.company.util.http;
 
+import com.company.util.CloseUtil;
 import com.google.common.base.Charsets;
+import com.google.common.io.ByteStreams;
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.Map;
 
@@ -13,23 +22,34 @@ import java.util.Map;
  */
 abstract class HttpMethods {
 
-    /** URL */
-    protected String url = null;
+    private static final Logger logger = LoggerFactory.getLogger(HttpMethods.class);
 
-    /** 请求参数 */
+    //==================== 请求 ====================
+    //URL
+    protected String url = null;
+    //请求参数
     protected Map<String, String> paramMap = null;
-    /** 上传文件 */
+    //上传文件
     protected Map<String, byte[]> fileMap = null;
 
-    /** 编码 */
+    //编码
     protected Charset charset = Charsets.UTF_8;
-    /** 请求头 */
+    //请求头
     protected Map<String, String> headerMap = null;
 
-    /** 连接超时时间 */
+    //==================== 配置 ====================
+    //连接超时时间
     protected int connectTimeout = 20 * 1000;
-    /** 读取超时时间 */
+    //读取超时时间
     protected int readTimeout = 20 * 1000;
+
+    //==================== 响应 ====================
+    //状态码
+    private int statusCode;
+    //数据
+    private byte[] data = null;
+    //响应头
+    private Header[] headers = null;
 
     protected HttpMethods(String url, Map<String, String> paramMap) {
         this.url = url;
@@ -62,14 +82,29 @@ abstract class HttpMethods {
         return this;
     }
 
-    /**
-     * 释放连接
-     *
-     * @param httpRequest
-     */
-    public final void releaseConnection(HttpRequestBase httpRequest) {
+    protected final void releaseConnection(HttpRequestBase httpRequest) {
         if (httpRequest != null) {
             httpRequest.releaseConnection();
+        }
+    }
+
+    protected final void parseHttpResponse(HttpResponse response) {
+        InputStream is = null;
+        try {
+            if (response != null) {
+                StatusLine statusLine = response.getStatusLine();
+                statusCode = statusLine.getStatusCode();
+                logger.info("status code===> {}", statusCode);
+                if (statusCode == HttpStatus.SC_OK) {
+                    is = response.getEntity().getContent();
+                    data = ByteStreams.toByteArray(is);
+                }
+                headers = response.getAllHeaders();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            CloseUtil.closeQuietly(is);
         }
     }
 
@@ -78,12 +113,22 @@ abstract class HttpMethods {
      *
      * @return byte[]
      */
-    public abstract byte[] submit();
+    public abstract HttpMethods submit();
 
     /**
      * 异步提交
      *
      * @return byte[]
      */
-    public abstract void asyncSubmit();
+    public abstract HttpMethods asyncSubmit();
+
+    /**
+     * 获取结果
+     *
+     * @return HttpResult
+     */
+    public final HttpResult get() {
+        HttpResult httpResult = new HttpResult(statusCode, data, headers);
+        return httpResult;
+    }
 }

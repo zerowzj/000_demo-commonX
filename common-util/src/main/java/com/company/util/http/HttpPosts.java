@@ -88,13 +88,11 @@ public class HttpPosts extends HttpMethods {
     }
 
     @Override
-    public byte[] submit() {
+    public HttpPosts submit() {
         CloseableHttpClient httpClient = SyncClients.getHttpClient();
 
         HttpPost httpPost = null;
         CloseableHttpResponse response = null;
-        InputStream is = null;
-        byte[] data = null;
         try {
             //===>请求
             httpPost = buildHttpPost();
@@ -103,27 +101,20 @@ public class HttpPosts extends HttpMethods {
             //===>
             response = httpClient.execute(httpPost);
             //===>响应
-            StatusLine statusLine = response.getStatusLine();
-            int statusCode = statusLine.getStatusCode();
-            logger.info("status code===> {}", statusCode);
-            if (statusCode == HttpStatus.SC_OK) {
-                is = response.getEntity().getContent();
-                data = ByteStreams.toByteArray(is);
-            }
+            parseHttpResponse(response);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            CloseUtil.closeQuietly(is);
             CloseUtil.closeQuietly(response);
             CloseUtil.closeQuietly(httpClient);
             releaseConnection(httpPost);
         }
-        return data;
+        return this;
     }
 
     @Override
-    public void asyncSubmit() {
-
+    public HttpMethods asyncSubmit() {
+        return this;
     }
 
     /**

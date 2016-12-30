@@ -87,13 +87,10 @@ public class HttpGets extends HttpMethods {
     }
 
     @Override
-    public byte[] submit() {
+    public HttpGets submit() {
         CloseableHttpClient httpClient = SyncClients.createHttpClient();
-
         HttpGet httpGet = null;
         CloseableHttpResponse response = null;
-        InputStream is = null;
-        byte[] data = null;
         try {
             //===>请求
             httpGet = buildHttpGet();
@@ -101,26 +98,19 @@ public class HttpGets extends HttpMethods {
             //===>
             response = httpClient.execute(httpGet);
             //===>响应
-            StatusLine statusLine = response.getStatusLine();
-            int statusCode = statusLine.getStatusCode();
-            logger.info("status code===> {}", statusCode);
-            if (statusCode == HttpStatus.SC_OK) {
-                is = response.getEntity().getContent();
-                data = ByteStreams.toByteArray(is);
-            }
+            parseHttpResponse(response);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            CloseUtil.closeQuietly(is);
             HttpClientUtils.closeQuietly(response);
             HttpClientUtils.closeQuietly(httpClient);
             releaseConnection(httpGet);
         }
-        return data;
+        return this;
     }
 
     @Override
-    public void asyncSubmit() {
+    public HttpMethods asyncSubmit() {
         CloseableHttpAsyncClient httpAsyncClient = AsyncClients.createHttpClient();
         httpAsyncClient.start();
 
@@ -170,5 +160,7 @@ public class HttpGets extends HttpMethods {
             HttpClientUtils.closeQuietly(response);
             releaseConnection(httpGet);
         }
+
+        return this;
     }
 }
