@@ -41,7 +41,7 @@ public class CacheLoaderTest {
     public static void main(String[] args) throws Exception {
         while (true) {
             try {
-                logger.info("jerry value:" + cache.get("jer11ry"));
+                logger.info("jerry value:" + cache.get("jerry"));
                 TimeUnit.SECONDS.sleep(5);
             } catch (Exception ex) {
 
