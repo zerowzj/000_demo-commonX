@@ -88,7 +88,7 @@ public class HttpGets extends HttpMethods {
 
     @Override
     public HttpGets submit() {
-        CloseableHttpClient httpClient = SyncClients.createHttpClient();
+        CloseableHttpClient httpClient = SyncClients.getHttpClient();
         HttpGet httpGet = null;
         CloseableHttpResponse response = null;
         try {
@@ -102,9 +102,10 @@ public class HttpGets extends HttpMethods {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
+            releaseConnection(httpGet);
             HttpClientUtils.closeQuietly(response);
             HttpClientUtils.closeQuietly(httpClient);
-            releaseConnection(httpGet);
+
         }
         return this;
     }

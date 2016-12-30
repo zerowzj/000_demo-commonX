@@ -12,27 +12,26 @@ import java.util.concurrent.Executors;
  */
 public class HttpGetsTest {
 
-    ExecutorService exec = Executors.newFixedThreadPool(100);
+    static ExecutorService exec = Executors.newFixedThreadPool(100);
 
-    @Test
-    public void test_submit() {
+    public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        CountDownLatch latch = new CountDownLatch(20);
-        for (int i = 0; i < 100000; i++) {
-            latch.countDown();
+//        CountDownLatch latch = new CountDownLatch(10000);
+        for (int i = 0; i < 50; i++) {
+//            latch.countDown();
             exec.submit(new Runnable() {
                 @Override
                 public void run() {
-                    HttpGets.create("http://www.baidu.com").submit().get();
+                    HttpGets.create("http://www.sohu.com").submit();
                 }
             });
         }
         try {
-            latch.await();
+//            latch.await();
         } catch (Exception ex) {
 
         }
-        System.out.println("耗时：" + (System.currentTimeMillis() - start));
+//        System.out.println("耗时：" + (System.currentTimeMillis() - start));
     }
 
     @Test
@@ -44,7 +43,7 @@ public class HttpGetsTest {
             exec.submit(new Runnable() {
                 @Override
                 public void run() {
-                    HttpGets.create("http://www.baidu.com").asyncSubmit().get();
+                    HttpGets.create("http://www.sohu.com").asyncSubmit().get();
                 }
             });
         }

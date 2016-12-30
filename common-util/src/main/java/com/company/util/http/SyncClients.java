@@ -3,6 +3,7 @@ package com.company.util.http;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.pool.PoolStats;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class SyncClients {
 
+    private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
     private static final Logger logger = LoggerFactory.getLogger(AsyncClients.class);
 
     private static PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
@@ -22,8 +25,6 @@ public class SyncClients {
     static {
         //连接池最大生成连接数200
         connManager.setMaxTotal(1000);
-        logger.info("sssssssssssssssssssssssss");
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new IdleMonitor(), 1000, 5000, TimeUnit.MILLISECONDS);
 
     }
@@ -32,16 +33,13 @@ public class SyncClients {
 
         @Override
         public void run() {
-            logger.info("监控");
-            logger.info("release end connect count:=" + connManager.getTotalStats().getLeased());
-            logger.info("release end connect count:=" + connManager.getTotalStats().getMax());
-            logger.info("release end connect count:=" + connManager.getTotalStats().getPending());
             // Close expired connections
-//            connManager.closeExpiredConnections();
+            connManager.closeExpiredConnections();
             // Optionally, close connections
             // that have been idle longer than readTimeout*2 MILLISECONDS
 //            connManager.closeIdleConnections(readTimeout * 2, TimeUnit.MILLISECONDS);
-            logger.info("release end connect count:=" + connManager.getTotalStats().getAvailable());
+            PoolStats poolStats = connManager.getTotalStats();
+            logger.info("[Max= {}],[Available= {}],[Leased= {}],[Pending= {}]", poolStats.getMax(), poolStats.getAvailable(), poolStats.getLeased(), poolStats.getPending());
 
         }
     }
