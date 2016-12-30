@@ -126,6 +126,9 @@ public class HttpPosts extends HttpMethods {
 
     }
 
+    /**
+     * 实体格式
+     */
     public enum BodyFormat {
         FORM, JSON, MULTIPART
     }

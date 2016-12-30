@@ -12,6 +12,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
 /**
@@ -133,6 +135,26 @@ public class HttpGets extends HttpMethods {
             //===>
             Future<HttpResponse> future = httpAsyncClient.execute(httpGet, null);
             response = future.get();// 获取结果
+
+            final CountDownLatch latch = new CountDownLatch(1);
+            httpAsyncClient.execute(httpGet, new FutureCallback<HttpResponse>() {
+                @Override
+                public void completed(HttpResponse result) {
+                    latch.countDown();
+                }
+
+                @Override
+                public void failed(Exception ex) {
+                    latch.countDown();
+                }
+
+                @Override
+                public void cancelled() {
+                    latch.countDown();
+                }
+            });
+            latch.await();
+
             //===>响应
             StatusLine statusLine = response.getStatusLine();
             int statusCode = statusLine.getStatusCode();
