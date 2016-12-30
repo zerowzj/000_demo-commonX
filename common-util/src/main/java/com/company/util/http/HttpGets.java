@@ -57,7 +57,7 @@ public class HttpGets extends HttpMethods {
         return new HttpGets(url, params);
     }
 
-    private HttpGet createHttpGet() {
+    private HttpGet buildHttpGet() {
         HttpGet httpGet = null;
         try {
             //===>Url
@@ -66,12 +66,13 @@ public class HttpGets extends HttpMethods {
                 builder.setParameters(Entitys.pairs(paramMap));
             }
             URI uri = builder.build();
-            //===>Get
-            httpGet = new HttpGet(uri);
+            //===>配置
             RequestConfig requestConfig = RequestConfig.custom()
                     .setConnectTimeout(connectTimeout)
                     .setSocketTimeout(readTimeout)
                     .build();
+            //===>Get
+            httpGet = new HttpGet(uri);
             httpGet.setConfig(requestConfig);
             //===>头部
             if (headerMap != null && !headerMap.isEmpty()) {
@@ -93,7 +94,7 @@ public class HttpGets extends HttpMethods {
         byte[] data = null;
         try {
             //===>请求
-            httpGet = createHttpGet();
+            httpGet = buildHttpGet();
             logger.info("url===> {}", httpGet.getURI().toString());
             //===>
             response = httpClient.execute(httpGet);
@@ -127,7 +128,7 @@ public class HttpGets extends HttpMethods {
         byte[] data = null;
         try {
             //===>请求
-            httpGet = createHttpGet();
+            httpGet = buildHttpGet();
             logger.info("url===> {}", httpGet.getURI().toString());
             //===>
             Future<HttpResponse> future = httpAsyncClient.execute(httpGet, null);

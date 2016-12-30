@@ -7,6 +7,7 @@ import com.google.common.io.ByteStreams;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -54,7 +55,7 @@ public class HttpPosts extends HttpMethods {
         return this;
     }
 
-    private HttpPost createHttpPost() {
+    private HttpPost buildHttpPost() {
         HttpPost httpPost = null;
         try {
             //===>Entity
@@ -67,9 +68,15 @@ public class HttpPosts extends HttpMethods {
                 Preconditions.checkArgument(!(fileMap == null || fileMap.isEmpty()), "upload file is not null or empty");
                 httpEntity = Entitys.createMultipartEntity(paramMap, fileMap);
             }
+            //===>配置
+            RequestConfig requestConfig = RequestConfig.custom()
+                    .setConnectTimeout(connectTimeout)
+                    .setSocketTimeout(readTimeout)
+                    .build();
             //===>Post
             httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
+            httpPost.setConfig(requestConfig);
             //===>头部
             if (headerMap != null && !headerMap.isEmpty()) {
                 httpPost.setHeaders(Headers.create(headerMap));
@@ -90,12 +97,12 @@ public class HttpPosts extends HttpMethods {
         byte[] data = null;
         try {
             //===>请求
-            httpPost = createHttpPost();
+            httpPost = buildHttpPost();
             logger.info("url===> {}", httpPost.getURI().toString());
             logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
             //===>
             response = httpClient.execute(httpPost);
-            //响应
+            //===>响应
             StatusLine statusLine = response.getStatusLine();
             int statusCode = statusLine.getStatusCode();
             logger.info("status code===> {}", statusCode);
