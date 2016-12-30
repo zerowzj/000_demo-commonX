@@ -23,7 +23,7 @@ public class HttpGetsTest {
             exec.submit(new Runnable() {
                 @Override
                 public void run() {
-                    HttpGets.create("http://www.baidu.com").submit();
+                    HttpGets.create("http://www.baidu.com").submit().get();
                 }
             });
         }
@@ -44,7 +44,7 @@ public class HttpGetsTest {
             exec.submit(new Runnable() {
                 @Override
                 public void run() {
-                    HttpGets.create("http://www.baidu.com").asyncSubmit();
+                    HttpGets.create("http://www.baidu.com").asyncSubmit().get();
                 }
             });
         }

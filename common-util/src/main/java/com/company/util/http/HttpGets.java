@@ -110,7 +110,7 @@ public class HttpGets extends HttpMethods {
     }
 
     @Override
-    public HttpMethods asyncSubmit() {
+    public HttpGets asyncSubmit() {
         CloseableHttpAsyncClient httpAsyncClient = AsyncClients.createHttpClient();
         httpAsyncClient.start();
 
