@@ -9,6 +9,7 @@ import org.apache.http.nio.reactor.ConnectingIOReactor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  * 连接池释放连接的时候，并不会直接对TCP连接的状态有任何改变，只是维护了两个Set，leased和avaliabled，leased代表被占用的连接集合，
  * avaliabled代表可用的连接的集合，释放连接的时候仅仅是将连接从leased中remove掉了，并把连接放到avaliabled集合中
  */
-class AsyncClients {
+public class AsyncClients {
 
     private static final Logger logger = LoggerFactory.getLogger(AsyncClients.class);
 
@@ -77,5 +78,18 @@ class AsyncClients {
                 .setConnectionManager(connManager)
                 .build();
         return httpClient;
+    }
+
+    /**
+     * 管理连接池
+     */
+    public static void shutdown(){
+        if(connManager != null){
+            try {
+                connManager.shutdown();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }

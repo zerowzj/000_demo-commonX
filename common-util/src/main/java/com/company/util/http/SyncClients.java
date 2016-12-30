@@ -64,4 +64,13 @@ public class SyncClients {
                 .build();
         return httpClient;
     }
+
+    /**
+     * 关闭连接池
+     */
+    public static void shutdown(){
+        if(connManager != null){
+            connManager.shutdown();
+        }
+    }
 }

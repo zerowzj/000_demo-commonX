@@ -14,7 +14,11 @@ public class HttpGetsTest {
 
     static ExecutorService exec = Executors.newFixedThreadPool(100);
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
+        test_submit();
+    }
+
+    public static void test_submit() {
         long start = System.currentTimeMillis();
 //        CountDownLatch latch = new CountDownLatch(10000);
         for (int i = 0; i < 50; i++) {

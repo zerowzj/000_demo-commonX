@@ -104,8 +104,6 @@ public class HttpGets extends HttpMethods {
         } finally {
             releaseConnection(httpGet);
             HttpClientUtils.closeQuietly(response);
-            HttpClientUtils.closeQuietly(httpClient);
-
         }
         return this;
     }
@@ -117,8 +115,6 @@ public class HttpGets extends HttpMethods {
 
         HttpGet httpGet = null;
         HttpResponse response = null;
-        InputStream is = null;
-        byte[] data = null;
         try {
             //===>请求
             httpGet = buildHttpGet();
@@ -147,21 +143,13 @@ public class HttpGets extends HttpMethods {
             latch.await();
 
             //===>响应
-            StatusLine statusLine = response.getStatusLine();
-            int statusCode = statusLine.getStatusCode();
-            logger.info("status code===> {}", statusCode);
-            if (statusCode == HttpStatus.SC_OK) {
-                is = response.getEntity().getContent();
-                data = ByteStreams.toByteArray(is);
-            }
+            parseHttpResponse(response);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            CloseUtil.closeQuietly(is);
-            HttpClientUtils.closeQuietly(response);
             releaseConnection(httpGet);
+            HttpClientUtils.closeQuietly(response);
         }
-
         return this;
     }
 }
