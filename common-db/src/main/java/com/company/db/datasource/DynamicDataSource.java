@@ -18,8 +18,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     protected Object determineCurrentLookupKey() {
         DataSourceType dataSourceType = DataSourceHolder.get();
 
-        if(dataSourceType == null
-                || dataSourceType == dataSourceType.WRITE) {
+        if(dataSourceType == null || dataSourceType == dataSourceType.WRITE) {
             return dataSourceType.WRITE.name();
         }
 
