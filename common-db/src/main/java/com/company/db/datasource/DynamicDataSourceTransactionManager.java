@@ -4,7 +4,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 
 /**
- * Created by wangzhj on 2017/1/4.
+ * 动态数据源事务管理器
+ *
+ * @author wangzhj
  */
 public class DynamicDataSourceTransactionManager extends DataSourceTransactionManager {
 
