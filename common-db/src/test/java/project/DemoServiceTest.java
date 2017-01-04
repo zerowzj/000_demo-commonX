@@ -15,7 +15,7 @@ public class DemoServiceTest extends JUnitBaseTest {
 
     @Test
     public void test_add() {
-        String name = "王振军";
+        String name = "我是写写库";
         demoService.add(name);
     }
 
