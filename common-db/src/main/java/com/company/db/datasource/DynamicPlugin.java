@@ -36,30 +36,30 @@ public class DynamicPlugin implements Interceptor {
             Object[] objects = invocation.getArgs();
             MappedStatement ms = (MappedStatement) objects[0];
 
-            DataSourceType dynamicDataSourceGlobal = null;
+            DataSourceType dataSourceType = null;
 
-            if((dynamicDataSourceGlobal = cacheMap.get(ms.getId())) == null) {
+            if((dataSourceType = cacheMap.get(ms.getId())) == null) {
                 //读方法
                 if(ms.getSqlCommandType().equals(SqlCommandType.SELECT)) {
                     //!selectKey 为自增id查询主键(SELECT LAST_INSERT_ID() )方法，使用主库
                     if(ms.getId().contains(SelectKeyGenerator.SELECT_KEY_SUFFIX)) {
-                        dynamicDataSourceGlobal = DataSourceType.WRITE;
+                        dataSourceType = DataSourceType.WRITE;
                     } else {
                         BoundSql boundSql = ms.getSqlSource().getBoundSql(objects[1]);
                         String sql = boundSql.getSql().toLowerCase(Locale.CHINA).replaceAll("[\\t\\n\\r]", " ");
                         if(sql.matches(REGEX)) {
-                            dynamicDataSourceGlobal = DataSourceType.WRITE;
+                            dataSourceType = DataSourceType.WRITE;
                         } else {
-                            dynamicDataSourceGlobal = DataSourceType.READ;
+                            dataSourceType = DataSourceType.READ;
                         }
                     }
                 }else{
-                    dynamicDataSourceGlobal = DataSourceType.WRITE;
+                    dataSourceType = DataSourceType.WRITE;
                 }
-                logger.warn("设置方法[{}] use [{}] Strategy, SqlCommandType [{}]..", ms.getId(), dynamicDataSourceGlobal.name(), ms.getSqlCommandType().name());
-                cacheMap.put(ms.getId(), dynamicDataSourceGlobal);
+                logger.warn("设置方法[{}] use [{}] Strategy, SqlCommandType [{}]..", ms.getId(), dataSourceType.name(), ms.getSqlCommandType().name());
+                cacheMap.put(ms.getId(), dataSourceType);
             }
-            DataSourceHolder.put(dynamicDataSourceGlobal);
+            DataSourceHolder.put(dataSourceType);
         }
 
         return invocation.proceed();
