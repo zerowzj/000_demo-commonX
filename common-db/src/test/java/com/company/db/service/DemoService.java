@@ -10,7 +10,6 @@ public interface DemoService {
 
     public void add(String name);
 
-
     public void get(Long id);
 
     public void find(Long id);
