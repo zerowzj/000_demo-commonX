@@ -21,6 +21,8 @@ public final class DataSourceHolder {
 
     /**
      * 获取
+     *
+     * @return DataSourceType
      */
     public static DataSourceType get() {
         return holder.get();

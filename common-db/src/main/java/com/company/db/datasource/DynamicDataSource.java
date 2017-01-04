@@ -25,9 +25,9 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         super.setDefaultTargetDataSource(writeDataSource); //默认
 
         Map<Object, Object> targetDataSources = new HashMap<>();
-        //写
+        //写数据源
         targetDataSources.put(DataSourceType.WRITE.name(), writeDataSource);
-        //读
+        //读数据源
         if(readDataSource != null) {
             targetDataSources.put(DataSourceType.READ.name(), readDataSource);
         }
