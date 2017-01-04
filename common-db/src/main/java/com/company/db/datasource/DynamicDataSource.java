@@ -6,37 +6,52 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by wangzhj on 2017/1/3.
+ * 动态数据源
+ *
+ * @author wangzhj
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
+    /** 写数据源 */
     private Object writeDataSource = null;
-
+    /** 读数据源 */
     private Object readDataSource = null;
-
-    @Override
-    protected Object determineCurrentLookupKey() {
-        DataSourceType dataSourceType = DataSourceHolder.get();
-
-        if(dataSourceType == null || dataSourceType == dataSourceType.WRITE) {
-            return dataSourceType.WRITE.name();
-        }
-
-        return dataSourceType.READ.name();
-    }
 
     @Override
     public void afterPropertiesSet() {
         if (this.writeDataSource == null) {
-            throw new IllegalArgumentException("Property 'writeDataSource' is required");
+            throw new IllegalArgumentException("writeDataSource is required");
         }
-        setDefaultTargetDataSource(writeDataSource);
+        super.setDefaultTargetDataSource(writeDataSource); //默认
+
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DataSourceType.WRITE.name(), writeDataSource);
         if(readDataSource != null) {
             targetDataSources.put(DataSourceType.READ.name(), readDataSource);
         }
-        setTargetDataSources(targetDataSources);
+        super.setTargetDataSources(targetDataSources); //
+
         super.afterPropertiesSet();
+    }
+
+    @Override
+    protected Object determineCurrentLookupKey() {
+        DataSourceType dataSourceType = DataSourceHolder.get();
+        String dataSource = null;
+        if(dataSourceType == null || dataSourceType == dataSourceType.WRITE) {
+            dataSource = dataSourceType.WRITE.name();
+        } else {
+            dataSource = dataSourceType.READ.name();
+        }
+        return dataSource;
+    }
+
+
+    public void setWriteDataSource(Object writeDataSource) {
+        this.writeDataSource = writeDataSource;
+    }
+
+    public void setReadDataSource(Object readDataSource) {
+        this.readDataSource = readDataSource;
     }
 }

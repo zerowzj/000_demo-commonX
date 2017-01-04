@@ -1,7 +1,9 @@
 package com.company.db.datasource;
 
 /**
- * Created by wangzhj on 2017/1/3.
+ * 数据源类型
+ *
+ * @author wangzhj
  */
 public enum DataSourceType {
     READ, WRITE;

@@ -28,6 +28,7 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
 
     /**
      * 清理本地线程的数据源
+     *
      * @param transaction
      */
     @Override
