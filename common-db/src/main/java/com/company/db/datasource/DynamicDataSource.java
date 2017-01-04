@@ -1,5 +1,7 @@
 package com.company.db.datasource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import java.util.HashMap;
@@ -11,6 +13,8 @@ import java.util.Map;
  * @author wangzhj
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
+
+    private static Logger logger = LoggerFactory.getLogger(DynamicDataSource.class);
 
     /** 写数据源 */
     private Object writeDataSource = null;
@@ -45,6 +49,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         } else {
             dataSource = dataSourceType.READ.name();
         }
+        logger.info(dataSource);
         return dataSource;
     }
 

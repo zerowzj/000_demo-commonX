@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- ==================== -->
+    <!--       Bean加载       -->
+    <!-- ==================== -->
+    <context:component-scan base-package="com.company.db.*" use-default-filters="true">
+    </context:component-scan>
+    <!-- ==================== -->
+    <!--    Properties加载    -->
+    <!-- ==================== -->
+    <!--<context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
+    <util:properties id="config" location="classpath:config.properties"/>
+    <!-- ==================== -->
+    <!--        -->
+    <!-- ==================== -->
+    <!-- 数据源 -->
+    <bean id="writeDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="#{config['ds.druid.write.username']}"/>
+        <property name="password" value="#{config['ds.druid.write.password']}"/>
+        <property name="url"      value="#{config['ds.druid.write.url']}"/>
+    </bean>
+    <bean id="readDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="#{config['ds.druid.read.username']}"/>
+        <property name="password" value="#{config['ds.druid.read.password']}"/>
+        <property name="url"      value="#{config['ds.druid.read.url']}"/>
+    </bean>
+    <bean id="dataSource" class="com.company.db.datasource.DynamicDataSource">
+        <property name="writeDataSource" ref="writeDataSource" />
+        <property name="readDataSource" ref="readDataSource" />
+        <property name="defaultTargetDataSource" ref="writeDataSource"/>
+    </bean>
+    <!-- SessionFactory -->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-cfg.xml"/>
+    </bean>
+    <!-- ==================== -->
+    <!--       事务配置       -->
+    <!-- ==================== -->
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="com.company.db.datasource.DynamicDataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 事务通知 -->
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="get*" propagation="REQUIRED" />
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="*" rollback-for="Exception" />
+        </tx:attributes>
+    </tx:advice>
+    <!-- ==================== -->
+    <!--        AOP配置        -->
+    <!-- ==================== -->
+    <aop:config>
+    <!--配置事务切点 -->
+    <aop:pointcut id="servicePointcut" expression="execution(* com.company.db.service..*.*(..))" />
+    <aop:advisor pointcut-ref="servicePointcut" advice-ref="transactionAdvice" />
+    </aop:config>
+</beans>

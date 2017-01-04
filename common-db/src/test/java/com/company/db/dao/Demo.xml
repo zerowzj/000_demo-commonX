@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.db.dao">
+    <resultMap id="demoEO" type="DemoEO">
+        <result property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID,
+        NAME
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="DemoEO">
+        INSERT INTO DEMO (NAME) VALUE (#{name})
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="demoEO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM DEMO
+        WHERE ID = #{id}
+    </select>
+</mapper>
