@@ -1,5 +1,7 @@
 package com.company.db.datasource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 
@@ -10,6 +12,8 @@ import org.springframework.transaction.TransactionDefinition;
  */
 public class DynamicDataSourceTransactionManager extends DataSourceTransactionManager {
 
+    private static final Logger logger = LoggerFactory.getLogger(DynamicDataSourceTransactionManager.class);
+
     /**
      * 只读事务到读库，读写事务到写库
      *
@@ -18,13 +22,17 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
      */
     @Override
     protected void doBegin(Object transaction, TransactionDefinition definition) {
+        logger.info(definition.getName());
         //设置数据源
         boolean readOnly = definition.isReadOnly();
+        DataSourceType dataSourceType = null;
         if(readOnly) {
-            DataSourceHolder.put(DataSourceType.READ);
+            dataSourceType = DataSourceType.READ;
         } else {
-            DataSourceHolder.put(DataSourceType.WRITE);
+            dataSourceType = DataSourceType.WRITE;
         }
+        logger.info("===>设置数据源[{}]", dataSourceType);
+        DataSourceHolder.put(dataSourceType);
         super.doBegin(transaction, definition);
     }
 

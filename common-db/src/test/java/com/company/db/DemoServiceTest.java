@@ -1,9 +1,10 @@
-package project;
+package com.company.db;
 
 
 import com.company.db.service.DemoService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import project.JUnitBaseTest;
 
 /**
  * @author wangzhj

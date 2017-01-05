@@ -3,6 +3,8 @@ package com.company.db.service;
 
 import com.company.db.dao.DemoDao;
 import com.company.db.dao.DemoEO;
+import com.company.db.datasource.DataSourceHolder;
+import com.company.db.datasource.DataSourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,7 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public void find(Long id) {
+        DataSourceHolder.put(DataSourceType.WRITE);
         DemoEO demoEO = demoDao.get(id);
         System.out.println(demoEO.getName());
     }
