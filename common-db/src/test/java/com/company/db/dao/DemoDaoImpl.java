@@ -1,5 +1,7 @@
 package com.company.db.dao;
 
+import com.company.db.datasource.DataSourceHolder;
+import com.company.db.datasource.DataSourceType;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,4 +12,13 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("demoDao")
 public class DemoDaoImpl extends BaseDaoImpl<DemoEO> implements DemoDao {
+
+    @Override
+    public DemoEO findLt(Long id) {
+        logger.info("===>设置数据源");
+        DataSourceHolder.put(DataSourceType.READ);
+        String sqlId = getSqlId("get");
+        DemoEO entity = getSqlSession().selectOne(sqlId, id);
+        return entity;
+    }
 }

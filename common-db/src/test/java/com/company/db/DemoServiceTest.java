@@ -29,4 +29,9 @@ public class DemoServiceTest extends JUnitBaseTest {
     public void test_find() {
         demoService.find(1L);
     }
+
+    @Test
+    public void test_findLt() {
+        demoService.findLt(1L);
+    }
 }

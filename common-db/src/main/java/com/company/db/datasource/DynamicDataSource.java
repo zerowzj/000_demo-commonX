@@ -16,12 +16,12 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     private static Logger logger = LoggerFactory.getLogger(DynamicDataSource.class);
 
-    /** 写数据源 */
+  /*  *//** 写数据源 *//*
     private Object writeDataSource = null;
-    /** 读数据源 */
-    private Object readDataSource = null;
+    *//** 读数据源 *//*
+    private Object readDataSource = null;*/
 
-    @Override
+  /*  @Override
     public void afterPropertiesSet() {
         if (this.writeDataSource == null) {
             throw new IllegalArgumentException("writeDataSource is required");
@@ -39,27 +39,27 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         super.setTargetDataSources(targetDataSources); //目标
 
         super.afterPropertiesSet();
-    }
+    }*/
 
     @Override
     protected Object determineCurrentLookupKey() {
         DataSourceType dataSourceType = DataSourceHolder.get();
         String dataSource = null;
-        if(dataSourceType == null || dataSourceType == dataSourceType.WRITE) {
+        /*if(dataSourceType == null || dataSourceType == dataSourceType.WRITE) {
             dataSource = dataSourceType.WRITE.name();
         } else {
             dataSource = dataSourceType.READ.name();
-        }
-        logger.info("===>使用数据源[{}]", dataSource);
-        return dataSource;
+        }*/
+        logger.info("===>使用数据源[{}]", dataSourceType);
+        return DataSourceHolder.get().name();
     }
 
 
-    public void setWriteDataSource(Object writeDataSource) {
+  /*  public void setWriteDataSource(Object writeDataSource) {
         this.writeDataSource = writeDataSource;
     }
 
     public void setReadDataSource(Object readDataSource) {
         this.readDataSource = readDataSource;
-    }
+    }*/
 }

@@ -5,6 +5,8 @@ import com.company.db.dao.DemoDao;
 import com.company.db.dao.DemoEO;
 import com.company.db.datasource.DataSourceHolder;
 import com.company.db.datasource.DataSourceType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service;
 @Service("demoService")
 public class DemoServiceImpl implements DemoService {
 
+    private static final Logger logger = LoggerFactory.getLogger(DemoServiceImpl.class);
+
     @Autowired
     private DemoDao demoDao = null;
 
@@ -26,19 +30,25 @@ public class DemoServiceImpl implements DemoService {
         demoEO.setName(name);
 
         demoDao.insert(demoEO);
-
     }
 
     @Override
     public void get(Long id) {
         DemoEO demoEO = demoDao.get(id);
-        System.out.println(demoEO.getName());
+        logger.info(demoEO.getName());
     }
 
     @Override
     public void find(Long id) {
-
         DemoEO demoEO = demoDao.get(id);
-        System.out.println(demoEO.getName());
+        logger.info(demoEO.getName());
+    }
+
+    @Override
+    public void findLt(Long id) {
+        logger.info("===>设置数据源");
+        DataSourceHolder.put(DataSourceType.READ);
+        DemoEO demoEO = demoDao.findLt(id);
+        logger.info(demoEO.getName());
     }
 }
