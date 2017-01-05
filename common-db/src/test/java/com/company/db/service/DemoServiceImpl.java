@@ -37,7 +37,7 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public void find(Long id) {
-        DataSourceHolder.put(DataSourceType.WRITE);
+
         DemoEO demoEO = demoDao.get(id);
         System.out.println(demoEO.getName());
     }
