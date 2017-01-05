@@ -26,12 +26,13 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         if (this.writeDataSource == null) {
             throw new IllegalArgumentException("writeDataSource is required");
         }
-        super.setDefaultTargetDataSource(writeDataSource); //默认
-
+        //默认
+        super.setDefaultTargetDataSource(writeDataSource);
+        //
         Map<Object, Object> targetDataSources = new HashMap<>();
-        //写数据源
+        //===>写数据源
         targetDataSources.put(DataSourceType.WRITE.name(), writeDataSource);
-        //读数据源
+        //===>读数据源
         if(readDataSource != null) {
             targetDataSources.put(DataSourceType.READ.name(), readDataSource);
         }
