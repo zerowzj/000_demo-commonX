@@ -19,9 +19,11 @@ public final class DataSourceHolder {
 
     /**
      * 设置数据源类型
+     *
+     * @param dataSourceType
      */
-    public static void put(DataSourceType dataSource) {
-        holder.set(dataSource);
+    public static void put(DataSourceType dataSourceType) {
+        holder.set(dataSourceType);
     }
 
     /**
@@ -34,7 +36,7 @@ public final class DataSourceHolder {
     }
 
     /**
-     * 清除
+     * 清除数据源类型
      */
     public static void clear() {
         holder.remove();

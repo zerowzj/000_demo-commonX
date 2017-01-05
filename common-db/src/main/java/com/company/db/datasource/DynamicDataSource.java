@@ -50,7 +50,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         } else {
             dataSource = dataSourceType.READ.name();
         }
-        logger.info("====>使用数据源[{}]", dataSource);
+        logger.info("===>使用数据源[{}]", dataSource);
         return dataSource;
     }
 
