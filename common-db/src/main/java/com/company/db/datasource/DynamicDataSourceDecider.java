@@ -18,6 +18,7 @@ public class DynamicDataSourceDecider implements MethodInterceptor {
     public Object invoke(MethodInvocation invocation) throws Throwable {
         logger.info("DataSourceMethodInterceptor...");
 
+        Object[] args = invocation.getArguments();
         DataSourceHolder.put(DataSourceType.WRITE);
         Object result = null;
         try {

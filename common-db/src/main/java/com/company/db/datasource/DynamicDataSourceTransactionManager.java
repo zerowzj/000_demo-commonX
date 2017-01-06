@@ -25,17 +25,18 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
     @Override
     protected void doBegin(Object transaction, TransactionDefinition definition) {
         logger.info("我是事务管理器");
-//        String name = definition.getName();
-//        //设置数据源
-//        boolean readOnly = definition.isReadOnly();
-//        DataSourceType dataSourceType = null;
-//        if(readOnly) {
-//            dataSourceType = DataSourceType.READ;
-//        } else {
-//            dataSourceType = DataSourceType.WRITE;
-//        }
-//        logger.info("===>对方法[{}]设置数据源[{}]", name, dataSourceType);
-//        DataSourceHolder.put(dataSourceType);
+        String name = definition.getName();
+        //设置数据源
+        boolean readOnly = definition.isReadOnly();
+        DataSourceType dataSourceType = null;
+        if(readOnly) {
+            dataSourceType = DataSourceType.READ;
+        } else {
+            dataSourceType = DataSourceType.WRITE;
+        }
+        DataSourceHolder.put(dataSourceType);
+        logger.info("===>对方法[{}]设置数据源[{}]", name, dataSourceType);
+        //
         super.doBegin(transaction, definition);
     }
 
