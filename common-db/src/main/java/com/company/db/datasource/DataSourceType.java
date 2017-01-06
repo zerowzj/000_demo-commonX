@@ -6,5 +6,5 @@ package com.company.db.datasource;
  * @author wangzhj
  */
 public enum DataSourceType {
-    READ, WRITE;
+    WRITE, READ;
 }
