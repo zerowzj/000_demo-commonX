@@ -50,15 +50,11 @@
         </property>
     </bean>
     <!-- SessionFactory -->
-    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:mybatis-cfg.xml"/>
-    </bean>-->
-    <bean id="sqlSessionFactory" class="com.company.db.datasource.DynamicSqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis-cfg.xml"/>
     </bean>
-    <bean id="sqlSessionTemplate" class="com.company.db.datasource.DynamicSqlSessionTemplate">
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
     <!-- ==================== -->

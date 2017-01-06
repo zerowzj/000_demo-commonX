@@ -1,9 +1,6 @@
 package com.company.db.dao;
 
-import com.company.db.datasource.DynamicSqlSessionTemplate;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -16,7 +13,7 @@ import java.io.Serializable;
 public abstract class BaseDaoImpl<E extends BaseEO> implements BaseDao<E> {
 
     @Resource
-    protected DynamicSqlSessionTemplate sqlSessionTemplate;
+    protected SqlSessionTemplate sqlSessionTemplate;
 
     @Override
     public final E insert(final E entity) {
