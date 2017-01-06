@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 
-import javax.sql.DataSource;
-
 /**
  * 动态数据源事务管理器
  *
@@ -24,17 +22,19 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
      */
     @Override
     protected void doBegin(Object transaction, TransactionDefinition definition) {
-        String name = definition.getName();
-        //设置数据源
-        boolean readOnly = definition.isReadOnly();
-        DataSourceType dataSourceType = null;
-        if(readOnly) {
-            dataSourceType = DataSourceType.READ;
-        } else {
-            dataSourceType = DataSourceType.WRITE;
+        DataSourceType dataSourceType = DataSourceHolder.get();
+        if(dataSourceType == null){
+            String name = definition.getName();
+            //设置数据源
+            boolean readOnly = definition.isReadOnly();
+            if(readOnly) {
+                dataSourceType = DataSourceType.READ;
+            } else {
+                dataSourceType = DataSourceType.WRITE;
+            }
+            DataSourceHolder.put(dataSourceType);
+            logger.info("===>对方法[{}]设置数据源[{}]", name, dataSourceType);
         }
-        DataSourceHolder.put(dataSourceType);
-        logger.info("===>对方法[{}]设置数据源[{}]", name, dataSourceType);
         //
         super.doBegin(transaction, definition);
     }
