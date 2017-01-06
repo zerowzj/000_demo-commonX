@@ -19,13 +19,13 @@ public class JUnitBaseTest {
 
     @Before
     public void before(){
-        logger.info("**********执行前**********");
-        logger.info("");
+        logger.info("----------执行前----------");
+//        logger.info("");
     }
 
     @After
     public void after(){
-        logger.info("");
-        logger.info("**********执行后**********");
+//        logger.info("");
+        logger.info("----------执行后----------");
     }
 }
