@@ -46,8 +46,6 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public void findLt(Long id) {
-        logger.info("===>设置数据源");
-        DataSourceHolder.put(DataSourceType.READ);
         DemoEO demoEO = demoDao.findLt(id);
         logger.info(demoEO.getName());
     }

@@ -15,10 +15,9 @@ public class DemoDaoImpl extends BaseDaoImpl<DemoEO> implements DemoDao {
 
     @Override
     public DemoEO findLt(Long id) {
-        logger.info("===>设置数据源");
         DataSourceHolder.put(DataSourceType.READ);
         String sqlId = getSqlId("get");
-        DemoEO entity = getSqlSession().selectOne(sqlId, id);
+        DemoEO entity = sqlSessionTemplate.selectOne(sqlId, id);
         return entity;
     }
 }
