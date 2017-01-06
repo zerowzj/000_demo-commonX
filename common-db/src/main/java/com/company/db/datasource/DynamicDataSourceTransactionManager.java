@@ -24,7 +24,6 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
     protected void doBegin(Object transaction, TransactionDefinition definition) {
         DataSourceType dataSourceType = DataSourceHolder.get();
         if(dataSourceType == null){
-            String name = definition.getName();
             //设置数据源
             boolean readOnly = definition.isReadOnly();
             if(readOnly) {
@@ -33,6 +32,7 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
                 dataSourceType = DataSourceType.WRITE;
             }
             DataSourceHolder.put(dataSourceType);
+            String name = definition.getName();
             logger.info("===>对方法[{}]设置数据源[{}]", name, dataSourceType);
         }
         //
