@@ -52,10 +52,4 @@ public abstract class BaseDaoImpl<E extends BaseEO> implements BaseDao<E> {
     protected final String getSqlId(String sqlId) {
         return this.getClass().getPackage().getName() + "." + sqlId;
     }
-
-//    @Override
-//    @Resource
-//    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-//        super.setSqlSessionFactory(sqlSessionFactory);
-//    }
 }
