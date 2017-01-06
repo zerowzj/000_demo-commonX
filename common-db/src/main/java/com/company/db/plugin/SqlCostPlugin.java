@@ -1,4 +1,4 @@
-package com.company.db.interceptor;
+package com.company.db.plugin;
 
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
@@ -24,9 +24,9 @@ import java.lang.reflect.Method;
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
         @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})
 })
-public class SqlCostInterceptor extends InterceptorAdapter {
+public class SqlCostPlugin extends PluginAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(SqlCostInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(SqlCostPlugin.class);
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {

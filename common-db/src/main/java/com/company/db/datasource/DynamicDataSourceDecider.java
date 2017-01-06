@@ -6,7 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by wangzhj on 2017/1/6.
+ * 数据源决定者
+ *
+ * @author wangzhj
  */
 public class DynamicDataSourceDecider implements MethodInterceptor {
 

@@ -1,4 +1,4 @@
-package com.company.db.interceptor;
+package com.company.db.plugin;
 
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Plugin;
@@ -10,7 +10,7 @@ import java.util.Properties;
  *
  * @author wangzhj
  */
-public abstract class InterceptorAdapter implements Interceptor {
+public abstract class PluginAdapter implements Interceptor {
 
     @Override
     public Object plugin(Object target) {
