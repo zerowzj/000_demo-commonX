@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by wangzhj on 2017/1/6.
  */
-public class DataSourceDetermineInterceptor implements MethodInterceptor {
+public class DynamicDataSourceDecider implements MethodInterceptor {
 
-    private static final Logger logger = LoggerFactory.getLogger(DataSourceDetermineInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(DynamicDataSourceDecider.class);
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
