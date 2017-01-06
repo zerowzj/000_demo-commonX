@@ -24,8 +24,8 @@ public class DynamicDataSourceDecideInterceptor implements MethodInterceptor {
             if (args != null && args.length >= 1) {
                 Object lastArg = args[args.length - 1];
                 if (lastArg instanceof Boolean) {
-                    Boolean f = (Boolean) lastArg;
-                    if (f) {
+                    Boolean flg = (Boolean) lastArg;
+                    if (flg) {
                         DataSourceHolder.put(DataSourceType.WRITE);
                         logger.info("===>对方法[{}]设置数据源[{}]", clazz.getName() + "." + name, "WRITE");
                     }
