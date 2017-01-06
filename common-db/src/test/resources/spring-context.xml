@@ -23,9 +23,8 @@
     <!--<context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
     <util:properties id="db" location="classpath:db.properties"/>
     <!-- ==================== -->
-    <!--        -->
+    <!--       数据源配置      -->
     <!-- ==================== -->
-    <!-- 数据源 -->
     <bean id="writeDataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="username" value="#{db['ds.druid.write.username']}"/>
