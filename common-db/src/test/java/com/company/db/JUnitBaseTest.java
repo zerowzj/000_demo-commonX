@@ -1,4 +1,4 @@
-package project;
+package com.company.db;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,11 +19,13 @@ public class JUnitBaseTest {
 
     @Before
     public void before(){
-        logger.info("==========执行前==========");
+        logger.info("**********执行前**********");
+        logger.info("");
     }
 
     @After
     public void after(){
-        logger.info("==========执行后==========");
+        logger.info("");
+        logger.info("**********执行后**********");
     }
 }

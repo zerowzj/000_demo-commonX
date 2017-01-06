@@ -24,7 +24,6 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
      */
     @Override
     protected void doBegin(Object transaction, TransactionDefinition definition) {
-        logger.info("我是事务管理器");
         String name = definition.getName();
         //设置数据源
         boolean readOnly = definition.isReadOnly();

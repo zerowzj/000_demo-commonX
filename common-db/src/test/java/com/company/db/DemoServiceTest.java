@@ -1,12 +1,9 @@
 package com.company.db;
 
 
-import com.company.db.datasource.DataSourceHolder;
-import com.company.db.datasource.DataSourceType;
 import com.company.db.service.DemoService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import project.JUnitBaseTest;
 
 /**
  * @author wangzhj
@@ -35,8 +32,8 @@ public class DemoServiceTest extends JUnitBaseTest {
     @Test
     public void test_findLt() {
 
-        for(int i = 0; i < 2; i++){
+//        for(int i = 0; i < 2; i++){
             demoService.findLt(1L);
-        }
+//        }
     }
 }
