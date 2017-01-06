@@ -14,5 +14,5 @@ public interface DemoService {
 
     public void find(Long id);
 
-    public void findLt(Long id);
+    public void findLt(Long id, boolean f);
 }

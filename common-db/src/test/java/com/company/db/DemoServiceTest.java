@@ -33,7 +33,7 @@ public class DemoServiceTest extends JUnitBaseTest {
     public void test_findLt() {
 
 //        for(int i = 0; i < 2; i++){
-            demoService.findLt(1L);
+            demoService.findLt(1L, false);
 //        }
     }
 }

@@ -45,7 +45,7 @@ public class DemoServiceImpl implements DemoService {
     }
 
     @Override
-    public void findLt(Long id) {
+    public void findLt(Long id, boolean f) {
         DemoEO demoEO = demoDao.findLt(id);
         logger.info(demoEO.getName());
     }
