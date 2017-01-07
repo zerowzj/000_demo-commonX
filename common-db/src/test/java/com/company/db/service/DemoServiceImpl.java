@@ -31,7 +31,6 @@ public class DemoServiceImpl implements DemoService {
     public void add(String name) {
         DemoEO demoEO = new DemoEO();
         demoEO.setName(name);
-
         demoDao.insert(demoEO);
     }
 
