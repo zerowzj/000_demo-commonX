@@ -6,7 +6,7 @@ import org.apache.ibatis.plugin.Plugin;
 import java.util.Properties;
 
 /**
- * 拦截器适配器
+ * 插件适配器
  *
  * @author wangzhj
  */

@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 
 /**
- * Sql耗时拦截器
+ * Sql耗时插件
  *
  * @author wangzhj
  */
@@ -47,7 +47,7 @@ public class SqlCostPlugin extends PluginAdapter {
             Method method = invocation.getMethod();
             result = invocation.proceed();
             long end = System.currentTimeMillis();
-            logger.info("[SqlCostInterceptor] execute [" + method.getName() + "] cost [" + (end - start) + "] ms");
+            logger.info("[SqlCostPlugin] execute [" + method.getName() + "] cost [" + (end - start) + "] ms");
         }
         return result;
     }
