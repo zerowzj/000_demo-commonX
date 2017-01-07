@@ -35,7 +35,6 @@ public class DynamicDataSourceTransactionManager extends DataSourceTransactionMa
             String name = definition.getName();
             logger.info("===>对方法[{}]设置数据源[{}]", name, dataSourceType);
         }
-        //
         super.doBegin(transaction, definition);
     }
 
