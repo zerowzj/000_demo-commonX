@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+
+import java.util.Map;
 
 /**
  * <p></p>
@@ -46,6 +49,9 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public void findLt(Long id, boolean f) {
+        Map m = TransactionSynchronizationManager.getResourceMap();
+       String str = TransactionSynchronizationManager.getCurrentTransactionName();
+        TransactionSynchronizationManager.getSynchronizations();
         DemoEO demoEO = demoDao.findLt(id);
         logger.info(demoEO.getName());
     }

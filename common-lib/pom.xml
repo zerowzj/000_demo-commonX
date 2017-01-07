@@ -199,6 +199,15 @@
                 <version>5.1.28</version>
             </dependency>
             <!-- ==================== -->
+            <!--       分布式事务      -->
+            <!-- ==================== -->
+            <dependency>
+                <groupId>com.atomikos</groupId>
+                <artifactId>transactions-jta</artifactId>
+                <version>4.0.4</version>
+            </dependency>
+
+            <!-- ==================== -->
             <!--        任务调度       -->
             <!-- ==================== -->
             <!-- Quartz -->
