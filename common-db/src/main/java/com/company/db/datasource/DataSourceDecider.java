@@ -17,7 +17,7 @@ public abstract class DataSourceDecider implements MethodInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(DataSourceDecider.class);
 
     @Override
-    public Object invoke(MethodInvocation invocation) throws Throwable {
+    public final Object invoke(MethodInvocation invocation) throws Throwable {
         Object result = null;
         try {
             decide(invocation.getThis(), invocation.getMethod(), invocation.getArguments());
@@ -28,5 +28,9 @@ public abstract class DataSourceDecider implements MethodInterceptor {
         return result;
     }
 
+    /**
+     *
+     *
+     */
     public abstract void decide(Object target, Method method, Object[] args);
 }

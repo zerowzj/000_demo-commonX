@@ -9,7 +9,7 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
  *
  * @author wangzhj
  */
-public class DynamicDataSource extends AbstractRoutingDataSource {
+public final class DynamicDataSource extends AbstractRoutingDataSource {
 
     private static Logger logger = LoggerFactory.getLogger(DynamicDataSource.class);
 

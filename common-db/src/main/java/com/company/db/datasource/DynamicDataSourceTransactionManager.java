@@ -10,7 +10,7 @@ import org.springframework.transaction.TransactionDefinition;
  *
  * @author wangzhj
  */
-public class DynamicDataSourceTransactionManager extends DataSourceTransactionManager {
+public final class DynamicDataSourceTransactionManager extends DataSourceTransactionManager {
 
     private static final Logger logger = LoggerFactory.getLogger(DynamicDataSourceTransactionManager.class);
 
