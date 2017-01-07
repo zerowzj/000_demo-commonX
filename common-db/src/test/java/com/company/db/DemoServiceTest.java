@@ -36,4 +36,11 @@ public class DemoServiceTest extends JUnitBaseTest {
             demoService.findLt(1L, false);
 //        }
     }
+
+
+    @Test
+    public void test(){
+        int type = 5;
+        System.out.println(type != 6 && type != 7 && type != 8);
+    }
 }
