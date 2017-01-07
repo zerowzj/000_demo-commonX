@@ -85,15 +85,15 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
 
     </dependencies>
     <!-- ==================== -->
@@ -108,14 +108,11 @@
                 </includes>
             </resource>
         </resources>
-        <testResources>
+        <!--<testResources>
             <testResource>
                 <directory>src/test/resources</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
             </testResource>
-        </testResources>
+        </testResources>-->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
