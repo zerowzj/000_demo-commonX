@@ -13,5 +13,4 @@ public class MyProxyFactory<T> {
 //        return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[]{mapperInterface}, mapperProxy);
     return null;
     }
-
 }
