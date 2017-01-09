@@ -7,7 +7,6 @@ import java.lang.reflect.Proxy;
 /**
  *
  *
- *
  * @auhtor wangzhj
  */
 public class MyProxyFactory<T> {
