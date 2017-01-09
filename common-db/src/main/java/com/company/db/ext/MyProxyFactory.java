@@ -5,7 +5,10 @@ import org.apache.ibatis.binding.MapperProxy;
 import java.lang.reflect.Proxy;
 
 /**
- * Created by wangzhj on 2017/1/7.
+ *
+ *
+ *
+ * @auhtor wangzhj
  */
 public class MyProxyFactory<T> {
 
