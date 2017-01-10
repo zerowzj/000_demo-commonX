@@ -37,19 +37,4 @@ public class ReadWriteTest {
     public void test_find() {
         orderService.find(1L);
     }
-
-    @Test
-    public void test_findLt() {
-
-//        for(int i = 0; i < 2; i++){
-            orderService.findLt(1L, false);
-//        }
-    }
-
-
-    @Test
-    public void test(){
-        int type = 5;
-        System.out.println(type != 6 && type != 7 && type != 8);
-    }
 }
