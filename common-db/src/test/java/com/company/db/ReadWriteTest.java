@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author wangzhj
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring-rw.xml"})
+@ContextConfiguration({"classpath:rw/spring-rw.xml"})
 public class ReadWriteTest {
 
     private static final Logger logger = LoggerFactory.getLogger(ReadWriteTest.class);

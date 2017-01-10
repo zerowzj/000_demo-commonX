@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author wangzhj
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring-sharding.xml"})
+@ContextConfiguration({"classpath:sharding/spring-sharding.xml"})
 public class ShardingTest {
 
     private static final Logger logger = LoggerFactory.getLogger(ShardingTest.class);

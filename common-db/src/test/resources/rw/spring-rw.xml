@@ -20,7 +20,7 @@
     <!-- ==================== -->
     <!--    Properties加载    -->
     <!-- ==================== -->
-    <util:properties id="db" location="classpath:db-rw.properties"/>
+    <util:properties id="db" location="classpath:rw/db-rw.properties"/>
     <!-- ==================== -->
     <!--       数据源配置      -->
     <!-- ==================== -->

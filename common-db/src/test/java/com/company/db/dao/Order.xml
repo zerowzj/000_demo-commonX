@@ -10,20 +10,20 @@
     <sql id="Base_Column_List">
         ID,
         NAME,
-        USER_ID
+        user_id
     </sql>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="GENERATED_KEY"   parameterType="OrderEO">
-        INSERT INTO T_ORDER (name, user_id) VALUE (#{name}, #{userId})
-        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="GENERATED_KEY" parameterType="OrderEO">
+        INSERT INTO t_order (name, user_id) VALUE (#{name}, #{userId})
+        <!--<selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">-->
+            <!--SELECT LAST_INSERT_ID()-->
+        <!--</selectKey>-->
     </insert>
 
     <select id="get" parameterType="java.lang.Long" resultMap="orderEO">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM T_ORDER
+        FROM t_order
         WHERE ID = #{id}
     </select>
 </mapper>
