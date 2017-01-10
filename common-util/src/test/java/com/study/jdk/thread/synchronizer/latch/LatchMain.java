@@ -1,4 +1,4 @@
-package com.study.jdk.concurrent.latch;
+package com.study.jdk.thread.synchronizer.latch;
 
 import com.google.common.base.Stopwatch;
 
