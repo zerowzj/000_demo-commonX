@@ -32,9 +32,9 @@
     </bean>
     <bean id="ds_read" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="username" value="#{db['dsds_read.druid.username']}"/>
-        <property name="password" value="#{db['dsds_read.druid.password']}"/>
-        <property name="url" value="#{db['dsds_read.druid.url']}"/>
+        <property name="username" value="#{db['ds_read.druid.username']}"/>
+        <property name="password" value="#{db['ds_read.druid.password']}"/>
+        <property name="url" value="#{db['ds_read.druid.url']}"/>
     </bean>
     <bean id="dataSource" class="com.company.db.datasource.DynamicDataSource">
         <!--<property name="writeDataSource" ref="writeDataSource"/>

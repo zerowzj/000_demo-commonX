@@ -24,6 +24,6 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM t_order
-        WHERE ID = #{id}
+        WHERE id = #{id}
     </select>
 </mapper>
