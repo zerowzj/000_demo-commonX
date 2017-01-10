@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- ==================== -->
+    <!--       Bean加载       -->
+    <!-- ==================== -->
+    <context:component-scan base-package="com.company.db.*" use-default-filters="true">
+    </context:component-scan>
+    <!-- ==================== -->
+    <!--    Properties加载    -->
+    <!-- ==================== -->
+    <!--<context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
+    <util:properties id="db" location="classpath:db.properties"/>
+    <!-- ==================== -->
+    <!--       数据源配置      -->
+    <!-- ==================== -->
+    <bean id="ds_0" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="#{db['ds.druid.write.username']}"/>
+        <property name="password" value="#{db['ds.druid.write.password']}"/>
+        <property name="url" value="#{db['ds.druid.write.url']}"/>
+    </bean>
+    <bean id="ds_1" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="#{db['ds.druid.read.username']}"/>
+        <property name="password" value="#{db['ds.druid.read.password']}"/>
+        <property name="url" value="#{db['ds.druid.read.url']}"/>
+    </bean>
+    <bean id="dataSourceRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule">
+        <constructor-arg>
+            <map>
+                <entry key="ds_0" value-ref="ds_0"/>
+                <entry key="ds_1" value-ref="ds_1"/>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean id="tbleRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.TableRule">
+        <constructor-arg value="t_order" index="0"/>
+        <constructor-arg index="1">
+            <list>
+                <value>t_order_0</value>
+                <value>t_order_1</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg index="2" ref="dataSourceRule"/>
+    </bean>
+    <!-- SessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-cfg.xml"/>
+    </bean>
+    <!-- SqlSessionTemplate -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+    <!-- ==================== -->
+    <!--       事务配置       -->
+    <!-- ==================== -->
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="com.company.db.datasource.DynamicDataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>-->
+    <!-- 事务通知 -->
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+            <tx:method name="get*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <!--<tx:method name="*" rollback-for="Exception"/>-->
+        </tx:attributes>
+    </tx:advice>
+     <!-- ==================== -->
+    <!--        AOP配置        -->
+    <!-- ==================== -->
+    <bean id="myDataSourceDecider" class="com.company.db.MyDataSourceDecider" />
+    <aop:config>
+        <!--配置事务切点 -->
+        <!-- 关键配置，切换数据源一定要比持久层代码更先执行（事务也算持久层代码） -->
+        <aop:pointcut id="servicePointcut" expression="execution(* com.company.db.service..*.*(..))"/>
+        <aop:advisor pointcut-ref="servicePointcut" advice-ref="transactionAdvice"/>
+        <aop:advisor pointcut-ref="servicePointcut" advice-ref="myDataSourceDecider" order="1"/>
+    </aop:config>
+</beans>
