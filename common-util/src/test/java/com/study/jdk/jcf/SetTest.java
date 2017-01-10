@@ -2,6 +2,10 @@ package com.study.jdk.jcf;
 
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * Created by wangzhj on 2016/12/21.
  */
@@ -16,10 +20,32 @@ public class SetTest {
     @Test
     public void test_HashSet() {
 
+        Set<String> set = new HashSet<>(1);
+
+        set.add("1");
+        set.add("2");
+        set.add("3");
+        set.add("4");
+        set.add("5");
+
+        for(String str : set){
+            System.out.println(str);
+        }
     }
 
     @Test
     public void test_TreeSet() {
 
+        Set<String> set = new TreeSet<>();
+
+        set.add("1");
+        set.add("2");
+        set.add("3");
+        set.add("4");
+        set.add("5");
+
+        for(String str : set){
+            System.out.println(str);
+        }
     }
 }

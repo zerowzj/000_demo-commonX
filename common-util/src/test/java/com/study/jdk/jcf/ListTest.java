@@ -4,11 +4,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
- * Created by wangzhj on 2016/12/21.
+ * set的存储特点为无序和互异，
+ * list的存储特点为有序和存异。
  */
 public class ListTest {
 
@@ -16,25 +16,55 @@ public class ListTest {
 
     @Test
     public void test_ArrayList(){
-
-        List list = new ArrayList<>(1);
-
+        List<String> list = new ArrayList<>();
         list.add("1");
         list.add("2");
         list.add("3");
-        list.add("4");
-        list.add("5");
-
-    }
-
-    @Test
-    public void test_Vector(){
-
+        list.add("3");
+        for(String str : list){
+            System.out.println(str);
+        }
     }
 
     @Test
     public void test_LinkedList(){
-
+        List<String> list = new LinkedList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("3");
+        for(String str : list){
+            System.out.println(str);
+        }
     }
 
+    /**
+     * Vector非常类似ArrayList，但是Vector是同步的。
+     */
+    @Test
+    public void test_Vector(){
+        Vector<String> vector = new Vector();
+        vector.add("1");
+        vector.add("2");
+        vector.add("3");
+        vector.add("3");
+        for(String str : vector){
+            System.out.println(str);
+        }
+    }
+
+    /**
+     * Stack继承自Vector，实现一个后进先出的堆栈。
+     */
+    @Test
+    public void test_Stack(){
+        Stack<String> stack = new Stack<>() ;
+        stack.push("1");
+        stack.push("2");
+        stack.push("3");
+        stack.push("3");
+        while (!stack.empty()){
+            System.out.println(stack.pop());
+        }
+    }
 }
