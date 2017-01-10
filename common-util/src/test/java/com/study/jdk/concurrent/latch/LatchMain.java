@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class LatchMain {
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         final CountDownLatch latch = new CountDownLatch(2);
 
         Thread t1 = new Thread(new Runnable() {
@@ -36,5 +36,29 @@ public class LatchMain {
         }
 
         System.out.println("main");
+    }
+
+
+    public static void main(String[] args) {
+        final CountDownLatch latch = new CountDownLatch(2);
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("1");
+                latch.countDown();
+                System.out.println("2");
+                latch.countDown();
+            }
+        });
+        t.start();
+
+        try {
+            latch.await();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        System.out.println("3");
     }
 }
