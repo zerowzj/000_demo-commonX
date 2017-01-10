@@ -25,6 +25,8 @@ public class ShardingTest {
     @Test
     public void test_add() {
         String name = "我是写写库";
-        orderService.add(1000L, name);
+        for(int i = 1; i <= 3;i++){
+            orderService.add(Long.valueOf(i), name);
+        }
     }
 }

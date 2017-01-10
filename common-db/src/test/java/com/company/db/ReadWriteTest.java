@@ -14,35 +14,35 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author wangzhj
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:*.xml"})
+@ContextConfiguration({"classpath:spring-rw.xml"})
 public class ReadWriteTest {
 
     private static final Logger logger = LoggerFactory.getLogger(ReadWriteTest.class);
 
     @Autowired
-    private OrderService demoService;
+    private OrderService orderService;
 
     @Test
     public void test_add() {
         String name = "我是写写库";
-        demoService.add(1L, name);
+        orderService.add(1L, name);
     }
 
     @Test
     public void test_get() {
-        demoService.get(1L);
+        orderService.get(1L);
     }
 
     @Test
     public void test_find() {
-        demoService.find(1L);
+        orderService.find(1L);
     }
 
     @Test
     public void test_findLt() {
 
 //        for(int i = 0; i < 2; i++){
-            demoService.findLt(1L, false);
+            orderService.findLt(1L, false);
 //        }
     }
 

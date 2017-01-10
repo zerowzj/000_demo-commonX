@@ -69,10 +69,10 @@
     <!-- 事务通知 -->
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+            <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="get*" propagation="REQUIRED"/>
             <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
-            <!--<tx:method name="*" rollback-for="Exception"/>-->
+            <tx:method name="*" rollback-for="Exception"/>
         </tx:attributes>
     </tx:advice>
      <!-- ==================== -->

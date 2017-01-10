@@ -13,7 +13,7 @@
         USER_ID
     </sql>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="OrderEO">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="GENERATED_KEY"   parameterType="OrderEO">
         INSERT INTO T_ORDER (name, user_id) VALUE (#{name}, #{userId})
         <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
             SELECT LAST_INSERT_ID()
