@@ -5,14 +5,19 @@
     <resultMap id="orderEO" type="OrderEO">
         <result property="id" column="ID"/>
         <result property="name" column="NAME"/>
+        <result property="userId" column="USER_ID"/>
     </resultMap>
     <sql id="Base_Column_List">
         ID,
-        NAME
+        NAME,
+        USER_ID
     </sql>
 
-    <insert id="insert" parameterType="OrderEO">
-        INSERT INTO T_ORDER (ID, NAME) VALUE (#{id}, #{name})
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="OrderEO">
+        INSERT INTO T_ORDER (name, user_id) VALUE (#{name}, #{userId})
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
     <select id="get" parameterType="java.lang.Long" resultMap="orderEO">

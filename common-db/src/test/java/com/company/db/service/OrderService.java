@@ -8,7 +8,7 @@ package com.company.db.service;
  */
 public interface OrderService {
 
-    public void add(Long id, String name);
+    public void add(Long userId, String name);
 
     public void get(Long id);
 

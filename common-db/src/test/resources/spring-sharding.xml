@@ -44,7 +44,7 @@
         <property name="url" value="#{db['ds_1.druid.url']}"/>
     </bean>
 
-    <rdb:strategy id="orderTableStrategy" sharding-columns="id" algorithm-class="com.company.db.ShardingAlgorithm"/>
+    <rdb:strategy id="orderTableStrategy" sharding-columns="user_id" algorithm-class="com.company.db.ShardingAlgorithm"/>
     <rdb:data-source id="shardingDataSource">
         <rdb:sharding-rule data-sources="ds">
             <rdb:table-rules>
@@ -113,7 +113,7 @@
     <!-- 事务通知 -->
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
+            <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="get*" propagation="REQUIRED"/>
             <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
             <!--<tx:method name="*" rollback-for="Exception"/>-->

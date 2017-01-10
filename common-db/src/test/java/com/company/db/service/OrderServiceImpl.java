@@ -26,23 +26,23 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao = null;
 
     @Override
-    public void add(Long id, String name) {
-        OrderEO demoEO = new OrderEO();
-        demoEO.setId(id);
-        demoEO.setName(name);
-        orderDao.insert(demoEO);
+    public void add(Long userId, String name) {
+        OrderEO orderEO = new OrderEO();
+        orderEO.setName(name);
+        orderEO.setUserId(userId);
+        orderDao.insert(orderEO);
     }
 
     @Override
     public void get(Long id) {
-        OrderEO demoEO = orderDao.get(id);
-        logger.info(demoEO.getName());
+        OrderEO orderEO = orderDao.get(id);
+        logger.info(orderEO.getName());
     }
 
     @Override
     public void find(Long id) {
-        OrderEO demoEO = orderDao.get(id);
-        logger.info(demoEO.getName());
+        OrderEO orderEO = orderDao.get(id);
+        logger.info(orderEO.getName());
     }
 
     @Override
