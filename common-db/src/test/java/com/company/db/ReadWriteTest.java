@@ -25,7 +25,7 @@ public class ReadWriteTest {
     @Test
     public void test_add() {
         String name = "我是写写库";
-        demoService.add(name);
+        demoService.add(1L, name);
     }
 
     @Test

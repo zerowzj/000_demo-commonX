@@ -25,6 +25,12 @@
     <!-- ==================== -->
     <!--       数据源配置      -->
     <!-- ==================== -->
+    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="#{db['ds.druid.username']}"/>
+        <property name="password" value="#{db['ds.druid.password']}"/>
+        <property name="url" value="#{db['ds.druid.url']}"/>
+    </bean>
     <bean id="ds_0" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="username" value="#{db['ds_0.druid.username']}"/>
@@ -37,22 +43,39 @@
         <property name="password" value="#{db['ds_1.druid.password']}"/>
         <property name="url" value="#{db['ds_1.druid.url']}"/>
     </bean>
-    <!-- 分库 -->
+
+    <rdb:strategy id="orderTableStrategy" sharding-columns="id" algorithm-class="com.company.db.ShardingAlgorithm"/>
+    <rdb:data-source id="shardingDataSource">
+        <rdb:sharding-rule data-sources="ds">
+            <rdb:table-rules>
+                <rdb:table-rule logic-table="t_order" actual-tables="t_order_${0..2}" table-strategy="orderTableStrategy"/>
+            </rdb:table-rules>
+            <rdb:binding-table-rules>
+                <rdb:binding-table-rule logic-tables="t_order"/>
+            </rdb:binding-table-rules>
+        </rdb:sharding-rule>
+    </rdb:data-source>
+
+
+    <!--&lt;!&ndash; 分库算法 &ndash;&gt;
     <bean id="noneDatabaseShardingAlgorithm" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.NoneDatabaseShardingAlgorithm"/>
+    &lt;!&ndash; 分库策略 &ndash;&gt;
     <bean id="databaseStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy">
         <constructor-arg index="0" value="user_id" />
         <constructor-arg index="1" ref="noneDatabaseShardingAlgorithm" />
      </bean>
-    <!--<rdb:strategy id="databaseStrategy" sharding-columns="user_id" algorithm-expression="dbtbl_${user_id.longValue() % 2}"/>-->
+    &lt;!&ndash;<rdb:strategy id="databaseStrategy" sharding-columns="user_id" algorithm-expression="dbtbl_${user_id.longValue() % 2}"/>&ndash;&gt;
+    &lt;!&ndash; 分表算法 &ndash;&gt;
+    &lt;!&ndash; 分表策略 &ndash;&gt;
     <bean id="tableStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
         <constructor-arg index="0" value="order_id"></constructor-arg>
         <constructor-arg index="1" ref=""></constructor-arg>
     </bean>
-    <!--<rdb:strategy id="orderTableStrategy" sharding-columns="order_id" algorithm-expression="t_order_${order_id.longValue() % 4}"/>-->
+    &lt;!&ndash;<rdb:strategy id="orderTableStrategy" sharding-columns="order_id" algorithm-expression="t_order_${order_id.longValue() % 4}"/>&ndash;&gt;
     <rdb:strategy id="orderItemTableStrategy" sharding-columns="order_id" algorithm-class="com.dangdang.ddframe.rdb.sharding.example.config.spring.algorithm.SingleKeyModuloTableShardingAlgorithm"/>
 
     <rdb:data-source id="shardingDataSource">
-        <rdb:sharding-rule data-sources="dbtbl_0,dbtbl_1">
+        <rdb:sharding-rule data-sources="ds_0,ds_1">
             <rdb:table-rules>
                 <rdb:table-rule logic-table="t_order" actual-tables="t_order_${0..3}" database-strategy="databaseStrategy" table-strategy="orderTableStrategy"/>
                 <rdb:table-rule logic-table="t_order_item" actual-tables="t_order_item_0,t_order_item_1,t_order_item_2,t_order_item_3" database-strategy="databaseStrategy" table-strategy="orderItemTableStrategy"/>
@@ -68,7 +91,9 @@
     </bean>
     <bean id="ShardingDataSource" class="com.dangdang.ddframe.rdb.sharding.jdbc.ShardingDataSource">
         <constructor-arg index="0" ref="shardingRule" />
-    </bean>
+    </bean>-->
+
+
     <!-- SessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="shardingDataSource"/>

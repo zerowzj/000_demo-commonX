@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.db.dao">
-    <resultMap id="demoEO" type="DemoEO">
+    <resultMap id="orderEO" type="OrderEO">
         <result property="id" column="ID"/>
         <result property="name" column="NAME"/>
     </resultMap>
@@ -11,17 +11,14 @@
         NAME
     </sql>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="DemoEO">
-        INSERT INTO DEMO (NAME) VALUE (#{name})
-        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+    <insert id="insert" parameterType="OrderEO">
+        INSERT INTO T_ORDER (ID, NAME) VALUE (#{id}, #{name})
     </insert>
 
-    <select id="get" parameterType="java.lang.Long" resultMap="demoEO">
+    <select id="get" parameterType="java.lang.Long" resultMap="orderEO">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM DEMO
+        FROM T_ORDER
         WHERE ID = #{id}
     </select>
 </mapper>

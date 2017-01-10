@@ -5,12 +5,12 @@
     <!--        别名           -->
     <!-- ==================== -->
     <typeAliases>
-        <typeAlias type="com.company.db.dao.OrderEO" alias="DemoEO"/>
+        <typeAlias type="com.company.db.dao.OrderEO" alias="OrderEO"/>
     </typeAliases>
     <!-- ==================== -->
     <!--        映射           -->
     <!-- ==================== -->
     <mappers>
-        <mapper resource="com/company/db/dao/Demo.xml"/>
+        <mapper resource="com/company/db/dao/Order.xml"/>
     </mappers>
 </configuration>
