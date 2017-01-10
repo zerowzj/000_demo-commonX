@@ -4,14 +4,14 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:rdb="http://www.dangdang.com/schema/ddframe/rdb"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		http://www.dangdang.com/schema/ddframe/rdb http://www.dangdang.com/schema/ddframe/rdb/rdb.xsd">
     <!-- ==================== -->
     <!--       Bean加载       -->
     <!-- ==================== -->
@@ -20,44 +20,58 @@
     <!-- ==================== -->
     <!--    Properties加载    -->
     <!-- ==================== -->
-    <!--<context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
-    <util:properties id="db" location="classpath:db.properties"/>
+    <util:properties id="db" location="classpath:db-sharding.properties"/>
+
     <!-- ==================== -->
     <!--       数据源配置      -->
     <!-- ==================== -->
     <bean id="ds_0" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="username" value="#{db['ds.druid.write.username']}"/>
-        <property name="password" value="#{db['ds.druid.write.password']}"/>
-        <property name="url" value="#{db['ds.druid.write.url']}"/>
+        <property name="username" value="#{db['ds_0.druid.username']}"/>
+        <property name="password" value="#{db['ds_0.druid.password']}"/>
+        <property name="url" value="#{db['ds_0.druid.url']}"/>
     </bean>
     <bean id="ds_1" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="username" value="#{db['ds.druid.read.username']}"/>
-        <property name="password" value="#{db['ds.druid.read.password']}"/>
-        <property name="url" value="#{db['ds.druid.read.url']}"/>
+        <property name="username" value="#{db['ds_1.druid.username']}"/>
+        <property name="password" value="#{db['ds_1.druid.password']}"/>
+        <property name="url" value="#{db['ds_1.druid.url']}"/>
     </bean>
-    <bean id="dataSourceRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule">
-        <constructor-arg>
-            <map>
-                <entry key="ds_0" value-ref="ds_0"/>
-                <entry key="ds_1" value-ref="ds_1"/>
-            </map>
-        </constructor-arg>
+    <!-- 分库 -->
+    <bean id="noneDatabaseShardingAlgorithm" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.NoneDatabaseShardingAlgorithm"/>
+    <bean id="databaseStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy">
+        <constructor-arg index="0" value="user_id" />
+        <constructor-arg index="1" ref="noneDatabaseShardingAlgorithm" />
+     </bean>
+    <!--<rdb:strategy id="databaseStrategy" sharding-columns="user_id" algorithm-expression="dbtbl_${user_id.longValue() % 2}"/>-->
+    <bean id="tableStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
+        <constructor-arg index="0" value="order_id"></constructor-arg>
+        <constructor-arg index="1" ref=""></constructor-arg>
     </bean>
-    <bean id="tbleRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.TableRule">
-        <constructor-arg value="t_order" index="0"/>
-        <constructor-arg index="1">
-            <list>
-                <value>t_order_0</value>
-                <value>t_order_1</value>
-            </list>
-        </constructor-arg>
-        <constructor-arg index="2" ref="dataSourceRule"/>
+    <!--<rdb:strategy id="orderTableStrategy" sharding-columns="order_id" algorithm-expression="t_order_${order_id.longValue() % 4}"/>-->
+    <rdb:strategy id="orderItemTableStrategy" sharding-columns="order_id" algorithm-class="com.dangdang.ddframe.rdb.sharding.example.config.spring.algorithm.SingleKeyModuloTableShardingAlgorithm"/>
+
+    <rdb:data-source id="shardingDataSource">
+        <rdb:sharding-rule data-sources="dbtbl_0,dbtbl_1">
+            <rdb:table-rules>
+                <rdb:table-rule logic-table="t_order" actual-tables="t_order_${0..3}" database-strategy="databaseStrategy" table-strategy="orderTableStrategy"/>
+                <rdb:table-rule logic-table="t_order_item" actual-tables="t_order_item_0,t_order_item_1,t_order_item_2,t_order_item_3" database-strategy="databaseStrategy" table-strategy="orderItemTableStrategy"/>
+            </rdb:table-rules>
+        </rdb:sharding-rule>
+    </rdb:data-source>
+    <bean id="shardingRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule">
+        <constructor-arg index="0" ref="" />
+        <constructor-arg index="1" ref="" />
+        <constructor-arg index="2" ref="" />
+        <constructor-arg index="3" ref="" />
+        <constructor-arg index="4" ref="" />
+    </bean>
+    <bean id="ShardingDataSource" class="com.dangdang.ddframe.rdb.sharding.jdbc.ShardingDataSource">
+        <constructor-arg index="0" ref="shardingRule" />
     </bean>
     <!-- SessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="shardingDataSource"/>
         <property name="configLocation" value="classpath:mybatis-cfg.xml"/>
     </bean>
     <!-- SqlSessionTemplate -->
@@ -68,12 +82,9 @@
     <!--       事务配置       -->
     <!-- ==================== -->
     <!-- 事务管理器 -->
-    <bean id="transactionManager" class="com.company.db.datasource.DynamicDataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="shardingDataSource"/>
     </bean>
-    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>-->
     <!-- 事务通知 -->
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
@@ -86,12 +97,10 @@
      <!-- ==================== -->
     <!--        AOP配置        -->
     <!-- ==================== -->
-    <bean id="myDataSourceDecider" class="com.company.db.MyDataSourceDecider" />
     <aop:config>
         <!--配置事务切点 -->
         <!-- 关键配置，切换数据源一定要比持久层代码更先执行（事务也算持久层代码） -->
         <aop:pointcut id="servicePointcut" expression="execution(* com.company.db.service..*.*(..))"/>
         <aop:advisor pointcut-ref="servicePointcut" advice-ref="transactionAdvice"/>
-        <aop:advisor pointcut-ref="servicePointcut" advice-ref="myDataSourceDecider" order="1"/>
     </aop:config>
 </beans>

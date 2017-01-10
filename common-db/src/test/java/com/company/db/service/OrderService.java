@@ -6,7 +6,7 @@ package com.company.db.service;
  * @author wangzhj
  * @time 2016-12-01 11:22
  */
-public interface DemoService {
+public interface OrderService {
 
     public void add(String name);
 

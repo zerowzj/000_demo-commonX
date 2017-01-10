@@ -1,7 +1,7 @@
 package com.company.db;
 
 
-import com.company.db.service.DemoService;
+import com.company.db.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class ReadWriteTest {
     private static final Logger logger = LoggerFactory.getLogger(ReadWriteTest.class);
 
     @Autowired
-    private DemoService demoService;
+    private OrderService demoService;
 
     @Test
     public void test_add() {

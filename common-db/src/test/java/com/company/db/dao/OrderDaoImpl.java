@@ -10,14 +10,13 @@ import org.springframework.stereotype.Repository;
  * @author wangzhj
  * @time 2016-11-25 18:18
  */
-@Repository("demoDao")
-public class DemoDaoImpl extends BaseDaoImpl<DemoEO> implements DemoDao {
+@Repository("orderDao")
+public class OrderDaoImpl extends BaseDaoImpl<OrderEO> implements OrderDao {
 
     @Override
-    public DemoEO findLt(Long id) {
-        DataSourceHolder.put(DataSourceType.READ);
+    public OrderEO findLt(Long id) {
         String sqlId = getSqlId("get");
-        DemoEO entity = sqlSessionTemplate.selectOne(sqlId, id);
+        OrderEO entity = sqlSessionTemplate.selectOne(sqlId, id);
         return entity;
     }
 }

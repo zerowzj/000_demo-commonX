@@ -1,10 +1,8 @@
 package com.company.db.service;
 
 
-import com.company.db.dao.DemoDao;
-import com.company.db.dao.DemoEO;
-import com.company.db.datasource.DataSourceHolder;
-import com.company.db.datasource.DataSourceType;
+import com.company.db.dao.OrderDao;
+import com.company.db.dao.OrderEO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,30 +17,30 @@ import java.util.Map;
  * @author wangzhj
  * @time 2016-12-01 11:23
  */
-@Service("demoService")
-public class DemoServiceImpl implements DemoService {
+@Service("orderService")
+public class OrderServiceImpl implements OrderService {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
-    private DemoDao demoDao = null;
+    private OrderDao orderDao = null;
 
     @Override
     public void add(String name) {
-        DemoEO demoEO = new DemoEO();
+        OrderEO demoEO = new OrderEO();
         demoEO.setName(name);
-        demoDao.insert(demoEO);
+        orderDao.insert(demoEO);
     }
 
     @Override
     public void get(Long id) {
-        DemoEO demoEO = demoDao.get(id);
+        OrderEO demoEO = orderDao.get(id);
         logger.info(demoEO.getName());
     }
 
     @Override
     public void find(Long id) {
-        DemoEO demoEO = demoDao.get(id);
+        OrderEO demoEO = orderDao.get(id);
         logger.info(demoEO.getName());
     }
 
@@ -51,7 +49,7 @@ public class DemoServiceImpl implements DemoService {
         Map m = TransactionSynchronizationManager.getResourceMap();
        String str = TransactionSynchronizationManager.getCurrentTransactionName();
         TransactionSynchronizationManager.getSynchronizations();
-        DemoEO demoEO = demoDao.findLt(id);
+        OrderEO demoEO = orderDao.findLt(id);
         logger.info(demoEO.getName());
     }
 }

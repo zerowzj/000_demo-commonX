@@ -21,7 +21,7 @@
     <!--    Properties加载    -->
     <!-- ==================== -->
     <!--<context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>-->
-    <util:properties id="db" location="classpath:db.properties"/>
+    <util:properties id="db" location="classpath:db-rw.properties"/>
     <!-- ==================== -->
     <!--       数据源配置      -->
     <!-- ==================== -->
