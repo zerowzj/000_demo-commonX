@@ -45,19 +45,12 @@
     </rdb:data-source>-->
 
 
-    <!-- 分库策略 -->
-    <bean id="noneDatabaseShardingAlgorithm"
-          class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.NoneDatabaseShardingAlgorithm"/>
+    <!-- 数据源策略 -->
+    <bean id="noneDatabaseShardingAlgorithm" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.NoneDatabaseShardingAlgorithm"/>
     <bean id="databaseStrategy"
           class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy">
         <constructor-arg name="shardingColumn" value=""/>
         <constructor-arg name="databaseShardingAlgorithm" ref="noneDatabaseShardingAlgorithm"/>
-    </bean>
-    <!-- 分表策略 -->
-    <bean id="shardingAlgorithm" class="com.company.db.ShardingAlgorithm"/>
-    <bean id="tableStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
-        <constructor-arg name="shardingColumn" value="id"/>
-        <constructor-arg name="tableShardingAlgorithm" ref="shardingAlgorithm"></constructor-arg>
     </bean>
     <!-- 数据源规则 -->
     <bean id="dataSourceRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule">
@@ -66,6 +59,13 @@
                 <entry key="dd" value-ref="ds"/>
             </map>
         </constructor-arg>
+    </bean>
+
+    <!-- 表策略 -->
+    <bean id="shardingAlgorithm" class="com.company.db.ShardingAlgorithm"/>
+    <bean id="tableStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
+        <constructor-arg name="shardingColumn" value="id"/>
+        <constructor-arg name="tableShardingAlgorithm" ref="shardingAlgorithm"></constructor-arg>
     </bean>
     <!-- 表规则 -->
     <bean id="tableRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.TableRule">
@@ -94,6 +94,7 @@
             </list>
         </constructor-arg>
     </bean>
+
     <!-- Sharding规则 -->
     <bean id="shardingRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule">
         <constructor-arg name="dataSourceRule" ref="dataSourceRule"/>
