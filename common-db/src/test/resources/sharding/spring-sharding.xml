@@ -32,7 +32,7 @@
         <property name="url" value="#{db['ds.druid.url']}"/>
     </bean>
 
-    <!--<rdb:strategy id="orderTableStrategy" sharding-columns="id" algorithm-class="com.company.db.ShardingAlgorithm"/>
+    <rdb:strategy id="orderTableStrategy" sharding-columns="id" algorithm-class="com.company.db.ShardingAlgorithm"/>
     <rdb:data-source id="shardingDataSource">
         <rdb:sharding-rule data-sources="ds">
             <rdb:table-rules>
@@ -42,17 +42,17 @@
                 <rdb:binding-table-rule logic-tables="t_order"/>
             </rdb:binding-table-rules>
         </rdb:sharding-rule>
-    </rdb:data-source>-->
+    </rdb:data-source>
 
 
-    <!-- 数据源策略 -->
+   <!-- &lt;!&ndash; 数据源策略 &ndash;&gt;
     <bean id="noneDatabaseShardingAlgorithm" class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.NoneDatabaseShardingAlgorithm"/>
     <bean id="databaseStrategy"
           class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy">
         <constructor-arg name="shardingColumn" value=""/>
         <constructor-arg name="databaseShardingAlgorithm" ref="noneDatabaseShardingAlgorithm"/>
     </bean>
-    <!-- 数据源规则 -->
+    &lt;!&ndash; 数据源规则 &ndash;&gt;
     <bean id="dataSourceRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule">
         <constructor-arg name="dataSourceMap">
             <map>
@@ -61,13 +61,13 @@
         </constructor-arg>
     </bean>
 
-    <!-- 表策略 -->
+    &lt;!&ndash; 表策略 &ndash;&gt;
     <bean id="shardingAlgorithm" class="com.company.db.ShardingAlgorithm"/>
     <bean id="tableStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
         <constructor-arg name="shardingColumn" value="id"/>
         <constructor-arg name="tableShardingAlgorithm" ref="shardingAlgorithm"></constructor-arg>
     </bean>
-    <!-- 表规则 -->
+    &lt;!&ndash; 表规则 &ndash;&gt;
     <bean id="tableRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.TableRule">
         <constructor-arg name="logicTable" value="t_order"/>
         <constructor-arg name="dynamic" value="false"/>
@@ -95,7 +95,7 @@
         </constructor-arg>
     </bean>
 
-    <!-- Sharding规则 -->
+    &lt;!&ndash; Sharding规则 &ndash;&gt;
     <bean id="shardingRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule">
         <constructor-arg name="dataSourceRule" ref="dataSourceRule"/>
         <constructor-arg name="tableRules">
@@ -113,7 +113,7 @@
     </bean>
     <bean id="shardingDataSource" class="com.dangdang.ddframe.rdb.sharding.jdbc.ShardingDataSource">
         <constructor-arg name="shardingRule" ref="shardingRule"/>
-    </bean>
+    </bean>-->
 
 
     <!-- SessionFactory -->
