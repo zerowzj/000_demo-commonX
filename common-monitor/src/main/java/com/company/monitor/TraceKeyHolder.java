@@ -3,10 +3,10 @@ package com.company.monitor;
 import java.math.BigDecimal;
 
 /**
- * <p></p>
  *
+ * 对于涉及到ThreadLocal相关使用的接口，都需要去考虑在使用完上下文对象时，
+ * 清除掉对应的数据，以避免内存泄露问题
  * @author wangzhj
- * @time 2016-12-02 9:58
  */
 public class TraceKeyHolder {
 

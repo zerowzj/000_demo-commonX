@@ -4,18 +4,19 @@ import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
 import com.company.monitor.Constant;
-import com.company.monitor.CostTimer;
 import com.company.util.JsonUtil;
 import com.google.common.base.Joiner;
+import com.google.common.base.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 生产者过滤器
  *
  * @author wangzhj
- * @time 2016-11-30 18:55
  */
 @Activate(group = {Constants.PROVIDER})
 public class ProviderFilter implements Filter {
@@ -28,7 +29,7 @@ public class ProviderFilter implements Filter {
         String callTraceKey = RpcContext.getContext().getAttachment(Constant.CALL_TRACE_KEY);
         MDC.put("id", callTraceKey);
         //计时
-        CostTimer.start(Constant.COST_TIMER_PROVIDER);
+        Stopwatch stopwatch = Stopwatch.createStarted();
         //全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
@@ -41,10 +42,10 @@ public class ProviderFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("   [DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.COST_TIMER_PROVIDER));
+            stopwatch.stop();
+            logger.info("   [DUBBO][{}] [COST TIME][{}]ms", fqName, stopwatch.elapsed(TimeUnit.MILLISECONDS));
             logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
             //清理
-            CostTimer.clear(Constant.COST_TIMER_PROVIDER);
             MDC.clear();
         }
         return result;

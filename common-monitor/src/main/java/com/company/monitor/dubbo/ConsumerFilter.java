@@ -3,18 +3,18 @@ package com.company.monitor.dubbo;
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.rpc.*;
-import com.company.monitor.Constant;
-import com.company.monitor.CostTimer;
 import com.company.util.JsonUtil;
 import com.google.common.base.Joiner;
+import com.google.common.base.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 消费者过滤器
  *
  * @author wangzhj
- * @time 2016-11-30 18:55
  */
 @Activate(group = {Constants.CONSUMER})
 public class ConsumerFilter implements Filter {
@@ -24,7 +24,7 @@ public class ConsumerFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         //计时
-        CostTimer.start(Constant.COST_TIMER_CONSUMER);
+        Stopwatch stopwatch = Stopwatch.createStarted();
         //全限定名
         String canonicalName = invoker.getInterface().getCanonicalName();
         String methodName = invocation.getMethodName();
@@ -37,10 +37,9 @@ public class ConsumerFilter implements Filter {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            logger.info("   [DUBBO][{}] [COST TIME][{}]ms", fqName, CostTimer.get(Constant.COST_TIMER_CONSUMER));
+            stopwatch.stop();
+            logger.info("   [DUBBO][{}] [COST TIME][{}]ms", fqName, stopwatch.elapsed(TimeUnit.MILLISECONDS));
             logger.info("[RESPONSE]<==={}", JsonUtil.toJson(result.getValue()));
-            //清理
-            CostTimer.clear(Constant.COST_TIMER_CONSUMER);
         }
         return result;
     }
