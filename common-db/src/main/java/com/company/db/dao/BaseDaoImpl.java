@@ -1,6 +1,8 @@
 package com.company.db.dao;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -10,35 +12,33 @@ import java.io.Serializable;
  *
  * @author wangzhj
  */
-public abstract class BaseDaoImpl<E extends BaseEO> implements BaseDao<E> {
-
-    protected SqlSessionTemplate sqlSessionTemplate;
+public abstract class BaseDaoImpl<E extends BaseEO> extends SqlSessionDaoSupport implements BaseDao<E> {
 
     @Override
     public final E insert(final E entity) {
         String sqlId = getSqlId("insert");
-        int count = sqlSessionTemplate.insert(sqlId, entity);
+        int count = getSqlSession().insert(sqlId, entity);
         return entity;
     }
 
     @Override
     public final int delete(final Serializable id) {
         String sqlId = getSqlId("delete");
-        int count = sqlSessionTemplate.delete(sqlId, id);
+        int count = getSqlSession().delete(sqlId, id);
         return count;
     }
 
     @Override
     public final int update(final E entity) {
         String sqlId = getSqlId("update");
-        int count = sqlSessionTemplate.update(sqlId, entity);
+        int count = getSqlSession().update(sqlId, entity);
         return count;
     }
 
     @Override
     public final E get(final Serializable id) {
         String sqlId = getSqlId("get");
-        E entity = sqlSessionTemplate.selectOne(sqlId, id);
+        E entity = getSqlSession().selectOne(sqlId, id);
         return entity;
     }
 
@@ -52,8 +52,9 @@ public abstract class BaseDaoImpl<E extends BaseEO> implements BaseDao<E> {
         return this.getClass().getPackage().getName() + "." + sqlId;
     }
 
+    @Override
     @Resource
-    public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate){
-        this.sqlSessionTemplate = sqlSessionTemplate;
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        super.setSqlSessionFactory(sqlSessionFactory);
     }
 }

@@ -19,13 +19,7 @@ public class OrderDaoImpl extends BaseDaoImpl<OrderEO> implements OrderDao {
     @Override
     public OrderEO findLt(Long id) {
         String sqlId = getSqlId("get");
-        OrderEO entity = sqlSessionTemplate.selectOne(sqlId, id);
+        OrderEO entity = getSqlSession().selectOne(sqlId, id);
         return entity;
-    }
-
-    @Override
-    @Resource(name = "sqlSession")
-    public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
-        super.setSqlSessionTemplate(sqlSessionTemplate);
     }
 }
