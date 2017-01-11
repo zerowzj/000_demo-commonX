@@ -50,18 +50,18 @@
           class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.NoneDatabaseShardingAlgorithm"/>
     <bean id="databaseStrategy"
           class="com.dangdang.ddframe.rdb.sharding.api.strategy.database.DatabaseShardingStrategy">
-        <constructor-arg index="0" value=""/>
-        <constructor-arg index="1" ref="noneDatabaseShardingAlgorithm"/>
+        <constructor-arg name="shardingColumn" value=""/>
+        <constructor-arg name="databaseShardingAlgorithm" ref="noneDatabaseShardingAlgorithm"/>
     </bean>
     <!-- 分表策略 -->
     <bean id="shardingAlgorithm" class="com.company.db.ShardingAlgorithm"/>
     <bean id="tableStrategy" class="com.dangdang.ddframe.rdb.sharding.api.strategy.table.TableShardingStrategy">
-        <constructor-arg index="0" value="id"/>
-        <constructor-arg index="1" ref="shardingAlgorithm"></constructor-arg>
+        <constructor-arg name="shardingColumn" value="id"/>
+        <constructor-arg name="tableShardingAlgorithm" ref="shardingAlgorithm"></constructor-arg>
     </bean>
     <!-- 数据源规则 -->
     <bean id="dataSourceRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.DataSourceRule">
-        <constructor-arg>
+        <constructor-arg name="dataSourceMap">
             <map>
                 <entry key="dd" value-ref="ds"/>
             </map>
@@ -96,22 +96,22 @@
     </bean>
     <!-- Sharding规则 -->
     <bean id="shardingRule" class="com.dangdang.ddframe.rdb.sharding.api.rule.ShardingRule">
-        <constructor-arg index="0" ref="dataSourceRule"/>
-        <constructor-arg index="1">
+        <constructor-arg name="dataSourceRule" ref="dataSourceRule"/>
+        <constructor-arg name="tableRules">
             <list>
                 <ref bean="tableRule"/>
             </list>
         </constructor-arg>
-        <constructor-arg index="2">
+        <constructor-arg name="bindingTableRules">
             <list>
                 <ref bean="bindingTableRule"/>
             </list>
         </constructor-arg>
-        <constructor-arg index="3" ref="databaseStrategy"/>
-        <constructor-arg index="4" ref="tableStrategy"/>
+        <constructor-arg name="databaseShardingStrategy" ref="databaseStrategy"/>
+        <constructor-arg name="tableShardingStrategy" ref="tableStrategy"/>
     </bean>
     <bean id="shardingDataSource" class="com.dangdang.ddframe.rdb.sharding.jdbc.ShardingDataSource">
-        <constructor-arg index="0" ref="shardingRule"/>
+        <constructor-arg name="shardingRule" ref="shardingRule"/>
     </bean>
 
 

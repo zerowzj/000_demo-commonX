@@ -32,6 +32,6 @@ public class ShardingTest {
 
     @Test
     public void test_get(){
-        orderService.get(1L);
+        orderService.get(3L);
     }
 }
