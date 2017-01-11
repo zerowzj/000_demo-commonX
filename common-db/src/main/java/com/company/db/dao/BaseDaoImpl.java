@@ -12,7 +12,6 @@ import java.io.Serializable;
  */
 public abstract class BaseDaoImpl<E extends BaseEO> implements BaseDao<E> {
 
-    @Resource
     protected SqlSessionTemplate sqlSessionTemplate;
 
     @Override
@@ -51,5 +50,10 @@ public abstract class BaseDaoImpl<E extends BaseEO> implements BaseDao<E> {
      */
     protected final String getSqlId(String sqlId) {
         return this.getClass().getPackage().getName() + "." + sqlId;
+    }
+
+    @Resource
+    public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate){
+        this.sqlSessionTemplate = sqlSessionTemplate;
     }
 }

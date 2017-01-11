@@ -2,7 +2,10 @@ package com.company.db.dao;
 
 import com.company.db.datasource.DataSourceHolder;
 import com.company.db.datasource.DataSourceType;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
 
 /**
  * <p></p>
@@ -18,5 +21,11 @@ public class OrderDaoImpl extends BaseDaoImpl<OrderEO> implements OrderDao {
         String sqlId = getSqlId("get");
         OrderEO entity = sqlSessionTemplate.selectOne(sqlId, id);
         return entity;
+    }
+
+    @Override
+    @Resource(name = "sqlSession")
+    public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+        super.setSqlSessionTemplate(sqlSessionTemplate);
     }
 }
