@@ -1,5 +1,6 @@
 package com.company.db.plugin;
 
+import com.google.common.base.Stopwatch;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -14,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Sql耗时插件
@@ -30,6 +32,7 @@ public class SqlCostPlugin extends PluginAdapter {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
+        Stopwatch stopwatch = Stopwatch.createStarted();
         //
         Object[] args = invocation.getArgs();
         //
@@ -43,11 +46,10 @@ public class SqlCostPlugin extends PluginAdapter {
         Object target = invocation.getTarget();
         Object result = null;
         if (target instanceof Executor) {
-            long start = System.currentTimeMillis();
             Method method = invocation.getMethod();
             result = invocation.proceed();
-            long end = System.currentTimeMillis();
-            logger.info("[SqlCostPlugin] execute [" + method.getName() + "] cost [" + (end - start) + "] ms");
+            stopwatch.stop();
+            logger.info("[SqlCostPlugin] execute [" + method.getName() + "] cost [" + (stopwatch.elapsed(TimeUnit.SECONDS)) + "] s");
         }
         return result;
     }
