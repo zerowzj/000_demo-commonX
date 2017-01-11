@@ -29,4 +29,9 @@ public class ShardingTest {
             orderService.add(Long.valueOf(i), name);
         }
     }
+
+    @Test
+    public void test_get(){
+        orderService.get(1L);
+    }
 }

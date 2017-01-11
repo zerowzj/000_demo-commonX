@@ -28,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void add(Long userId, String name) {
         OrderEO orderEO = new OrderEO();
+        orderEO.setId(userId);
         orderEO.setName(name);
         orderEO.setUserId(userId);
         orderDao.insert(orderEO);
