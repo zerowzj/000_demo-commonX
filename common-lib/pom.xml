@@ -248,6 +248,9 @@
                     </exclusion>-->
                 </exclusions>
             </dependency>
+            <!-- ==================== -->
+            <!--     分布式协调框架     -->
+            <!-- ==================== -->
             <!-- ZooKeeper -->
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
