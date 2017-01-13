@@ -8,9 +8,9 @@
         <result property="userId" column="USER_ID"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID,
-        NAME,
-        user_id
+        t.ID,
+        t.NAME,
+        t.user_id
     </sql>
 
     <insert id="insert" parameterType="OrderEO">
@@ -23,7 +23,8 @@
     <select id="get" parameterType="java.lang.Long" resultMap="orderEO">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM t_order
-        WHERE id = #{id}
+        FROM t_order t
+        WHERE t.id = #{id}
+        ORDER BY t.id
     </select>
 </mapper>
