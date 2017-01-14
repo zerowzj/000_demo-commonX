@@ -14,10 +14,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author wangzhj
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:sharding/spring-sharding.xml"})
-public class ShardingTest {
+@ContextConfiguration({"classpath:sharding/spring-sharding-jdbc.xml"})
+public class ShardingJdbcTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(ShardingTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShardingJdbcTest.class);
 
     @Autowired
     private OrderService orderService;
