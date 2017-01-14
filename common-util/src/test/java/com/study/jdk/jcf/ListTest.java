@@ -67,4 +67,10 @@ public class ListTest {
             System.out.println(stack.pop());
         }
     }
+
+    @Test
+    public void test(){
+        String str = "1";
+        System.out.println(str.hashCode());
+    }
 }
