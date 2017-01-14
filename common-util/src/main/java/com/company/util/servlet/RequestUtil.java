@@ -2,6 +2,7 @@ package com.company.util.servlet;
 
 import com.company.util.CloseUtil;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,6 +27,10 @@ public abstract class RequestUtil {
     public static final String AJAX_VALUE = "XMLHttpRequest";
 
     public static final String MULTIPART = "multipart/";
+
+    public static HttpServletRequest toHttp(ServletRequest request) {
+        return (HttpServletRequest) request;
+    }
 
     /**
      * 是否是Ajax请求
