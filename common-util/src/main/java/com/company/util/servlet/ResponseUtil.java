@@ -12,6 +12,12 @@ import java.util.Locale;
  */
 public abstract class ResponseUtil {
 
+    /**
+     * 转HttpServletResponse
+     *
+     * @param response
+     * @return HttpServletResponse
+     */
     public static HttpServletResponse toHttp(ServletResponse response) {
         return (HttpServletResponse) response;
     }

@@ -28,6 +28,12 @@ public abstract class RequestUtil {
 
     public static final String MULTIPART = "multipart/";
 
+    /**
+     * 转HttpServletRequest
+     *
+     * @param request
+     * @return HttpServletRequest
+     */
     public static HttpServletRequest toHttp(ServletRequest request) {
         return (HttpServletRequest) request;
     }
