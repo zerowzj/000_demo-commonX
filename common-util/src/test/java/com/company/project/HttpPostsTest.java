@@ -66,5 +66,6 @@ public class HttpPostsTest {
         heads.put("requestid", "11111111111111111");
         HttpResult result = HttpPosts.create("http://xin.jiaoshi.xk12.cn/login", params).headers(heads).submit().result();
         System.out.println(JsonUtil.toJson(result));
+        System.out.println(new String(result.getData()));
     }
 }
