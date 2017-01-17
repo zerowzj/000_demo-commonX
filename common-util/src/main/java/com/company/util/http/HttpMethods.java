@@ -31,8 +31,7 @@ abstract class HttpMethods {
     protected Map<String, String> paramMap = null;
     //上传文件
     protected Map<String, byte[]> fileMap = null;
-
-    //编码
+    //实体编码
     protected Charset charset = Charsets.UTF_8;
     //请求头
     protected Map<String, String> headerMap = null;
