@@ -46,10 +46,10 @@ abstract class HttpMethods {
     //==================== 响应 ====================
     //状态码
     private int statusCode;
-    //数据
-    private byte[] data = null;
     //响应头
     private Header[] headers = null;
+    //响应数据
+    private byte[] data = null;
 
     protected HttpMethods(String url, Map<String, String> paramMap) {
         this.url = url;
@@ -62,25 +62,45 @@ abstract class HttpMethods {
         this.fileMap = fileMap;
     }
 
+    /**
+     * 设置连接超时时间
+     *
+     * @param connectTimeout
+     */
     public final HttpMethods connectTimeout(int connectTimeout) {
         this.connectTimeout = connectTimeout;
         return this;
     }
 
-    public final HttpMethods readTimeout(int readTimeout) {
+    /**
+     * 设置读取超时时间
+     *
+     * @param readTimeout
+     */
+    public HttpMethods readTimeout(int readTimeout) {
         this.readTimeout = readTimeout;
         return this;
     }
 
-    public final HttpMethods charset(Charset charset) {
+    /**
+     * 读取请求字符集
+     *
+     * @param charset
+     */
+    public HttpMethods charset(Charset charset) {
         this.charset = charset;
         return this;
     }
 
-    public final HttpMethods headers(Map<String, String> headerMap) {
-        this.headerMap = headerMap;
-        return this;
-    }
+//    /**
+//     * 设置请求头
+//     *
+//     * @param headerMap
+//     */
+//    public HttpMethods headers(Map<String, String> headerMap) {
+//        this.headerMap = headerMap;
+//        return this;
+//    }
 
     protected final void releaseConnection(HttpRequestBase httpRequest) {
         if (httpRequest != null) {
@@ -99,6 +119,7 @@ abstract class HttpMethods {
                     is = response.getEntity().getContent();
                     data = ByteStreams.toByteArray(is);
                 }
+                //响应头
                 headers = response.getAllHeaders();
             }
         } catch (Exception ex) {
@@ -127,8 +148,8 @@ abstract class HttpMethods {
      *
      * @return HttpResult
      */
-    public final HttpResult get() {
-        HttpResult httpResult = new HttpResult(statusCode, data, headers);
+    public final HttpResult result() {
+        HttpResult httpResult = new HttpResult(statusCode, headers, data);
         return httpResult;
     }
 }

@@ -47,7 +47,7 @@ public class HttpGetsTest {
             exec.submit(new Runnable() {
                 @Override
                 public void run() {
-                    HttpGets.create("http://www.sohu.com").asyncSubmit().get();
+                    HttpGets.create("http://www.sohu.com").asyncSubmit().result();
                 }
             });
         }

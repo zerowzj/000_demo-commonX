@@ -36,15 +36,24 @@ public class HttpPosts extends HttpMethods {
         super(url, params, files);
     }
 
+    /**
+     *
+     */
     public static HttpPosts create(String url, Map<String, String> params) {
         return create(url, params, null);
     }
 
+    /**
+     *
+     */
     public static HttpPosts create(Map<String, byte[]> files, String url) {
         Preconditions.checkArgument(!(files == null || files.isEmpty()), "files is not null or empty");
         return create(url, null, files);
     }
 
+    /**
+     *
+     */
     public static HttpPosts create(String url, Map<String, String> params, Map<String, byte[]> files) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
         return new HttpPosts(url, params, files);
@@ -55,10 +64,20 @@ public class HttpPosts extends HttpMethods {
         return this;
     }
 
+    /**
+     * 设置请求头
+     *
+     * @param headerMap
+     */
+    public HttpPosts headers(Map<String, String> headerMap) {
+        this.headerMap = headerMap;
+        return this;
+    }
+
     private HttpPost buildHttpPost() {
         HttpPost httpPost = null;
         try {
-            //===>Entity
+            //===>请求实体
             HttpEntity httpEntity = null;
             if (bodyFormat == BodyFormat.FORM) {
                 httpEntity = Entitys.createUrlEncodedFormEntity(paramMap, charset);
@@ -73,11 +92,10 @@ public class HttpPosts extends HttpMethods {
                     .setConnectTimeout(connectTimeout)
                     .setSocketTimeout(readTimeout)
                     .build();
-            //===>Post
             httpPost = new HttpPost(url);
             httpPost.setEntity(httpEntity);
             httpPost.setConfig(requestConfig);
-            //===>头部
+            //===>请求头
             if (headerMap != null && !headerMap.isEmpty()) {
                 httpPost.setHeaders(Headers.create(headerMap));
             }
@@ -94,13 +112,13 @@ public class HttpPosts extends HttpMethods {
         HttpPost httpPost = null;
         CloseableHttpResponse response = null;
         try {
-            //===>请求
+            //===>
             httpPost = buildHttpPost();
             logger.info("url===> {}", httpPost.getURI().toString());
             logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
             //===>
             response = httpClient.execute(httpPost);
-            //===>响应
+            //===>
             parseHttpResponse(response);
         } catch (Exception ex) {
             ex.printStackTrace();

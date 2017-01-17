@@ -19,7 +19,7 @@ public class Headers {
      * @return Header[]
      */
     public static Header[] create(Map<String, String> headerMap) {
-        Header[] headerArray = ObjectArrays.newArray(Header.class, 1);
+        Header[] headerArray = ObjectArrays.newArray(Header.class, 0);
         for (Map.Entry<String, String> entry : headerMap.entrySet()) {
             Header header = new BasicHeader(entry.getKey(), entry.getValue());
             headerArray = ObjectArrays.concat(header, headerArray);
