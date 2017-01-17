@@ -11,14 +11,14 @@ public class HttpResult {
 
     private int statusCode = 0;
 
-    private byte[] data = null;
-
     private Header[] headers = null;
 
-    public HttpResult(int statusCode, byte[] data, Header[] headers){
+    private byte[] data = null;
+
+    public HttpResult(int statusCode, Header[] headers, byte[] data){
         this.statusCode = statusCode;
-        this.data = data;
         this.headers = headers;
+        this.data = data;
     }
 
     public boolean isOK() {
