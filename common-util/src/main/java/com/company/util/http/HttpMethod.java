@@ -101,12 +101,22 @@ public abstract class HttpMethod {
         return this;
     }
 
+    /**
+     * 释放连接
+     *
+     * @param httpRequest
+     */
     protected void releaseConnection(HttpRequestBase httpRequest) {
         if (httpRequest != null) {
             httpRequest.releaseConnection();
         }
     }
 
+    /**
+     * 解析响应
+     *
+     * @param response
+     */
     protected final void parseHttpResponse(HttpResponse response) {
         InputStream is = null;
         try {
