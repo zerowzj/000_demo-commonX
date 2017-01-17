@@ -100,8 +100,8 @@ public class HttpPosts extends HttpMethod {
         try {
             //===>
             httpPost = buildHttpPost();
-            logger.info("url===> {}", httpPost.getURI().toString());
-            logger.info("body===> {}", EntityUtils.toString(httpPost.getEntity()));
+            logger.info(" request url===> {}", httpPost.getURI().toString());
+            logger.info("request body===> {}", EntityUtils.toString(httpPost.getEntity()));
             //===>
             response = httpClient.execute(httpPost);
             //===>

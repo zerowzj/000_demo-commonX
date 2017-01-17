@@ -63,7 +63,8 @@ public class HttpPostsTest {
                 .headers(headers)
                 .submit()
                 .result();
-        System.out.println(JsonUtil.toJson(result));
+//        System.out.println(JsonUtil.toJson(result));
+        System.out.println(result.isOK());
         System.out.println(new String(result.getData()));
     }
 }
