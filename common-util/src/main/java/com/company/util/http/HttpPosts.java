@@ -23,9 +23,7 @@ public class HttpPosts extends HttpMethod {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
-    /**
-     * 请求实体格式
-     */
+    //请求实体格式
     private BodyFormat bodyFormat = BodyFormat.FORM;
 
     private HttpPosts(String url, Map<String, String> params, Map<String, byte[]> files) {
@@ -33,14 +31,22 @@ public class HttpPosts extends HttpMethod {
     }
 
     /**
+     * 创建HttpPosts
      *
+     * @param url
+     * @param params
+     * @return HttpPosts
      */
     public static HttpPosts create(String url, Map<String, String> params) {
         return create(url, params, null);
     }
 
     /**
+     * 创建HttpPosts
      *
+     * @param files
+     * @param url
+     * @return HttpPosts
      */
     public static HttpPosts create(Map<String, byte[]> files, String url) {
         Preconditions.checkArgument(!(files == null || files.isEmpty()), "files is not null or empty");
@@ -48,7 +54,12 @@ public class HttpPosts extends HttpMethod {
     }
 
     /**
+     * 创建HttpPosts
      *
+     * @param url
+     * @param params
+     * @param files
+     * @return HttpPosts
      */
     public static HttpPosts create(String url, Map<String, String> params, Map<String, byte[]> files) {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(url), "url is not null or empty");
