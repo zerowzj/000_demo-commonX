@@ -4,6 +4,9 @@ import com.company.util.http.HttpGets;
 import com.company.util.http.HttpPosts;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.junit.Test;
 
 import java.util.List;
@@ -43,5 +46,14 @@ public class HttpPostsTest {
             }
         }
         System.out.println(System.currentTimeMillis() - start);
+    }
+
+
+    @Test
+    public void test_tt(){
+
+        String str = "1a2s3dqwe";
+        System.out.println(Base64.encodeBase64String(DigestUtils.md5(str)));
+
     }
 }

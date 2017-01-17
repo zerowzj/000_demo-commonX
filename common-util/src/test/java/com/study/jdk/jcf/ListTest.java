@@ -14,6 +14,58 @@ public class ListTest {
 
     public static final Logger logger = LoggerFactory.getLogger(ListTest.class);
 
+    public static void main(String[] args) {
+        final Vector<Integer> data = new Vector<>();
+        final int length = 1000;
+//
+//        for(int i = 0; i < length; i++){
+//            if(data.isEmpty()){
+//                data.add(1);
+//            } else {
+//                data.add(data.get(data.size()-1)+1);
+//            }
+//        }
+
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = 0; i < length; i++){
+                    if(data.isEmpty()){
+                        data.add(1);
+                    } else {
+                        data.add(data.get(data.size()-1)+1);
+                    }
+                }
+            }
+        });
+        t1.start();
+
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = 0; i < length; i++){
+                    if(data.isEmpty()){
+                        data.add(1);
+                    } else {
+                        data.add(data.get(data.size()-1)+1);
+                    }
+                }
+            }
+        });
+        t2.start();
+
+        try {
+            t1.join();
+            t2.join();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        for(Integer i : data){
+            System.out.println("===>"+i);
+        }
+    }
+
     @Test
     public void test_ArrayList(){
         List<String> list = new ArrayList<>();
