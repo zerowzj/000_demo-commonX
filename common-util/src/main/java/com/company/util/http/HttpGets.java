@@ -1,12 +1,8 @@
 package com.company.util.http;
 
-import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.io.ByteStreams;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -18,7 +14,6 @@ import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
 import java.net.URI;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -29,7 +24,7 @@ import java.util.concurrent.Future;
  *
  * @author wangzhj
  */
-public class HttpGets extends HttpMethods {
+public class HttpGets extends HttpMethod {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
 

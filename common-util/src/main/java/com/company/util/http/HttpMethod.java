@@ -20,11 +20,11 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-abstract class HttpMethods {
+public abstract class HttpMethod {
 
-    private static final Logger logger = LoggerFactory.getLogger(HttpMethods.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpMethod.class);
 
-    //==================== 请求 ====================
+    //==================== 请求信息 ====================
     //URL
     protected String url = null;
     //请求参数
@@ -36,13 +36,13 @@ abstract class HttpMethods {
     //请求头
     protected Map<String, String> headerMap = null;
 
-    //==================== 配置 ====================
+    //==================== 配置信息 ====================
     //连接超时时间
     protected int connectTimeout = 20 * 1000;
     //读取超时时间
     protected int readTimeout = 20 * 1000;
 
-    //==================== 响应 ====================
+    //==================== 响应信息 ====================
     //状态码
     private int statusCode;
     //响应头
@@ -50,12 +50,12 @@ abstract class HttpMethods {
     //响应数据
     private byte[] data = null;
 
-    protected HttpMethods(String url, Map<String, String> paramMap) {
+    protected HttpMethod(String url, Map<String, String> paramMap) {
         this.url = url;
         this.paramMap = paramMap;
     }
 
-    protected HttpMethods(String url, Map<String, String> paramMap, Map<String, byte[]> fileMap) {
+    protected HttpMethod(String url, Map<String, String> paramMap, Map<String, byte[]> fileMap) {
         this.url = url;
         this.paramMap = paramMap;
         this.fileMap = fileMap;
@@ -66,7 +66,7 @@ abstract class HttpMethods {
      *
      * @param connectTimeout
      */
-    public final HttpMethods connectTimeout(int connectTimeout) {
+    public HttpMethod connectTimeout(int connectTimeout) {
         this.connectTimeout = connectTimeout;
         return this;
     }
@@ -76,7 +76,7 @@ abstract class HttpMethods {
      *
      * @param readTimeout
      */
-    public HttpMethods readTimeout(int readTimeout) {
+    public HttpMethod readTimeout(int readTimeout) {
         this.readTimeout = readTimeout;
         return this;
     }
@@ -86,22 +86,22 @@ abstract class HttpMethods {
      *
      * @param charset
      */
-    public HttpMethods charset(Charset charset) {
+    public HttpMethod charset(Charset charset) {
         this.charset = charset;
         return this;
     }
 
-//    /**
-//     * 设置请求头
-//     *
-//     * @param headerMap
-//     */
-//    public HttpMethods headers(Map<String, String> headerMap) {
-//        this.headerMap = headerMap;
-//        return this;
-//    }
+    /**
+     * 设置请求头
+     *
+     * @param headerMap
+     */
+    public HttpMethod headers(Map<String, String> headerMap) {
+        this.headerMap = headerMap;
+        return this;
+    }
 
-    protected final void releaseConnection(HttpRequestBase httpRequest) {
+    protected void releaseConnection(HttpRequestBase httpRequest) {
         if (httpRequest != null) {
             httpRequest.releaseConnection();
         }
@@ -133,14 +133,14 @@ abstract class HttpMethods {
      *
      * @return byte[]
      */
-    public abstract HttpMethods submit();
+    public abstract HttpMethod submit();
 
     /**
      * 异步提交
      *
      * @return byte[]
      */
-    public abstract HttpMethods asyncSubmit();
+    public abstract HttpMethod asyncSubmit();
 
     /**
      * 获取结果

@@ -3,10 +3,7 @@ package com.company.util.http;
 import com.company.util.CloseUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.io.ByteStreams;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -15,7 +12,6 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -23,7 +19,7 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public class HttpPosts extends HttpMethods {
+public class HttpPosts extends HttpMethod {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
@@ -61,16 +57,6 @@ public class HttpPosts extends HttpMethods {
 
     public HttpPosts bodyFormat(BodyFormat format) {
         this.bodyFormat = format;
-        return this;
-    }
-
-    /**
-     * 设置请求头
-     *
-     * @param headerMap
-     */
-    public HttpPosts headers(Map<String, String> headerMap) {
-        this.headerMap = headerMap;
         return this;
     }
 
@@ -131,7 +117,7 @@ public class HttpPosts extends HttpMethods {
     }
 
     @Override
-    public HttpMethods asyncSubmit() {
+    public HttpMethod asyncSubmit() {
         return this;
     }
 
