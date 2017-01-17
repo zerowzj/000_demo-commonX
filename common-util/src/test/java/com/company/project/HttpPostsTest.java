@@ -26,13 +26,13 @@ public class HttpPostsTest {
     @Test
     public void test() {
         long start = System.currentTimeMillis();
-        Stopwatch  stopwatch = Stopwatch.createStarted();
+        Stopwatch stopwatch = Stopwatch.createStarted();
         int count = 5000;
         final Map<String, String> params = Maps.newHashMap();
         params.put("userName", "admin");
         params.put("token", "123");
         List<Thread> tLt = Lists.newArrayList();
-        for(int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -45,7 +45,7 @@ public class HttpPostsTest {
 
             tLt.add(t);
         }
-        for(Thread t : tLt){
+        for (Thread t : tLt) {
             try {
                 t.join();
             } catch (Exception ex) {
@@ -58,13 +58,13 @@ public class HttpPostsTest {
 
 
     @Test
-    public void test_tt(){
+    public void test_teacher_web() {
         Map<String, String> params = Maps.newHashMap();
         params.put("username", "61151099");
         params.put("password", "123456");
-        Map<String, String> heads = Maps.newHashMap();
-        heads.put("requestid", "11111111111111111");
-        HttpResult result = HttpPosts.create("http://xin.jiaoshi.xk12.cn/login", params).headers(heads).submit().result();
+        Map<String, String> headers = Maps.newHashMap();
+        headers.put("requestid", "111111111111");
+        HttpResult result = HttpPosts.create("http://xin.jiaoshi.xk12.cn/login", params).headers(headers).submit().result();
         System.out.println(JsonUtil.toJson(result));
         System.out.println(new String(result.getData()));
     }

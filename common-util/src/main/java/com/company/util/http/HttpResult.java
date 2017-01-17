@@ -7,15 +7,16 @@ import org.apache.http.Header;
  */
 public class HttpResult {
 
+    //
     private boolean isOK = true;
-
+    //状态码
     private int statusCode = 0;
-
+    //响应头部
     private Header[] headers = null;
-
+    //响应实体
     private byte[] data = null;
 
-    public HttpResult(int statusCode, Header[] headers, byte[] data){
+    public HttpResult(int statusCode, Header[] headers, byte[] data) {
         this.statusCode = statusCode;
         this.headers = headers;
         this.data = data;
