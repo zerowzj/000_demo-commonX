@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Created by wangzhj on 2017/1/17.
  */
-public class RegExPatternMatcher implements PatternMatcher {
+public class RegExMatcher implements PatternMatcher {
 
     @Override
     public boolean matches(String pattern, String source) {

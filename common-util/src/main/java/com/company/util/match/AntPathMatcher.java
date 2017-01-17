@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Created by wangzhj on 2017/1/17.
+ * Wildcard	Description
+ * ?	    匹配任何单字符
+ * *	    匹配0或者任意数量的字符
+ * **	    匹配0或者更多的目录
  */
 public class AntPathMatcher implements PatternMatcher {
 
@@ -15,8 +18,8 @@ public class AntPathMatcher implements PatternMatcher {
     private String pathSeparator = DEFAULT_PATH_SEPARATOR;
 
     public static void main(String[] args) {
-        String antPath = "/test/**/abc";
-        String url = "/test/abc";
+        String antPath = "/test/*/abc";
+        String url = "/test//abc";
 
         PatternMatcher matcher = new AntPathMatcher();
         System.out.println(matcher.matches(antPath, url));
