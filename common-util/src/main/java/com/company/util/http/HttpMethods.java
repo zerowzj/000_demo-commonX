@@ -140,16 +140,7 @@ public abstract class HttpMethods {
     }
 
     /**
-     * 获取结果
-     *
-     * @return HttpResult
-     */
-    public final HttpResult result() {
-        HttpResult httpResult = new HttpResult(statusCode, headers, data);
-        return httpResult;
-    }
-    /**
-     * 同步提交
+     * 构造Http方法
      *
      * @return byte[]
      */
@@ -168,4 +159,14 @@ public abstract class HttpMethods {
      * @return byte[]
      */
     public abstract HttpMethods asyncSubmit();
+
+    /**
+     * 获取结果
+     *
+     * @return HttpResult
+     */
+    public final HttpResult result() {
+        HttpResult httpResult = new HttpResult(statusCode, headers, data);
+        return httpResult;
+    }
 }
