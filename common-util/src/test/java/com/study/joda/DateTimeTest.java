@@ -21,12 +21,16 @@ public class DateTimeTest {
     @Test
     public void test() {
         DateTime dateTime = DateTime.now();
+
+        logger.info(dateTime.toString("yyyy-MM-dd HH:mm:ss.sss"));
+        logger.info(dateTime.toString("yyy年MM月dd日 HH:mm:ss EE"));
         logger.info("{}", dateTime.monthOfYear().getAsString());
         logger.info("{}", dateTime.getDayOfMonth());
         logger.info("{}", dateTime.getDayOfWeek());
         logger.info("{}", dateTime.getHourOfDay());
         logger.info("{}", dateTime.getMinuteOfHour());
 
+        //
         Date date = dateTime.toDate();
     }
 }
