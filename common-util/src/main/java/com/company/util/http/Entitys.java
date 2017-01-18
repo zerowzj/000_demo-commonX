@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wangzhj on 2016/12/23.
+ * 实体
+ *
+ * @author wangzhj
  */
 abstract class Entitys {
 
@@ -64,6 +66,7 @@ abstract class Entitys {
      * @return HttpEntity
      */
     public static HttpEntity createMultipartEntity(Map<String, String> params, Map<String, byte[]> files) {
+
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
         //文件
