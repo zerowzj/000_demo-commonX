@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.junit.Test;
 
+import java.util.Formatter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -66,5 +67,19 @@ public class HttpPostsTest {
 //        System.out.println(JsonUtil.toJson(result));
         System.out.println(result.isOK());
         System.out.println(new String(result.getData()));
+    }
+
+
+    @Test
+    public void test_test(){
+        long start = System.currentTimeMillis();
+        long useTime = 324243;
+        String cost = format((useTime) / 1000.0);
+
+        System.out.println(cost);
+    }
+
+    private String format(double value) {
+        return new Formatter().format("%.3f", value).toString() + "s";
     }
 }
