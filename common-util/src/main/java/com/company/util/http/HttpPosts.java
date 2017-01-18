@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public class HttpPosts extends HttpMethod {
+public class HttpPosts extends HttpMethods {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpPosts.class);
 
@@ -71,7 +71,8 @@ public class HttpPosts extends HttpMethod {
         return this;
     }
 
-    private HttpPost buildHttpPost() {
+    @Override
+    public HttpPost buildHttpMethod() {
         HttpPost httpPost = null;
         try {
             //===>请求实体
@@ -110,7 +111,7 @@ public class HttpPosts extends HttpMethod {
         CloseableHttpResponse response = null;
         try {
             //===>
-            httpPost = buildHttpPost();
+            httpPost = buildHttpMethod();
             logger.info(" request url===> {}", httpPost.getURI().toString());
             logger.info("request body===> {}", EntityUtils.toString(httpPost.getEntity()));
             //===>
@@ -128,7 +129,7 @@ public class HttpPosts extends HttpMethod {
     }
 
     @Override
-    public HttpMethod asyncSubmit() {
+    public HttpMethods asyncSubmit() {
         return this;
     }
 

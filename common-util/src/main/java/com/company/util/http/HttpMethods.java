@@ -8,6 +8,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,9 +21,9 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-abstract class HttpMethod {
+public abstract class HttpMethods {
 
-    private static final Logger logger = LoggerFactory.getLogger(HttpMethod.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpMethods.class);
 
     //==================== 请求信息 ====================
     //URL
@@ -50,12 +51,12 @@ abstract class HttpMethod {
     //响应数据
     private byte[] data = null;
 
-    protected HttpMethod(String url, Map<String, String> paramMap) {
+    protected HttpMethods(String url, Map<String, String> paramMap) {
         this.url = url;
         this.paramMap = paramMap;
     }
 
-    protected HttpMethod(String url, Map<String, String> paramMap, Map<String, byte[]> fileMap) {
+    protected HttpMethods(String url, Map<String, String> paramMap, Map<String, byte[]> fileMap) {
         this.url = url;
         this.paramMap = paramMap;
         this.fileMap = fileMap;
@@ -66,7 +67,7 @@ abstract class HttpMethod {
      *
      * @param connectTimeout
      */
-    public HttpMethod connectTimeout(int connectTimeout) {
+    public HttpMethods connectTimeout(int connectTimeout) {
         this.connectTimeout = connectTimeout;
         return this;
     }
@@ -76,7 +77,7 @@ abstract class HttpMethod {
      *
      * @param readTimeout
      */
-    public HttpMethod readTimeout(int readTimeout) {
+    public HttpMethods readTimeout(int readTimeout) {
         this.readTimeout = readTimeout;
         return this;
     }
@@ -86,7 +87,7 @@ abstract class HttpMethod {
      *
      * @param charset
      */
-    public HttpMethod charset(Charset charset) {
+    public HttpMethods charset(Charset charset) {
         this.charset = charset;
         return this;
     }
@@ -96,7 +97,7 @@ abstract class HttpMethod {
      *
      * @param headerMap
      */
-    public HttpMethod headers(Map<String, String> headerMap) {
+    public HttpMethods headers(Map<String, String> headerMap) {
         this.headerMap = headerMap;
         return this;
     }
@@ -147,18 +148,24 @@ abstract class HttpMethod {
         HttpResult httpResult = new HttpResult(statusCode, headers, data);
         return httpResult;
     }
+    /**
+     * 同步提交
+     *
+     * @return byte[]
+     */
+    public abstract HttpRequestBase buildHttpMethod();
 
     /**
      * 同步提交
      *
      * @return byte[]
      */
-    public abstract HttpMethod submit();
+    public abstract HttpMethods submit();
 
     /**
      * 异步提交
      *
      * @return byte[]
      */
-    public abstract HttpMethod asyncSubmit();
+    public abstract HttpMethods asyncSubmit();
 }

@@ -3,6 +3,7 @@ package com.company.util.http;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -24,7 +25,7 @@ import java.util.concurrent.Future;
  *
  * @author wangzhj
  */
-public class HttpGets extends HttpMethod {
+public class HttpGets extends HttpMethods {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpGets.class);
 
@@ -54,7 +55,8 @@ public class HttpGets extends HttpMethod {
         return new HttpGets(url, params);
     }
 
-    private HttpGet buildHttpGet() {
+    @Override
+    public HttpGet buildHttpMethod() {
         HttpGet httpGet = null;
         try {
             //===>Url
@@ -88,7 +90,7 @@ public class HttpGets extends HttpMethod {
         CloseableHttpResponse response = null;
         try {
             //===>请求
-            httpGet = buildHttpGet();
+            httpGet = buildHttpMethod();
             logger.info("url===> {}", httpGet.getURI().toString());
             //===>
             response = httpClient.execute(httpGet);
@@ -112,12 +114,12 @@ public class HttpGets extends HttpMethod {
         HttpResponse response = null;
         try {
             //===>请求
-            httpGet = buildHttpGet();
+            httpGet = buildHttpMethod();
             logger.info("url===> {}", httpGet.getURI().toString());
             //===>
             Future<HttpResponse> future = httpAsyncClient.execute(httpGet, null);
             response = future.get();// 获取结果
-
+            CookieStore cookieStore;
             final CountDownLatch latch = new CountDownLatch(1);
             httpAsyncClient.execute(httpGet, new FutureCallback<HttpResponse>() {
                 @Override
