@@ -20,7 +20,7 @@ import java.util.Map;
  *
  * @author wangzhj
  */
-public abstract class HttpMethod {
+abstract class HttpMethod {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpMethod.class);
 
@@ -29,7 +29,7 @@ public abstract class HttpMethod {
     protected String url = null;
     //请求参数
     protected Map<String, String> paramMap = null;
-    //上传文件
+    //文件参数
     protected Map<String, byte[]> fileMap = null;
     //实体编码
     protected Charset charset = Charsets.UTF_8;
@@ -139,6 +139,16 @@ public abstract class HttpMethod {
     }
 
     /**
+     * 获取结果
+     *
+     * @return HttpResult
+     */
+    public final HttpResult result() {
+        HttpResult httpResult = new HttpResult(statusCode, headers, data);
+        return httpResult;
+    }
+
+    /**
      * 同步提交
      *
      * @return byte[]
@@ -151,14 +161,4 @@ public abstract class HttpMethod {
      * @return byte[]
      */
     public abstract HttpMethod asyncSubmit();
-
-    /**
-     * 获取结果
-     *
-     * @return HttpResult
-     */
-    public final HttpResult result() {
-        HttpResult httpResult = new HttpResult(statusCode, headers, data);
-        return httpResult;
-    }
 }
