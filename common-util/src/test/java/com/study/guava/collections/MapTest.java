@@ -63,6 +63,5 @@ public class MapTest {
         }
 
         logger.info(JsonUtil.toJson(dataLt));
-
     }
 }
