@@ -7,6 +7,7 @@ import com.google.common.cache.LoadingCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -40,22 +41,33 @@ public class CacheLoaderTest {
 
 
     public static void main(String[] args) throws Exception {
-        try {
-//            loadingCache.get("", new Callable<String>() {
-//                @Override
-//                public String call() throws Exception {
-//                    return null;
-//                }
-//            });
 
-            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
-//                logger.info("jerry value:" + cache.get("jerry"));
-            //Guava Cache的get方法先在本地缓存中取，如果不存在，则会触发load方法。但load方法不能返回null。
-//            logger.info("jerry value:" + loadingCache.get("jerry"));
-        } catch (Exception ex) {
+        while (true) {
+            logger.info(PropertiesUtil.getString("1"));
+
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (Exception ex) {
+
+            }
 
         }
 
-        Optional.fromNullable(null).or(new ArrayList());
+//        try {
+////            loadingCache.get("", new Callable<String>() {
+////                @Override
+////                public String call() throws Exception {
+////                    return null;
+////                }
+////            });
+//
+////            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
+////                logger.info("jerry value:" + cache.get("jerry"));
+//            //Guava Cache的get方法先在本地缓存中取，如果不存在，则会触发load方法。但load方法不能返回null。
+////            logger.info("jerry value:" + loadingCache.get("jerry"));
+//        } catch (Exception ex) {
+//
+//        }
+
     }
 }
