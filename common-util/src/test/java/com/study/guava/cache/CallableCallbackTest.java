@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,16 +16,27 @@ public class CallableCallbackTest {
 
     private static final Logger logger = LoggerFactory.getLogger(CacheLoaderTest.class);
 
-//    Cache<String, String> cache = CacheBuilder.newBuilder().
+    Cache<String, String> cache = CacheBuilder.newBuilder().build();
 
     public static void main(String[] args) throws Exception {
-        while (true) {
-            try {
-//                logger.info("jerry value:" + cache.get("jerry"));
-                TimeUnit.SECONDS.sleep(5);
-            } catch (Exception ex) {
+        Cache<String, String> cache = CacheBuilder.newBuilder().maximumSize(1000).build();
+//        String resultVal = cache.get("jerry", new Callable<String>() {
+//            public String call() {
+//                String strProValue="hello "+"jerry"+"!";
+//                return strProValue;
+//            }
+//        });
+        String resultVal =    cache.getIfPresent("jerry");
+        cache.put("", "");
+        System.out.println("jerry value : " + resultVal);
 
+
+        resultVal = cache.get("peida", new Callable<String>() {
+            public String call() {
+                String strProValue="hello "+"peida"+"!";
+                return strProValue;
             }
-        }
+        });
+        System.out.println("peida value : " + resultVal);
     }
 }

@@ -23,9 +23,9 @@ public class LocalTimeTest {
 
     @Test
     public void test() {
-        LocalTime nowTime = LocalTime.now();
-        logger.info("{}", nowTime.getHourOfDay());
-        logger.info("{}", nowTime.getMinuteOfHour());
+        LocalTime a = LocalTime.now();
+//        logger.info("{}", nowTime.getHourOfDay());
+//        logger.info("{}", nowTime.getMinuteOfHour());
 //        logger.info("{}", nowTime.secondOfMinute().get);
     }
 
