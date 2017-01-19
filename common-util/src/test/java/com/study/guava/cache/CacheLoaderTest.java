@@ -9,10 +9,14 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wangzhj on 2016/12/15.
+ *
+ * Guava Cache是单个应用运行时的本地缓存。它不把数据存放到文件或外部服务器。
+ * 如果这不符合你的需求，请尝试Memcached这类工具
  */
 public class CacheLoaderTest {
 
@@ -20,8 +24,9 @@ public class CacheLoaderTest {
 
     private static LoadingCache<String, String> loadingCache = CacheBuilder.newBuilder()
 //            .initialCapacity(100)
+//            .maximumSize(1000)
 //            .refreshAfterWrite(10, TimeUnit.SECONDS)
-            .expireAfterWrite(10, TimeUnit.SECONDS)
+//            .expireAfterWrite(10, TimeUnit.SECONDS)
 //            .expireAfterAccess(10, TimeUnit.SECONDS)
 //            .ticker(Ticker.systemTicker())
 //            .removalListener(new RemovalListener<Object, Object>() {
@@ -33,7 +38,7 @@ public class CacheLoaderTest {
             .build(new CacheLoader<String, String>() {
                 @Override
                 public String load(String key) {
-                    logger.info("加载[{}]的值", key);
+                    logger.info("load key[{}]'s value!", key);
                     String value = "hello " + key + "!";
                     return null;
                 }
@@ -41,33 +46,21 @@ public class CacheLoaderTest {
 
 
     public static void main(String[] args) throws Exception {
+        try {
+            loadingCache.get("", new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return null;
+                }
+            });
 
-        while (true) {
-            logger.info(PropertiesUtil.getString("1"));
-
-            try {
-                TimeUnit.SECONDS.sleep(3);
-            } catch (Exception ex) {
-
-            }
+            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
+                logger.info("jerry value:" + loadingCache.get("jerry"));
+            //Guava Cache的get方法先在本地缓存中取，如果不存在，则会触发load方法。但load方法不能返回null。
+            logger.info("jerry value:" + loadingCache.get("jerry"));
+        } catch (Exception ex) {
 
         }
-
-//        try {
-////            loadingCache.get("", new Callable<String>() {
-////                @Override
-////                public String call() throws Exception {
-////                    return null;
-////                }
-////            });
-//
-////            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
-////                logger.info("jerry value:" + cache.get("jerry"));
-//            //Guava Cache的get方法先在本地缓存中取，如果不存在，则会触发load方法。但load方法不能返回null。
-////            logger.info("jerry value:" + loadingCache.get("jerry"));
-//        } catch (Exception ex) {
-//
-//        }
 
     }
 }
