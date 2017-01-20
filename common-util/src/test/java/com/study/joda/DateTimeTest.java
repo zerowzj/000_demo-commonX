@@ -15,7 +15,7 @@ public class DateTimeTest {
     public static final Logger logger = LoggerFactory.getLogger(DateTimeTest.class);
 
     @Test
-    public void test() {
+    public void test1() {
         DateTime dateTime = DateTime.now();
 
         logger.info(dateTime.toString("yyyy-MM-dd HH:mm:ss.sss"));
@@ -25,7 +25,13 @@ public class DateTimeTest {
         logger.info("{}", dateTime.getDayOfWeek());
         logger.info("{}", dateTime.getHourOfDay());
         logger.info("{}", dateTime.getMinuteOfHour());
+    }
 
+
+    @Test
+    public void test2() {
+        //
+        DateTime dateTime = new DateTime(new Date());
         //
         Date date = dateTime.toDate();
     }
