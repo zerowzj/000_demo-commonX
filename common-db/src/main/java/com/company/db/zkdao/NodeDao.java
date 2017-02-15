@@ -3,10 +3,9 @@ package com.company.db.zkdao;
 import java.util.List;
 
 /**
- * <p>节点Dao</p>
+ * 节点Dao
  *
  * @author wangzhj
- * @time 2016-11-21 9:44
  */
 public interface NodeDao {
 

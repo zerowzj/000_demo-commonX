@@ -12,15 +12,6 @@ import java.util.List;
 
 public class NodeDaoImpl extends BaseDaoImpl implements NodeDao {
 
-    public NodeDaoImpl() {
-        super();
-    }
-
-    public static void main(String[] args) {
-        NodeDaoImpl dao = new NodeDaoImpl();
-        dao.getChildrenNodeData("/xdfapp/teacher-web/v1.6/unchange");
-    }
-
     @Override
     public boolean createNode(String nodeName) {
         return createNode(nodeName, "");
@@ -56,7 +47,6 @@ public class NodeDaoImpl extends BaseDaoImpl implements NodeDao {
             }
         } catch (Exception ex) {
             Throwables.throwIfUnchecked(ex);
-
         }
         return suc;
     }
