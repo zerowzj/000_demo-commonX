@@ -20,16 +20,16 @@ public class SplitterTest {
 
     @Test
     public void test_omitEmptyStrings() {
-        String str = "aaa,bbb,,,ddd";
-        List<String> tt = Splitter.on(",").omitEmptyStrings().splitToList(str);
-        logger.info(tt.toString());
+        String str = "aaa,bbb,    ,ddd";
+        List<String> data = Splitter.on(",").omitEmptyStrings().trimResults().splitToList(str);
+        logger.info(data.toString());
     }
 
     @Test
     public void test_trimResults() {
-        String str = "aaa, bbb,ccc ,ddd";
-        List<String> tt = Splitter.on(",").trimResults().splitToList(str);
-        logger.info(tt.toString());
+        String str = "aaa,bbb, ccc   ,ddd";
+        List<String> data = Splitter.on(",").trimResults().splitToList(str);
+        logger.info(data.toString());
     }
 
     @Test

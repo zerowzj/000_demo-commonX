@@ -211,6 +211,12 @@
                 <artifactId>sharding-jdbc-config-common</artifactId>
                 <version>1.4.1</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>config-toolkit</artifactId>
+                <version>3.1.2-RELEASE</version>
+            </dependency>
             <!-- ==================== -->
             <!--       分布式事务      -->
             <!-- ==================== -->
@@ -266,6 +272,17 @@
                         <groupId>log4j</groupId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <!-- ===== Curator ===== -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
             </dependency>
             <!-- ==================== -->
             <!--        Http协议       -->
