@@ -14,8 +14,8 @@ import javax.annotation.PreDestroy;
  */
 abstract class BaseDaoImpl {
 
+    public String str;
     private String zkAddress;
-
     private CuratorFramework client;
 
     @PostConstruct
