@@ -49,7 +49,7 @@ public class SqlCostPlugin extends PluginAdapter {
             Method method = invocation.getMethod();
             result = invocation.proceed();
             stopwatch.stop();
-            logger.info("[SqlCostPlugin] execute [" + method.getName() + "] cost [" + (stopwatch.elapsed(TimeUnit.SECONDS)) + "] s");
+            logger.info("[SqlCostPlugin] execute[" + method.getName() + "] cost[" + (stopwatch.elapsed(TimeUnit.SECONDS)) + "] s");
         }
         return result;
     }

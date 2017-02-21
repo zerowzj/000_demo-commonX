@@ -65,6 +65,19 @@ public class NodeDaoImpl extends BaseDaoImpl implements NodeDao {
     }
 
     @Override
+    public NodeEO getNodeData(String nodeName) {
+        try {
+            Stat stat = getClient().checkExists().forPath(nodeName);
+            if (stat != null) {
+
+            }
+        } catch (Exception ex) {
+
+        }
+        return null;
+    }
+
+    @Override
     public List<String> getChildrenNode(String nodeName) {
         List<String> children = null;
         try {

@@ -10,7 +10,7 @@ import java.util.Properties;
  *
  * @author wangzhj
  */
-public abstract class PluginAdapter implements Interceptor {
+abstract class PluginAdapter implements Interceptor {
 
     @Override
     public Object plugin(Object target) {

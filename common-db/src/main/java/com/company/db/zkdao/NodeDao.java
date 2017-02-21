@@ -44,6 +44,14 @@ public interface NodeDao {
     public void deleteNode(String nodeName);
 
     /**
+     * 获取节点数据
+     *
+     * @param nodeName
+     * @return NodeEO
+     */
+    public NodeEO getNodeData(String nodeName);
+
+    /**
      * 获取子节点
      *
      * @param nodeName
