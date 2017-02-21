@@ -1,7 +1,8 @@
-package com.company.db.zkdao;
+package zkdao;
 
 
-import com.company.db.service.OrderService;
+import com.company.zk.dao.NodeDao;
+import com.company.zk.dao.NodeEO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
