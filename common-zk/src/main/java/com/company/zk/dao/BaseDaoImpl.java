@@ -12,7 +12,7 @@ import javax.annotation.PreDestroy;
  *
  * @author wangzhj
  */
-public abstract class BaseDaoImpl {
+abstract class BaseDaoImpl {
 
     private String zkAddress;
 
@@ -20,12 +20,14 @@ public abstract class BaseDaoImpl {
 
     @PostConstruct
     private void init() {
+        System.out.println("init()。。。。。。。。。。。。。。。");
         client = CuratorFrameworkFactory.newClient(zkAddress, new ExponentialBackoffRetry(1000, 3));
         client.start();
     }
 
     @PreDestroy
     private void destroy() {
+        System.out.println("destroy()。。。。。。。。。。。。。。。");
         if (client != null) {
             client.close();
         }

@@ -15,10 +15,10 @@
     <!-- ==================== -->
     <!--       Bean加载       -->
     <!-- ==================== -->
-    <context:component-scan base-package="com.company.db.zkdao" use-default-filters="true">
+    <context:component-scan base-package="com.company.zk.dao" use-default-filters="true">
     </context:component-scan>
     <!-- ==================== -->
-    <bean id="nodeDao" class="com.company.db.zkdao.NodeDaoImpl">
+    <bean id="nodeDao" class="com.company.zk.dao.NodeDaoImpl">
         <property name="zkAddress" value="10.60.0.63:2181" />
     </bean>
 </beans>
