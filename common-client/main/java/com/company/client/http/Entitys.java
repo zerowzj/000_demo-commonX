@@ -1,5 +1,6 @@
 package com.company.client.http;
 
+import com.company.util.JsonUtil;
 import com.google.common.collect.Lists;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
