@@ -114,8 +114,8 @@
         </dependency>
 
         <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
+            <groupId>com.company.common</groupId>
+            <artifactId>common-util</artifactId>
         </dependency>
     </dependencies>
     <!-- ==================== -->
