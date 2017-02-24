@@ -52,6 +52,10 @@ public class LoadingCacheTest {
     public void test_get() throws Exception {
         try {
             logger.info("jerry value:" + loadingCache.get("jerry"));
+            logger.info("jerry value:" + loadingCache.get("jerry"));
+            logger.info("jerry value:" + loadingCache.get("jerry"));
+            logger.info("jerry value:" + loadingCache.get("jerry"));
+            logger.info("jerry value:" + loadingCache.get("jerry"));
         } catch (Exception ex) {
 
         }
