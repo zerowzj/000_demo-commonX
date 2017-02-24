@@ -28,6 +28,11 @@ public class NodeDaoTest {
     private NodeDao nodeDao2;
 
     @Test
+    public void test_1(){
+        System.out.println(nodeDao == nodeDao2);
+    }
+
+    @Test
     public void test() {
         List<NodeEO> nodeLt = nodeDao.getChildrenNodeData("/xdfapp/teacher-web/v1.6/unchange");
         logger.info("===>");

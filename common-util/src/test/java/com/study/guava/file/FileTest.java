@@ -1,5 +1,6 @@
 package com.study.guava.file;
 
+import com.google.common.io.Files;
 import org.junit.Test;
 
 /**
@@ -9,6 +10,5 @@ public class FileTest {
 
     @Test
     public void test(){
-
     }
 }

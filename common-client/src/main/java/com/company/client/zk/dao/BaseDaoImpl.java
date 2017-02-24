@@ -11,6 +11,11 @@ import javax.annotation.PreDestroy;
 /**
  * 基础Dao实现
  *
+ * CuratorFrameworkFactory是线程安全的。
+ * 你应该在应用中为单一的ZooKeeper集群共享唯一的CuratorFramework实例。
+ * 工厂方法(newClient())提供了一个简单的方式创建实例。Builder可以使用更多的参数控制生成的实例。
+ * 一旦生成framework实例， 必须调用start方法启动它。应用结束时应该调用close方法关闭它。
+ *
  * @author wangzhj
  */
 @Scope("prototype")

@@ -8,6 +8,7 @@ import org.apache.curator.framework.api.*;
 import org.apache.curator.utils.ZKPaths;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
+import org.springframework.context.annotation.Scope;
 
 import java.util.List;
 

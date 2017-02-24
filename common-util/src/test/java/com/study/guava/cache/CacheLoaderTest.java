@@ -72,21 +72,21 @@ public class CacheLoaderTest {
     }
 
     @Test
-    public void test_getAll() {
-        try {
-            logger.info("jerry value:" + loadingCache.getAll(Arrays.asList("123", "123123")));
-        } catch (Exception ex) {
-
-        }
-    }
-
-    @Test
     public void test_getIfPresent() throws Exception {
         try {
             logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
 
             loadingCache.put("jerry", "自己放置的值！");
             logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    @Test
+    public void test_getAll() {
+        try {
+            logger.info("jerry value:" + loadingCache.getAll(Arrays.asList("123", "123123")));
         } catch (Exception ex) {
 
         }
