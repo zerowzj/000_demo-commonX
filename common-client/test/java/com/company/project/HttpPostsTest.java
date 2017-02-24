@@ -1,8 +1,7 @@
 package com.company.project;
 
-import com.company.util.JsonUtil;
-import com.company.util.http.HttpPosts;
-import com.company.util.http.HttpResult;
+import com.company.client.http.HttpPosts;
+import com.company.client.http.HttpResult;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
