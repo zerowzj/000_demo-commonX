@@ -1,6 +1,6 @@
-package com.company.project;
+package com.company.client.http;
 
-import com.company.util.http.HttpGets;
+import com.company.client.http.HttpGets;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
