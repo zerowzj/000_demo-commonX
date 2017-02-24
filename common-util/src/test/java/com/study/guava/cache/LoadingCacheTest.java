@@ -16,9 +16,9 @@ import java.util.concurrent.Callable;
  * Guava Cache是单个应用运行时的本地缓存。它不把数据存放到文件或外部服务器。
  * 如果这不符合你的需求，请尝试Memcached这类工具
  */
-public class CacheLoaderTest {
+public class LoadingCacheTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(CacheLoaderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoadingCacheTest.class);
 
     private static LoadingCache<String, String> loadingCache = CacheBuilder.newBuilder()
 //            .initialCapacity(100)
@@ -96,6 +96,17 @@ public class CacheLoaderTest {
     public void test_getAllPresent() {
         try {
             logger.info("jerry value:" + loadingCache.getAllPresent(Arrays.asList("123", "123123")));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    @Test
+    public void test_refresh() {
+        try {
+            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
+            loadingCache.refresh("jerry");
+            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
         } catch (Exception ex) {
 
         }
