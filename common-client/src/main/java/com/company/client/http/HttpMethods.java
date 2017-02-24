@@ -141,21 +141,21 @@ public abstract class HttpMethods {
     /**
      * 构造Http方法
      *
-     * @return byte[]
+     * @return HttpRequestBase
      */
     public abstract HttpRequestBase buildHttpMethod();
 
     /**
      * 同步提交
      *
-     * @return byte[]
+     * @return HttpMethods
      */
     public abstract HttpMethods submit();
 
     /**
      * 异步提交
      *
-     * @return byte[]
+     * @return HttpMethods
      */
     public abstract HttpMethods asyncSubmit();
 

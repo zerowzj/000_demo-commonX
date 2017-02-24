@@ -12,19 +12,23 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by wangzhj on 2016/12/29.
+ * 同步客户端
+ *
+ * @author wangzhj
  */
 public class SyncClients {
 
     private static final Logger logger = LoggerFactory.getLogger(AsyncClients.class);
-    private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
     private static PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
 
-    static {
-        //连接池最大生成连接数200
-        connManager.setMaxTotal(1000);
-        scheduler.scheduleAtFixedRate(new IdleMonitor(), 1000, 5000, TimeUnit.MILLISECONDS);
+    private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
+    static {
+        //连接池最大生成连接数
+        connManager.setMaxTotal(100);
+        //
+        scheduler.scheduleAtFixedRate(new IdleMonitor(), 1000, 5000, TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -51,14 +55,13 @@ public class SyncClients {
     /**
      * 关闭连接池
      */
-    public static void shutdown(){
-        if(connManager != null){
+    public static void shutdown() {
+        if (connManager != null) {
             connManager.shutdown();
         }
     }
 
     private static class IdleMonitor implements Runnable {
-
         @Override
         public void run() {
             // Close expired connections
