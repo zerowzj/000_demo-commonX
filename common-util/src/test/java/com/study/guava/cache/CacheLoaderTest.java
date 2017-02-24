@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.concurrent.Callable;
 
 /**
@@ -38,17 +37,15 @@ public class CacheLoaderTest {
                 @Override
                 public String load(String key) throws Exception {
                     logger.info("load into cache!");
-
                     return "hello " + key + "!";
                 }
 
-                @Override
+          /*      @Override
                 public Map<String, String> loadAll(Iterable<? extends String> keys) throws Exception {
-                    logger.info("load into cache!");
+                    logger.info("load all into cache!");
                     return super.loadAll(keys);
-                }
+                }*/
             });
-
 
     @Test
     public void test_get() throws Exception {
@@ -60,7 +57,7 @@ public class CacheLoaderTest {
     }
 
     @Test
-    public void test_get1() throws Exception {
+    public void test_get_callable() throws Exception {
         try {
             logger.info("jerry value:" + loadingCache.get("jerry", new Callable<String>() {
                 @Override
@@ -69,6 +66,15 @@ public class CacheLoaderTest {
                 }
             }));
             logger.info("jerry value:" + loadingCache.get("jerry"));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    @Test
+    public void test_getAll() {
+        try {
+            logger.info("jerry value:" + loadingCache.getAll(Arrays.asList("123", "123123")));
         } catch (Exception ex) {
 
         }
@@ -87,9 +93,9 @@ public class CacheLoaderTest {
     }
 
     @Test
-    public void test_getAll() {
+    public void test_getAllPresent() {
         try {
-            logger.info("jerry value:" + loadingCache.getAll(Arrays.asList("123", "123123")));
+            logger.info("jerry value:" + loadingCache.getAllPresent(Arrays.asList("123", "123123")));
         } catch (Exception ex) {
 
         }
