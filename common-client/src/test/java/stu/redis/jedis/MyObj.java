@@ -1,4 +1,4 @@
-package com.redis.jedis;
+package stu.redis.jedis;
 
 import org.msgpack.annotation.Message;
 

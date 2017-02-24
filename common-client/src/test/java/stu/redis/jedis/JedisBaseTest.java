@@ -1,4 +1,4 @@
-package com.redis.jedis;
+package stu.redis.jedis;
 
 import org.junit.After;
 import org.junit.Before;

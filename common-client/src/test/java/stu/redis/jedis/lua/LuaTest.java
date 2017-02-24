@@ -1,8 +1,8 @@
-package com.redis.jedis.lua;
+package stu.redis.jedis.lua;
 
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
-import com.redis.jedis.JedisBaseTest;
+import stu.redis.jedis.JedisBaseTest;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

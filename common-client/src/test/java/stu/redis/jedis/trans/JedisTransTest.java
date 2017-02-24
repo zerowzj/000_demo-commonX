@@ -1,6 +1,6 @@
-package com.redis.jedis.trans;
+package stu.redis.jedis.trans;
 
-import com.redis.jedis.JedisBaseTest;
+import stu.redis.jedis.JedisBaseTest;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

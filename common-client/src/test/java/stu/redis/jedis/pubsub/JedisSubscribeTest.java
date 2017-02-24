@@ -1,6 +1,6 @@
-package com.redis.jedis.pubsub;
+package stu.redis.jedis.pubsub;
 
-import com.redis.jedis.JedisBaseTest;
+import stu.redis.jedis.JedisBaseTest;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
