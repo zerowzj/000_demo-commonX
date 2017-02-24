@@ -1,4 +1,4 @@
-package com.company.client.zk;
+package com.company.client.zk.dao;
 
 import java.util.List;
 

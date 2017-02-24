@@ -1,4 +1,4 @@
-package com.company.client.zk;
+package com.company.client.zk.dao;
 
 import com.google.common.base.Joiner;
 
