@@ -7,8 +7,6 @@ import org.apache.http.Header;
  */
 public class ResultBody {
 
-    //
-    private boolean isOK = true;
     //状态码
     private int statusCode = 0;
     //响应头部
