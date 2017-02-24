@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class SyncClients {
 
-    private static final Logger logger = LoggerFactory.getLogger(AsyncClients.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncClients.class);
 
     private static PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
 
@@ -70,8 +70,7 @@ public class SyncClients {
             // that have been idle longer than readTimeout*2 MILLISECONDS
 //            connManager.closeIdleConnections(readTimeout * 2, TimeUnit.MILLISECONDS);
             PoolStats poolStats = connManager.getTotalStats();
-            logger.info("[Max= {}],[Available= {}],[Leased= {}],[Pending= {}]", poolStats.getMax(), poolStats.getAvailable(), poolStats.getLeased(), poolStats.getPending());
-
+            LOGGER.info("[Max= {}],[Available= {}],[Leased= {}],[Pending= {}]", poolStats.getMax(), poolStats.getAvailable(), poolStats.getLeased(), poolStats.getPending());
         }
     }
 }

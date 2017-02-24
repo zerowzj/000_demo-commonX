@@ -1,7 +1,5 @@
 package com.company.client.http;
 
-import com.company.client.http.HttpPosts;
-import com.company.client.http.HttpResult;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -59,7 +57,7 @@ public class HttpPostsTest {
         params.put("password", "123456");
         Map<String, String> headers = Maps.newHashMap();
         headers.put("requestid", "111111111111");
-        HttpResult result = HttpPosts.create(url, params)
+        ResultBody result = HttpPosts.create(url, params)
                 .headers(headers)
                 .submit()
                 .result();
