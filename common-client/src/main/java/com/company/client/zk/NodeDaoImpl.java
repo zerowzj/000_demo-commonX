@@ -6,6 +6,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import org.apache.curator.framework.api.*;
 import org.apache.curator.utils.ZKPaths;
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class NodeDaoImpl extends BaseDaoImpl implements NodeDao {
             Stat stat = getClient().checkExists().forPath(nodeName);
             if (stat == null) {
                 CreateBuilder createBuilder = getClient().create();
-                String opResult = createBuilder.creatingParentsIfNeeded().forPath(nodeName, value.getBytes("UTF-8"));
+                String opResult = createBuilder.creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(nodeName, value.getBytes("UTF-8"));
                 suc = Objects.equal(nodeName, opResult);
             }
         } catch (Exception ex) {
