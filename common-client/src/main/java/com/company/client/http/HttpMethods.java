@@ -165,7 +165,7 @@ public abstract class HttpMethods {
      * @return ResultBody
      */
     public final ResultBody result() {
-        ResultBody httpResult = new ResultBody(statusCode, headers, data);
-        return httpResult;
+        ResultBody resultBody = new ResultBody(statusCode, headers, data);
+        return resultBody;
     }
 }
