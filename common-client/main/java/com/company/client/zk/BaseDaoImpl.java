@@ -3,6 +3,7 @@ package com.company.client.zk;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -12,6 +13,7 @@ import javax.annotation.PreDestroy;
  *
  * @author wangzhj
  */
+@Scope("prototype")
 abstract class BaseDaoImpl {
 
     private String zkAddress;
