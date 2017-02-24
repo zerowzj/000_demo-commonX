@@ -2,6 +2,7 @@ package com.study.guava.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.util.concurrent.Callables;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,9 @@ public class CacheTest {
                     return "call执行的值！";
                 }
             }));
+
+            //同步方式获取不存在的key缓存
+            Callables.returning("");
         } catch (Exception ex) {
 
         }
