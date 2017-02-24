@@ -25,13 +25,20 @@ public class NodeDaoTest {
     @Test
     public void test() {
         List<NodeEO> nodeLt = nodeDao.getChildrenNodeData("/xdfapp/teacher-web/v1.6/unchange");
+        logger.info("===>");
         for (NodeEO nodeEO : nodeLt) {
-            logger.info("{}=={}", nodeEO.getNodeName(), nodeEO.getNodeData());
+            logger.info("{} = {}", nodeEO.getNodeName(), nodeEO.getNodeData());
         }
+        logger.info("===>");
+    }
 
-        List<NodeEO> nodeLt2 = nodeDao.getChildrenNodeData("/xdfapp/teacher-web/v1.6/unchange");
-        for (NodeEO nodeEO : nodeLt) {
-            logger.info("{}=={}", nodeEO.getNodeName(), nodeEO.getNodeData());
+    @Test
+    public void test_() {
+        List<String> nodeLt = nodeDao.getChildrenNode("/xdfapp/teacher-web/v1.6/unchange");
+        logger.info("===>");
+        for (String nodeName : nodeLt) {
+            logger.info("{}", nodeName);
         }
+        logger.info("===>");
     }
 }

@@ -106,7 +106,7 @@ public class NodeDaoImpl extends BaseDaoImpl implements NodeDao {
                         String propPath = ZKPaths.makePath(nodeName, child);
 
                         NodeEO nodeEO = new NodeEO();
-                        nodeEO.setNodeName(propPath);
+                        nodeEO.setNodeName(child);
                         nodeEO.setNodeData(new String(getDataBuilder.forPath(propPath), Charsets.UTF_8));
 
                         nodeEOLt.add(nodeEO);

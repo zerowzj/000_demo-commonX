@@ -20,7 +20,6 @@
         <module>common-validation</module>
         <module>common-base</module>
         <module>common-monitor</module>
-        <module>common-zk</module>
         <module>common-client</module>
     </modules>
 </project>
