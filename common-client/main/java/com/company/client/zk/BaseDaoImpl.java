@@ -20,12 +20,14 @@ abstract class BaseDaoImpl {
 
     @PostConstruct
     private void init() {
+        System.out.println("@PostConstruct......");
         client = CuratorFrameworkFactory.newClient(zkAddress, new ExponentialBackoffRetry(1000, 3));
         client.start();
     }
 
     @PreDestroy
     private void destroy() {
+        System.out.println("@PreDestroy......");
         if (client != null) {
             client.close();
         }
