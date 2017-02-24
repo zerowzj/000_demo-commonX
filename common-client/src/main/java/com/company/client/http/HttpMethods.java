@@ -8,7 +8,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -163,10 +162,10 @@ public abstract class HttpMethods {
     /**
      * 获取结果
      *
-     * @return HttpResult
+     * @return ResultBody
      */
-    public final HttpResult result() {
-        HttpResult httpResult = new HttpResult(statusCode, headers, data);
+    public final ResultBody result() {
+        ResultBody httpResult = new ResultBody(statusCode, headers, data);
         return httpResult;
     }
 }

@@ -5,7 +5,7 @@ import org.apache.http.Header;
 /**
  * Created by wangzhj on 2016/12/30.
  */
-public class HttpResult {
+public class ResultBody {
 
     //
     private boolean isOK = true;
@@ -16,7 +16,7 @@ public class HttpResult {
     //响应实体
     private byte[] data = null;
 
-    public HttpResult(int statusCode, Header[] headers, byte[] data) {
+    public ResultBody(int statusCode, Header[] headers, byte[] data) {
         this.statusCode = statusCode;
         this.headers = headers;
         this.data = data;
