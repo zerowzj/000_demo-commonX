@@ -1,20 +1,19 @@
 package com.study.guava.cache;
 
-import com.google.common.base.Optional;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Time;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by wangzhj on 2016/12/15.
- *
+ * <p>
  * Guava Cache是单个应用运行时的本地缓存。它不把数据存放到文件或外部服务器。
  * 如果这不符合你的需求，请尝试Memcached这类工具
  */
@@ -37,30 +36,62 @@ public class CacheLoaderTest {
 //            })
             .build(new CacheLoader<String, String>() {
                 @Override
-                public String load(String key) {
-                    logger.info("load key[{}]'s value!", key);
-                    String value = "hello " + key + "!";
-                    return null;
+                public String load(String key) throws Exception {
+                    logger.info("load into cache!");
+
+                    return "hello " + key + "!";
                 }
-            });
 
-
-    public static void main(String[] args) throws Exception {
-        try {
-            loadingCache.get("", new Callable<String>() {
                 @Override
-                public String call() throws Exception {
-                    return null;
+                public Map<String, String> loadAll(Iterable<? extends String> keys) throws Exception {
+                    logger.info("load into cache!");
+                    return super.loadAll(keys);
                 }
             });
 
-            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
-                logger.info("jerry value:" + loadingCache.get("jerry"));
-            //Guava Cache的get方法先在本地缓存中取，如果不存在，则会触发load方法。但load方法不能返回null。
+
+    @Test
+    public void test_get() throws Exception {
+        try {
             logger.info("jerry value:" + loadingCache.get("jerry"));
         } catch (Exception ex) {
 
         }
+    }
 
+    @Test
+    public void test_get1() throws Exception {
+        try {
+            logger.info("jerry value:" + loadingCache.get("jerry", new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return "CALLLL";
+                }
+            }));
+            logger.info("jerry value:" + loadingCache.get("jerry"));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    @Test
+    public void test_getIfPresent() throws Exception {
+        try {
+            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
+
+            loadingCache.put("jerry", "自己放置的值！");
+            logger.info("jerry value:" + loadingCache.getIfPresent("jerry"));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    @Test
+    public void test_getAll() {
+        try {
+            logger.info("jerry value:" + loadingCache.getAll(Arrays.asList("123", "123123")));
+        } catch (Exception ex) {
+
+        }
     }
 }
