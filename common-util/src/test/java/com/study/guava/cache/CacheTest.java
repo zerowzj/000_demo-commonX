@@ -2,6 +2,7 @@ package com.study.guava.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,25 +17,29 @@ public class CacheTest {
 
     Cache<String, String> cache = CacheBuilder.newBuilder().build();
 
-    public static void main(String[] args) throws Exception {
-        Cache<String, String> cache = CacheBuilder.newBuilder().maximumSize(1000).build();
-//        String resultVal = cache.get("jerry", new Callable<String>() {
-//            public String call() {
-//                String strProValue="hello "+"jerry"+"!";
-//                return strProValue;
-//            }
-//        });
-        String resultVal =    cache.getIfPresent("jerry");
-        cache.put("", "");
-        System.out.println("jerry value : " + resultVal);
+    @Test
+    public void test_get_callable() throws Exception {
+        try {
+            logger.info("jerry value:" + cache.get("jerry", new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return "call执行的值！";
+                }
+            }));
+        } catch (Exception ex) {
 
+        }
+    }
 
-        resultVal = cache.get("peida", new Callable<String>() {
-            public String call() {
-                String strProValue="hello "+"peida"+"!";
-                return strProValue;
-            }
-        });
-        System.out.println("peida value : " + resultVal);
+    @Test
+    public void test_getIfPresent() throws Exception {
+        try {
+            logger.info("jerry value:" + cache.getIfPresent("jerry"));
+
+            cache.put("jerry", "自己放置的值！");
+            logger.info("jerry value:" + cache.getIfPresent("jerry"));
+        } catch (Exception ex) {
+
+        }
     }
 }
