@@ -7,6 +7,10 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.junit.Test;
 
+import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 /**
  * Created by wangzhj on 2017/2/24.
  */
@@ -16,22 +20,29 @@ public class ObjectPoolTest {
     public void test() throws Exception {
         //资源池配置
         GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
-        poolConfig.setMinIdle(2);
-        GenericObjectPool<String> pool = new GenericObjectPool(new BasePooledObjectFactory<String>() {
+        poolConfig.setMaxTotal(5);
+        final GenericObjectPool<String> pool = new GenericObjectPool(new BasePooledObjectFactory<String>() {
 
             @Override
             public String create() throws Exception {
-                return "123123";
+                String i = UUID.randomUUID().toString();
+                System.out.println("make " + i + " success...");
+                return i;
             }
 
             @Override
             public PooledObject<String> wrap(String obj) {
+                System.out.println(obj);
                 return new DefaultPooledObject<>(obj);
             }
         }, poolConfig);
 
-        for(int i = 0; i < 3; i++) {
+        Executor executor = Executors.newFixedThreadPool(3);
+
+        for (int i = 0; i < 10; i++) {
             Thread.sleep(1000);
+
+
             //获取资源对象
             String user = pool.borrowObject();
             //将获取的资源对象，返还给资源池
